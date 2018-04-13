@@ -5,14 +5,34 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
+//express-session
+var session = require('express-session');
+
 var index = require('./routes/index');
-var users = require('./routes/users');
+//var users = require('./routes/users');
+var dashboard = require('./routes/dashboard');
 
 var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+
+//ruta de jquery
+app.use(express.static(path.join(__dirname, '/node_modules/jquery/dist')));
+
+//ruta de material design
+app.use(express.static(path.join(__dirname, '/node_modules/material-design-lite')));
+
+//ruta de bootstrap
+app.use(express.static(path.join(__dirname, '/node_modules/bootstrap/dist')));
+
+//ruta de popper
+app.use(express.static(path.join(__dirname, '/node_modules/popper.js/dist/')));
+
+//ruta de bootstrap-datepicker
+app.use(express.static(path.join(__dirname, '/node_modules/bootstrap-datepicker/dist')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -22,8 +42,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//express session
+app.use(session({resave: true, saveUninitialized: true, secret: 'shhhh', cookie: { maxAge: 60000 }}));
+
 app.use('/', index);
-app.use('/users', users);
+//app.use('/users', users);
+app.use('/dashboard', dashboard);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -1,2 +1,40 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class="container">
+
+    <div class="row">
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            <br>
+            <h2>Incluir Salud</h2>
+            <br>
+            <h5>Escriba su usuario y contraseña para ingresar</h5>
+            <div class="loginform">
+                <input id="user" type="text" placeholder="Usuario">
+                <input id="pass" type="password" placeholder="Contraseña">
+            </div>
+            <br>
+            <button id="login" class="btn btn-success btn-block">Ingresar</button>
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
+    </div>
+</div>
+
+<script>
+
+    $(function(){
+
+        $("#login").click(function(){
+
+            if($("#pass").val() === "123"){
+
+                window.location.replace('dashboard');
+            }else{
+                alert("nombre de usuario o contraseña incorrecta");
+            }
+
+            $.post('trylogin',function(data){
+                console.log(data)
+            });
+        });
+
+    });
+</script>
