@@ -6,7 +6,19 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    res.render('dashboard', { title: 'Dashboard' });
+
+    console.log(req.session.user);
+
+    var user = req.session.user;
+
+    if(user){
+
+        res.render('dashboard', { title: 'Dashboard', user: user });
+    }else{
+        res.redirect('/');
+    }
+
+
 });
 
 module.exports = router;

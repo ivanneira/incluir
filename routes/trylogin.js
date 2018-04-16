@@ -10,18 +10,20 @@ router.post('/', function(req, res, next) {
     var user = req.body.user;
     var pass = req.body.pass;
 
-    //aca tiene que ir la verificación por base de datos
-    if(user == '1'){
-
+    if(consultar(user,pass)){
         req.session.user = user;
-
-        res.send('dashboard');
-
+        res.send("dashboard");
     }else{
         res.send(false);
     }
 
 });
+
+//TODO: consulta a la base de datos si coincide usuario y contraseña
+function consultar(user,pass){
+
+    return true;
+}
 
 module.exports = router;
 

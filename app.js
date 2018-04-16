@@ -13,6 +13,10 @@ var index = require('./routes/index');
 //var users = require('./routes/users');
 var dashboard = require('./routes/dashboard');
 
+var trylogin = require('./routes/trylogin');
+
+var logout  = require('./routes/logout');
+
 var app = express();
 
 // view engine setup
@@ -48,6 +52,9 @@ app.use(session({resave: true, saveUninitialized: true, secret: 'shhhh', cookie:
 app.use('/', index);
 //app.use('/users', users);
 app.use('/dashboard', dashboard);
+
+app.use('/trylogin', trylogin);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

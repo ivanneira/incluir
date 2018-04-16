@@ -22,17 +22,43 @@
 
     $(function(){
 
-        $("#login").click(function(){
+        $('body').keypress(function( event ) {
+            if ( event.which === 13 ) {
+                event.preventDefault();
 
+                $("#login").trigger('click');
+            }
+        });
+
+        $("#login").click(function(){
+/*
             if($("#pass").val() === "123"){
 
                 window.location.replace('dashboard');
             }else{
                 alert("nombre de usuario o contraseña incorrecta");
             }
+*/
+            $.ajax({
+                type: "POST",
+                url: 'trylogin',
+                data: {
+                    user: $("#user").val(),
+                    pass: $("#pass").val()
+                },
+                success: function(data){
 
-            $.post('trylogin',function(data){
-                console.log(data)
+                    if(data){
+                        window.location.replace(data);
+                    }else{
+                        alert("Nombre de usuario o contraseña incorrecta");
+                    }
+
+                },
+                error: function(e){
+                    console.log(e);
+                    alert("Nombre de usuario o contraseña incorrecta");
+                }
             });
         });
 

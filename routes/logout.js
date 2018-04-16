@@ -1,9 +1,19 @@
+/**
+ * Created by Ivan on 16/04/2018.
+ */
+
 var express = require('express');
 var router = express.Router();
 
-/* GET home page. */
+
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Incluir Salud' });
+
+    req.session.user = undefined;
+    req.session.user = undefined;
+
+    res.redirect('/');
+
 });
 
 module.exports = router;
+
