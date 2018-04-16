@@ -2,7 +2,7 @@
 
     <div class="row">
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
-        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+        <div class="logincard card-1 col-xs-4 col-sm-4 col-md-4 col-lg-4">
             <br>
             <h2>Incluir Salud</h2>
             <br>
@@ -13,6 +13,7 @@
             </div>
             <br>
             <button id="login" class="btn btn-success btn-block">Ingresar</button>
+            <br>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
     </div>
@@ -31,14 +32,7 @@
         });
 
         $("#login").click(function(){
-/*
-            if($("#pass").val() === "123"){
 
-                window.location.replace('dashboard');
-            }else{
-                alert("nombre de usuario o contraseña incorrecta");
-            }
-*/
             $.ajax({
                 type: "POST",
                 url: 'trylogin',
@@ -63,4 +57,17 @@
         });
 
     });
+
 </script>
+
+<style>
+
+    body{
+        background-color: #DDD;
+    }
+
+    .logincard{
+        margin-top: 10px;
+        background-color: #FFF;
+    }
+</style>

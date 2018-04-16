@@ -22,9 +22,11 @@ function modalAC(title, body, action){
     var modal = $('#modalAC');
 
     modalT.text(title);
+
     modalB
         .empty()
         .append(body);
+
     modalA
         .unbind('click')
         .click(action);
