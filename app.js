@@ -12,6 +12,7 @@ var session = require('express-session');
 var index = require('./routes/index');
 //var users = require('./routes/users');
 var dashboard = require('./routes/dashboard');
+var planillas = require('./routes/planillas');
 
 var trylogin = require('./routes/trylogin');
 
@@ -52,6 +53,7 @@ app.use(session({resave: true, saveUninitialized: true, secret: 'shhhh', cookie:
 app.use('/', index);
 //app.use('/users', users);
 app.use('/dashboard', dashboard);
+app.use('/planillas', planillas);
 
 app.use('/trylogin', trylogin);
 app.use('/logout', logout);

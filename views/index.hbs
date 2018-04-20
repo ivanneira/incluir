@@ -33,6 +33,19 @@
 
         $("#login").click(function(){
 
+            if(
+                    ($("#user").val() == "")
+                    ||
+                    (typeof($("#user").val() ) == 'undefined')
+                    ||
+                    ($("#pass").val() == "")
+                    ||
+                    (typeof($("#pass").val()) == 'undefined')
+            ){
+                alert("Ingrese correctamente usuario o contraseña");
+                return;
+            }
+
             $.ajax({
                 type: "POST",
                 url: 'trylogin',
