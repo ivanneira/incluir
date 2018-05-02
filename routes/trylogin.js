@@ -10,19 +10,17 @@ router.post('/', function(req, res, next) {
     var user = req.body.user;
     var pass = req.body.pass;
 
-    if(consultar(user,pass)){
-        req.session.user = user;
-        res.send("dashboard");
-    }else{
-        res.send(false);
-    }
-
+    consultar(user,pass,function(response){
+        if(response){
+            req.session.user = user;
+            res.send("dashboard");
+        }else{
+            res.send(false);
+        }
+    })
 });
 
-
-
-//TODO: consulta a la base de datos si coincide usuario y contraseña
-function consultar(user,pass){
+function consultar(user,pass,callback){
 
     var knex = require('knex')({
         client: 'mssql',
@@ -48,19 +46,19 @@ function consultar(user,pass){
             console.log("rows")
             console.dir(rows)
             if(rows.length > 0) {
-                return true;
+                callback(true);
             }
             else
             {
-                return false;
+                callback(false);
             }
             //res.send(rows) ;
 
         })
         .catch(function(error){
-            console.log(2)
+
             console.log(error);
-            return false;
+            callback(false);
         });
 
      return false;
