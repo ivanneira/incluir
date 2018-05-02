@@ -11,6 +11,8 @@ var bodyParser = require('body-parser');
 //express-session
 var session = require('express-session');
 
+
+
 var index = require('./routes/index');
 //var users = require('./routes/users');
 var dashboard = require('./routes/dashboard');
@@ -43,6 +45,9 @@ app.use(express.static(path.join(__dirname, '/node_modules/popper.js/dist/')));
 
 //ruta de bootstrap-datepicker
 app.use(express.static(path.join(__dirname, '/node_modules/bootstrap-datepicker/dist')));
+
+//ruta de select2
+app.use(express.static(path.join(__dirname, '/node_modules/select2/dist')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

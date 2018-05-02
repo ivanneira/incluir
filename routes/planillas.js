@@ -49,7 +49,7 @@ router.get('/encuestadores', function(req, res, next) {
             else
             {
                res.setHeader('Content-Type', 'application/json');
-               res.send(JSON.stringify({ msg: "No encontrado..." }))
+               res.send(false)
             }
         })
         .catch(function(error){
@@ -78,7 +78,7 @@ router.get('/supervisores', function(req, res, next) {
             else
             {
                 res.setHeader('Content-Type', 'application/json');
-                res.send(JSON.stringify({ msg: "No encontrado..." }))
+                res.send(false)
             }
         })
         .catch(function(error){
