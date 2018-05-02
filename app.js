@@ -29,6 +29,9 @@ app.set('view engine', 'hbs');
 //ruta de jquery
 app.use(express.static(path.join(__dirname, '/node_modules/jquery/dist')));
 
+//ruta de font awesome
+app.use(express.static(path.join(__dirname, '/node_modules/font-awesome')));
+
 //ruta de material design
 app.use(express.static(path.join(__dirname, '/node_modules/material-design-lite')));
 

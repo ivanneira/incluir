@@ -35,12 +35,14 @@ function consultar(user,pass,callback){
         pool: { min: 0, max: 40 }
     });
 
-      knex
+
+        knex
         .column('usuario','clave')
         .select()
         .from("usuarios")
         .where("usuario",'=', user)
         .andWhere("clave",'=', pass)
+        .andWhere('activo','=', 1)
         .then(function(rows){
             console.log(1)
             console.log("rows")
@@ -62,6 +64,8 @@ function consultar(user,pass,callback){
         });
 
      return false;
+
+
 }
 
 
