@@ -87,4 +87,85 @@ router.get('/supervisores', function(req, res, next) {
 
 });
 
+
+/*Trae Todas las Provincias de Argentina Solamente*/
+/*Mas un valor cuyo PaisID = 1 que equivale al Valor [Sin Dato]*/
+
+
+
+/*Trae Todas las Provincias de Argentina Solamente*/
+/*Mas un valor cuyo PaisID = 1 que equivale al Valor [Sin Dato]*/
+
+router.get('/getDepartamentos', function(req, res, next) {
+
+    var q = req.query.q;
+
+    knex
+        .column('ID','Nombre', 'ProvinciaID', 'Zona')
+        .select()
+        .from('departamento')
+        .where('PronvinciaID', '=', 18)
+        .andWhere('Nombre','like', '%'+q+'%')
+        .andWhere('Activa','=', 1)
+        .then(function(rows){
+
+            if(rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else
+            {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+});
+
+
+/*Trae Todas las Localidades de San Juan Solamente*/
+/*Hay que pasarle el DepartamentoID*/
+
+router.get('/getLocalidades', function(req, res, next) {
+
+
+    if(typeof(req.query.DepartamentoID) == 'undefined')
+    {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(false)
+    }
+
+    var q = req.query.q;
+    var DepartamentoID = req.query.DepartamentoID;
+
+
+    knex
+        .column('ID','Nombre', 'DepartamentoID')
+        .select()
+        .from('localidad')
+        .where('DepartamentoID', '=', DepartamentoID)
+        .andWhere('Nombre','like', '%'+q+'%')
+        .andWhere('Activa','=', 1)
+        .then(function(rows){
+
+            if(rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else
+            {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+});
+
+/**/
 module.exports = router;
