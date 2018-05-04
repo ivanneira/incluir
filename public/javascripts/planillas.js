@@ -190,7 +190,7 @@ function fillModal(){
         '       <td><select class="selectTipoPension"></select></td>'+
         '   </tr>'+
         '   <tr>'+
-        '       <td><input type="number" class="form-control" placeholder="Diagnóstico"></td>'+
+        '       <td><select class="selectCIE10"></td>'+
         '       <td><input type="number" class="form-control" placeholder="Prestaciones"></td>'+
         '       <td><input type="number" class="form-control" placeholder="Nº conviven"></td>'+
         '   </tr>'+
@@ -277,6 +277,37 @@ function fillDropDown(){
                         return {
                             text: item.Nombre,
                             id: item.ID
+                        }
+
+                    })
+                };
+            }
+        }
+    });
+
+    $(".selectCIE10").select2({
+        placeholder: 'Busque diagnóstico',
+        width: '100%',
+        dropdownParent: $("#modalAC"),
+        ajax: {
+            url: 'planillas/getCIE10',
+            type: 'GET',
+            dataType: 'json',
+            data: function (params) {
+                var query = {
+                    q: params.term
+                };
+                // Query parameters will be ?1=[term]
+                return query;
+            },
+            processResults: function (data) {
+
+                return {
+                    results: $.map(data, function (item) {
+
+                        return {
+                            text: item.text,
+                            id: item.id
                         }
 
                     })

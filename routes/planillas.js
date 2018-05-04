@@ -105,6 +105,34 @@ router.get('/getTipoServicios', function(req, res, next) {
 
 });
 
+router.get('/getCIE10', function(req, res, next) {
+
+
+    var q = req.query.q;
+
+    knex
+        .column('id10 as id','dec10 as text')
+        .select()
+        .from('cie10')
+        .where('dec10', 'like', '%'+q+'%')
+        .then(function(rows){
+
+            if(rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else
+            {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+});
+
 
 router.get('/encuestadores', function(req, res, next) {
 
