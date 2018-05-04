@@ -137,59 +137,160 @@ router.get('/getCIE10', function(req, res, next) {
 router.get('/encuestadores', function(req, res, next) {
 
 
+    var zonaID;
+    var supervisorID;
+
+    if(typeof(req.query.zonaID) != 'undefined')
+    {
+        zonaID = req.query.zonaID;
+    }
+
+    if(typeof(req.query.supervisorID) != 'undefined')
+    {
+        supervisorID = req.query.supervisorID;
+    }
+
     var q = req.query.q;
 
-    knex
-        .column('id','apellido','nombre')
-        .select()
-        .from('encuestadores')
-        .where('nombre', 'like', '%'+q+'%')
-        .orWhere('apellido','like', '%'+q+'%')
-        .andWhere('activo','=', 1)
-        .then(function(rows){
+    if(zonaID !="")
+    {
+        knex
+            .column('id', 'apellido', 'nombre')
+            .select()
+            .from('personas')
+            .where('nombre', 'like', '%' + q + '%')
+            .orWhere('apellido', 'like', '%' + q + '%')
+            .andWhere('personaSupervisorID', '!=', null)
+            .andWhere('zonaID', '=', zonaID)
+            .andWhere('activo', '=', 1)
+            .then(function (rows) {
 
-            if(rows.length > 0) {
-                res.setHeader('Content-Type', 'application/json');
-                res.send(rows)
-            }
-            else
-            {
-               res.setHeader('Content-Type', 'application/json');
-               res.send(false)
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        });
+                if (rows.length > 0) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(rows)
+                }
+                else {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(false)
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    else if(supervisorID !="")
+    {
+        knex
+            .column('id', 'apellido', 'nombre')
+            .select()
+            .from('personas')
+            .where('nombre', 'like', '%' + q + '%')
+            .orWhere('apellido', 'like', '%' + q + '%')
+            .andWhere('personaSupervisorID', '=', supervisorID)
+            .andWhere('activo', '=', 1)
+            .then(function (rows) {
 
+                if (rows.length > 0) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(rows)
+                }
+                else {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(false)
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    else {
+        knex
+            .column('id', 'apellido', 'nombre')
+            .select()
+            .from('personas')
+            .where('nombre', 'like', '%' + q + '%')
+            .orWhere('apellido', 'like', '%' + q + '%')
+            .andWhere('personaSupervisorID', '!=', null)
+            .andWhere('activo', '=', 1)
+            .then(function (rows) {
+
+                if (rows.length > 0) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(rows)
+                }
+                else {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(false)
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 });
 
 router.get('/supervisores', function(req, res, next) {
 
+    var zonaID = "";
+
+    if(typeof(req.query.zonaID) != 'undefined')
+    {
+        zonaID = req.query.zonaID;
+    }
+
+
     var q = req.query.q;
 
-    knex
-        .column('id','apellido','nombre')
-        .select()
-        .from('encuestadores')
-        .where('nombre', 'like', '%'+q+'%')
-        .orWhere('apellido','like', '%'+q+'%')
-        .andWhere('activo','=', 1)
-        .then(function(rows){
+    if(zonaID != "")
+    {
+        knex
+            .column('id', 'apellido', 'nombre')
+            .select()
+            .from('personas')
+            .where('nombre', 'like', '%' + q + '%')
+            .orWhere('apellido', 'like', '%' + q + '%')
+            .andWhere('activo', '=', 1)
+            .andWhere('personaSupervisorID', '=', null)
+            .andWhere('zonaID', '=', zonaID)
+            .then(function (rows) {
 
-            if(rows.length > 0) {
-                res.setHeader('Content-Type', 'application/json');
-                res.send(rows)
-            }
-            else
-            {
-                res.setHeader('Content-Type', 'application/json');
-                res.send(false)
-            }
-        })
-        .catch(function(error){
-            console.log(error);
-        });
+                if (rows.length > 0) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(rows)
+                }
+                else {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(false)
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+    else {
+        knex
+            .column('id', 'apellido', 'nombre')
+            .select()
+            .from('personas')
+            .where('nombre', 'like', '%' + q + '%')
+            .orWhere('apellido', 'like', '%' + q + '%')
+            .andWhere('activo', '=', 1)
+            .andWhere('personaSupervisorID', '=', null)
+            .then(function (rows) {
+
+                if (rows.length > 0) {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(rows)
+                }
+                else {
+                    res.setHeader('Content-Type', 'application/json');
+                    res.send(false)
+                }
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
 
 });
 
