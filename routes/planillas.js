@@ -101,10 +101,10 @@ router.get('/getDepartamentos', function(req, res, next) {
     var q = req.query.q;
 
     knex
-        .column('ID','Nombre', 'ProvinciaID', 'Zona')
+        .column('ID','Nombre')
         .select()
         .from('departamento')
-        .where('PronvinciaID', '=', 18)
+        .where('ProvinciaID', '=', 18)
         .andWhere('Nombre','like', '%'+q+'%')
         .andWhere('Activa','=', 1)
         .then(function(rows){
@@ -131,23 +131,25 @@ router.get('/getDepartamentos', function(req, res, next) {
 
 router.get('/getLocalidades', function(req, res, next) {
 
-
+/*
     if(typeof(req.query.DepartamentoID) == 'undefined')
     {
         res.setHeader('Content-Type', 'application/json');
         res.send(false)
     }
-
+*/
     var q = req.query.q;
-    var DepartamentoID = req.query.DepartamentoID;
+    //var DepartamentoID = req.query.DepartamentoID;
 
+    //console.log("ssssssssssssssssssssssssssssssssssss")
+    console.log(q)
 
     knex
         .column('ID','Nombre', 'DepartamentoID')
         .select()
         .from('localidad')
-        .where('DepartamentoID', '=', DepartamentoID)
-        .andWhere('Nombre','like', '%'+q+'%')
+        .where('DepartamentoID', '=', q)
+        //.andWhere('Nombre','like', '%'+q+'%')
         .andWhere('Activa','=', 1)
         .then(function(rows){
 
