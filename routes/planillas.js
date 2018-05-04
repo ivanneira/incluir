@@ -27,6 +27,84 @@ router.get('/', function(req, res, next) {
 
 });
 
+/* GET tipos de pensión. */
+router.get('/getTipoPension', function(req, res, next) {
+
+    knex
+        .column('id','nombre as text')
+        .select()
+        .from('tipoPension')
+        .where('activo','=', 1)
+        .then(function(rows){
+
+            if(rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else
+            {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+});
+
+/* GET tipos de vivienda. */
+router.get('/getTipoVivienda', function(req, res, next) {
+
+    knex
+        .column('id','nombre as text')
+        .select()
+        .from('tipoVivienda')
+        .where('activo','=', 1)
+        .then(function(rows){
+
+            if(rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else
+            {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+});
+
+/* GET tipos de vivienda. */
+router.get('/getTipoServicios', function(req, res, next) {
+
+    knex
+        .column('id','nombre as text')
+        .select()
+        .from('serviciosBasicos')
+        .where('activo','=', 1)
+        .then(function(rows){
+
+            if(rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else
+            {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+});
+
 
 router.get('/encuestadores', function(req, res, next) {
 
@@ -142,7 +220,7 @@ router.get('/getLocalidades', function(req, res, next) {
     //var DepartamentoID = req.query.DepartamentoID;
 
     //console.log("ssssssssssssssssssssssssssssssssssss")
-    console.log(q)
+    //console.log(q)
 
     knex
         .column('ID','Nombre', 'DepartamentoID')

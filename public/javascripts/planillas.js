@@ -2,7 +2,50 @@
  * Created by Ivan on 02/05/2018.
  */
 
+var tipoPension;
+var tipoVivienda;
+var tipoServicios;
+
 $(function(){
+
+    $.ajax({
+        url: 'planillas/getTipoPension',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data){
+            tipoPension = data;
+        },
+        error: function(e){
+            ERROR();
+            console.log(e);
+        }
+    });
+
+    $.ajax({
+        url: 'planillas/getTipoVivienda',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data){
+            tipoVivienda = data;
+        },
+        error: function(e){
+            ERROR();
+            console.log(e);
+        }
+    });
+
+    $.ajax({
+        url: 'planillas/getTipoServicios',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data){
+            tipoServicios = data;
+        },
+        error: function(e){
+            ERROR();
+            console.log(e);
+        }
+    });
 
     //select2 de encuestador
     $(".selectEncuestador").select2({
@@ -108,6 +151,13 @@ $(function(){
 
 });
 
+
+
+function ERROR(){
+
+    alert("Hubo un error, por favor regargue la página");
+}
+
 function fillModal(){
 
     var htmlString =
@@ -137,7 +187,7 @@ function fillModal(){
         '               </label>'+
         '           </div>' +
         '       </td>'+
-        '       <td><input type="number" class="form-control" placeholder="Tipo pensión"></td>'+
+        '       <td><select class="selectTipoPension"></select></td>'+
         '   </tr>'+
         '   <tr>'+
         '       <td><input type="number" class="form-control" placeholder="Diagnóstico"></td>'+
@@ -146,8 +196,8 @@ function fillModal(){
         '   </tr>'+
         '   <tr>'+
         '       <td><input type="number" class="form-control" placeholder="Nº G Familiar"></td>'+
-        '       <td><input type="number" class="form-control" placeholder="Tipo vivienda"></td>'+
-        '       <td><input type="number" class="form-control" placeholder="Servicios básicos"></td>'+
+        '       <td><select class="selectTipoVivienda"></td>'+
+        '       <td><select class="selectTipoServicios"></td>'+
         '   </tr>'+
         '   <tr>'+
         '       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
@@ -177,6 +227,31 @@ function fillDropDown(){
         .datepicker({
             autoclose: true,
             language: 'es'
+        });
+
+    $(".selectTipoPension")
+        .select2({
+            placeholder: 'Elija tipo de pensión',
+            width: '100%',
+            minimumResultsForSearch: -1,
+            data: tipoPension
+        });
+
+    $(".selectTipoVivienda")
+        .select2({
+            placeholder: 'Elija tipo de vivienda',
+            width: '100%',
+            minimumResultsForSearch: -1,
+            data: tipoVivienda
+        });
+
+    $(".selectTipoServicios")
+        .select2({
+            placeholder: 'Elija tipo de vivienda',
+            width: '100%',
+            minimumResultsForSearch: -1,
+            multiple: true,
+            data: tipoServicios
         });
 
     $(".selectLocalidad").select2({
