@@ -7,11 +7,11 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    //console.log(req.session.user);
+    console.log(req.session.user);
 
     var user = req.session.user;
 
-    if(user){
+    if(typeof(user) !='undefined'){
 
         res.render('dashboard', { title: 'Dashboard', user: user });
     }else{

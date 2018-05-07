@@ -23,7 +23,17 @@ var knex = require('knex')({
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    res.render('planillas', { title: 'Planillas' });
+    var user = req.session.user;
+
+    if(typeof(user) !='undefined'){
+
+        //res.render('dashboard', { title: 'Dashboard', user: user });
+        res.render('planillas', { title: 'Planillas', user: user });
+    }else{
+        res.redirect('/');
+    }
+
+
 
 });
 
