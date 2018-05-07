@@ -6,6 +6,8 @@ var tipoPension;
 var tipoVivienda;
 var tipoServicios;
 
+var $modal = $("#modalAC");
+
 $(function(){
 
     $.ajax({
@@ -165,7 +167,7 @@ function fillModal(){
         '   <tr>'+
         '       <td><input type="text" class="form-control" placeholder="Nombre"></td>'+
         '       <td><input type="text" class="form-control" placeholder="Apellido"></td>'+
-        '       <td><input id="nacimiento" data-provide="datepicker"></td>'+
+        '       <td><input placeholder="Elija fecha" id="nacimiento" data-provide="datepicker"></td>'+
         '   </tr>'+
         '   <tr>'+
         '       <td><input type="number" class="form-control" placeholder="DNI"></td>'+
@@ -214,7 +216,9 @@ function fillModal(){
     $("#modalACTitulo").text('Nuevo registro');
 
     $("#modalAC")
-        .modal('show');
+        .modal('show')
+        .modal('handleUpdate');
+
 
     fillDropDown();
 
@@ -226,7 +230,8 @@ function fillDropDown(){
     $("#nacimiento")
         .datepicker({
             autoclose: true,
-            language: 'es'
+            language: 'es-ES',
+            format: 'dd/mm/yyyy'
         });
 
     $(".selectTipoPension")
@@ -288,6 +293,7 @@ function fillDropDown(){
     $(".selectCIE10").select2({
         placeholder: 'Busque diagnóstico',
         width: '100%',
+        dropdownAutoWidth: true,
         multiple: true,
         dropdownParent: $("#modalACBody"),
         ajax: {
