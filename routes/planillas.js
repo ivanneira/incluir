@@ -115,6 +115,7 @@ router.get('/getCIE10', function(req, res, next) {
         .select()
         .from('cie10')
         .where('dec10', 'like', '%'+q+'%')
+        .orWhere('id10', 'like', '%'+q+'%')
         .then(function(rows){
 
             if(rows.length > 0) {
@@ -135,7 +136,7 @@ router.get('/getCIE10', function(req, res, next) {
 
 
 router.get('/encuestadores', function(req, res, next) {
-
+    /*
 
     var zonaID;
     var supervisorID;
@@ -149,9 +150,33 @@ router.get('/encuestadores', function(req, res, next) {
     {
         supervisorID = req.query.supervisorID;
     }
-
+*/
     var q = req.query.q;
 
+    knex
+        .column('id', 'apellido', 'nombre')
+        .select()
+        .from('personas')
+        .where('nombre', 'like', '%' + q + '%')
+        .orWhere('apellido', 'like', '%' + q + '%')
+        .andWhere('personaSupervisorID', '!=', null)
+        //.andWhere('zonaID', '=', zonaID)
+        .andWhere('activo', '=', 1)
+        .then(function (rows) {
+
+            if (rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+/*
     if(zonaID !="")
     {
         knex
@@ -161,7 +186,7 @@ router.get('/encuestadores', function(req, res, next) {
             .where('nombre', 'like', '%' + q + '%')
             .orWhere('apellido', 'like', '%' + q + '%')
             .andWhere('personaSupervisorID', '!=', null)
-            .andWhere('zonaID', '=', zonaID)
+            //.andWhere('zonaID', '=', zonaID)
             .andWhere('activo', '=', 1)
             .then(function (rows) {
 
@@ -226,7 +251,7 @@ router.get('/encuestadores', function(req, res, next) {
             .catch(function (error) {
                 console.log(error);
             });
-    }
+    }*/
 });
 
 router.get('/supervisores', function(req, res, next) {

@@ -288,7 +288,8 @@ function fillDropDown(){
     $(".selectCIE10").select2({
         placeholder: 'Busque diagnóstico',
         width: '100%',
-        dropdownParent: $("#modalAC"),
+        multiple: true,
+        dropdownParent: $("#modalACBody"),
         ajax: {
             url: 'planillas/getCIE10',
             type: 'GET',
@@ -306,7 +307,7 @@ function fillDropDown(){
                     results: $.map(data, function (item) {
 
                         return {
-                            text: item.text,
+                            text: item.id + ' - ' + item.text,
                             id: item.id
                         }
 
