@@ -1,4 +1,13 @@
 
+.select2-selection--multiple {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.select2-selection--multiple {
+  height: 100% !important;
+}
 /* enable absolute positioning */
 .inner-addon {
   position: relative;
