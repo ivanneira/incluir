@@ -8,11 +8,22 @@
             <br>
             <h5>Escriba su usuario y contraseña para ingresar</h5>
             <div class="loginform">
-                <input id="user" type="text" placeholder="Usuario">
-                <input id="pass" type="password" placeholder="Contraseña">
+
+
+                <div class="inner-addon left-addon">
+                    <i class="fa fa-user"></i>
+                    <input type="text" class="form-control" id="user" type="text" placeholder="Usuario"/>
+                </div>
+                <br>
+                <div class="inner-addon left-addon">
+                    <i class="fa fa-key"></i>
+                    <input type="text" class="form-control" id="pass" type="password" placeholder="Contraseña" />
+                </div>
+
+
             </div>
             <br>
-            <button id="login" class="btn btn-success btn-block">Ingresar</button>
+            <button id="login" class="btn btn-success btn-block"><i class="fa fa-lock"></i> Ingresar</button>
             <br>
         </div>
         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></div>
@@ -21,54 +32,70 @@
 
 <script>
 
+    $( "#pass" ).blur(function() {
+        $("#login").trigger('click');
+    });
+    /*
     $(function(){
 
         $('body').keypress(function( event ) {
             if ( event.which === 13 ) {
                 event.preventDefault();
 
+                $("#login").prop("disabled", "true")
                 $("#login").trigger('click');
             }
         });
 
-        $("#login").click(function(){
 
-            if(
-                    ($("#user").val() == "")
-                    ||
-                    (typeof($("#user").val() ) == 'undefined')
-                    ||
-                    ($("#pass").val() == "")
-                    ||
-                    (typeof($("#pass").val()) == 'undefined')
-            ){
-                alert("Ingrese correctamente usuario o contraseña");
-                return;
-            }
 
-            $.ajax({
-                type: "POST",
-                url: 'trylogin',
-                data: {
-                    user: $("#user").val(),
-                    pass: $("#pass").val()
-                },
-                success: function(data){
+    });
+    */
 
-                    if(data){
-                        window.location.replace(data);
-                    }else{
-                        alert("Nombre de usuario o contraseña incorrecta");
-                    }
 
-                },
-                error: function(e){
-                    console.log(e);
+    $("#login").click(function(){
+
+        if(
+                ($("#user").val() == "")
+                ||
+                (typeof($("#user").val() ) == 'undefined')
+                ||
+                ($("#pass").val() == "")
+                ||
+                (typeof($("#pass").val()) == 'undefined')
+        ){
+            $(this).prop("disabled", false)
+            alert("Ingrese correctamente usuario o contraseña");
+
+            return false;
+        }
+
+        $("#login").prop("disabled", true)
+        $.ajax({
+            type: "POST",
+            url: 'trylogin',
+            data: {
+                user: $("#user").val(),
+                pass: $("#pass").val()
+            },
+            success: function(data){
+
+                if(data){
+                    window.location.replace(data);
+                }else{
                     alert("Nombre de usuario o contraseña incorrecta");
-                }
-            });
-        });
+                    $("#login").prop("disabled", false)
 
+                }
+
+            },
+            error: function(e){
+                console.log(e);
+                alert("Nombre de usuario o contraseña incorrecta");
+                $("#login").prop("disabled", "false")
+
+            }
+        });
     });
 
 </script>

@@ -266,19 +266,19 @@ router.get('/supervisores', function(req, res, next) {
 
     var q = req.query.q;
 
+    console.log(zonaID)
     if(zonaID != "")
     {
         knex
-            .column('id', 'apellido', 'nombre')
+            .column('id', 'apellido', 'nombre','zonaID')
             .select()
             .from('personas')
             .where('nombre', 'like', '%' + q + '%')
             .orWhere('apellido', 'like', '%' + q + '%')
-            .andWhere('activo', '=', 1)
             .andWhere('personaSupervisorID', '=', null)
             .andWhere('zonaID', '=', zonaID)
+            .andWhere('activo', '=', 1)
             .then(function (rows) {
-
                 if (rows.length > 0) {
                     res.setHeader('Content-Type', 'application/json');
                     res.send(rows)
