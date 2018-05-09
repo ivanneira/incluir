@@ -24,7 +24,7 @@ var knex = require('knex')({
 router.get('/', function(req, res, next) {
 
     var user = req.session.user;
-
+/*descomentar!
     if(typeof(user) !='undefined'){
 
         //res.render('dashboard', { title: 'Dashboard', user: user });
@@ -33,7 +33,7 @@ router.get('/', function(req, res, next) {
         res.redirect('/');
     }
 
-
+*/res.render('planillas', { title: 'Planillas', user: user });
 
 });
 
@@ -164,14 +164,15 @@ router.get('/encuestadores', function(req, res, next) {
     var q = req.query.q;
 
     knex
-        .column('id', 'apellido', 'nombre')
-        .select()
-        .from('personas')
-        .where('nombre', 'like', '%' + q + '%')
-        .orWhere('apellido', 'like', '%' + q + '%')
-        .andWhere('personaSupervisorID', '!=', null)
+        .raw("select p.apellido + ', ' + p.nombre as text, p.id from personas  p left join tipofuncion tf on p.tipoFuncionID = tf.ID where tf.nombre  like '%"+ q +"%'")
+        //.column('id', 'apellido', 'nombre')
+        //.select()
+        //.from('personas')
+        //.where('nombre', 'like', '%' + q + '%')
+        //.orWhere('apellido', 'like', '%' + q + '%')
+        //.andWhere('personaSupervisorID', '!=', null)
         //.andWhere('zonaID', '=', zonaID)
-        .andWhere('activo', '=', 1)
+        //.andWhere('activo', '=', 1)
         .then(function (rows) {
 
             if (rows.length > 0) {
@@ -266,17 +267,33 @@ router.get('/encuestadores', function(req, res, next) {
 
 router.get('/supervisores', function(req, res, next) {
 
-    var zonaID = "";
-
+    //var zonaID = "";
+    /*
     if(typeof(req.query.zonaID) != 'undefined')
     {
         zonaID = req.query.zonaID;
     }
 
-
+*/
     var q = req.query.q;
 
-    console.log(zonaID)
+    knex
+        .raw("select p.apellido + ', ' + p.nombre as text, p.id from personas  p left join tipofuncion tf on p.tipoFuncionID = tf.ID where tf.nombre like '%"+ q +"%'")
+        .then(function (rows) {
+            if (rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+/*
     if(zonaID != "")
     {
         knex
@@ -326,7 +343,7 @@ router.get('/supervisores', function(req, res, next) {
                 console.log(error);
             });
     }
-
+*/
 });
 
 
@@ -340,14 +357,14 @@ router.get('/supervisores', function(req, res, next) {
 
 router.get('/getDepartamentos', function(req, res, next) {
 
-    var q = req.query.q;
+    //var q = req.query.q;
 
     knex
         .column('ID','Nombre')
         .select()
         .from('departamento')
         .where('ProvinciaID', '=', 18)
-        .andWhere('Nombre','like', '%'+q+'%')
+        //.andWhere('Nombre','like', '%'+q+'%')
         .andWhere('Activa','=', 1)
         .then(function(rows){
 
@@ -393,6 +410,29 @@ router.get('/getLocalidades', function(req, res, next) {
         .where('DepartamentoID', '=', q)
         //.andWhere('Nombre','like', '%'+q+'%')
         .andWhere('Activa','=', 1)
+        .then(function(rows){
+
+            if(rows.length > 0) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(rows)
+            }
+            else
+            {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(false)
+            }
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+
+});
+
+/* GET pestaciones. */
+router.get('/getPrestaciones', function(req, res, next) {
+
+    knex
+        .raw('exec getprestaciones')
         .then(function(rows){
 
             if(rows.length > 0) {

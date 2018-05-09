@@ -6,9 +6,27 @@ var tipoPension;
 var tipoVivienda;
 var tipoServicios;
 
+var prestaciones;
+
 var $modal = $("#modalAC");
 
 $(function(){
+
+    $.ajax({
+        url: 'planillas/getPrestaciones',
+        type: 'GET',
+        dataType: 'json',
+        success: function(data){
+
+            processPrestaciones(data);
+            console.dir(prestaciones)
+        },
+        error: function(e){
+            ERROR();
+            console.log(e);
+        }
+    });
+
 
     $.ajax({
         url: 'planillas/getTipoPension',
@@ -53,6 +71,7 @@ $(function(){
     $(".selectEncuestador").select2({
         placeholder: 'Busque encuestador',
         width: '100%',
+        language: 'es',
         ajax: {
             url: 'planillas/encuestadores',
             type: 'GET',
@@ -71,7 +90,7 @@ $(function(){
                     results: $.map(data, function (item) {
 
                             return {
-                                text: item.nombre + ', ' + item.apellido,
+                                text: item.text,
                                 id: item.id
                             }
 
@@ -81,11 +100,46 @@ $(function(){
         }
     });
 
+    function processPrestaciones(data){
+
+        var padres = [];
+
+        for(var index in data){
+
+            if(data[index].PRESTACIONID == null){
+                padres.push({
+                    text: data[index].NOMBRE,
+                    id: data[index].ID,
+                    children: []
+                });
+            }
+        }
+
+        for(var index in padres){
+
+            for(var index2 in data){
+
+                if(data[index2].PRESTACIONID == padres[index].id){
+                    padres[index].children.push(
+                        {
+                            text: data[index2].NOMBRE,
+                            id: data[index2].ID
+                        }
+                    );
+                }
+            }
+        }
+
+        prestaciones = padres;
+
+    }
+
 
     //select2 de supervisor
     $(".selectSupervisor").select2({
         placeholder: 'Busque supervisor',
         width: '100%',
+        language: 'es',
         ajax: {
             url: 'planillas/supervisores',
             type: 'GET',
@@ -104,7 +158,7 @@ $(function(){
                     results: $.map(data, function (item) {
 
                         return {
-                            text: item.nombre + ', ' + item.apellido,
+                            text: item.text,
                             id: item.id
                         }
 
@@ -118,18 +172,20 @@ $(function(){
     $(".selectDepartamento").select2({
         placeholder: 'Busque departamento',
         width: '100%',
+
+        minimumResultsForSearch: -1,        language: 'es',
         ajax: {
             url: 'planillas/getDepartamentos',
             type: 'GET',
             dataType: 'json',
-            data: function (params) {
+            /*data: function (params) {
                 var query = {
                     q: params.term
                 };
 
                 // Query parameters will be ?1=[term]
                 return query;
-            },
+            },*/
             processResults: function (data) {
 
                 return {
@@ -148,7 +204,20 @@ $(function(){
 
     $("#agregarRegistro").click(function(){
 
-        fillModal();
+        if(
+                $("#numeroPlanilla").val() != "" &&
+                $(".selectSupervisor").val() != null &&
+                $(".selectEncuestador").val() != null &&
+                $(".selectDepartamento").val() != null
+        ){
+            fillModal();
+
+        }else{
+
+                    alert("Complete los datos del encabezado primero")
+        }
+
+
     });
 
 });
@@ -161,13 +230,13 @@ function ERROR(){
 }
 
 function fillModal(){
-
+/*
     var htmlString =
-        '<table class="table table-primary table-striped table-hover">'+
+        '<table class="table table-dark table-striped table-hover">'+
         '   <tr>'+
-        '       <td><input type="text" class="form-control" placeholder="Nombre"></td>'+
+        '       <td><input type="text" class="form-control" placeholder="Nombre" data-toggle="tooltip" data-placement="top" title="Nombre completo"></td>'+
         '       <td><input type="text" class="form-control" placeholder="Apellido"></td>'+
-        '       <td><input placeholder="Elija fecha" id="nacimiento" data-provide="datepicker"></td>'+
+        '       <td><input class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker"></td>'+
         '   </tr>'+
         '   <tr>'+
         '       <td><input type="number" class="form-control" placeholder="DNI"></td>'+
@@ -192,8 +261,8 @@ function fillModal(){
         '       <td><select class="selectTipoPension"></select></td>'+
         '   </tr>'+
         '   <tr>'+
-        '       <td><select class="selectCIE10"></td>'+
-        '       <td><input type="number" class="form-control" placeholder="Prestaciones"></td>'+
+        '       <td><select class="selectCIE10" data-placeholder="Seleccione motivo"></td>'+
+        '       <td><select class="selectPrestaciones"></td>'+
         '       <td><input type="number" class="form-control" placeholder="Nº conviven"></td>'+
         '   </tr>'+
         '   <tr>'+
@@ -203,17 +272,168 @@ function fillModal(){
         '   </tr>'+
         '   <tr>'+
         '       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
-        '       <td></td>'+
-        '       <td></td>'+
+        '       <td>' +
+        '           <div class="input-group input-group">'+
+        '               <div class="input-group-prepend">'+
+        '                   <span class="input-group-text" id="latitud">-31,</span>'+
+        '               </div>'+
+        '               <input type="number" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
+        '           </div>'+
+        '       </td>' +
+        '       <td>' +
+        '           <div class="input-group input-group">'+
+        '               <div class="input-group-prepend">'+
+        '                   <span class="input-group-text" id="longitud">-68,</span>'+
+        '               </div>'+
+        '               <input type="number" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
+        '           </div>'+
+        '       </td>' +
+        '   </tr>'+
+        '   <tr>'+
+        '       <td colspan="3"><input type="text" class="form-control" placeholder="Comentario"></td>'+
+
         '   </tr>'+
         '</table>';
 
+*/
 
+
+    //tabs
+    var htmlString =
+        '<ul class="nav nav-tabs nav-fill" role="tablist" id="formTabs">'+
+        '   <li class="nav-item">' +
+        '       <a id="personales-tab" data-toggle="tab" class="nav-link active bg-dark text-light" href="#personales">Datos personales</a>' +
+        '   </li>'+
+        '   <li class="nav-item">' +
+        '       <a id="localizacion-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#localizacion">Datos de localización</a>' +
+        '   </li>'+
+        '   <li class="nav-item">' +
+        '       <a id="prestaciones-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#prestaciones">Datos de la prestación</a>' +
+        '   </li>'+
+        '   <li class="nav-item">' +
+        '       <a id="vivienda-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#vivienda">Datos de vivienda</a>' +
+        '   </li>'+
+        '</ul>';
+
+    //tabs content
+    htmlString +=
+        '<div class="tab-content" id="tabContent">'+
+        '<div class="tab-pane fade show active" id="personales" role="tabpanel" aria-labelledby="personales-tab"></div>'+
+        '<div class="tab-pane fade" id="localizacion" role="tabpanel" aria-labelledby="localizacion-tab"></div>'+
+        '<div class="tab-pane fade" id="prestaciones" role="tabpanel" aria-labelledby="prestaciones-tab"></div>'+
+        '<div class="tab-pane fade" id="vivienda" role="tabpanel" aria-labelledby="vivienda-tab"></div>'+
+        '</div>';
+
+
+    //agrega el esqueleto al modal
     $("#modalACBody")
         .empty()
         .append(htmlString);
 
-    $("#modalACTitulo").text('Nuevo registro');
+    //pestaña de datos personales
+    var htmlPersonales =
+         '<table class="table table-dark table-striped table-hover">'+
+         '  <tr>'+
+         '      <td><input type="text" class="form-control" placeholder="Nombre" data-toggle="tooltip" data-placement="top" title="Nombre completo"></td>'+
+         '      <td><input type="text" class="form-control" placeholder="Apellido"></td>'+
+         '  </tr>'+
+         '  <tr>'+
+         '      <td><input class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker"></td>'+
+         '      <td><input type="number" class="form-control" placeholder="DNI"></td>'+
+         '  </tr>'+
+         '  <tr>'+
+         '      <td><input type="text" class="form-control" placeholder="Teléfono">'+
+         '      <td><input type="text" class="form-control" placeholder="fallecido">'+
+         '  </tr>'+
+         '</table>';
+
+    $("#personales")
+        .append(htmlPersonales);
+
+    //pestaña de datos de localización
+    var htmlLocalizacion =
+        '<table class="table table-dark table-striped table-hover">'+
+        '<tr>'+
+        '<td><select class="selectLocalidad"></select></td>'+
+        '<td colspan="2"><input type="text" class="form-control" placeholder="Domicilio"></td>'+
+        '</tr>'+
+        '<tr>'+
+        '       <td>' +
+        '           <div class="input-group input-group">'+
+        '               <div class="input-group-prepend">'+
+        '                   <span class="input-group-text" id="latitud">-31,</span>'+
+        '               </div>'+
+        '               <input type="number" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
+        '           </div>'+
+        '       </td>' +
+        '       <td>' +
+        '           <div class="input-group input-group">'+
+        '               <div class="input-group-prepend">'+
+        '                   <span class="input-group-text" id="longitud">-68,</span>'+
+        '               </div>'+
+        '               <input type="number" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
+        '           </div>'+
+        '       </td>' +
+        '<td></td>'+
+        '</tr>'+
+        '<tr>'+
+        '<td colspan="3"></td>'+
+        '</tr>'+
+        '</table>';
+
+    $("#localizacion")
+        .append(htmlLocalizacion);
+
+    //pestaña de datos de la prestación
+    var htmlPrestaciones =
+        '<table class="table table-dark table-striped table-hover">'+
+        '   <tr>'+
+        '       <td><input type="number" class="form-control" placeholder="Nº Beneficiario"></td>'+
+        '       <td>' +
+        '           <div class="btn-group btn-group-toggle" data-toggle="buttons">'+
+        '               <label class="btn btn-light">'+
+        '                   <input type="radio" name="options" autocomplete="off"> Titular'+
+        '               </label>'+
+        '               <label class="btn btn-light">'+
+        '                   <input type="radio" name="options" autocomplete="off"> Adherente'+
+        '               </label>'+
+        '           </div>' +
+        '       </td>'+
+        '   </tr>'+
+        '   <tr>'+
+        '       <td><select class="selectTipoPension"></select></td>'+
+        '       <td><select class="selectCIE10" data-placeholder="Seleccione motivo"></td>'+
+        '   </tr>'+
+        '   <tr>'+
+        '       <td colspan="2"><select class="selectPrestaciones"></td>'+
+        '   </tr>'+
+        '</table>';
+
+    $("#prestaciones")
+        .append(htmlPrestaciones);
+
+
+    var htmlVivienda =
+        '<table class="table table-dark table-striped table-hover">'+
+        '   <tr>'+
+        '       <td><input type="number" class="form-control" placeholder="Nº conviven"></td>'+
+        '       <td><input type="number" class="form-control" placeholder="Nº G Familiar"></td>'+
+        '       <td><select class="selectTipoVivienda"></td>'+
+        '   </tr>'+
+        '   <tr>'+
+        '       <td colspan="3"><select class="selectTipoServicios"></td>'+
+        '   </tr>'+
+        '   <tr>'+
+        '       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
+        '       <td colspan="2"><input type="text" class="form-control" placeholder="Comentario"></td>'+
+        '   </tr>'+
+        '</table>';
+
+    $("#vivienda")
+        .append(htmlVivienda);
+
+
+    $("#modalACTitulo").text('Nuevo registro, planilla nº: ' + $("#numeroPlanilla").val());
 
     $("#modalAC")
         .modal('show')
@@ -230,7 +450,7 @@ function fillDropDown(){
     $("#nacimiento")
         .datepicker({
             autoclose: true,
-            language: 'es-ES',
+            language: 'es',
             format: 'dd/mm/yyyy'
         });
 
@@ -238,6 +458,7 @@ function fillDropDown(){
         .select2({
             placeholder: 'Elija tipo de pensión',
             width: '100%',
+            language: 'es',
             minimumResultsForSearch: -1,
             data: tipoPension
         });
@@ -246,6 +467,7 @@ function fillDropDown(){
         .select2({
             placeholder: 'Elija tipo de vivienda',
             width: '100%',
+            language: 'es',
             minimumResultsForSearch: -1,
             data: tipoVivienda
         });
@@ -254,6 +476,7 @@ function fillDropDown(){
         .select2({
             placeholder: 'Elija tipo de vivienda',
             width: '100%',
+            language: 'es',
             minimumResultsForSearch: -1,
             multiple: true,
             data: tipoServicios
@@ -262,6 +485,7 @@ function fillDropDown(){
     $(".selectLocalidad").select2({
         placeholder: 'Busque localidad',
         width: '100%',
+        language: 'es',
         minimumResultsForSearch: -1,
         ajax: {
             url: 'planillas/getLocalidades',
@@ -291,11 +515,15 @@ function fillDropDown(){
     });
 
     $(".selectCIE10").select2({
-        placeholder: 'Busque diagnóstico',
         width: '100%',
         dropdownAutoWidth: true,
         multiple: true,
+        language: 'es',
+        minimumInputLength: 3,
         dropdownParent: $("#modalACBody"),
+        placeholder: function(){
+            $(this).data('placeholder');
+        },
         ajax: {
             url: 'planillas/getCIE10',
             type: 'GET',
@@ -321,5 +549,14 @@ function fillDropDown(){
                 };
             }
         }
+    });
+
+    $(".selectPrestaciones").select2({
+        placeholder: 'Elija prestaciones',
+        width: '100%',
+        language: 'es',
+        multiple: true,
+        minimumResultsForSearch: -1,
+        data: prestaciones
     });
 }

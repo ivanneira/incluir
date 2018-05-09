@@ -3,14 +3,13 @@
         <img class="card-2 rounded" src="images/incluir_logo.jpg" width="50" height="50" alt="">
 
     </a>
-    <h3>Incluir Salud</h3>
+    <h3 class="text-light">Incluir Salud</h3>
     <button id="logout" class="btn btn-warning"><i class="fa fa-power-off"></i> Usuario: {{user}}</button>
 </nav>
 
 <div class="container">
-    <h6>Nueva planilla</h6>
-
-
+    <br>
+    <br>
     <table id="encabezado" class="card-1 table table-primary table-striped table-hover">
         <tr>
             <thead class="thead-dark">
@@ -22,14 +21,14 @@
             </thead>
         </tr>
         <tr>
-            <td><input type="text" class="form-control" placeholder="Nº planilla"></td>
+            <td><input id="numeroPlanilla" type="text" class="form-control" placeholder="Nº planilla"></td>
             <td><select class="selectSupervisor"></select></td>
             <td><select class="selectEncuestador"></select></td>
             <td><select class="selectDepartamento"></select></td>
         </tr>
     </table>
 
-    <button id="agregarRegistro" class="btn btn-block btn-success">Agregar</button>
+    <button id="agregarRegistro" class="btn btn-sm btn-success">+Agregar</button>
 
 </div>
 
