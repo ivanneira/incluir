@@ -363,7 +363,7 @@ function fillModal(){
         '               <div class="input-group-prepend">'+
         '                   <span class="input-group-text" id="latitud">-31,</span>'+
         '               </div>'+
-        '               <input type="number" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
+        '               <input name="lat" id="lat" type="number" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
         '           </div>'+
         '       </td>' +
         '       <td>' +
@@ -371,19 +371,24 @@ function fillModal(){
         '               <div class="input-group-prepend">'+
         '                   <span class="input-group-text" id="longitud">-68,</span>'+
         '               </div>'+
-        '               <input type="number" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
+        '               <input name="lon" id="lon" type="number" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
         '           </div>'+
         '       </td>' +
         '<td></td>'+
         '</tr>'+
         '<tr>'+
-        '<td colspan="3"></td>'+
+        '<td colspan="3" >' +
+        '<div style="padding:10px">'+
+        '<div id="map"></div>'+
+        '</div>'+
+        '</td>'+
         '</tr>'+
         '</table>';
 
     $("#localizacion")
         .append(htmlLocalizacion);
 
+        initMap();
     //pestaña de datos de la prestación
     var htmlPrestaciones =
         '<table class="table table-dark table-striped table-hover">'+
@@ -559,4 +564,74 @@ function fillDropDown(){
         minimumResultsForSearch: -1,
         data: prestaciones
     });
+}
+
+var map;
+
+function initMap() {
+    var latitude = -31.536395; // YOUR LATITUDE VALUE
+    var longitude = -68.536976; // YOUR LONGITUDE VALUE
+
+    var myLatLng = {lat: latitude, lng: longitude};
+
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: myLatLng,
+        zoom: 14,
+        disableDoubleClickZoom: true, // disable the default map zoom on double click
+    });
+
+    // Update lat/long value of div when anywhere in the map is clicked
+    google.maps.event.addListener(map,'click',function(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lon').value =  event.latLng.lng();
+    });
+
+    // Update lat/long value of div when you move the mouse over the map
+    /*
+    google.maps.event.addListener(map,'mousemove',function(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lon').value = event.latLng.lng();
+    });
+    */
+
+    var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        //title: 'Hello World'
+
+        // setting latitude & longitude as title of the marker
+        // title is shown when you hover over the marker
+        title: latitude + ', ' + longitude
+    });
+
+    // Update lat/long value of div when the marker is clicked
+    marker.addListener('click', function(event) {
+        document.getElementById('lat').value = event.latLng.lat();
+        document.getElementById('lon').value =  event.latLng.lng();
+    });
+
+    // Create new marker on double click event on the map
+    /*
+    google.maps.event.addListener(map,'dblclick',function(event) {
+        var marker = new google.maps.Marker({
+            position: event.latLng,
+            map: map,
+            title: event.latLng.lat()+', '+event.latLng.lng()
+        });
+
+        // Update lat/long value of div when the marker is clicked
+        marker.addListener('click', function() {
+            document.getElementById('lat').value = event.latLng.lat();
+            document.getElementById('lon').value =  event.latLng.lng();
+        });
+    });
+    */
+    // Create new marker on single click event on the map
+    /*google.maps.event.addListener(map,'click',function(event) {
+     var marker = new google.maps.Marker({
+     position: event.latLng,
+     map: map,
+     title: event.latLng.lat()+', '+event.latLng.lng()
+     });
+     });*/
 }
