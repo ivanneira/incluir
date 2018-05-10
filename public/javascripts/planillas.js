@@ -19,7 +19,7 @@ $(function(){
         success: function(data){
 
             processPrestaciones(data);
-            console.dir(prestaciones)
+            //console.dir(prestaciones)
         },
         error: function(e){
             ERROR();
@@ -203,7 +203,7 @@ $(function(){
     });
 
     $("#agregarRegistro").click(function(){
-
+/*
         if(
                 $("#numeroPlanilla").val() != "" &&
                 $(".selectSupervisor").val() != null &&
@@ -216,7 +216,7 @@ $(function(){
 
                     alert("Complete los datos del encabezado primero")
         }
-
+*/fillModal();
 
     });
 
@@ -318,10 +318,10 @@ function fillModal(){
     //tabs content
     htmlString +=
         '<div class="tab-content" id="tabContent">'+
-        '<div class="tab-pane fade show active" id="personales" role="tabpanel" aria-labelledby="personales-tab"></div>'+
-        '<div class="tab-pane fade" id="localizacion" role="tabpanel" aria-labelledby="localizacion-tab"></div>'+
-        '<div class="tab-pane fade" id="prestaciones" role="tabpanel" aria-labelledby="prestaciones-tab"></div>'+
-        '<div class="tab-pane fade" id="vivienda" role="tabpanel" aria-labelledby="vivienda-tab"></div>'+
+        '   <div class="tab-pane fade show active" id="personales" role="tabpanel" aria-labelledby="personales-tab"></div>'+
+        '   <div class="tab-pane fade" id="localizacion" role="tabpanel" aria-labelledby="localizacion-tab"></div>'+
+        '   <div class="tab-pane fade" id="prestaciones" role="tabpanel" aria-labelledby="prestaciones-tab"></div>'+
+        '   <div class="tab-pane fade" id="vivienda" role="tabpanel" aria-labelledby="vivienda-tab"></div>'+
         '</div>';
 
 
@@ -353,11 +353,11 @@ function fillModal(){
     //pestaña de datos de localización
     var htmlLocalizacion =
         '<table class="table table-dark table-striped table-hover">'+
-        '<tr>'+
-        '<td><select class="selectLocalidad"></select></td>'+
-        '<td colspan="2"><input type="text" class="form-control" placeholder="Domicilio"></td>'+
-        '</tr>'+
-        '<tr>'+
+        '   <tr>'+
+        '       <td><select class="selectLocalidad"></select></td>'+
+        '       <td colspan="2"><input type="text" class="form-control" placeholder="Domicilio"></td>'+
+        '   </tr>'+
+        '   <tr>'+
         '       <td>' +
         '           <div class="input-group input-group">'+
         '               <div class="input-group-prepend">'+
