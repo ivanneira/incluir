@@ -5,8 +5,10 @@
 var tipoPension;
 var tipoVivienda;
 var tipoServicios;
-
 var prestaciones;
+
+var map;
+var marker;
 
 var $modal = $("#modalAC");
 
@@ -363,7 +365,7 @@ function fillModal(){
         '               <div class="input-group-prepend">'+
         '                   <span class="input-group-text" id="latitud">-31,</span>'+
         '               </div>'+
-        '               <input name="lat" id="lat" type="number" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
+        '               <input name="lat" id="lat" type="text" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
         '           </div>'+
         '       </td>' +
         '       <td>' +
@@ -371,18 +373,17 @@ function fillModal(){
         '               <div class="input-group-prepend">'+
         '                   <span class="input-group-text" id="longitud">-68,</span>'+
         '               </div>'+
-        '               <input name="lon" id="lon" type="number" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
+        '               <input name="lon" id="lon" type="text" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
         '           </div>'+
         '       </td>' +
-        '<td></td>'+
-        '</tr>'+
-        '<tr>'+
-        '<td colspan="3" >' +
-        '<div style="padding:10px">'+
-        '<div id="map"></div>'+
-        '</div>'+
-        '</td>'+
-        '</tr>'+
+        '   </tr>'+
+        '   <tr>'+
+        '       <td colspan="3" >' +
+        '           <div style="padding:10px">'+
+        '               <div id="map"></div>'+
+        '           </div>'+
+        '       </td>'+
+        '   </tr>'+
         '</table>';
 
     $("#localizacion")
@@ -456,6 +457,7 @@ function fillDropDown(){
         .datepicker({
             autoclose: true,
             language: 'es',
+            container: $("#modalAC"),
             format: 'dd/mm/yyyy'
         });
 
@@ -566,7 +568,7 @@ function fillDropDown(){
     });
 }
 
-var map;
+
 
 function initMap() {
     var latitude = -31.536395; // YOUR LATITUDE VALUE
@@ -578,22 +580,231 @@ function initMap() {
         center: myLatLng,
         zoom: 14,
         disableDoubleClickZoom: true, // disable the default map zoom on double click
+        fullscreenControl: false,
+        styles: [
+            {
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#212121"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.icon",
+                "stylers": [
+                    {
+                        "visibility": "off"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
+            {
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                    {
+                        "color": "#212121"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.country",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#9e9e9e"
+                    }
+                ]
+            },
+            {
+                "featureType": "administrative.locality",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#bdbdbd"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#181818"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
+            {
+                "featureType": "poi.park",
+                "elementType": "labels.text.stroke",
+                "stylers": [
+                    {
+                        "color": "#1b1b1b"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "geometry.fill",
+                "stylers": [
+                    {
+                        "color": "#2c2c2c"
+                    }
+                ]
+            },
+            {
+                "featureType": "road",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#8a8a8a"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.arterial",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#373737"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#3c3c3c"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.highway.controlled_access",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#4e4e4e"
+                    }
+                ]
+            },
+            {
+                "featureType": "road.local",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#616161"
+                    }
+                ]
+            },
+            {
+                "featureType": "transit",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#757575"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "geometry",
+                "stylers": [
+                    {
+                        "color": "#000000"
+                    }
+                ]
+            },
+            {
+                "featureType": "water",
+                "elementType": "labels.text.fill",
+                "stylers": [
+                    {
+                        "color": "#3d3d3d"
+                    }
+                ]
+            }
+        ]
     });
 
     // Update lat/long value of div when anywhere in the map is clicked
     google.maps.event.addListener(map,'click',function(event) {
-        document.getElementById('lat').value = event.latLng.lat();
-        document.getElementById('lon').value =  event.latLng.lng();
+
+
+        var latlng = {lat:event.latLng.lat(),lng: event.latLng.lng() };
+
+        var latt = event.latLng.lat();
+
+        latt = latt
+            .toString()
+            .slice(4);
+
+        var longg = event.latLng.lng();
+        longg = longg
+            .toString()
+            .slice(4);
+
+        $("#lat").val(latt);
+        $("#lon").val(longg);
+
+        if(marker){
+            marker.setMap(null);
+        }
+
+        marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            //title: 'Hello World'
+
+            // setting latitude & longitude as title of the marker
+            // title is shown when you hover over the marker
+            title: latitude + ', ' + longitude
+        });
+
     });
 
     // Update lat/long value of div when you move the mouse over the map
-    /*
+/*
     google.maps.event.addListener(map,'mousemove',function(event) {
         document.getElementById('lat').value = event.latLng.lat();
         document.getElementById('lon').value = event.latLng.lng();
     });
-    */
-
+*/
+/*
     var marker = new google.maps.Marker({
         position: myLatLng,
         map: map,
@@ -603,12 +814,48 @@ function initMap() {
         // title is shown when you hover over the marker
         title: latitude + ', ' + longitude
     });
-
+*/
+/*
     // Update lat/long value of div when the marker is clicked
-    marker.addListener('click', function(event) {
+    map.addListener('click', function(event) {
         document.getElementById('lat').value = event.latLng.lat();
         document.getElementById('lon').value =  event.latLng.lng();
     });
+*/
+
+    $("#lat").on('change', function(){
+
+        setMapPoint("-31." + $(this).val(),"-68." + $("#lon").val() );
+    });
+
+    $("#lon").on('change', function(){
+
+        setMapPoint("-31." + $("#lat").val(),"-68." + $(this).val() );
+    });
+
+    function setMapPoint(lat, lng){
+
+        console.log(lat)
+        console.log(lng)
+
+
+        var latlng = {lat: parseFloat(lat) , lng: parseFloat(lng) };
+
+        console.log(latlng)
+        if(marker){
+            marker.setMap(null);
+        }
+
+        map
+            .setCenter(latlng);
+
+        marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: 'Hello World!'
+        });
+
+    }
 
     // Create new marker on double click event on the map
     /*
