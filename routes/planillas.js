@@ -432,10 +432,12 @@ router.get('/getLocalidades', function(req, res, next) {
 router.get('/getPrestaciones', function(req, res, next) {
 
     knex
-        .raw('exec getprestaciones')
+        .raw('exec getprestaciones ')
         .then(function(rows){
 
             if(rows.length > 0) {
+
+                console.log(rows)
                 res.setHeader('Content-Type', 'application/json');
                 res.send(rows)
             }

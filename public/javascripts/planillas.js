@@ -5,7 +5,7 @@
 var tipoPension;
 var tipoVivienda;
 var tipoServicios;
-var prestaciones;
+//var prestaciones;
 
 var map;
 var marker;
@@ -13,7 +13,7 @@ var marker;
 var $modal = $("#modalAC");
 
 $(function(){
-
+/*
     $.ajax({
         url: 'planillas/getPrestaciones',
         type: 'GET',
@@ -29,7 +29,7 @@ $(function(){
         }
     });
 
-
+*/
     $.ajax({
         url: 'planillas/getTipoPension',
         type: 'GET',
@@ -419,6 +419,7 @@ function fillModal(){
         .append(htmlPrestaciones);
 
 
+
     var htmlVivienda =
         '<table class="table table-dark table-striped table-hover">'+
         '   <tr>'+
@@ -564,7 +565,32 @@ function fillDropDown(){
         language: 'es',
         multiple: true,
         minimumResultsForSearch: -1,
-        data: prestaciones
+        ajax: {
+            url: 'planillas/getPrestaciones',
+            type: 'GET',
+            dataType: 'json',
+            data: function (params) {
+                var query = {
+                    q: params.term
+                };
+
+                // Query parameters will be ?1=[term]
+                return query;
+            },
+            processResults: function (data) {
+
+                return {
+                    results: $.map(data, function (item) {
+
+                        return {
+                            text: item.nombre,
+                            id: item.id
+                        }
+
+                    })
+                };
+            }
+        }
     });
 }
 
