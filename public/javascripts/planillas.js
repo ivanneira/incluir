@@ -607,7 +607,7 @@ function initMap() {
         zoom: 14,
         disableDoubleClickZoom: true, // disable the default map zoom on double click
         fullscreenControl: false,
-        styles: [
+        /*styles: [
             {
                 "elementType": "geometry",
                 "stylers": [
@@ -784,7 +784,7 @@ function initMap() {
                     }
                 ]
             }
-        ]
+        ]*/
     });
 
     // Update lat/long value of div when anywhere in the map is clicked
