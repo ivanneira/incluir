@@ -315,6 +315,12 @@ function fillModal(){
         '   <li class="nav-item">' +
         '       <a id="vivienda-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#vivienda">Datos de vivienda</a>' +
         '   </li>'+
+        '   <li class="nav-item">' +
+        '       <a id="comentarios-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#comentarios">Comentarios</a>' +
+        '   </li>'+
+        '   <li class="nav-item">' +
+        '       <a id="encuesta-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#encuesta">Encuesta de satisfacción</a>' +
+        '   </li>'+
         '</ul>';
 
     //tabs content
@@ -324,6 +330,8 @@ function fillModal(){
         '   <div class="tab-pane fade" id="localizacion" role="tabpanel" aria-labelledby="localizacion-tab"></div>'+
         '   <div class="tab-pane fade" id="prestaciones" role="tabpanel" aria-labelledby="prestaciones-tab"></div>'+
         '   <div class="tab-pane fade" id="vivienda" role="tabpanel" aria-labelledby="vivienda-tab"></div>'+
+        '   <div class="tab-pane fade" id="comentarios" role="tabpanel" aria-labelledby="comentarios-tab"></div>'+
+        '   <div class="tab-pane fade" id="encuesta" role="tabpanel" aria-labelledby="encuesta-tab"></div>'+
         '</div>';
 
 
@@ -479,10 +487,10 @@ function fillModal(){
         '   </tr>'+
         '   <tr>'+
         //'       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
-        '       <td colspan="3">' +
-        '           <label for="comentario">Comentarios</label>' +
-        '           <input name="comentario" type="text" class="form-control" placeholder="Comentario">' +
-        '   </td>'+
+        //'       <td colspan="3">' +
+        //'           <label for="comentario">Comentarios</label>' +
+        //'           <input name="comentario" type="text" class="form-control" placeholder="Comentario">' +
+        //'       </td>'+
         '   </tr>'+
         '</table>';
 
@@ -497,7 +505,18 @@ function fillModal(){
         width: '100%'
     });
 
+    var htmlComentarios =
+        '<table class="table table-dark table-striped table-hover">'+
+        '   </tr>'+
+        '       <td>' +
+        '           <label for="comentario">Comentarios</label>' +
+        '           <textarea name="comentario" type="text" class="form-control" placeholder="Comentario" rows="10"></textarea>' +
+        '   </td>'+
+        '   </tr>'+
+        '</table>';
 
+    $("#comentarios")
+        .append(htmlComentarios);
 
     $("#modalACTitulo").text('Nuevo registro, planilla nº: ' + $("#numeroPlanilla").val());
 
