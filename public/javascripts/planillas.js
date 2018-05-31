@@ -518,6 +518,157 @@ function fillModal(){
     $("#comentarios")
         .append(htmlComentarios);
 
+
+    var htmlEncuesta =
+        '<table class="table table-dark table-striped table-hover">'+
+        '   <tr>'+
+        '       <td>' +
+        '           <label for="necuesta">Nº de encuesta</label>' +
+        '           <input name="necuesta" type="number" class="form-control" placeholder="Nº de encuesta">' +
+        '       </td>'+
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>'+
+        '       <td>' +
+        '           <p class="font-italic">¿Dónde se atiende?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input class="form-check-input" type="checkbox" id="dcaps">' +
+        '               <label class="form-check-label" for="dcaps">CAPS</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input class="form-check-input" type="checkbox" id="dhospital">' +
+        '               <label class="form-check-label" for="dhospital">Hospital</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input class="form-check-input" type="checkbox" id="dconsultorio">' +
+        '               <label class="form-check-label" for="dconsultorio">Consultorio particular</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input class="form-check-input" type="checkbox" id="dotro">' +
+        '               <label class="form-check-label" for="dotros">Otro</label>' +
+        '           </div>' +
+        '       </td>'+
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>'+
+        '       <td>' +
+        '           <p class="font-italic">¿Quién lo atiende?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input class="form-check-input" type="checkbox" id="mcabecera">' +
+        '               <label class="form-check-label" for="mcabecera">Médico de cabecera</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input class="form-check-input" type="checkbox" id="mespecialista">' +
+        '               <label class="form-check-label" for="mespecialista">Médico especialista</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input class="form-check-input" type="checkbox" id="mguardia">' +
+        '               <label class="form-check-label" for="mguardia">Médico de guardia</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input class="form-check-input" type="checkbox" id="motros">' +
+        '               <label class="form-check-label" for="motros">Otro</label>' +
+        '           </div>' +
+        '       </td>'+
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Cuánto tiempo le llevó encontrar el turno?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="tiempo" class="form-check-input" type="radio" id="t15">' +
+        '               <label class="form-check-label" for="t15">Menos de 15 días</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="tiempo" class="form-check-input" type="radio" id="t30">' +
+        '               <label class="form-check-label" for="t30">Entre 15 y 30 días</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="tiempo" class="form-check-input" type="radio" id="tmas">' +
+        '               <label class="form-check-label" for="tmas">Mas de 30 días</label>' +
+        '           </div>' +
+        '       </td>' +
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Cómo fue atendido?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="atendido" class="form-check-input" type="radio" id="atmb">' +
+        '               <label class="form-check-label" for="atmb">Muy bien</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="atendido" class="form-check-input" type="radio" id="atbi">' +
+        '               <label class="form-check-label" for="atbi">Bien</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="atendido" class="form-check-input" type="radio" id="atre">' +
+        '               <label class="form-check-label" for="atre">Regular</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="atendido" class="form-check-input" type="radio" id="atma">' +
+        '               <label class="form-check-label" for="atma">Mal</label>' +
+        '           </div>' +
+        '       </td>' +
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Le solicitaron estudios, cuáles?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="estudios" class="form-check-input" type="radio" id="esrx">' +
+        '               <label class="form-check-label" for="esrx">RX</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="estudios" class="form-check-input" type="radio" id="esla">' +
+        '               <label class="form-check-label" for="esla">Laboratorio</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="estudios" class="form-check-input" type="radio" id="esot">' +
+        '               <label class="form-check-label" for="esot">otros</label>' +
+        '           </div>' +
+        '       </td>' +
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '      <td>' +
+        '          <input name="remedios" id="remedios" type="checkbox" checked data-toggle="toggle">' +
+        '          <input name="demora" id="demora" type="checkbox" checked data-toggle="toggle">' +
+        '      </td>' +
+        '   </tr>';
+
+    htmlEncuesta +=
+        '</table>';
+
+
+
+
+    $("#encuesta")
+        .append(htmlEncuesta);
+
+    $("#remedios").bootstrapToggle({
+        on: "Si, me indicaron remedios",
+        off: "No me indicaron remedios",
+        onstyle: 'success',
+        offstyle: 'danger',
+        width: '100%'
+    });
+
+    $("#demora").bootstrapToggle({
+        on: "Los conseguí sin demora",
+        off: "Los conseguí con demora",
+        onstyle: 'success',
+        offstyle: 'danger',
+        width: '100%'
+    });
+
+
     $("#modalACTitulo").text('Nuevo registro, planilla nº: ' + $("#numeroPlanilla").val());
 
     $("#modalAC")
