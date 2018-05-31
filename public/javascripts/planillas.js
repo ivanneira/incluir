@@ -13,23 +13,23 @@ var marker;
 var $modal = $("#modalAC");
 
 $(function(){
-/*
-    $.ajax({
-        url: 'planillas/getPrestaciones',
-        type: 'GET',
-        dataType: 'json',
-        success: function(data){
+    /*
+     $.ajax({
+     url: 'planillas/getPrestaciones',
+     type: 'GET',
+     dataType: 'json',
+     success: function(data){
 
-            processPrestaciones(data);
-            //console.dir(prestaciones)
-        },
-        error: function(e){
-            ERROR();
-            console.log(e);
-        }
-    });
+     processPrestaciones(data);
+     //console.dir(prestaciones)
+     },
+     error: function(e){
+     ERROR();
+     console.log(e);
+     }
+     });
 
-*/
+     */
     $.ajax({
         url: 'planillas/getTipoPension',
         type: 'GET',
@@ -91,10 +91,10 @@ $(function(){
                 return {
                     results: $.map(data, function (item) {
 
-                            return {
-                                text: item.text,
-                                id: item.id
-                            }
+                        return {
+                            text: item.text,
+                            id: item.id
+                        }
 
                     })
                 };
@@ -181,13 +181,13 @@ $(function(){
             type: 'GET',
             dataType: 'json',
             /*data: function (params) {
-                var query = {
-                    q: params.term
-                };
+             var query = {
+             q: params.term
+             };
 
-                // Query parameters will be ?1=[term]
-                return query;
-            },*/
+             // Query parameters will be ?1=[term]
+             return query;
+             },*/
             processResults: function (data) {
 
                 return {
@@ -205,20 +205,20 @@ $(function(){
     });
 
     $("#agregarRegistro").click(function(){
-/*
-        if(
-                $("#numeroPlanilla").val() != "" &&
-                $(".selectSupervisor").val() != null &&
-                $(".selectEncuestador").val() != null &&
-                $(".selectDepartamento").val() != null
-        ){
-            fillModal();
+        /*
+         if(
+         $("#numeroPlanilla").val() != "" &&
+         $(".selectSupervisor").val() != null &&
+         $(".selectEncuestador").val() != null &&
+         $(".selectDepartamento").val() != null
+         ){
+         fillModal();
 
-        }else{
+         }else{
 
-                    alert("Complete los datos del encabezado primero")
-        }
-*/fillModal();
+         alert("Complete los datos del encabezado primero")
+         }
+         */fillModal();
 
     });
 
@@ -232,72 +232,72 @@ function ERROR(){
 }
 
 function fillModal(){
-/*
-    var htmlString =
-        '<table class="table table-dark table-striped table-hover">'+
-        '   <tr>'+
-        '       <td><input type="text" class="form-control" placeholder="Nombre" data-toggle="tooltip" data-placement="top" title="Nombre completo"></td>'+
-        '       <td><input type="text" class="form-control" placeholder="Apellido"></td>'+
-        '       <td><input class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker"></td>'+
-        '   </tr>'+
-        '   <tr>'+
-        '       <td><input type="number" class="form-control" placeholder="DNI"></td>'+
-        '       <td><input type="text" class="form-control" placeholder="Teléfono"></td>'+
-        '       <td><select class="selectLocalidad"></select></td>'+
-        '   </tr>'+
-        '   <tr>'+
-        '       <td colspan="3"><input type="text" class="form-control" placeholder="Domicilio"></td>'+
-        '   </tr>'+
-        '   <tr>'+
-        '       <td><input type="number" class="form-control" placeholder="Nº Beneficiario"></td>'+
-        '       <td>' +
-        '           <div class="btn-group btn-group-toggle" data-toggle="buttons">'+
-        '               <label class="btn btn-light">'+
-        '                   <input type="radio" name="options" autocomplete="off"> Titular'+
-        '               </label>'+
-        '               <label class="btn btn-light">'+
-        '                   <input type="radio" name="options" autocomplete="off"> Adherente'+
-        '               </label>'+
-        '           </div>' +
-        '       </td>'+
-        '       <td><select class="selectTipoPension"></select></td>'+
-        '   </tr>'+
-        '   <tr>'+
-        '       <td><select class="selectCIE10" data-placeholder="Seleccione motivo"></td>'+
-        '       <td><select class="selectPrestaciones"></td>'+
-        '       <td><input type="number" class="form-control" placeholder="Nº conviven"></td>'+
-        '   </tr>'+
-        '   <tr>'+
-        '       <td><input type="number" class="form-control" placeholder="Nº G Familiar"></td>'+
-        '       <td><select class="selectTipoVivienda"></td>'+
-        '       <td><select class="selectTipoServicios"></td>'+
-        '   </tr>'+
-        '   <tr>'+
-        '       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
-        '       <td>' +
-        '           <div class="input-group input-group">'+
-        '               <div class="input-group-prepend">'+
-        '                   <span class="input-group-text" id="latitud">-31,</span>'+
-        '               </div>'+
-        '               <input type="number" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
-        '           </div>'+
-        '       </td>' +
-        '       <td>' +
-        '           <div class="input-group input-group">'+
-        '               <div class="input-group-prepend">'+
-        '                   <span class="input-group-text" id="longitud">-68,</span>'+
-        '               </div>'+
-        '               <input type="number" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
-        '           </div>'+
-        '       </td>' +
-        '   </tr>'+
-        '   <tr>'+
-        '       <td colspan="3"><input type="text" class="form-control" placeholder="Comentario"></td>'+
+    /*
+     var htmlString =
+     '<table class="table table-dark table-striped table-hover">'+
+     '   <tr>'+
+     '       <td><input type="text" class="form-control" placeholder="Nombre" data-toggle="tooltip" data-placement="top" title="Nombre completo"></td>'+
+     '       <td><input type="text" class="form-control" placeholder="Apellido"></td>'+
+     '       <td><input class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker"></td>'+
+     '   </tr>'+
+     '   <tr>'+
+     '       <td><input type="number" class="form-control" placeholder="DNI"></td>'+
+     '       <td><input type="text" class="form-control" placeholder="Teléfono"></td>'+
+     '       <td><select class="selectLocalidad"></select></td>'+
+     '   </tr>'+
+     '   <tr>'+
+     '       <td colspan="3"><input type="text" class="form-control" placeholder="Domicilio"></td>'+
+     '   </tr>'+
+     '   <tr>'+
+     '       <td><input type="number" class="form-control" placeholder="Nº Beneficiario"></td>'+
+     '       <td>' +
+     '           <div class="btn-group btn-group-toggle" data-toggle="buttons">'+
+     '               <label class="btn btn-light">'+
+     '                   <input type="radio" name="options" autocomplete="off"> Titular'+
+     '               </label>'+
+     '               <label class="btn btn-light">'+
+     '                   <input type="radio" name="options" autocomplete="off"> Adherente'+
+     '               </label>'+
+     '           </div>' +
+     '       </td>'+
+     '       <td><select class="selectTipoPension"></select></td>'+
+     '   </tr>'+
+     '   <tr>'+
+     '       <td><select class="selectCIE10" data-placeholder="Seleccione motivo"></td>'+
+     '       <td><select class="selectPrestaciones"></td>'+
+     '       <td><input type="number" class="form-control" placeholder="Nº conviven"></td>'+
+     '   </tr>'+
+     '   <tr>'+
+     '       <td><input type="number" class="form-control" placeholder="Nº G Familiar"></td>'+
+     '       <td><select class="selectTipoVivienda"></td>'+
+     '       <td><select class="selectTipoServicios"></td>'+
+     '   </tr>'+
+     '   <tr>'+
+     '       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
+     '       <td>' +
+     '           <div class="input-group input-group">'+
+     '               <div class="input-group-prepend">'+
+     '                   <span class="input-group-text" id="latitud">-31,</span>'+
+     '               </div>'+
+     '               <input type="number" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
+     '           </div>'+
+     '       </td>' +
+     '       <td>' +
+     '           <div class="input-group input-group">'+
+     '               <div class="input-group-prepend">'+
+     '                   <span class="input-group-text" id="longitud">-68,</span>'+
+     '               </div>'+
+     '               <input type="number" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
+     '           </div>'+
+     '       </td>' +
+     '   </tr>'+
+     '   <tr>'+
+     '       <td colspan="3"><input type="text" class="form-control" placeholder="Comentario"></td>'+
 
-        '   </tr>'+
-        '</table>';
+     '   </tr>'+
+     '</table>';
 
-*/
+     */
 
 
     //tabs
@@ -334,20 +334,38 @@ function fillModal(){
 
     //pestaña de datos personales
     var htmlPersonales =
-         '<table class="table table-dark table-striped table-hover">'+
-         '  <tr>'+
-         '      <td><input type="text" class="form-control" placeholder="Nombre" data-toggle="tooltip" data-placement="top" title="Nombre completo"></td>'+
-         '      <td><input type="text" class="form-control" placeholder="Apellido"></td>'+
-         '  </tr>'+
-         '  <tr>'+
-         '      <td><input class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker"></td>'+
-         '      <td><input type="number" class="form-control" placeholder="DNI"></td>'+
-         '  </tr>'+
-         '  <tr>'+
-         '      <td><input type="text" class="form-control" placeholder="Teléfono">'+
-         '      <td><input type="text" class="form-control" placeholder="fallecido">'+
-         '  </tr>'+
-         '</table>';
+        '<table class="table table-dark table-striped table-hover">'+
+        '  <tr>'+
+        '      <td>' +
+        '           <label for="nombre">Nombre</label>' +
+        '           <input name="nombre" type="text" class="form-control" placeholder="Nombre" data-toggle="tooltip" data-placement="top" title="Nombre completo">' +
+        '       </td>'+
+        '       <td>' +
+        '           <label for="apellido">Apellido</label>' +
+        '           <input name="apellido" type="text" class="form-control" placeholder="Apellido">' +
+        '       </td>'+
+        '  </tr>'+
+        '  <tr>'+
+        '      <td>' +
+        '           <label for="fecnac">Fecha de nacimiento</label>' +
+        '           <input name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker">' +
+        '       </td>'+
+        '      <td>' +
+        '           <label for="dni">DNI</label>' +
+        '           <input name="dni" type="number" class="form-control" placeholder="DNI">' +
+        '       </td>'+
+        '  </tr>'+
+        '  <tr>'+
+        '      <td>' +
+        '           <label for="tel">Teléfono</label>' +
+        '           <input name="tel" type="text" class="form-control" placeholder="Teléfono">' +
+        '       </td>'+
+        '      <td>' +
+        '           <label for="vivo">Vivo</label>' +
+        '          <input name="vivo" id="fallecido" type="checkbox" checked data-toggle="toggle">' +
+        '      </td>' +
+        '  </tr>'+
+        '</table>';
 
     $("#personales")
         .append(htmlPersonales);
@@ -356,14 +374,20 @@ function fillModal(){
     var htmlLocalizacion =
         '<table class="table table-dark table-striped table-hover">'+
         '   <tr>'+
-        '       <td><select class="selectLocalidad"></select></td>'+
-        '       <td colspan="2"><input type="text" class="form-control" placeholder="Domicilio"></td>'+
+        '       <td>' +
+        '           <label for="localidad">Localidad</label>' +
+        '           <select name="localidad" class="selectLocalidad"></select>' +
+        '       </td>'+
+        '       <td colspan="2">' +
+        '           <label for="domicilio">Domicilio</label>' +
+        '           <input name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
+        '       </td>'+
         '   </tr>'+
         '   <tr>'+
         '       <td>' +
         '           <div class="input-group input-group">'+
         '               <div class="input-group-prepend">'+
-        '                   <span class="input-group-text" id="latitud">-31,</span>'+
+        '                   <span class="input-group-text" id="latitud">Latitud</span>'+
         '               </div>'+
         '               <input name="lat" id="lat" type="text" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
         '           </div>'+
@@ -371,7 +395,7 @@ function fillModal(){
         '       <td>' +
         '           <div class="input-group input-group">'+
         '               <div class="input-group-prepend">'+
-        '                   <span class="input-group-text" id="longitud">-68,</span>'+
+        '                   <span class="input-group-text" id="longitud">Longitud</span>'+
         '               </div>'+
         '               <input name="lon" id="lon" type="text" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
         '           </div>'+
@@ -380,6 +404,7 @@ function fillModal(){
         '   <tr>'+
         '       <td colspan="3" >' +
         '           <div style="padding:10px">'+
+        '           <label for="map">Mapa interactivo</label>' +
         '               <div id="map"></div>'+
         '           </div>'+
         '       </td>'+
@@ -389,14 +414,15 @@ function fillModal(){
     $("#localizacion")
         .append(htmlLocalizacion);
 
-        initMap();
+    initMap();
     //pestaña de datos de la prestación
     var htmlPrestaciones =
         '<table class="table table-dark table-striped table-hover">'+
         '   <tr>'+
-        '       <td><input type="number" class="form-control" placeholder="Nº Beneficiario"></td>'+
-        '       <td>' +
-        '           <div class="btn-group btn-group-toggle" data-toggle="buttons">'+
+        //'       <td><input type="number" class="form-control" placeholder="Nº Beneficiario"></td>'+
+        '       <td colspan="2">' +
+        '           <label for="titular">Titularidad</label>' +
+        '           <div id="titular" class="btn-group btn-group-toggle" data-toggle="buttons">'+
         '               <label class="btn btn-light">'+
         '                   <input type="radio" name="options" autocomplete="off"> Titular'+
         '               </label>'+
@@ -407,11 +433,20 @@ function fillModal(){
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
-        '       <td><select class="selectTipoPension"></select></td>'+
-        '       <td><select class="selectCIE10" data-placeholder="Seleccione motivo"></td>'+
+        '       <td>' +
+        '           <label for="pension">Tipo de pensión</label>' +
+        '           <select name="pension" class="selectTipoPension"></select>' +
+        '       </td>'+
+        '       <td>' +
+        '           <label for="motivo">Motivo de la pensión (CIE10)</label>' +
+        '           <select name="motivo" class="selectCIE10" data-placeholder="Seleccione motivo">' +
+        '       </td>'+
         '   </tr>'+
         '   <tr>'+
-        '       <td colspan="2"><select class="selectPrestaciones"></td>'+
+        '       <td colspan="2">' +
+        '           <label for="prestaciones">Prestaciones</label>' +
+        '           <select name="prestaciones" class="selectPrestaciones">' +
+        '       </td>'+
         '   </tr>'+
         '</table>';
 
@@ -419,25 +454,49 @@ function fillModal(){
         .append(htmlPrestaciones);
 
 
-
     var htmlVivienda =
         '<table class="table table-dark table-striped table-hover">'+
         '   <tr>'+
-        '       <td><input type="number" class="form-control" placeholder="Nº conviven"></td>'+
-        '       <td><input type="number" class="form-control" placeholder="Nº G Familiar"></td>'+
-        '       <td><select class="selectTipoVivienda"></td>'+
+        '       <td>' +
+        '           <label for="conviven">Nº de personas que conviven</label>' +
+        '           <input name="conviven" type="number" class="form-control" placeholder="Nº conviven">' +
+        '       </td>'+
+        '       <td>' +
+        '           <label for="grupo">Nº del grupo familiar</label>' +
+        '           <input name="grupo" type="number" class="form-control" placeholder="Nº G Familiar">' +
+        '       </td>'+
+        '       <td>' +
+        '           <label for="vivienda">Tipo de vivienda</label>' +
+        '           <select name="vivienda" class="selectTipoVivienda">' +
+        '           <input id="comentarioTipoVivienda" class="form-control" type="text" placeholder="Especifique" >' +
+        '       </td>'+
         '   </tr>'+
         '   <tr>'+
-        '       <td colspan="3"><select class="selectTipoServicios"></td>'+
+        '       <td colspan="3">' +
+        '           <label for="servicios">Servicios básicos</label>' +
+        '           <select name="servicios" class="selectTipoServicios">' +
+        '       </td>'+
         '   </tr>'+
         '   <tr>'+
-        '       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
-        '       <td colspan="2"><input type="text" class="form-control" placeholder="Comentario"></td>'+
+        //'       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
+        '       <td colspan="3">' +
+        '           <label for="comentario">Comentarios</label>' +
+        '           <input name="comentario" type="text" class="form-control" placeholder="Comentario">' +
+        '   </td>'+
         '   </tr>'+
         '</table>';
 
     $("#vivienda")
         .append(htmlVivienda);
+
+    $("#fallecido").bootstrapToggle({
+        on: "Vivo",
+        off: "Fallecido",
+        onstyle: 'success',
+        offstyle: 'danger',
+        width: '100%'
+    });
+
 
 
     $("#modalACTitulo").text('Nuevo registro, planilla nº: ' + $("#numeroPlanilla").val());
@@ -446,6 +505,7 @@ function fillModal(){
         .modal('show')
         .modal('handleUpdate');
 
+    $("#comentarioTipoVivienda").hide();
 
     fillDropDown();
 
@@ -478,6 +538,15 @@ function fillDropDown(){
             language: 'es',
             minimumResultsForSearch: -1,
             data: tipoVivienda
+        })
+        .on('select2:select',function(e){
+            if(e.params.data.text === "Otros"){
+                $("#comentarioTipoVivienda")
+                    .show();
+            }else{
+                $("#comentarioTipoVivienda")
+                    .hide();
+            }
         });
 
     $(".selectTipoServicios")
@@ -488,7 +557,9 @@ function fillDropDown(){
             minimumResultsForSearch: -1,
             multiple: true,
             data: tipoServicios
-        });
+        }).on('select2:select',function(e){
+        console.log(e)
+    });
 
     $(".selectLocalidad").select2({
         placeholder: 'Busque localidad',
@@ -525,7 +596,7 @@ function fillDropDown(){
     $(".selectCIE10").select2({
         width: '100%',
         dropdownAutoWidth: true,
-        multiple: true,
+        //multiple: true,
         language: 'es',
         minimumInputLength: 3,
         dropdownParent: $("#modalACBody"),
@@ -606,185 +677,7 @@ function initMap() {
         center: myLatLng,
         zoom: 14,
         disableDoubleClickZoom: true, // disable the default map zoom on double click
-        fullscreenControl: false,
-        /*styles: [
-            {
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#212121"
-                    }
-                ]
-            },
-            {
-                "elementType": "labels.icon",
-                "stylers": [
-                    {
-                        "visibility": "off"
-                    }
-                ]
-            },
-            {
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#757575"
-                    }
-                ]
-            },
-            {
-                "elementType": "labels.text.stroke",
-                "stylers": [
-                    {
-                        "color": "#212121"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#757575"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative.country",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#9e9e9e"
-                    }
-                ]
-            },
-            {
-                "featureType": "administrative.locality",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#bdbdbd"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#757575"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.park",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#181818"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.park",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#616161"
-                    }
-                ]
-            },
-            {
-                "featureType": "poi.park",
-                "elementType": "labels.text.stroke",
-                "stylers": [
-                    {
-                        "color": "#1b1b1b"
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "geometry.fill",
-                "stylers": [
-                    {
-                        "color": "#2c2c2c"
-                    }
-                ]
-            },
-            {
-                "featureType": "road",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#8a8a8a"
-                    }
-                ]
-            },
-            {
-                "featureType": "road.arterial",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#373737"
-                    }
-                ]
-            },
-            {
-                "featureType": "road.highway",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#3c3c3c"
-                    }
-                ]
-            },
-            {
-                "featureType": "road.highway.controlled_access",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#4e4e4e"
-                    }
-                ]
-            },
-            {
-                "featureType": "road.local",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#616161"
-                    }
-                ]
-            },
-            {
-                "featureType": "transit",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#757575"
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "elementType": "geometry",
-                "stylers": [
-                    {
-                        "color": "#000000"
-                    }
-                ]
-            },
-            {
-                "featureType": "water",
-                "elementType": "labels.text.fill",
-                "stylers": [
-                    {
-                        "color": "#3d3d3d"
-                    }
-                ]
-            }
-        ]*/
+        fullscreenControl: false
     });
 
     // Update lat/long value of div when anywhere in the map is clicked
@@ -797,12 +690,12 @@ function initMap() {
 
         latt = latt
             .toString()
-            .slice(4);
+        //.slice(4);
 
         var longg = event.latLng.lng();
         longg = longg
             .toString()
-            .slice(4);
+        //.slice(4);
 
         $("#lat").val(latt);
         $("#lon").val(longg);
@@ -824,39 +717,39 @@ function initMap() {
     });
 
     // Update lat/long value of div when you move the mouse over the map
-/*
-    google.maps.event.addListener(map,'mousemove',function(event) {
-        document.getElementById('lat').value = event.latLng.lat();
-        document.getElementById('lon').value = event.latLng.lng();
-    });
-*/
-/*
-    var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        //title: 'Hello World'
+    /*
+     google.maps.event.addListener(map,'mousemove',function(event) {
+     document.getElementById('lat').value = event.latLng.lat();
+     document.getElementById('lon').value = event.latLng.lng();
+     });
+     */
+    /*
+     var marker = new google.maps.Marker({
+     position: myLatLng,
+     map: map,
+     //title: 'Hello World'
 
-        // setting latitude & longitude as title of the marker
-        // title is shown when you hover over the marker
-        title: latitude + ', ' + longitude
-    });
-*/
-/*
-    // Update lat/long value of div when the marker is clicked
-    map.addListener('click', function(event) {
-        document.getElementById('lat').value = event.latLng.lat();
-        document.getElementById('lon').value =  event.latLng.lng();
-    });
-*/
+     // setting latitude & longitude as title of the marker
+     // title is shown when you hover over the marker
+     title: latitude + ', ' + longitude
+     });
+     */
+    /*
+     // Update lat/long value of div when the marker is clicked
+     map.addListener('click', function(event) {
+     document.getElementById('lat').value = event.latLng.lat();
+     document.getElementById('lon').value =  event.latLng.lng();
+     });
+     */
 
     $("#lat").on('change', function(){
 
-        setMapPoint("-31." + $(this).val(),"-68." + $("#lon").val() );
+        setMapPoint($(this).val(),$("#lon").val() );
     });
 
     $("#lon").on('change', function(){
 
-        setMapPoint("-31." + $("#lat").val(),"-68." + $(this).val() );
+        setMapPoint($("#lat").val(),+ $(this).val() );
     });
 
     function setMapPoint(lat, lng){
@@ -885,20 +778,20 @@ function initMap() {
 
     // Create new marker on double click event on the map
     /*
-    google.maps.event.addListener(map,'dblclick',function(event) {
-        var marker = new google.maps.Marker({
-            position: event.latLng,
-            map: map,
-            title: event.latLng.lat()+', '+event.latLng.lng()
-        });
+     google.maps.event.addListener(map,'dblclick',function(event) {
+     var marker = new google.maps.Marker({
+     position: event.latLng,
+     map: map,
+     title: event.latLng.lat()+', '+event.latLng.lng()
+     });
 
-        // Update lat/long value of div when the marker is clicked
-        marker.addListener('click', function() {
-            document.getElementById('lat').value = event.latLng.lat();
-            document.getElementById('lon').value =  event.latLng.lng();
-        });
-    });
-    */
+     // Update lat/long value of div when the marker is clicked
+     marker.addListener('click', function() {
+     document.getElementById('lat').value = event.latLng.lat();
+     document.getElementById('lon').value =  event.latLng.lng();
+     });
+     });
+     */
     // Create new marker on single click event on the map
     /*google.maps.event.addListener(map,'click',function(event) {
      var marker = new google.maps.Marker({

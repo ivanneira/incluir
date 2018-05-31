@@ -155,3 +155,18 @@ ul.select2-selection__rendered {
 
   border-top: none !important;
 }
+
+.tab-content {
+
+  border: 2px solid white;
+}
+
+.select2-selection__choice{
+
+  color: black !important;
+}
+
+#titular > .active {
+
+  background-color: #28a745 !important;
+}
