@@ -788,9 +788,53 @@ function fillModal(){
         .modal('show')
         .modal('handleUpdate');
 
+    //evento del botón aceptar, llama a las verificaciones
+    $("#modalACAceptar")
+        .unbind('click')
+        .click(verificarCampos);
+
+    //esconde el campo de cometarios de vivienda por defecto
     $("#comentarioTipoVivienda").hide();
 
     fillDropDown();
+
+}
+
+//verificación
+function verificarCampos(){
+
+    //en caso que NO esté seleccionado como fallecido
+    if($("#fallecido").prop('checked') ){
+
+        //verificación de campos numéricos
+        $(':input[type="number"]').each(function(index,item){
+
+            console.log("verificando " + item.name);
+
+            if( item.value.includes('-') || item.value.includes('+') || item.value.includes('e') || item.value.includes(NaN) || (item.value === '') ){
+                $(item)
+                    .addClass('bg-warning')
+                    .attr('data-toogle', 'tooltip')
+                    .attr('data-placement', 'top')
+                    .attr('title', 'El valor es incorrecto')
+                    .tooltip('show')
+
+
+            }else{
+                $(item)
+                    .removeClass('bg-warning')
+                    .tooltip('hide')
+                    .removeAttr('data-toogle', 'tooltip')
+                    .removeAttr('data-placement', 'top')
+                    .removeAttr('title', 'El valor es incorrecto')
+                    .removeAttr('data-original-title', 'El valor es incorrecto');
+            }
+        });
+
+    }else{
+
+        console.log("fallecido esta seleccionado")
+    }
 
 }
 
