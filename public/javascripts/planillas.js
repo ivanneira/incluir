@@ -520,7 +520,7 @@ function fillModal(){
 
 
     var htmlEncuesta =
-        '<table class="table table-dark table-striped table-hover">'+
+        '<table class="table table-dark table-striped table-hover text-center">'+
         '   <tr>'+
         '       <td>' +
         '           <label for="necuesta">Nº de encuesta</label>' +
@@ -637,10 +637,129 @@ function fillModal(){
 
     htmlEncuesta +=
         '   <tr>' +
-        '      <td>' +
-        '          <input name="remedios" id="remedios" type="checkbox" checked data-toggle="toggle">' +
-        '          <input name="demora" id="demora" type="checkbox" checked data-toggle="toggle">' +
-        '      </td>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Le indicaron remedios? Los consiguió con facilidad?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="remedios" class="form-check-input" type="radio" id="resi">' +
+        '               <label class="form-check-label" for="resi">Si, sin demora</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="remedios" class="form-check-input" type="radio" id="reside">' +
+        '               <label class="form-check-label" for="reside">Si, con demora</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="remedios" class="form-check-input" type="radio" id="reno">' +
+        '               <label class="form-check-label" for="reno">No</label>' +
+        '           </div>' +
+        '       </td>' +
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Fue derivado a otro médico?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="derivado" class="form-check-input" type="radio" id="dersi">' +
+        '               <label class="form-check-label" for="resi">Si</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="derivado" class="form-check-input" type="radio" id="derno">' +
+        '               <label class="form-check-label" for="reside">No</label>' +
+        '           </div>' +
+        '       </td>' +
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Cómo es atendido en la UGP?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="ugp" class="form-check-input" type="radio" id="ugpmb">' +
+        '               <label class="form-check-label" for="atmb">Muy bien</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="ugp" class="form-check-input" type="radio" id="ugpb">' +
+        '               <label class="form-check-label" for="atbi">Bien</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="ugp" class="form-check-input" type="radio" id="ugpr">' +
+        '               <label class="form-check-label" for="atre">Regular</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="ugp" class="form-check-input" type="radio" id="ugpm">' +
+        '               <label class="form-check-label" for="atma">Mal</label>' +
+        '           </div>' +
+        '       </td>' +
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Cuánto tiempo le llevó conseguir la prestación solicitada?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="conseguir" class="form-check-input" type="radio" id="conop1">' +
+        '               <label class="form-check-label" for="atmb">En el día</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="conseguir" class="form-check-input" type="radio" id="conop2">' +
+        '               <label class="form-check-label" for="atbi">Más de 1 día</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="conseguir" class="form-check-input" type="radio" id="conop3">' +
+        '               <label class="form-check-label" for="atre">Más de 1 Semana</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="conseguir" class="form-check-input" type="radio" id="conop4">' +
+        '               <label class="form-check-label" for="atma">Más de 1 mes</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="conseguir" class="form-check-input" type="radio" id="conop5">' +
+        '               <label class="form-check-label" for="atma">Más de 1 año</label>' +
+        '           </div>' +
+        '       </td>' +
+        '   </tr>';
+
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Conoce los beneficios que brinda el programa?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="beneficios" class="form-check-input" type="radio" id="be1">' +
+        '               <label class="form-check-label" for="resi">Si</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="beneficios" class="form-check-input" type="radio" id="be2">' +
+        '               <label class="form-check-label" for="reside">No</label>' +
+        '           </div>' +
+        '       </td>' +
+        '   </tr>';
+
+    htmlEncuesta +=
+        '   <tr>' +
+        '       <td>' +
+        '           <p class="font-italic">¿Quién le brindó información del Programa?</p>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="informacion" class="form-check-input" type="radio" id="in1">' +
+        '               <label class="form-check-label" for="atmb">UGP</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="informacion" class="form-check-input" type="radio" id="in2">' +
+        '               <label class="form-check-label" for="atbi">CAPS</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="informacion" class="form-check-input" type="radio" id="in3">' +
+        '               <label class="form-check-label" for="atre">Radio/TV</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="informacion" class="form-check-input" type="radio" id="in4">' +
+        '               <label class="form-check-label" for="atma">Encuestador</label>' +
+        '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input name="informacion" class="form-check-input" type="radio" id="in5">' +
+        '               <label class="form-check-label" for="atma">Otros</label>' +
+        '           </div>' +
+        '       </td>' +
         '   </tr>';
 
     htmlEncuesta +=
@@ -652,21 +771,6 @@ function fillModal(){
     $("#encuesta")
         .append(htmlEncuesta);
 
-    $("#remedios").bootstrapToggle({
-        on: "Si, me indicaron remedios",
-        off: "No me indicaron remedios",
-        onstyle: 'success',
-        offstyle: 'danger',
-        width: '100%'
-    });
-
-    $("#demora").bootstrapToggle({
-        on: "Los conseguí sin demora",
-        off: "Los conseguí con demora",
-        onstyle: 'success',
-        offstyle: 'danger',
-        width: '100%'
-    });
 
 
     $("#modalACTitulo").text('Nuevo registro, planilla nº: ' + $("#numeroPlanilla").val());
