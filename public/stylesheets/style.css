@@ -170,3 +170,9 @@ ul.select2-selection__rendered {
 
   background-color: #28a745 !important;
 }
+
+
+input[type=radio], input[type=checkbox] {
+  width:1.5em;
+  height:1.5em;
+}
