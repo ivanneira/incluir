@@ -18,6 +18,7 @@ var index = require('./routes/index');
 var dashboard = require('./routes/dashboard');
 var planillas = require('./routes/planillas');
 
+
 var trylogin = require('./routes/trylogin');
 
 var logout  = require('./routes/logout');

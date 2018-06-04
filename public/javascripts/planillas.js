@@ -8,28 +8,8 @@ var tipoServicios;
 //var prestaciones;
 
 var map;
-var marker;
-
-var $modal = $("#modalAC");
-
 $(function(){
-    /*
-     $.ajax({
-     url: 'planillas/getPrestaciones',
-     type: 'GET',
-     dataType: 'json',
-     success: function(data){
 
-     processPrestaciones(data);
-     //console.dir(prestaciones)
-     },
-     error: function(e){
-     ERROR();
-     console.log(e);
-     }
-     });
-
-     */
     $.ajax({
         url: 'planillas/getTipoPension',
         type: 'GET',
@@ -224,81 +204,15 @@ $(function(){
 
 });
 
+var marker;
 
-
+var $modal = $("#modalAC");
 function ERROR(){
 
     alert("Hubo un error, por favor regargue la página");
 }
 
 function fillModal(){
-    /*
-     var htmlString =
-     '<table class="table table-dark table-striped table-hover">'+
-     '   <tr>'+
-     '       <td><input type="text" class="form-control" placeholder="Nombre" data-toggle="tooltip" data-placement="top" title="Nombre completo"></td>'+
-     '       <td><input type="text" class="form-control" placeholder="Apellido"></td>'+
-     '       <td><input class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker"></td>'+
-     '   </tr>'+
-     '   <tr>'+
-     '       <td><input type="number" class="form-control" placeholder="DNI"></td>'+
-     '       <td><input type="text" class="form-control" placeholder="Teléfono"></td>'+
-     '       <td><select class="selectLocalidad"></select></td>'+
-     '   </tr>'+
-     '   <tr>'+
-     '       <td colspan="3"><input type="text" class="form-control" placeholder="Domicilio"></td>'+
-     '   </tr>'+
-     '   <tr>'+
-     '       <td><input type="number" class="form-control" placeholder="Nº Beneficiario"></td>'+
-     '       <td>' +
-     '           <div class="btn-group btn-group-toggle" data-toggle="buttons">'+
-     '               <label class="btn btn-light">'+
-     '                   <input type="radio" name="options" autocomplete="off"> Titular'+
-     '               </label>'+
-     '               <label class="btn btn-light">'+
-     '                   <input type="radio" name="options" autocomplete="off"> Adherente'+
-     '               </label>'+
-     '           </div>' +
-     '       </td>'+
-     '       <td><select class="selectTipoPension"></select></td>'+
-     '   </tr>'+
-     '   <tr>'+
-     '       <td><select class="selectCIE10" data-placeholder="Seleccione motivo"></td>'+
-     '       <td><select class="selectPrestaciones"></td>'+
-     '       <td><input type="number" class="form-control" placeholder="Nº conviven"></td>'+
-     '   </tr>'+
-     '   <tr>'+
-     '       <td><input type="number" class="form-control" placeholder="Nº G Familiar"></td>'+
-     '       <td><select class="selectTipoVivienda"></td>'+
-     '       <td><select class="selectTipoServicios"></td>'+
-     '   </tr>'+
-     '   <tr>'+
-     '       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
-     '       <td>' +
-     '           <div class="input-group input-group">'+
-     '               <div class="input-group-prepend">'+
-     '                   <span class="input-group-text" id="latitud">-31,</span>'+
-     '               </div>'+
-     '               <input type="number" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
-     '           </div>'+
-     '       </td>' +
-     '       <td>' +
-     '           <div class="input-group input-group">'+
-     '               <div class="input-group-prepend">'+
-     '                   <span class="input-group-text" id="longitud">-68,</span>'+
-     '               </div>'+
-     '               <input type="number" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
-     '           </div>'+
-     '       </td>' +
-     '   </tr>'+
-     '   <tr>'+
-     '       <td colspan="3"><input type="text" class="form-control" placeholder="Comentario"></td>'+
-
-     '   </tr>'+
-     '</table>';
-
-     */
-
 
     //tabs
     var htmlString =
@@ -318,9 +232,9 @@ function fillModal(){
         '   <li class="nav-item">' +
         '       <a id="comentarios-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#comentarios">Comentarios</a>' +
         '   </li>'+
-        '   <li class="nav-item">' +
-        '       <a id="encuesta-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#encuesta">Encuesta de satisfacción</a>' +
-        '   </li>'+
+        //'   <li class="nav-item">' +
+        //'       <a id="encuesta-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#encuesta">Encuesta de satisfacción</a>' +
+        //'   </li>'+
         '</ul>';
 
     //tabs content
@@ -331,7 +245,7 @@ function fillModal(){
         '   <div class="tab-pane fade" id="prestaciones" role="tabpanel" aria-labelledby="prestaciones-tab"></div>'+
         '   <div class="tab-pane fade" id="vivienda" role="tabpanel" aria-labelledby="vivienda-tab"></div>'+
         '   <div class="tab-pane fade" id="comentarios" role="tabpanel" aria-labelledby="comentarios-tab"></div>'+
-        '   <div class="tab-pane fade" id="encuesta" role="tabpanel" aria-labelledby="encuesta-tab"></div>'+
+        //'   <div class="tab-pane fade" id="encuesta" role="tabpanel" aria-labelledby="encuesta-tab"></div>'+
         '</div>';
 
 
@@ -346,27 +260,27 @@ function fillModal(){
         '  <tr>'+
         '      <td>' +
         '           <label for="nombre">Nombre</label>' +
-        '           <input name="nombre" type="text" class="form-control" placeholder="Nombre" data-toggle="tooltip" data-placement="top" title="Nombre completo">' +
+        '           <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">' +
         '       </td>'+
         '       <td>' +
         '           <label for="apellido">Apellido</label>' +
-        '           <input name="apellido" type="text" class="form-control" placeholder="Apellido">' +
+        '           <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido">' +
         '       </td>'+
         '  </tr>'+
         '  <tr>'+
         '      <td>' +
         '           <label for="fecnac">Fecha de nacimiento</label>' +
-        '           <input name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker">' +
+        '           <input id="fechaNacimiento" name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker">' +
         '       </td>'+
         '      <td>' +
         '           <label for="dni">DNI</label>' +
-        '           <input name="dni" type="number" class="form-control" placeholder="DNI">' +
+        '           <input "dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
         '       </td>'+
         '  </tr>'+
         '  <tr>'+
         '      <td>' +
         '           <label for="tel">Teléfono</label>' +
-        '           <input name="tel" type="text" class="form-control" placeholder="Teléfono">' +
+        '           <input id="tel" name="tel" type="text" class="form-control" placeholder="Teléfono">' +
         '       </td>'+
         '      <td>' +
         '           <label for="vivo">Vivo</label>' +
@@ -388,7 +302,7 @@ function fillModal(){
         '       </td>'+
         '       <td colspan="2">' +
         '           <label for="domicilio">Domicilio</label>' +
-        '           <input name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
+        '           <input id="domicilio" name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
@@ -449,6 +363,8 @@ function fillModal(){
         '       <td>' +
         '           <label for="motivo">Motivo de la pensión (CIE10)</label>' +
         '           <select name="motivo" class="selectCIE10" data-placeholder="Seleccione motivo">' +
+        '<option value="-1">Busque el código CIE10 correspondiente</option>' +
+        '</select>' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
@@ -469,11 +385,11 @@ function fillModal(){
         '   <tr>'+
         '       <td>' +
         '           <label for="conviven">Nº de personas que conviven</label>' +
-        '           <input name="conviven" type="number" class="form-control" placeholder="Nº conviven">' +
+        '           <input id="conviven" name="conviven" type="number" class="form-control" placeholder="Nº conviven">' +
         '       </td>'+
         '       <td>' +
         '           <label for="grupo">Nº del grupo familiar</label>' +
-        '           <input name="grupo" type="number" class="form-control" placeholder="Nº G Familiar">' +
+        '           <input id="grupo" name="grupo" type="number" class="form-control" placeholder="Nº G Familiar">' +
         '       </td>'+
         '       <td>' +
         '           <label for="vivienda">Tipo de vivienda</label>' +
@@ -488,11 +404,6 @@ function fillModal(){
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
-        //'       <td><input type="number" class="form-control" placeholder="Ingresos"></td>'+
-        //'       <td colspan="3">' +
-        //'           <label for="comentario">Comentarios</label>' +
-        //'           <input name="comentario" type="text" class="form-control" placeholder="Comentario">' +
-        //'       </td>'+
         '   </tr>'+
         '</table>';
 
@@ -521,7 +432,7 @@ function fillModal(){
     $("#comentarios")
         .append(htmlComentarios);
 
-
+/*
     //pestaña de encuesta de satisfacción
     var htmlEncuesta =
         '<table class="table table-dark table-striped table-hover text-center">'+
@@ -781,6 +692,8 @@ function fillModal(){
 
     $("#encuesta")
         .append(htmlEncuesta);
+*/
+
 
     $("#modalACTitulo").text('Nuevo registro, planilla nº: ' + $("#numeroPlanilla").val());
 
@@ -807,35 +720,64 @@ function verificarCampos(){
     if($("#fallecido").prop('checked') ){
 
         //verificación de campos numéricos
-        $(':input[type="number"]').each(function(index,item){
+        $('#modalACBody :input[type="number"]').each(function(index,item){
 
-            console.log("verificando " + item.name);
+            //console.log("verificando " + item.name);
 
-            if( item.value.includes('-') || item.value.includes('+') || item.value.includes('e') || item.value.includes(NaN) || (item.value === '') ){
-                $(item)
-                    .addClass('bg-warning')
-                    .attr('data-toogle', 'tooltip')
-                    .attr('data-placement', 'top')
-                    .attr('title', 'El valor es incorrecto')
-                    .tooltip('show')
+            //condicion que no permite caracteres extraños en campos numéricos
+            if(
+                item.value.includes('-')
+                || item.value.includes('+')
+                || item.value.includes('e')
+                || item.value.includes(NaN)
+                || (item.value === '')
+            ){
+                mostrarError(true,item)
 
 
             }else{
-                $(item)
-                    .removeClass('bg-warning')
-                    .tooltip('hide')
-                    .removeAttr('data-toogle', 'tooltip')
-                    .removeAttr('data-placement', 'top')
-                    .removeAttr('title', 'El valor es incorrecto')
-                    .removeAttr('data-original-title', 'El valor es incorrecto');
+                mostrarError(false,item)
+            }
+        });
+
+        var noEmptyInputs =
+            [
+                $("#nombre"),
+                $("#apellido"),
+                $("#fechaNacimiento"),
+                $("#domicilio"),
+                $("#conviven"),
+                $("#grupo")
+
+            ];
+
+        $(noEmptyInputs).each(function(index,item){
+
+            if(item){
+                mostrarError(true,item)
+            }else{
+                mostrarError(false,item)
             }
         });
 
     }else{
 
-        console.log("fallecido esta seleccionado")
+        //console.log("fallecido esta seleccionado")
     }
 
+
+}
+
+
+function mostrarError(condition,selector){
+
+    if(condition){
+        $(selector)
+            .addClass('bg-warning');
+    }else{
+        $(selector)
+            .removeClass('bg-warning');
+    }
 }
 
 function fillDropDown(){
@@ -924,6 +866,7 @@ function fillDropDown(){
         dropdownAutoWidth: true,
         //multiple: true,
         language: 'es',
+        //containerCssClass: "wrap",
         minimumInputLength: 3,
         dropdownParent: $("#modalACBody"),
         placeholder: function(){
@@ -1042,32 +985,6 @@ function initMap() {
 
     });
 
-    // Update lat/long value of div when you move the mouse over the map
-    /*
-     google.maps.event.addListener(map,'mousemove',function(event) {
-     document.getElementById('lat').value = event.latLng.lat();
-     document.getElementById('lon').value = event.latLng.lng();
-     });
-     */
-    /*
-     var marker = new google.maps.Marker({
-     position: myLatLng,
-     map: map,
-     //title: 'Hello World'
-
-     // setting latitude & longitude as title of the marker
-     // title is shown when you hover over the marker
-     title: latitude + ', ' + longitude
-     });
-     */
-    /*
-     // Update lat/long value of div when the marker is clicked
-     map.addListener('click', function(event) {
-     document.getElementById('lat').value = event.latLng.lat();
-     document.getElementById('lon').value =  event.latLng.lng();
-     });
-     */
-
     $("#lat").on('change', function(){
 
         setMapPoint($(this).val(),$("#lon").val() );
@@ -1080,13 +997,13 @@ function initMap() {
 
     function setMapPoint(lat, lng){
 
-        console.log(lat)
-        console.log(lng)
+        //console.log(lat)
+        //console.log(lng)
 
 
         var latlng = {lat: parseFloat(lat) , lng: parseFloat(lng) };
 
-        console.log(latlng)
+        //console.log(latlng)
         if(marker){
             marker.setMap(null);
         }
@@ -1101,29 +1018,4 @@ function initMap() {
         });
 
     }
-
-    // Create new marker on double click event on the map
-    /*
-     google.maps.event.addListener(map,'dblclick',function(event) {
-     var marker = new google.maps.Marker({
-     position: event.latLng,
-     map: map,
-     title: event.latLng.lat()+', '+event.latLng.lng()
-     });
-
-     // Update lat/long value of div when the marker is clicked
-     marker.addListener('click', function() {
-     document.getElementById('lat').value = event.latLng.lat();
-     document.getElementById('lon').value =  event.latLng.lng();
-     });
-     });
-     */
-    // Create new marker on single click event on the map
-    /*google.maps.event.addListener(map,'click',function(event) {
-     var marker = new google.maps.Marker({
-     position: event.latLng,
-     map: map,
-     title: event.latLng.lat()+', '+event.latLng.lng()
-     });
-     });*/
 }
