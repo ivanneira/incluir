@@ -257,12 +257,14 @@ htmlEncuesta +=
 htmlEncuesta +=
     '</table>';
 
-$("#encuesta")
-    .append(htmlEncuesta);
 
-$("#modalACTitulo").text('Encuesta de satisfacción');
 
 $("#agregarPlanilla").click(function(){
+
+    $("#encuesta")
+        .append(htmlEncuesta);
+
+    $("#modalACTitulo").text('Encuesta de satisfacción');
 
     $("#modalACBody")
         .empty()
@@ -271,4 +273,5 @@ $("#agregarPlanilla").click(function(){
     $("#modalAC")
         .modal('show')
         .modal('handleUpdate');
+
 });

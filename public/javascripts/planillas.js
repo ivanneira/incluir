@@ -220,16 +220,16 @@ function fillModal(){
         '   <li class="nav-item">' +
         '       <a id="personales-tab" data-toggle="tab" class="nav-link active bg-dark text-light" href="#personales">Datos personales</a>' +
         '   </li>'+
-        '   <li class="nav-item">' +
+        '   <li class="nav-item vivo">' +
         '       <a id="localizacion-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#localizacion">Datos de localización</a>' +
         '   </li>'+
-        '   <li class="nav-item">' +
+        '   <li class="nav-item vivo">' +
         '       <a id="prestaciones-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#prestaciones">Datos de la prestación</a>' +
         '   </li>'+
-        '   <li class="nav-item">' +
+        '   <li class="nav-item vivo">' +
         '       <a id="vivienda-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#vivienda">Datos de vivienda</a>' +
         '   </li>'+
-        '   <li class="nav-item">' +
+        '   <li class="nav-item vivo">' +
         '       <a id="comentarios-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#comentarios">Comentarios</a>' +
         '   </li>'+
         //'   <li class="nav-item">' +
@@ -267,10 +267,16 @@ function fillModal(){
         '           <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido">' +
         '       </td>'+
         '  </tr>'+
-        '  <tr>'+
+        '  <tr  class="vivo">'+
         '      <td>' +
         '           <label for="fecnac">Fecha de nacimiento</label>' +
-        '           <input id="fechaNacimiento" name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" id="nacimiento" data-provide="datepicker">' +
+        '           <input id="fechaNacimiento" name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
+        '           <label for="sexo">Sexo</label>' +
+        '           <select class="form-control" id="sexo" name="sexo">' +
+        '               <option value="-1">Seleccione el sexo...</option>' +
+        '               <option value="M">Masculino</option>' +
+        '               <option value="F">Femenino</option>' +
+        '           </select>' +
         '       </td>'+
         '      <td>' +
         '           <label for="dni">DNI</label>' +
@@ -278,9 +284,13 @@ function fillModal(){
         '       </td>'+
         '  </tr>'+
         '  <tr>'+
-        '      <td>' +
+        '      <td  class="vivo">' +
         '           <label for="tel">Teléfono</label>' +
         '           <input id="tel" name="tel" type="text" class="form-control" placeholder="Teléfono">' +
+        '       </td>'+
+        '       <td id="fechaDefuncion">' +
+        '           <label for="defuncion">Fecha de defunción</label>' +
+        '           <input name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
         '       </td>'+
         '      <td>' +
         '           <label for="vivo">Vivo</label>' +
@@ -292,6 +302,9 @@ function fillModal(){
     $("#personales")
         .append(htmlPersonales);
 
+    $("#fechaDefuncion").hide();
+
+
     //pestaña de datos de localización
     var htmlLocalizacion =
         '<table class="table table-dark table-striped table-hover">'+
@@ -300,9 +313,13 @@ function fillModal(){
         '           <label for="localidad">Localidad</label>' +
         '           <select name="localidad" class="selectLocalidad"></select>' +
         '       </td>'+
-        '       <td colspan="2">' +
-        '           <label for="domicilio">Domicilio</label>' +
+        '       <td>' +
+        '           <label for="domicilio">Calle, orientación y altura</label>' +
         '           <input id="domicilio" name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
+        '       </td>'+
+        '       <td>' +
+        '           <label for="barrio">Barrio</label>' +
+        '           <input id="barrio" name="barrio" type="text" class="form-control" placeholder="Barrio">' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
@@ -416,6 +433,25 @@ function fillModal(){
         onstyle: 'success',
         offstyle: 'danger',
         width: '100%'
+    });
+
+
+    //evento del botón fallecido
+    $("#fallecido").change(function(){
+
+
+        if($(this).prop('checked')){
+            $(".vivo:hidden").show();
+            $("#fechaDefuncion").hide();
+
+    }else{
+
+            $(".vivo:visible").hide();
+            $("#fechaDefuncion").show();
+        }
+
+
+
     });
 
     //pestaña de comentarios
@@ -744,21 +780,40 @@ function verificarCampos(){
             [
                 $("#nombre"),
                 $("#apellido"),
-                $("#fechaNacimiento"),
                 $("#domicilio"),
                 $("#conviven"),
-                $("#grupo")
+                $("#grupo"),
+                $("#barrio")
 
             ];
 
+
         $(noEmptyInputs).each(function(index,item){
 
-            if(item){
+            if(item.val() === ''){
                 mostrarError(true,item)
             }else{
                 mostrarError(false,item)
             }
         });
+
+
+        //verificación de campo sexo
+        if($("#sexo").val() === '-1'){
+            $("#sexo").addClass('bg-warning');
+        }else{
+            $("#sexo").removeClass('bg-warning');
+        }
+
+        //verificación de campo fecha de nacimiento
+        if($("#fechaNacimiento").val() === ''){
+
+            $("#fechaNacimiento").addClass('bg-warning');
+        }else{
+            $("#fechaNacimiento").removeClass('bg-warning');
+        }
+
+
 
     }else{
 
@@ -782,12 +837,22 @@ function mostrarError(condition,selector){
 
 function fillDropDown(){
 
-    $("#nacimiento")
+    $("#fechaNacimiento")
         .datepicker({
             autoclose: true,
             language: 'es',
             container: $("#modalAC"),
-            format: 'dd/mm/yyyy'
+            format: 'dd/mm/yyyy',
+            orientation: 'bottom'
+        });
+
+    $("#defuncion")
+        .datepicker({
+            autoclose: true,
+            language: 'es',
+            container: $("#modalAC"),
+            format: 'dd/mm/yyyy',
+            orientation: 'bottom'
         });
 
     $(".selectTipoPension")
