@@ -813,6 +813,13 @@ function verificarCampos(){
             $("#fechaNacimiento").removeClass('bg-warning');
         }
 
+        if($(".selectLocalidad").val()){
+
+            $(".selectLocalidad").removeClass('bg-warning');
+        }else{
+            $(".selectLocalidad").addClass('bg-warning');
+        }
+
 
 
     }else{
