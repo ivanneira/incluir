@@ -49,38 +49,7 @@ $(function(){
         }
     });
 
-    //select2 de encuestador
-    $(".selectEncuestador").select2({
-        placeholder: 'Busque encuestador',
-        width: '100%',
-        language: 'es',
-        ajax: {
-            url: 'planillas/encuestadores',
-            type: 'GET',
-            dataType: 'json',
-            data: function (params) {
-                var query = {
-                    q: params.term
-                };
 
-                // Query parameters will be ?1=[term]
-                return query;
-            },
-            processResults: function (data) {
-
-                return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.text,
-                            id: item.id
-                        }
-
-                    })
-                };
-            }
-        }
-    });
 
     function processPrestaciones(data){
 
@@ -117,73 +86,6 @@ $(function(){
     }
 
 
-    //select2 de supervisor
-    $(".selectSupervisor").select2({
-        placeholder: 'Busque supervisor',
-        width: '100%',
-        language: 'es',
-        ajax: {
-            url: 'planillas/supervisores',
-            type: 'GET',
-            dataType: 'json',
-            data: function (params) {
-                var query = {
-                    q: params.term
-                };
-
-                // Query parameters will be ?1=[term]
-                return query;
-            },
-            processResults: function (data) {
-
-                return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.text,
-                            id: item.id
-                        }
-
-                    })
-                };
-            }
-        }
-    });
-
-    //select2 de departamento
-    $(".selectDepartamento").select2({
-        placeholder: 'Busque departamento',
-        width: '100%',
-
-        minimumResultsForSearch: -1,        language: 'es',
-        ajax: {
-            url: 'planillas/getDepartamentos',
-            type: 'GET',
-            dataType: 'json',
-            /*data: function (params) {
-             var query = {
-             q: params.term
-             };
-
-             // Query parameters will be ?1=[term]
-             return query;
-             },*/
-            processResults: function (data) {
-
-                return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.Nombre,
-                            id: item.ID
-                        }
-
-                    })
-                };
-            }
-        }
-    });
-
     $("#agregarRegistro").click(function(){
         /*
          if(
@@ -200,6 +102,16 @@ $(function(){
          }
          */fillModal();
 
+    });
+
+    $("#agregarPlanilla").click(function(){
+
+        agregarEncabezado();
+    });
+
+    $("#agregarEncuesta").click(function(){
+
+        agregarEncuesta();
     });
 
 });
@@ -232,9 +144,6 @@ function fillModal(){
         '   <li class="nav-item vivo">' +
         '       <a id="comentarios-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#comentarios">Comentarios</a>' +
         '   </li>'+
-        //'   <li class="nav-item">' +
-        //'       <a id="encuesta-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#encuesta">Encuesta de satisfacción</a>' +
-        //'   </li>'+
         '</ul>';
 
     //tabs content
@@ -245,7 +154,6 @@ function fillModal(){
         '   <div class="tab-pane fade" id="prestaciones" role="tabpanel" aria-labelledby="prestaciones-tab"></div>'+
         '   <div class="tab-pane fade" id="vivienda" role="tabpanel" aria-labelledby="vivienda-tab"></div>'+
         '   <div class="tab-pane fade" id="comentarios" role="tabpanel" aria-labelledby="comentarios-tab"></div>'+
-        //'   <div class="tab-pane fade" id="encuesta" role="tabpanel" aria-labelledby="encuesta-tab"></div>'+
         '</div>';
 
 
@@ -280,7 +188,7 @@ function fillModal(){
         '       </td>'+
         '      <td>' +
         '           <label for="dni">DNI</label>' +
-        '           <input "dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
+        '           <input id="dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
         '       </td>'+
         '  </tr>'+
         '  <tr>'+
@@ -290,7 +198,7 @@ function fillModal(){
         '       </td>'+
         '       <td id="fechaDefuncion">' +
         '           <label for="defuncion">Fecha de defunción</label>' +
-        '           <input name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
+        '           <input id="defuncion" name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
         '       </td>'+
         '      <td>' +
         '           <label for="vivo">Vivo</label>' +
@@ -359,15 +267,14 @@ function fillModal(){
     var htmlPrestaciones =
         '<table class="table table-dark table-striped table-hover">'+
         '   <tr>'+
-        //'       <td><input type="number" class="form-control" placeholder="Nº Beneficiario"></td>'+
         '       <td colspan="2">' +
         '           <label for="titular">Titularidad</label>' +
         '           <div id="titular" class="btn-group btn-group-toggle" data-toggle="buttons">'+
         '               <label class="btn btn-light">'+
-        '                   <input type="radio" name="options" autocomplete="off"> Titular'+
+        '                   <input id="btnTitular" type="radio" name="options" autocomplete="off"> Titular'+
         '               </label>'+
         '               <label class="btn btn-light">'+
-        '                   <input type="radio" name="options" autocomplete="off"> Adherente'+
+        '                   <input id="btnAdherente" type="radio" name="options" autocomplete="off"> Adherente'+
         '               </label>'+
         '           </div>' +
         '       </td>'+
@@ -460,276 +367,13 @@ function fillModal(){
         '   </tr>'+
         '       <td>' +
         '           <label for="comentario">Comentarios</label>' +
-        '           <textarea name="comentario" type="text" class="form-control" placeholder="Comentario" rows="10"></textarea>' +
+        '           <textarea id="comentario" name="comentario" type="text" class="form-control" placeholder="Comentarios" rows="10"></textarea>' +
         '   </td>'+
         '   </tr>'+
         '</table>';
 
     $("#comentarios")
         .append(htmlComentarios);
-
-/*
-    //pestaña de encuesta de satisfacción
-    var htmlEncuesta =
-        '<table class="table table-dark table-striped table-hover text-center">'+
-        '   <tr>'+
-        '       <td>' +
-        '           <label for="necuesta">Nº de encuesta</label>' +
-        '           <input name="necuesta" type="number" class="form-control" placeholder="Nº de encuesta">' +
-        '       </td>'+
-        '   </tr>';
-
-    //¿Dónde se atiende?
-    htmlEncuesta +=
-        '   <tr>'+
-        '       <td>' +
-        '           <p class="font-italic">¿Dónde se atiende?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="do1">' +
-        '               <label class="form-check-label" for="do1">CAPS</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="do2">' +
-        '               <label class="form-check-label" for="do2">Hospital</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="do3">' +
-        '               <label class="form-check-label" for="do3">Consultorio particular</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="do4">' +
-        '               <label class="form-check-label" for="do4">Otro</label>' +
-        '           </div>' +
-        '       </td>'+
-        '   </tr>';
-
-    //¿Quién lo atiende?
-    htmlEncuesta +=
-        '   <tr>'+
-        '       <td>' +
-        '           <p class="font-italic">¿Quién lo atiende?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="qu1">' +
-        '               <label class="form-check-label" for="qu1">Médico de cabecera</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="qu2">' +
-        '               <label class="form-check-label" for="qu2">Médico especialista</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="qu3">' +
-        '               <label class="form-check-label" for="qu3">Médico de guardia</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="qu4">' +
-        '               <label class="form-check-label" for="qu4">Otro</label>' +
-        '           </div>' +
-        '       </td>'+
-        '   </tr>';
-
-    //¿Cuánto tiempo le llevó encontrar el turno?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Cuánto tiempo le llevó encontrar el turno?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="tiempo" class="form-check-input" type="radio" id="ti1">' +
-        '               <label class="form-check-label" for="ti1">Menos de 15 días</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="tiempo" class="form-check-input" type="radio" id="ti2">' +
-        '               <label class="form-check-label" for="ti2">Entre 15 y 30 días</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="tiempo" class="form-check-input" type="radio" id="ti3">' +
-        '               <label class="form-check-label" for="ti3">Mas de 30 días</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    //¿Cómo fue atendido?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Cómo fue atendido?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="atendido" class="form-check-input" type="radio" id="at1">' +
-        '               <label class="form-check-label" for="at1">Muy bien</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="atendido" class="form-check-input" type="radio" id="at2">' +
-        '               <label class="form-check-label" for="at2">Bien</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="atendido" class="form-check-input" type="radio" id="at3">' +
-        '               <label class="form-check-label" for="at3">Regular</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="atendido" class="form-check-input" type="radio" id="at4">' +
-        '               <label class="form-check-label" for="at4">Mal</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    //¿Le solicitaron estudios, cuáles?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Le solicitaron estudios, cuáles?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="estudios" class="form-check-input" type="radio" id="es1">' +
-        '               <label class="form-check-label" for="es1">RX</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="estudios" class="form-check-input" type="radio" id="es2">' +
-        '               <label class="form-check-label" for="es2">Laboratorio</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="estudios" class="form-check-input" type="radio" id="es3">' +
-        '               <label class="form-check-label" for="es3">otros</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    //¿Le indicaron remedios? Los consiguió con facilidad?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Le indicaron remedios? Los consiguió con facilidad?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="remedios" class="form-check-input" type="radio" id="re1">' +
-        '               <label class="form-check-label" for="re1">Si, sin demora</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="remedios" class="form-check-input" type="radio" id="re2">' +
-        '               <label class="form-check-label" for="re2">Si, con demora</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="remedios" class="form-check-input" type="radio" id="re3">' +
-        '               <label class="form-check-label" for="re3">No</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    //¿Fue derivado a otro médico?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Fue derivado a otro médico?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="derivado" class="form-check-input" type="radio" id="de1">' +
-        '               <label class="form-check-label" for="de1">Si</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="derivado" class="form-check-input" type="radio" id="de2">' +
-        '               <label class="form-check-label" for="de2">No</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    //¿Cómo es atendido en la UGP?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Cómo es atendido en la UGP?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="ugp" class="form-check-input" type="radio" id="ug1">' +
-        '               <label class="form-check-label" for="ug1">Muy bien</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="ugp" class="form-check-input" type="radio" id="ug2">' +
-        '               <label class="form-check-label" for="ug2">Bien</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="ugp" class="form-check-input" type="radio" id="ug3">' +
-        '               <label class="form-check-label" for="ug3">Regular</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="ugp" class="form-check-input" type="radio" id="ug4">' +
-        '               <label class="form-check-label" for="ug4">Mal</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    //¿Cuánto tiempo le llevó conseguir la prestación solicitada?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Cuánto tiempo le llevó conseguir la prestación solicitada?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co1">' +
-        '               <label class="form-check-label" for="co1">En el día</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co2">' +
-        '               <label class="form-check-label" for="co2">Más de 1 día</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co3">' +
-        '               <label class="form-check-label" for="co3">Más de 1 Semana</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co4">' +
-        '               <label class="form-check-label" for="co4">Más de 1 mes</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co5">' +
-        '               <label class="form-check-label" for="co5">Más de 1 año</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    //¿Conoce los beneficios que brinda el programa?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Conoce los beneficios que brinda el programa?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="beneficios" class="form-check-input" type="radio" id="be1">' +
-        '               <label class="form-check-label" for="be1">Si</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="beneficios" class="form-check-input" type="radio" id="be2">' +
-        '               <label class="form-check-label" for="be2">No</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    //¿Quién le brindó información del Programa?
-    htmlEncuesta +=
-        '   <tr>' +
-        '       <td>' +
-        '           <p class="font-italic">¿Quién le brindó información del Programa?</p>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in1">' +
-        '               <label class="form-check-label" for="in1">UGP</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in2">' +
-        '               <label class="form-check-label" for="in2">CAPS</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in3">' +
-        '               <label class="form-check-label" for="in3">Radio/TV</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in4">' +
-        '               <label class="form-check-label" for="in4">Encuestador</label>' +
-        '           </div>' +
-        '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in5">' +
-        '               <label class="form-check-label" for="in5">Otros</label>' +
-        '           </div>' +
-        '       </td>' +
-        '   </tr>';
-
-    htmlEncuesta +=
-        '</table>';
-
-    $("#encuesta")
-        .append(htmlEncuesta);
-*/
-
 
     $("#modalACTitulo").text('Nuevo registro, planilla nº: ' + $("#numeroPlanilla").val());
 
@@ -752,13 +396,15 @@ function fillModal(){
 //verificación
 function verificarCampos(){
 
+    //bandera para comprobar que no salió alguna corrección
+    var flag = true;
+
     //en caso que NO esté seleccionado como fallecido
     if($("#fallecido").prop('checked') ){
 
         //verificación de campos numéricos
         $('#modalACBody :input[type="number"]').each(function(index,item){
 
-            //console.log("verificando " + item.name);
 
             //condicion que no permite caracteres extraños en campos numéricos
             if(
@@ -769,6 +415,7 @@ function verificarCampos(){
                 || (item.value === '')
             ){
                 mostrarError(true,item)
+                flag = false;
 
 
             }else{
@@ -791,6 +438,7 @@ function verificarCampos(){
         $(noEmptyInputs).each(function(index,item){
 
             if(item.val() === ''){
+                flag = false;
                 mostrarError(true,item)
             }else{
                 mostrarError(false,item)
@@ -800,6 +448,7 @@ function verificarCampos(){
 
         //verificación de campo sexo
         if($("#sexo").val() === '-1'){
+            flag = false;
             $("#sexo").addClass('bg-warning');
         }else{
             $("#sexo").removeClass('bg-warning');
@@ -807,26 +456,72 @@ function verificarCampos(){
 
         //verificación de campo fecha de nacimiento
         if($("#fechaNacimiento").val() === ''){
-
+            flag = false;
             $("#fechaNacimiento").addClass('bg-warning');
         }else{
             $("#fechaNacimiento").removeClass('bg-warning');
         }
 
+        //verificación de selector de localidad
         if($(".selectLocalidad").val()){
 
-            $(".selectLocalidad").removeClass('bg-warning');
+            $(".selectLocalidad")
+                .next()
+                .find('.select2-selection')
+                .removeClass('bg-warning');
         }else{
-            $(".selectLocalidad").addClass('bg-warning');
+            flag = false;
+            $(".selectLocalidad")
+                .next()
+                .find('.select2-selection')
+                .addClass('bg-warning');
         }
 
 
+        if($("#btnTitular").prop('checked') || $("#btnAdherente").prop('checked')){
 
+            $("#titular").removeClass('alert alert-warning')
+        }else{
+            flag = false;
+            $("#titular").addClass('alert bg-warning')
+        }
+
+    //verificaciones en caso de encuestado fallecido
     }else{
 
-        //console.log("fallecido esta seleccionado")
+        //verificación de selector de fecha de defuncion
+        if(!$('#defuncion').val()){
+            flag = false;
+            $("#defuncion").addClass('bg-warning')
+        }else{
+
+            $("#defuncion").removeClass('bg-warning')
+        }
+
+        var noEmptyInputs =
+            [
+                $("#nombre"),
+                $("#apellido")
+            ];
+
+
+        $(noEmptyInputs).each(function(index,item){
+
+            if(item.val() === ''){
+                flag = false;
+                mostrarError(true,item)
+            }else{
+                mostrarError(false,item)
+            }
+        });
     }
 
+    if(flag){
+        //alert("los datos se guardan");
+        armarJSON();
+    }else{
+        alert("hay errores")
+    }
 
 }
 
@@ -840,6 +535,87 @@ function mostrarError(condition,selector){
         $(selector)
             .removeClass('bg-warning');
     }
+}
+
+function armarJSON(){
+
+    var data = {
+        apellido: '',
+        nombre: '',
+        fechaDefuncion: '',
+        fechaNacimiento: '',
+        dni: '',
+        sexo: '',
+        telefono: '',
+        localidadID: '',
+        domicilio: '',
+        barrio: '',
+        latitud: '',
+        longitud: '',
+        titularidad: '',
+        tipoPensionID: '',
+        diagnosticoID: '',
+        prestacionID: '',
+        nroPersonasConviven: '',
+        nroIntegrantesBeneficiario: '',
+        tipoViviendaID: '',
+        tipoViviendaDetalle: '',
+        serviciosBasicosID: '',
+        comentario: '',
+        planillaID: ''
+
+    };
+
+    //en caso de que el encuestado esté fallecido
+    if(!$('#fallecido').prop('checked')){
+
+
+        data.nombre = $("#nombre").val();
+        data.apellido = $("#apellido").val();
+        data.fechaNacimiento  = $("#fechaNacimiento").val();
+
+        enviarDatos(data);
+
+    //caso común de la encuesta
+    }else{
+
+        //planilla
+        data.planillaID = $("#numeroPlanilla").val();
+        //personales
+        data.nombre = $("#nombre").val();
+        data.apellido = $("#apellido").val();
+        data.fechaDefuncion = $("#defuncion").val();
+        data.dni = $("#dni").val();
+        data.sexo = $("#sexo").val();
+        data.telefono = $("#tel").val();
+        //localizacion
+        data.localidad = $(".selectLocalidad").val();
+        data.domicilio  = $("#domicilio").val();
+        data.barrio = $("#barrio").val();
+        data.latitud = $("#lat").val();
+        data.longitud = $("#lon").val();
+        //prestación
+        data.titularidad = $("#btnTitular").prop('checked') ? "titular" : "adherente";
+        data.tipoPensionID = $(".selectTipoPension ").val();
+        data.diagnosticoID = $(".selectCIE10").val();
+        data.prestacionID = $(".selectPrestaciones").val();
+        //vivienda
+        data.nroPersonasConviven = $("#conviven").val();
+        data.nroIntegrantesBeneficiario = $("#grupo").val();
+        data.tipoViviendaID = $(".selectTipoVivienda").val();
+        data.tipoViviendaDetalle = $("#comentarioTipoVivienda").val();
+        data.serviciosBasicosID = $(".selectTipoServicios").val();
+        data.comentario = $("#comentario").val();
+
+        enviarDatos(data);
+    }
+
+}
+
+function enviarDatos(jsonDATA){
+
+    console.log("los datos que se enviarían son los siguientes:");
+    console.dir(jsonDATA);
 }
 
 function fillDropDown(){
