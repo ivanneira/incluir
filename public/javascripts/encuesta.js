@@ -8,19 +8,19 @@ function agregarEncuesta(){
         '       <td>' +
         '           <div class="row">' +
         '              <div class="col-4">' +
-        '                      <label for="necuesta">Nº de encuesta</label>' +
-        '                      <input name="necuesta" type="number" class="form-control" placeholder="Nº de encuesta">' +
+        '                      <label for="nencuesta">Nº de encuesta</label>' +
+        '                      <input id="nencuesta" name="nencuesta" type="number" class="form-control" placeholder="Nº de encuesta">' +
         '              </div>' +
         '              <div class="col-4">' +
-        '                      <label for="fechaeEncuesta">Fecha de la encuesta</label>' +
-        '                      <input id="fechaeEncuesta" name="fechaeEncuesta" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
+        '                      <label for="fechaEncuesta">Fecha de la encuesta</label>' +
+        '                      <input id="fechaEncuesta" name="fechaEncuesta" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
         '              </div>' +
         '              <div class="col-4">' +
         '                      <label for="sexoEncuesta">Sexo</label>' +
         '                      <select class="form-control" id="sexoEncuesta" name="sexoEncuesta">' +
         '                          <option value="-1">Seleccione el sexo...</option>' +
-        '                          <option value="M">Masculino</option>' +
-        '                          <option value="F">Femenino</option>' +
+        '                          <option value="1">Masculino</option>' +
+        '                          <option value="2">Femenino</option>' +
         '                      </select>' +
         '              </div>' +
         '           </div>' +
@@ -66,24 +66,24 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Qué tipo de pensión tiene asignada?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <label class="form-check-label" for="pe1">Invalidez</label>' +
-        '               <input value="1" class="form-check-input pension" type="checkbox" id="pe1">' +
+        '               <label class="form-check-label" for="pe1">Invalidez </label>' +
+        '               <input name="pension" value="1" class="form-check-input" type="radio" id="pe1">' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
         '               <label class="form-check-label" for="pe2">Madres de 7 hijos</label>' +
-        '               <input value="2" class="form-check-input pension" type="checkbox" id="pe2">' +
+        '               <input name="pension" value="2" class="form-check-input" type="radio" id="pe2">' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
         '               <label class="form-check-label" for="pe3">Personas mayores de 65 años</label>' +
-        '               <input value="3" class="form-check-input pension" type="checkbox" id="pe3">' +
+        '               <input name="pension" value="3" class="form-check-input" type="radio" id="pe3">' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
         '               <label class="form-check-label" for="pe4">Héroes ex Combatientes de Malvina</label>' +
-        '               <input value="4" class="form-check-input pension" type="checkbox" id="pe4">' +
+        '               <input name="pension" value="4" class="form-check-input" type="radio" id="pe4">' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
         '               <label class="form-check-label" for="pe5">Otro</label>' +
-        '               <input value="5" class="form-check-input pension" type="checkbox" id="pe5">' +
+        '               <input name="pension" value="5" class="form-check-input" type="radio" id="pe5">' +
         '           </div>' +
         '       </td>'+
         '   </tr>';
@@ -118,19 +118,19 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Quién lo atiende?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="qu1">' +
+        '               <input value="1" class="quien form-check-input" type="checkbox" id="qu1">' +
         '               <label class="form-check-label" for="qu1">Médico de cabecera</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="qu2">' +
+        '               <input value="2" class="quien form-check-input" type="checkbox" id="qu2">' +
         '               <label class="form-check-label" for="qu2">Médico especialista</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="qu3">' +
+        '               <input value="3" class="quien form-check-input" type="checkbox" id="qu3">' +
         '               <label class="form-check-label" for="qu3">Médico de guardia</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input class="form-check-input" type="checkbox" id="qu4">' +
+        '               <input value="4" class="quien form-check-input" type="checkbox" id="qu4">' +
         '               <label class="form-check-label" for="qu4">Otro</label>' +
         '           </div>' +
         '       </td>'+
@@ -142,15 +142,15 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Cuánto tiempo le llevó encontrar el turno?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="tiempo" class="form-check-input" type="radio" id="ti1">' +
+        '               <input  value="1" name="tiempo" class="form-check-input" type="radio" id="ti1">' +
         '               <label class="form-check-label" for="ti1">Menos de 15 días</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="tiempo" class="form-check-input" type="radio" id="ti2">' +
+        '               <input value="2" name="tiempo" class="form-check-input" type="radio" id="ti2">' +
         '               <label class="form-check-label" for="ti2">Entre 15 y 30 días</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="tiempo" class="form-check-input" type="radio" id="ti3">' +
+        '               <input value="3" name="tiempo" class="form-check-input" type="radio" id="ti3">' +
         '               <label class="form-check-label" for="ti3">Mas de 30 días</label>' +
         '           </div>' +
         '       </td>' +
@@ -162,19 +162,19 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Cómo fue atendido?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="atendido" class="form-check-input" type="radio" id="at1">' +
+        '               <input value="1" name="atendido" class="form-check-input" type="radio" id="at1">' +
         '               <label class="form-check-label" for="at1">Muy bien</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="atendido" class="form-check-input" type="radio" id="at2">' +
+        '               <input value="2" name="atendido" class="form-check-input" type="radio" id="at2">' +
         '               <label class="form-check-label" for="at2">Bien</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="atendido" class="form-check-input" type="radio" id="at3">' +
+        '               <input value="3" name="atendido" class="form-check-input" type="radio" id="at3">' +
         '               <label class="form-check-label" for="at3">Regular</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="atendido" class="form-check-input" type="radio" id="at4">' +
+        '               <input value="4" name="atendido" class="form-check-input" type="radio" id="at4">' +
         '               <label class="form-check-label" for="at4">Mal</label>' +
         '           </div>' +
         '       </td>' +
@@ -186,15 +186,15 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Le solicitaron estudios, cuáles?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="estudios" class="form-check-input" type="radio" id="es1">' +
+        '               <input value="1" name="estudios" class="form-check-input" type="radio" id="es1">' +
         '               <label class="form-check-label" for="es1">RX</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="estudios" class="form-check-input" type="radio" id="es2">' +
+        '               <input value="2" name="estudios" class="form-check-input" type="radio" id="es2">' +
         '               <label class="form-check-label" for="es2">Laboratorio</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="estudios" class="form-check-input" type="radio" id="es3">' +
+        '               <input value="3" name="estudios" class="form-check-input" type="radio" id="es3">' +
         '               <label class="form-check-label" for="es3">otros</label>' +
         '           </div>' +
         '       </td>' +
@@ -206,15 +206,15 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Le indicaron remedios? Los consiguió con facilidad?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="remedios" class="form-check-input" type="radio" id="re1">' +
+        '               <input value="1" name="remedios" class="form-check-input" type="radio" id="re1">' +
         '               <label class="form-check-label" for="re1">Si, sin demora</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="remedios" class="form-check-input" type="radio" id="re2">' +
+        '               <input value="2" name="remedios" class="form-check-input" type="radio" id="re2">' +
         '               <label class="form-check-label" for="re2">Si, con demora</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="remedios" class="form-check-input" type="radio" id="re3">' +
+        '               <input value="3" name="remedios" class="form-check-input" type="radio" id="re3">' +
         '               <label class="form-check-label" for="re3">No</label>' +
         '           </div>' +
         '       </td>' +
@@ -226,11 +226,11 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Fue derivado a otro médico?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="derivado" class="form-check-input" type="radio" id="de1">' +
+        '               <input value="true" name="derivado" class="form-check-input" type="radio" id="de1">' +
         '               <label class="form-check-label" for="de1">Si</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="derivado" class="form-check-input" type="radio" id="de2">' +
+        '               <input value="false" name="derivado" class="form-check-input" type="radio" id="de2">' +
         '               <label class="form-check-label" for="de2">No</label>' +
         '           </div>' +
         '       </td>' +
@@ -242,19 +242,19 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Cómo es atendido en la UGP?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="ugp" class="form-check-input" type="radio" id="ug1">' +
+        '               <input value="1" name="ugp" class="form-check-input" type="radio" id="ug1">' +
         '               <label class="form-check-label" for="ug1">Muy bien</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="ugp" class="form-check-input" type="radio" id="ug2">' +
+        '               <input value="2" name="ugp" class="form-check-input" type="radio" id="ug2">' +
         '               <label class="form-check-label" for="ug2">Bien</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="ugp" class="form-check-input" type="radio" id="ug3">' +
+        '               <input value="3" name="ugp" class="form-check-input" type="radio" id="ug3">' +
         '               <label class="form-check-label" for="ug3">Regular</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="ugp" class="form-check-input" type="radio" id="ug4">' +
+        '               <input value="4" name="ugp" class="form-check-input" type="radio" id="ug4">' +
         '               <label class="form-check-label" for="ug4">Mal</label>' +
         '           </div>' +
         '       </td>' +
@@ -266,19 +266,19 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Cuánto tiempo le llevó conseguir la prestación solicitada?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co1">' +
+        '               <input value="1" name="conseguir" class="form-check-input" type="radio" id="co1">' +
         '               <label class="form-check-label" for="co1">En el día</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co2">' +
+        '               <input value="2" name="conseguir" class="form-check-input" type="radio" id="co2">' +
         '               <label class="form-check-label" for="co2">Más de 1 día</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co3">' +
+        '               <input value="3" name="conseguir" class="form-check-input" type="radio" id="co3">' +
         '               <label class="form-check-label" for="co3">Más de 1 Semana</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co4">' +
+        '               <input value="4" name="conseguir" class="form-check-input" type="radio" id="co4">' +
         '               <label class="form-check-label" for="co4">Más de 1 mes</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
@@ -294,11 +294,11 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Conoce los beneficios que brinda el programa?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="beneficios" class="form-check-input" type="radio" id="be1">' +
+        '               <input value="true" name="beneficios" class="form-check-input" type="radio" id="be1">' +
         '               <label class="form-check-label" for="be1">Si</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="beneficios" class="form-check-input" type="radio" id="be2">' +
+        '               <input value="false" name="beneficios" class="form-check-input" type="radio" id="be2">' +
         '               <label class="form-check-label" for="be2">No</label>' +
         '           </div>' +
         '       </td>' +
@@ -310,23 +310,23 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Quién le brindó información del Programa?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in1">' +
+        '               <input value="1" name="informacion" class="form-check-input" type="radio" id="in1">' +
         '               <label class="form-check-label" for="in1">UGP</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in2">' +
+        '               <input value="2" name="informacion" class="form-check-input" type="radio" id="in2">' +
         '               <label class="form-check-label" for="in2">CAPS</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in3">' +
+        '               <input value="3" name="informacion" class="form-check-input" type="radio" id="in3">' +
         '               <label class="form-check-label" for="in3">Radio/TV</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in4">' +
+        '               <input value="4" name="informacion" class="form-check-input" type="radio" id="in4">' +
         '               <label class="form-check-label" for="in4">Encuestador</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="informacion" class="form-check-input" type="radio" id="in5">' +
+        '               <input value="5" name="informacion" class="form-check-input" type="radio" id="in5">' +
         '               <label class="form-check-label" for="in5">Otros</label>' +
         '           </div>' +
         '       </td>' +
@@ -454,29 +454,96 @@ function agregarEncuesta(){
 
         var encuestaDATA = {
 
-            pension: [],
-            atencion: []
+            nroEncuesta: '',
+            tipoSexoID: '',
+            fechaEncuesta: '',
+            encuestadorID: '',
+            fechaNacimiento: '',
+            departamentoID: '',
+            codigo: '',
+            enlace_encuestaLugarAtencion: [],
+            tipoPensionID: '',
+            enlace_atendidoPor: [],
+            tiempoTurnoID: '',
+            calidadAtencionID: '',
+            estudiosSolicitadosID: '',
+            demoraRemedios: '',
+            derivado: '',
+            calidadAtencionUgpID: '',
+            tiempoPrestacionID: '',
+            conoceBeneficioPrograma: '',
+            informacionProgramaID: ''
 
         };
 
 
-        $(".pension").each(function(i,v){
-
-            if($(v).prop('checked')){
-                encuestaDATA.pension.push(v.value)
-            }
-        });
-
         $(".atiende").each(function(i,v){
 
             if($(v).prop('checked')){
-                encuestaDATA.atencion.push(v.value)
+                encuestaDATA.enlace_encuestaLugarAtencion.push({encuestaLugarAtencionID: v.value})
             }
+
         });
 
+        $(".quien").each(function(i,v){
+
+            if($(v).prop('checked')){
+                encuestaDATA.enlace_atendidoPor.push({atendidoPorID: v.value})
+            }
+
+        });
+
+        encuestaDATA.tipoPensionID = $("input:radio[name ='pension']:checked").val();
+
+        encuestaDATA.tiempoTurnoID = $("input:radio[name ='tiempo']:checked").val();
+
+        encuestaDATA.calidadAtencionID = $("input:radio[name ='atendido']:checked").val();
+
+        encuestaDATA.estudiosSolicitadosID = $("input:radio[name ='estudios']:checked").val();
+
+        encuestaDATA.demoraRemedios = $("input:radio[name ='remedios']:checked").val();
+
+        encuestaDATA.derivado = $("input:radio[name ='derivado']:checked").val();
+
+        encuestaDATA.calidadAtencionUgpID = $("input:radio[name ='ugp']:checked").val();
+
+        encuestaDATA.tiempoPrestacionID = $("input:radio[name ='conseguir']:checked").val();
+
+        encuestaDATA.conoceBeneficioPrograma = $("input:radio[name ='beneficios']:checked").val();
+
+        encuestaDATA.informacionProgramaID = $("input:radio[name ='informacion']:checked").val();
+
+        encuestaDATA.nroEncuesta = $("#nencuesta").val();
+
+        encuestaDATA.tipoSexoID = $("#sexoEncuesta").val();
+
+        encuestaDATA.fechaEncuesta = $("#fechaEncuesta").val();
+
+        encuestaDATA.encuestadorID = $(".selectEncuestadorEncuesta").val();
+
+        encuestaDATA.fechaNacimiento = $("#fechaNacimientoEncuesta").val();
+
+        encuestaDATA.departamentoID = $(".selectDepartamentoEncuesta").val();
+
+        encuestaDATA.codigo = $("#codigoEncuesta").val();
+
+
+
         console.dir(encuestaDATA)
+
+
+        $.ajax({
+            url: "http://192.168.3.105:45455/api/IncluirSalud/GuardarEncuesta",
+            method: "POST",
+            data: encuestaDATA,
+            dataType: "json"
+        })
+            .done(function(res){
+
+                console.log(res);
+            });
+
     }
 
 
 }
-
