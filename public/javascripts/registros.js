@@ -390,7 +390,7 @@ function fillModal(departamentoID){
     //esconde el campo de cometarios de vivienda por defecto
     $("#comentarioTipoVivienda").hide();
 
-    fillDropDown();
+    fillDropDown(departamentoID);
 
 }
 
@@ -619,7 +619,7 @@ function enviarDatos(jsonDATA){
     console.dir(jsonDATA);
 }
 
-function fillDropDown(){
+function fillDropDown(departamentoID){
 
     $("#fechaNacimiento")
         .datepicker({
@@ -689,8 +689,6 @@ function fillDropDown(){
             dataType: 'json',
             data: function (params) {
                 var query = {
-
-                    //TODO: verificar por qué no llega el dato
                     q: departamentoID
                 };
                 // Query parameters will be ?1=[term]
