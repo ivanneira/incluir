@@ -66,24 +66,24 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Qué tipo de pensión tiene asignada?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <label class="form-check-label" for="pe1">Invalidez </label>' +
         '               <input name="pension" value="1" class="form-check-input" type="radio" id="pe1">' +
+        '               <label class="form-check-label" for="pe1">Invalidez </label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <label class="form-check-label" for="pe2">Madres de 7 hijos</label>' +
         '               <input name="pension" value="2" class="form-check-input" type="radio" id="pe2">' +
+        '               <label class="form-check-label" for="pe2">Madres de 7 hijos</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <label class="form-check-label" for="pe3">Personas mayores de 65 años</label>' +
         '               <input name="pension" value="3" class="form-check-input" type="radio" id="pe3">' +
+        '               <label class="form-check-label" for="pe3">Personas mayores de 65 años</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <label class="form-check-label" for="pe4">Héroes ex Combatientes de Malvina</label>' +
         '               <input name="pension" value="4" class="form-check-input" type="radio" id="pe4">' +
+        '               <label class="form-check-label" for="pe4">Héroes ex Combatientes de Malvina</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <label class="form-check-label" for="pe5">Otro</label>' +
         '               <input name="pension" value="5" class="form-check-input" type="radio" id="pe5">' +
+        '               <label class="form-check-label" for="pe5">Otro</label>' +
         '           </div>' +
         '       </td>'+
         '   </tr>';
@@ -436,7 +436,9 @@ function agregarEncuesta(){
         .modal('show')
         .modal('handleUpdate');
 
-    $("#modalACAceptar").click(function(){
+    $("#modalACAceptar")
+        .unbind('click')
+        .click(function(){
 
 
         verificarEncuesta();
@@ -453,7 +455,8 @@ function agregarEncuesta(){
     function guardarDatosEncuesta(){
 
         var encuestaDATA = {
-
+            //id de usuario forzado
+            usuarioID: 1,
             nroEncuesta: '',
             tipoSexoID: '',
             fechaEncuesta: '',

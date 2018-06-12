@@ -11,17 +11,37 @@
     <br>
     <br>
 
+    <ul class="nav nav-tabs nav-fill" role="tablist" id="formTabs">
+       <li class="nav-item"> 
+               <a id="planillas-tab" data-toggle="tab" class="nav-link bg-secondary text-light active" href="#planillas">Planillas</a>
 
-    <button id="agregarPlanilla" class="btn btn-sm btn-success">+Agregar Planilla</button>
-    <button id="agregarEncuesta" class="btn btn-sm btn-success">+Agregar Encuesta</button>
-    <button id="agregarRegistro" class="btn btn-sm btn-success">+Agregar Registro</button>
-    <br>
-    <br>
-    <table id="encabezado" class="card-1 table table-primary table-striped table-hover">
-        <tbody id="planillasBody">
+           </li>
+       <li class="nav-item vivo"> 
+               <a id="encuestas-tab" data-toggle="tab" class="nav-link bg-secondary text-light" href="#encuestas">Encuestas</a>
+           </li>
+    </ul>
 
-        </tbody>
-    </table>
+    <div class="tab-content" id="tabContent">
+       <div class="tab-pane fade show active" id="planillas" role="tabpanel" aria-labelledby="planillas-tab">
+           <button id="agregarPlanilla" class="btn btn-sm btn-success">+Agregar Planilla</button>
+           <table class="card-1 table table-primary table-striped table-hover">
+               <tbody id="planillasBody">
+
+               </tbody>
+           </table>
+       </div>
+       <div class="tab-pane fade" id="encuestas" role="tabpanel" aria-labelledby="encuestas-tab">
+           <button id="agregarEncuesta" class="btn btn-sm btn-success">+Agregar Encuesta</button>
+           <table class="card-1 table table-primary table-striped table-hover">
+               <tbody id="encuestasBody">
+
+               </tbody>
+           </table>
+       </div>
+    </div>
+
+
+
 
 </div>
 

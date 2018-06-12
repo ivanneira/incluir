@@ -158,7 +158,7 @@ function verificarEncabezado(){
     encabezadoDATA.departamentoID = $(".selectDepartamento").val();
 
     $.ajax({
-        url: "",
+        url: "http://192.168.3.105:45455/api/IncluirSalud/GuardarPlanilla",
         method: "POST",
         data: encabezadoDATA,
         dataType: "json"

@@ -85,9 +85,9 @@ $(function(){
 
     }
 
-
+/*
     $("#agregarRegistro").click(function(){
-        /*
+
          if(
          $("#numeroPlanilla").val() != "" &&
          $(".selectSupervisor").val() != null &&
@@ -100,9 +100,10 @@ $(function(){
 
          alert("Complete los datos del encabezado primero")
          }
-         */fillModal();
+         fillModal();
 
     });
+*/
 
     $("#agregarPlanilla").click(function(){
 
@@ -124,7 +125,7 @@ function ERROR(){
     alert("Hubo un error, por favor regargue la página");
 }
 
-function fillModal(){
+function fillModal(departamentoID){
 
     //tabs
     var htmlString =
@@ -688,7 +689,9 @@ function fillDropDown(){
             dataType: 'json',
             data: function (params) {
                 var query = {
-                    q: $(".selectDepartamento").val()
+
+                    //TODO: verificar por qué no llega el dato
+                    q: departamentoID
                 };
                 // Query parameters will be ?1=[term]
                 return query;
