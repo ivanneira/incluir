@@ -125,7 +125,9 @@ function ERROR(){
     alert("Hubo un error, por favor regargue la página");
 }
 
-function fillModal(departamentoID){
+function fillModal(departamentoID,NumeroPlanilla,idplanilla){
+
+    //console.log(NumeroPlanilla)
 
     //tabs
     var htmlString =
@@ -183,8 +185,8 @@ function fillModal(departamentoID){
         '           <label for="sexo">Sexo</label>' +
         '           <select class="form-control" id="sexo" name="sexo">' +
         '               <option value="-1">Seleccione el sexo...</option>' +
-        '               <option value="M">Masculino</option>' +
-        '               <option value="F">Femenino</option>' +
+        '               <option value="1">Masculino</option>' +
+        '               <option value="2">Femenino</option>' +
         '           </select>' +
         '       </td>'+
         '      <td>' +
@@ -376,7 +378,9 @@ function fillModal(departamentoID){
     $("#comentarios")
         .append(htmlComentarios);
 
-    $("#modalACTitulo").text('Nuevo registro, planilla nº: ' + $("#numeroPlanilla").val());
+    $("#modalACTitulo")
+        .data('idplanilla',idplanilla)
+        .text('Nuevo registro, planilla nº: ' + NumeroPlanilla);
 
     $("#modalAC")
         .modal('show')
@@ -540,32 +544,7 @@ function mostrarError(condition,selector){
 
 function armarJSON(){
 
-    var data = {
-        apellido: '',
-        nombre: '',
-        fechaDefuncion: '',
-        fechaNacimiento: '',
-        dni: '',
-        sexo: '',
-        telefono: '',
-        localidadID: '',
-        domicilio: '',
-        barrio: '',
-        latitud: '',
-        longitud: '',
-        titularidad: '',
-        tipoPensionID: '',
-        diagnosticoID: '',
-        prestacionID: '',
-        nroPersonasConviven: '',
-        nroIntegrantesBeneficiario: '',
-        tipoViviendaID: '',
-        tipoViviendaDetalle: '',
-        serviciosBasicosID: '',
-        comentario: '',
-        planillaID: ''
-
-    };
+    var data = {};
 
     //en caso de que el encuestado esté fallecido
     if(!$('#fallecido').prop('checked')){
@@ -580,23 +559,26 @@ function armarJSON(){
         //caso común de la encuesta
     }else{
 
+        //TODO: faltan datos para guardar.
+
         //planilla
-        data.planillaID = $("#numeroPlanilla").val();
+        data.planillaID = $("#modalACTitulo").data().idplanilla;
         //personales
         data.nombre = $("#nombre").val();
         data.apellido = $("#apellido").val();
         data.fechaDefuncion = $("#defuncion").val();
+        data.fechaNacimiento = $("#fechaNacimiento").val();
         data.dni = $("#dni").val();
-        data.sexo = $("#sexo").val();
-        data.telefono = $("#tel").val();
+        data.tipoSexoID = $("#sexo").val();
+        data.tel = $("#tel").val();
         //localizacion
-        data.localidad = $(".selectLocalidad").val();
+        data.localidadID = $(".selectLocalidad").val();
         data.domicilio  = $("#domicilio").val();
         data.barrio = $("#barrio").val();
         data.latitud = $("#lat").val();
         data.longitud = $("#lon").val();
         //prestación
-        data.titularidad = $("#btnTitular").prop('checked') ? "titular" : "adherente";
+        data.tipoBeneficiarioID = $("#btnTitular").prop('checked') ? 1 : 2;
         data.tipoPensionID = $(".selectTipoPension ").val();
         data.diagnosticoID = $(".selectCIE10").val();
         data.prestacionID = $(".selectPrestaciones").val();
@@ -617,6 +599,17 @@ function enviarDatos(jsonDATA){
 
     console.log("los datos que se enviarían son los siguientes:");
     console.dir(jsonDATA);
+
+    $.ajax({
+        //id de usuario forzado a 1
+        url: "http://192.168.3.105:45455/api/IncluirSalud/GuardarFilaPlanilla",
+        method: "POST",
+        dataType: "json",
+        data: jsonDATA
+    })
+        .done(function(res){
+           console.dir(res);
+        });
 }
 
 function fillDropDown(departamentoID){

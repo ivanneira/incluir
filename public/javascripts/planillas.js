@@ -28,7 +28,7 @@ $(function(){
             for(var index in res){
 
                 htmlStringPlanilla +=
-                    '<tr>' +
+                    '<tr class="abrirplanilla" data-toggle="collapse"  href="#collapse' + res[index].PlanillaID + '" data-id="' + res[index].PlanillaID + '">' +
                     '   <td>' +
                     res[index].NumeroPlanilla +
                     '   </td>' +
@@ -39,15 +39,17 @@ $(function(){
                     res[index].DepartamentoNombre +
                     '   </td>' +
                     '   <td>' +
-                    '       <button class="btn btn-sm btn-success editarPlanilla" data-toggle="collapse"  href="#collapse' + res[index].PlanillaID + '" data-id="' + res[index].PlanillaID + '">Editar</button>' +
+                    //'       <button class="btn btn-sm btn-success editarPlanilla" data-toggle="collapse"  href="#collapse' + res[index].PlanillaID + '" data-id="' + res[index].PlanillaID + '">Ver</button>' +
                     //'       <button id="agregarRegistro" class="btn btn-sm btn-success" data-id="' + res[index].PlanillaID + '">+Agregar Registro</button>' +
                     //'       <button class="btn btn-danger borrarPlanilla" data-id="' + res[index].PlanillaID + '">Borrar</button>' +
+                    '       <button class="btn btn-sm btn-success nuevoRegistro" data-numeroplanilla="' + res[index].NumeroPlanilla + '" data-departamentoid="' + res[index].DepartamentoID + '" data-id="' + res[index].PlanillaID + '">+Agregar Registro</button>' +
                     '   </td>' +
                     '</tr>' +
                     '<tr>' +
                     '   <td colspan="4">' +
                     '       <div class="collapse" id="collapse' + res[index].PlanillaID + '">' +
-                    '       <button class="btn btn-sm btn-success nuevoRegistro" data-departamentoid="' + res[index].DepartamentoID + '" data-id="' + res[index].PlanillaID + '">+Agregar Registro</button>' +
+                    //'       <button class="btn btn-sm btn-success nuevoRegistro" data-numeroplanilla="' + res[index].NumeroPlanilla + '" data-departamentoid="' + res[index].DepartamentoID + '" data-id="' + res[index].PlanillaID + '">+Agregar Registro</button>' +
+                    //'          <p>lorem</p>'+
                     '       </div>' +
                     '   </td>' +
                     '</tr>' +
@@ -55,12 +57,78 @@ $(function(){
 
 
 
-                console.log(res[index]);
+                //console.log(res[index]);
             }
 
 
             $("#planillasBody")
-                .append(htmlStringPlanilla)
+                .append(htmlStringPlanilla);
+
+            $(".abrirplanilla").click(function(){
+
+                console.log($(this).data().id)
+
+                var idplanilla = $(this).data().id;
+
+                $("#collapse"+idplanilla )
+                    .empty()
+                    .append("Espere mientras se cargan los datos por favor...");
+
+                $.ajax({
+                    url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
+                    method: "GET",
+                    dataType: "json"
+                })
+                    .done(function(res2){
+
+
+                        console.log(res2);
+
+                        var htmlStringFilaPlanillas = '';
+
+
+
+                        for(var index in res2){
+
+                            htmlStringFilaPlanillas +=
+                                '<tr class="bg-dark text-light d-block">' +
+                                '   <td>' +
+                                res2[index].Nombre + " " + res2[index].Apellido +
+                                '   </td>' +
+                                '   <td>' +
+                                    res2[index].Localidad +
+                                '   </td>' +
+                                '   <td>' +
+                                    res2[index].Domicilio +
+                                '   </td>' +
+                                '   <td>' +
+                                '       <button class="btn btn-warning" data-id="' + res2[index].PlanillaID + '">Editar</button>' +
+                                '   </td>' +
+                                '</tr>'
+
+                        }
+
+                        if(res2 == ''){
+                            htmlStringFilaPlanillas = 'No se encontraron datos.';
+                        }
+
+                        $("#collapse"+idplanilla )
+                            .empty()
+                            .append(htmlStringFilaPlanillas);
+
+                    })
+                .fail(function(e){console.log(e)})
+
+            });
+
+            $(".nuevoRegistro").click(function(){
+
+                console.log($(this).data())
+
+
+                fillModal($(this).data().departamentoid,$(this).data().numeroplanilla,$(this).data().id);
+
+            });
         });
 
     $.ajax({
@@ -109,34 +177,15 @@ $(function(){
 
 
 
-                console.log(res[index]);
+                //console.log(res[index]);
             }
 
             $("#encuestasBody")
                 .append(htmlStringEncuesta)
 
-            $(".nuevoRegistro").click(function(){
 
-                console.log($(this).data().departamentoid)
 
-                fillModal($(this).data().departamentoid);
-/*
-                $.ajax({
-                    url: 'http://192.168.3.105:45455/api/IncluirSalud/ObtenerFilasPlanilla?id=' + $(this).data('id'),
-                    type: 'GET',
-                    dataType: 'json',
-                    success: function(data){
-                        tipoPension = data;
-                    },
-                    error: function(e){
-                        ERROR();
-                        console.log(e);
-                    }
-                });*/
-
-            });
-
-            console.log(res)
+            //console.log(res)
 
         });
 
