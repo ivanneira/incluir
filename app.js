@@ -50,6 +50,9 @@ app.use(express.static(path.join(__dirname, '/node_modules/bootstrap-datepicker/
 //ruta de select2
 app.use(express.static(path.join(__dirname, '/node_modules/select2/dist')));
 
+//ruta de async
+app.use(express.static(path.join(__dirname, '/node_modules/async/dist')));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));

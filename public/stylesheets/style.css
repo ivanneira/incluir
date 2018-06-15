@@ -64,7 +64,7 @@ body {
   margin-top: 20%;
 }
 
-
+/* lo deshabilité por el acordeón
 .card {
   background: #fff;
   border-radius: 2px;
@@ -73,7 +73,7 @@ body {
   margin: 1rem;
   position: relative;
   width: 300px;
-}
+}*/
 
 .card-1 {
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);

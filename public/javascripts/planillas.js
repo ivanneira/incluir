@@ -1,5 +1,13 @@
+var planillasDATA = [];
+var registrosDATA = [];
+var encuestasDATA = [];
+
 $(function(){
 
+    //forzado a usuario 1
+    loadPlanillas(1);
+
+/*
 
     $.ajax({
         //id de usuario forzado a 1
@@ -24,6 +32,10 @@ $(function(){
                 '       Acción' +
                 '   </th>' +
                 '</tr>';
+
+
+            var htmlStringPlanilla =
+                '';
 
             for(var index in res){
 
@@ -102,14 +114,14 @@ $(function(){
                                     res2[index].Domicilio +
                                 '   </td>' +
                                 '   <td>' +
-                                '       <button class="btn btn-warning" data-id="' + res2[index].PlanillaID + '">Editar</button>' +
+                                '       <button class="btn btn-sm btn-warning" data-id="' + res2[index].PlanillaID + '">Editar</button>' +
                                 '   </td>' +
                                 '</tr>'
 
                         }
 
                         if(res2 == ''){
-                            htmlStringFilaPlanillas = 'No se encontraron datos.';
+                            htmlStringFilaPlanillas = 'No se encontraron registros en ésta planilla.';
                         }
 
                         $("#collapse"+idplanilla )
@@ -189,4 +201,224 @@ $(function(){
 
         });
 
+    */
+
 });
+
+function loadPlanillas(userID){
+
+    $.ajax({
+        url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerPlanillas?id="+ userID,
+        method: "GET",
+        dataType: "json"
+    })
+        .done(function(res){
+
+            console.log(res)
+
+            var htmlStringPlanillas =
+                '<div id="accordion">';
+
+
+            for(var index in res){
+
+                htmlStringPlanillas +=
+                    '<div class="card">' +
+                    '   <div class="card-header" id="heading'+ res[index].PlanillaID +'">' +
+                    '       <h5 class="mb-0">' +
+                    '           <button class="btn btn-link btnPlanilla" data-toggle="collapse" data-id="' +res[index].PlanillaID + '" data-target="#collapse'+ res[index].PlanillaID +'" aria-expanded="true" aria-controls="collapse'+ res[index].PlanillaID +'">' +
+                    '               <p>Planilla Nº: ' + res[index].PlanillaID + '  Fecha: '+ res[index].FechaPlanilla +'   Encuestador: '+ res[index].EncuestadorNombre + ' </p>' +
+                    '           </button>' +
+                    '       </h5>' +
+                    '   </div>' +
+                    '' +
+                    '   <div id="collapse'+ res[index].PlanillaID +'" class="collapse" aria-labelledby="heading'+ res[index].PlanillaID +'" data-parent="#accordion">' +
+                    '       <div class="card-body" id="planillaBody'+ res[index].PlanillaID +'">' +
+                    '           <p>Espere mientras se cargan los datos...</p>' +
+                    '       </div>' +
+                    '   </div>' +
+                    '</div>';
+
+            }
+
+            htmlStringPlanillas +=
+                '</div>';
+
+            $("#planillasBody")
+                .append(htmlStringPlanillas);
+
+            $(".btnPlanilla").click(function(){
+
+                var idplanilla = $(this).data().id;
+
+                $(".card-body")
+                    .html("<p>Espere mientras se cargan los datos.</p>");
+
+                $.ajax({
+                    url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
+                    method: "GET",
+                    dataType: "json"
+                })
+                    .done(function(res){
+
+                        console.log(res)
+
+                        var htmlStringRegistro =
+                            '<table class="table table-striped">';
+
+                        if(res.length === 0){
+                            htmlStringRegistro = '<p>No se encontraron registros.</p>';
+                        }
+
+
+                        for(var index in res){
+
+                            htmlStringRegistro +=
+                                '<tr>' +
+                                '   <td>' +
+                                        res[index].Nombre + ' ' + res[index].Apellido +
+                                '   </td>' +
+                                '   <td>' +
+                                        res[index].DNI +
+                                '   </td>' +
+                                '   <td>' +
+                                    res[index].Localidad +
+                                '   </td>' +
+                                '   <td>' +
+                                '       <button class="btn btn-sm btn-warning">Editar</button>' +
+                                '   </td>' +
+                                '</tr>'
+
+                        }
+
+                        htmlStringRegistro += '</div>';
+
+                        $(".card-body")
+                            .empty();
+
+                        $("#planillaBody"+idplanilla)
+                            .append(htmlStringRegistro)
+                    });
+
+                console.log()
+            });
+        });
+
+
+
+/*
+    $.ajax({
+        url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerPlanillas?id="+ userID,
+        method: "GET",
+        dataType: "json"
+    })
+        .done(function(res){
+
+            planillasDATA = res;
+
+            for(var index in planillasDATA){
+
+                $.ajax({
+                    url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerFilasPlanilla?id="+ planillasDATA[index].PlanillaID,
+                    method: "GET",
+                    dataType: "json"
+                })
+                    .done(function(res){
+
+
+                        registrosDATA.push(res)
+                    });
+            }
+        });
+
+
+
+    console.log(registrosDATA)
+    */
+}
+
+function loadRegistros(PlanillaID){
+
+
+
+
+
+
+
+/*
+    for(var index in planillasDATA){
+
+        //console.log( planillasDATA[index].PlanillaID)
+
+        $.ajax({
+            url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerFilasPlanilla?id="+ planillasDATA[index].PlanillaID,
+            method: "GET",
+            dataType: "json"
+        })
+            .done(function(res){
+                console.log(planillasDATA[index].PlanillaID)
+                registrosDATA[planillasDATA[index].PlanillaID].registros = [];
+                registrosDATA[planillasDATA[index].PlanillaID].registros.push(res);
+            });
+
+
+    }
+
+    console.log(planillasDATA)
+    //console.log(registrosDATA)
+
+    //fillPlanillas();
+    */
+}
+
+function fillPlanillas(){
+    //console.dir(registros[0])
+
+    var htmlStringPlanillas =
+        '<div id="accordion">';
+
+
+
+    for(var index in planillasDATA) {
+
+        htmlStringPlanillas +=
+            '<div class="card">' +
+            '   <div class="card-header" id="heading' + planillasDATA[index].PlanillaID + '">' +
+            '       <h5 class="mb-0">' +
+            '           <button class="btn btn-link" data-toggle="collapse" data-target="#collapse' + planillasDATA[index].PlanillaID + '" aria-expanded="true" aria-controls="collapse' + planillasDATA[index].PlanillaID + '">' +
+            planillasDATA[index].PlanillaID +
+            '           </button>' +
+            '       </h5>' +
+            '   </div>';
+
+        var indice = planillasDATA[index].PlanillaID;
+
+        //console.log(planillasDATA[index].PlanillaID)
+        //console.log(registros[indice])
+        /*
+
+         if(registros.length !== 0){
+
+         for(var index2 in registros){
+
+         htmlStringPlanillas +=
+         '<div id="collapse'+ planillasDATA[index].PlanillaID +'" class="collapse show" aria-labelledby="heading'+ planillasDATA[index].PlanillaID +'" data-parent="#accordion">' +
+         '<div class="card-body">' +
+         registros[index2].Apellido +
+         '</div>' ;
+         }
+         }
+
+         htmlStringPlanillas += '</div>'
+
+         }
+
+         htmlStringPlanillas +=
+         '</div>';
+
+         console.log(htmlStringPlanillas)
+         $("#planillasBody").append(htmlStringPlanillas);
+
+         */
+    }
+}
