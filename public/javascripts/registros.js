@@ -715,7 +715,7 @@ function fillDropDown(departamentoID){
             $(this).data('placeholder');
         },
         ajax: {
-            url: server_host+":"+server_port+'/planillas/getCIE10',
+            url: '/planillas/getCIE10',
             type: 'GET',
             dataType: 'json',
             data: function (params) {
@@ -745,10 +745,11 @@ function fillDropDown(departamentoID){
         placeholder: 'Elija prestaciones',
         width: '100%',
         language: 'es',
-        multiple: true,
-        minimumResultsForSearch: -1,
+        //multiple: true,
+        dropdownParent: $("#modalACBody"),
+
         ajax: {
-            url: server_host+":"+server_port+'/planillas/getPrestaciones',
+            url: '/planillas/getPrestaciones',
             type: 'GET',
             dataType: 'json',
             data: function (params) {
@@ -763,7 +764,6 @@ function fillDropDown(departamentoID){
 
                 return {
                     results: $.map(data, function (item) {
-
                         return {
                             text: item.nombre,
                             id: item.id

@@ -431,8 +431,10 @@ router.get('/getLocalidades', function(req, res, next) {
 /* GET pestaciones. */
 router.get('/getPrestaciones', function(req, res, next) {
 
+    var q = req.query.q;
+
     knex
-        .raw('exec getprestaciones ')
+        .raw("SELECT id, nombre, orden FROM prestaciones where nombre like '%"+q+"%' and activo !=0")
         .then(function(rows){
 
             if(rows.length > 0) {
