@@ -227,7 +227,7 @@ function loadPlanillas(userID){
                     '   <div class="card-header" id="heading'+ res[index].PlanillaID +'">' +
                     '       <h5 class="mb-0">' +
                     '           <button class="btn btn-link btnPlanilla" data-toggle="collapse" data-id="' +res[index].PlanillaID + '" data-target="#collapse'+ res[index].PlanillaID +'" aria-expanded="true" aria-controls="collapse'+ res[index].PlanillaID +'">' +
-                    '               <p>Planilla Nº: ' + res[index].PlanillaID + '  Fecha: '+ res[index].FechaPlanilla +'   Encuestador: '+ res[index].EncuestadorNombre + ' </p>' +
+                    '               <p>Planilla Nº: ' + res[index].NumeroPlanilla + '  Fecha: '+ res[index].FechaPlanilla +'   Encuestador: '+ res[index].EncuestadorNombre + ' </p>' +
                     '           </button>' +
                     '       </h5>' +
                     '   </div>' +
@@ -251,6 +251,8 @@ function loadPlanillas(userID){
 
                 var idplanilla = $(this).data().id;
 
+                console.dir($(this).data())
+
                 $(".card-body")
                     .html("<p>Espere mientras se cargan los datos.</p>");
 
@@ -264,7 +266,10 @@ function loadPlanillas(userID){
                         console.log(res)
 
                         var htmlStringRegistro =
-                            '<table class="table table-striped">';
+                            '<table class="table table-striped">' +
+                            '<tr>' +
+                            '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '">+Agregar Registro</button>' +
+                            '</tr>';
 
                         if(res.length === 0){
                             htmlStringRegistro = '<p>No se encontraron registros.</p>';
@@ -285,7 +290,7 @@ function loadPlanillas(userID){
                                     res[index].Localidad +
                                 '   </td>' +
                                 '   <td>' +
-                                '       <button class="btn btn-sm btn-warning">Editar</button>' +
+                                '       <button class="btn btn-sm btn-warning" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
                                 '   </td>' +
                                 '</tr>'
 
@@ -298,6 +303,15 @@ function loadPlanillas(userID){
 
                         $("#planillaBody"+idplanilla)
                             .append(htmlStringRegistro)
+
+                        $(".nuevoRegistro").click(function(){
+
+                            console.log($(this).data())
+
+
+                            fillModal($(this).data().departamentoid,$(this).data().numeroplanilla,$(this).data().id);
+
+                        });
                     });
 
                 console.log()
