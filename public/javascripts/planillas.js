@@ -214,7 +214,7 @@ function loadPlanillas(userID){
     })
         .done(function(res){
 
-            console.log(res)
+            //console.log(res)
 
             var htmlStringPlanillas =
                 '<div id="accordion">';
@@ -226,7 +226,7 @@ function loadPlanillas(userID){
                     '<div class="card">' +
                     '   <div class="card-header" id="heading'+ res[index].PlanillaID +'">' +
                     '       <h5 class="mb-0">' +
-                    '           <button class="btn btn-link btnPlanilla" data-toggle="collapse" data-id="' +res[index].PlanillaID + '" data-target="#collapse'+ res[index].PlanillaID +'" aria-expanded="true" aria-controls="collapse'+ res[index].PlanillaID +'">' +
+                    '           <button class="btn btn-link btnPlanilla" data-toggle="collapse" data-departamentoid="' +res[index].DepartamentoID + '" data-numeroplanilla="' +res[index].NumeroPlanilla + '" data-id="' +res[index].PlanillaID + '" data-target="#collapse'+ res[index].PlanillaID +'" aria-expanded="true" aria-controls="collapse'+ res[index].PlanillaID +'">' +
                     '               <p>Planilla Nº: ' + res[index].NumeroPlanilla + '  Fecha: '+ res[index].FechaPlanilla +'   Encuestador: '+ res[index].EncuestadorNombre + ' </p>' +
                     '           </button>' +
                     '       </h5>' +
@@ -250,6 +250,8 @@ function loadPlanillas(userID){
             $(".btnPlanilla").click(function(){
 
                 var idplanilla = $(this).data().id;
+                var iddepartamento = $(this).data().departamentoid;
+                var numeroplanilla = $(this).data().numeroplanilla;
 
                 console.dir($(this).data())
 
@@ -268,11 +270,11 @@ function loadPlanillas(userID){
                         var htmlStringRegistro =
                             '<table class="table table-striped">' +
                             '<tr>' +
-                            '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '">+Agregar Registro</button>' +
+                            '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="'+ numeroplanilla +'" data-departamentoid="'+ iddepartamento +'">+Agregar nuevo registro</button>' +
                             '</tr>';
 
                         if(res.length === 0){
-                            htmlStringRegistro = '<p>No se encontraron registros.</p>';
+                            htmlStringRegistro += '<p>No se encontraron registros.</p>';
                         }
 
 

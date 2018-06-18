@@ -127,7 +127,7 @@ function ERROR(){
 
 function fillModal(departamentoID,NumeroPlanilla,idplanilla){
 
-    //console.log(NumeroPlanilla)
+    //console.log(departamentoID)
 
     //tabs
     var htmlString =
@@ -677,7 +677,7 @@ function fillDropDown(departamentoID){
         language: 'es',
         minimumResultsForSearch: -1,
         ajax: {
-            url: server_host+":"+server_port+'/planillas/getLocalidades',
+            url: '/planillas/getLocalidades',
             type: 'GET',
             dataType: 'json',
             data: function (params) {
