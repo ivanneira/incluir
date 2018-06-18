@@ -208,7 +208,7 @@ $(function(){
 function loadPlanillas(userID){
 
     $.ajax({
-        url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerPlanillas?id="+ userID,
+        url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerPlanillas?id="+ userID,
         method: "GET",
         dataType: "json"
     })
@@ -257,7 +257,7 @@ function loadPlanillas(userID){
                     .html("<p>Espere mientras se cargan los datos.</p>");
 
                 $.ajax({
-                    url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
+                    url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
                     method: "GET",
                     dataType: "json"
                 })

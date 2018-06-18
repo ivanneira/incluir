@@ -158,14 +158,21 @@ function verificarEncabezado(){
     encabezadoDATA.departamentoID = $(".selectDepartamento").val();
 
     $.ajax({
-        url: "http://192.168.3.105:45455/api/IncluirSalud/GuardarPlanilla",
+        url: server_host+":"+server_port+"/api/IncluirSalud/GuardarPlanilla",
         method: "POST",
         data: encabezadoDATA,
         dataType: "json"
     })
         .done(function(res){
 
-            console.log(res);
+            if(typeof(res) == "undefined") {
+                alert("Se agrego una nueva planilla");
+                location.reload();
+            }
+            else
+            {
+                console.log(res);
+            }
         });
 
 }

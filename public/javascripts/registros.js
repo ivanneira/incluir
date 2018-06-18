@@ -24,7 +24,7 @@ $(function(){
     });
 
     $.ajax({
-        url: 'planillas/getTipoVivienda',
+        url: '/planillas/getTipoVivienda',
         type: 'GET',
         dataType: 'json',
         success: function(data){
@@ -37,7 +37,7 @@ $(function(){
     });
 
     $.ajax({
-        url: 'planillas/getTipoServicios',
+        url: '/planillas/getTipoServicios',
         type: 'GET',
         dataType: 'json',
         success: function(data){
@@ -602,7 +602,7 @@ function enviarDatos(jsonDATA){
 
     $.ajax({
         //id de usuario forzado a 1
-        url: "http://192.168.3.105:45455/api/IncluirSalud/GuardarFilaPlanilla",
+        url: server_host+":"+server_port+"/api/IncluirSalud/GuardarFilaPlanilla",
         method: "POST",
         dataType: "json",
         data: jsonDATA
@@ -677,7 +677,7 @@ function fillDropDown(departamentoID){
         language: 'es',
         minimumResultsForSearch: -1,
         ajax: {
-            url: 'planillas/getLocalidades',
+            url: server_host+":"+server_port+'/planillas/getLocalidades',
             type: 'GET',
             dataType: 'json',
             data: function (params) {
@@ -715,7 +715,7 @@ function fillDropDown(departamentoID){
             $(this).data('placeholder');
         },
         ajax: {
-            url: 'planillas/getCIE10',
+            url: server_host+":"+server_port+'/planillas/getCIE10',
             type: 'GET',
             dataType: 'json',
             data: function (params) {
@@ -748,7 +748,7 @@ function fillDropDown(departamentoID){
         multiple: true,
         minimumResultsForSearch: -1,
         ajax: {
-            url: 'planillas/getPrestaciones',
+            url: server_host+":"+server_port+'/planillas/getPrestaciones',
             type: 'GET',
             dataType: 'json',
             data: function (params) {
