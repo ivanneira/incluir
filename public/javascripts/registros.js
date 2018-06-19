@@ -609,7 +609,16 @@ function enviarDatos(jsonDATA){
         data: jsonDATA
     })
         .done(function(res){
-           console.dir(res);
+            if(typeof(res)=="undefined")
+                {
+                    swal("Incluir Salud", "Se agrego una nueva registro!", "success");
+                    setTimeout(function(){location.reload();},1500)
+                }
+                else
+                {
+                    console.dir(res);
+                }
+
         });
 }
 
