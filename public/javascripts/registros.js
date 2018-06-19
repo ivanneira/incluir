@@ -561,7 +561,8 @@ function armarJSON(){
 
         data.nombre = $("#nombre").val();
         data.apellido = $("#apellido").val();
-        data.fechaNacimiento  = $("#fechaNacimiento").val();
+        data.fechaDefuncion  = $("#defuncion").val();
+
 
         enviarDatos(data);
 
@@ -575,8 +576,16 @@ function armarJSON(){
         //personales
         data.nombre = $("#nombre").val();
         data.apellido = $("#apellido").val();
-        data.fechaDefuncion = $("#defuncion").val();
-        data.fechaNacimiento = $("#fechaNacimiento").val();
+
+        var fd = $("#defuncion").val().split('/');
+        data.fechaDefuncion = typeof(fd[0]) === 'undefined' ? fd[2]+'-'+fd[1]+'-'+fd[0] : null;
+
+        console.dir(fd)
+        console.dir(data.fechaDefuncion)
+
+        var fn = $("#fechaNacimiento").val().split('/');
+        data.fechaNacimiento = fn[2]+'-'+fn[1]+'-'+fn[0];
+
         data.dni = $("#dni").val();
         data.tipoSexoID = $("#sexo").val();
         data.tel = $("#tel").val();

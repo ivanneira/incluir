@@ -351,7 +351,7 @@ function loadPlanillas(userID){
                     .html("<p>Espere mientras se cargan los datos.</p>");
 
                 $.ajax({
-                    url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerºFilasPlanilla?id=" + idplanilla,
+                    url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
                     method: "GET",
                     dataType: "json"
                 })
