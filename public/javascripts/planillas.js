@@ -214,20 +214,52 @@ function loadPlanillas(userID){
     })
         .done(function(res){
 
-            //console.log(res)
+            console.log(res)
 
             var htmlStringPlanillas =
                 '<div id="accordion">';
 
 
+
             for(var index in res){
+
+
+                // Split timestamp into [ Y, M, D, h, m, s ]
+                var t = res[index].FechaPlanilla.split(/[- :]/);
+
+                console.log(t)
+
+                // Apply each element to the Date function
+                var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
+
 
                 htmlStringPlanillas +=
                     '<div class="card">' +
                     '   <div class="card-header" id="heading'+ res[index].PlanillaID +'">' +
                     '       <h5 class="mb-0">' +
-                    '           <button class="btn btn-link btnPlanilla" data-toggle="collapse" data-departamentoid="' +res[index].DepartamentoID + '" data-numeroplanilla="' +res[index].NumeroPlanilla + '" data-id="' +res[index].PlanillaID + '" data-target="#collapse'+ res[index].PlanillaID +'" aria-expanded="true" aria-controls="collapse'+ res[index].PlanillaID +'">' +
-                    '               <p>Planilla Nº: ' + res[index].NumeroPlanilla + '  Fecha: '+ res[index].FechaPlanilla +'   Encuestador: '+ res[index].EncuestadorNombre + ' </p>' +
+                    '           <button class="btn btn-block btnPlanilla" data-toggle="collapse" data-departamentoid="' +res[index].DepartamentoID + '" data-numeroplanilla="' +res[index].NumeroPlanilla + '" data-id="' +res[index].PlanillaID + '" data-target="#collapse'+ res[index].PlanillaID +'" aria-expanded="true" aria-controls="collapse'+ res[index].PlanillaID +'">' +
+                    '               <div class="row font-weight-bold">' +
+                    '                   <div class="col-4">' +
+                    '                            Nº Planilla' +
+                    '                   </div>' +
+                    '                   <div class="col-4">' +
+                    '                            Fecha' +
+                    '                   </div>' +
+                    '                   <div class="col-4">' +
+                    '                            Encuestador' +
+                    '                   </div>' +
+                    '               </div>' +
+                    '               <div class="row">' +
+                    '                   <div class="col-4">' +
+                                            res[index].NumeroPlanilla +
+                    '                   </div>' +
+                    '                   <div class="col-4">' +
+                                             d +
+                    '                   </div>' +
+                    '                   <div class="col-4">' +
+                                            res[index].EncuestadorNombre +
+                    '                   </div>' +
+                    '               </div>' +
                     '           </button>' +
                     '       </h5>' +
                     '   </div>' +
@@ -292,7 +324,7 @@ function loadPlanillas(userID){
                                     res[index].Localidad +
                                 '   </td>' +
                                 '   <td>' +
-                                '       <button class="btn btn-sm btn-warning" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
+                                '       <button class="btn btn-sm btn-warning editarregistro" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
                                 '   </td>' +
                                 '</tr>'
 
@@ -314,9 +346,15 @@ function loadPlanillas(userID){
                             fillModal($(this).data().departamentoid,$(this).data().numeroplanilla,$(this).data().id);
 
                         });
+
+                        $(".editarregistro").click(function(){
+                           console.log($(this).data())
+
+                            fillModal($(this).data().departamentoid,$(this).data().numeroplanilla,$(this).data().id);
+                        });
                     });
 
-                console.log()
+
             });
         });
 
