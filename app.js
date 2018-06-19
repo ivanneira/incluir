@@ -28,6 +28,8 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
+
+
 //ruta de jquery
 app.use(express.static(path.join(__dirname, '/node_modules/jquery/dist')));
 
@@ -51,6 +53,9 @@ app.use(express.static(path.join(__dirname, '/node_modules/select2/dist')));
 
 //ruta de async
 app.use(express.static(path.join(__dirname, '/node_modules/async/dist')));
+
+//ruta de jAlert
+app.use(express.static(path.join(__dirname, '/node_modules/jAlert/dist')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

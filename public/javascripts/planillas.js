@@ -295,36 +295,37 @@ function loadPlanillas(userID){
                     method: "GET",
                     dataType: "json"
                 })
-                    .done(function(res){
+                    .done(function(res) {
 
                         console.log(res)
 
                         var htmlStringRegistro =
                             '<table class="table table-striped">' +
                             '<tr>' +
-                            '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="'+ numeroplanilla +'" data-departamentoid="'+ iddepartamento +'">+Agregar nuevo registro</button>' +
+                            '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '">+Agregar nuevo registro</button>' +
                             '</tr>';
 
-                        if(res.length === 0){
+                        if (res.length === 0) {
                             htmlStringRegistro += '<p>No se encontraron registros.</p>';
                         }
 
 
-                        for(var index in res){
+                        for (var index in res) {
 
                             htmlStringRegistro +=
                                 '<tr>' +
                                 '   <td>' +
-                                        res[index].Nombre + ' ' + res[index].Apellido +
+                                res[index].Nombre + ' ' + res[index].Apellido +
                                 '   </td>' +
                                 '   <td>' +
-                                        res[index].DNI +
+                                res[index].DNI +
                                 '   </td>' +
                                 '   <td>' +
-                                    res[index].Localidad +
+                                res[index].Localidad +
                                 '   </td>' +
                                 '   <td>' +
                                 '       <button class="btn btn-sm btn-warning editarregistro" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
+                                '       <button class="btn btn-sm btn-danger eliminaregistro" data-filaid="' + res[index].FilaPlanillaID + '">Eliminar</button>' +
                                 '   </td>' +
                                 '</tr>'
 
@@ -335,25 +336,43 @@ function loadPlanillas(userID){
                         $(".card-body")
                             .empty();
 
-                        $("#planillaBody"+idplanilla)
+                        $("#planillaBody" + idplanilla)
                             .append(htmlStringRegistro)
 
-                        $(".nuevoRegistro").click(function(){
+                        $(".nuevoRegistro").click(function () {
 
                             console.log($(this).data())
 
 
-                            fillModal($(this).data().departamentoid,$(this).data().numeroplanilla,$(this).data().id);
+                            fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id);
 
                         });
 
-                        $(".editarregistro").click(function(){
-                           console.log($(this).data())
+                        $(".editarregistro").click(function () {
+                            console.log($(this).data())
 
-                            fillModal($(this).data().departamentoid,$(this).data().numeroplanilla,$(this).data().id);
+                            fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id);
                         });
-                    });
 
+
+                        $(".eliminaregistro").click(function () {
+                            console.dir($(this).data())
+                            var id = $(this).data().filaid;
+                            //fillModal($(this).data().departamentoid,$(this).data().numeroplanilla,$(this).data().id);
+                            if (confirm("Desea eliminar este registro ?")) {
+                                $.ajax({
+                                    url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
+                                    method: "POST",
+                                    dataType: "json",
+
+                                    success: function (res) {
+                                        console.log(res)
+                                        location.reload();
+                                    }
+                                });
+                            }
+                        })
+                    })
 
             });
         });

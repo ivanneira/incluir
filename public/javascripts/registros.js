@@ -745,7 +745,7 @@ function fillDropDown(departamentoID){
         placeholder: 'Elija prestaciones',
         width: '100%',
         language: 'es',
-        //multiple: true,
+        multiple: true,
         dropdownParent: $("#modalACBody"),
 
         ajax: {
