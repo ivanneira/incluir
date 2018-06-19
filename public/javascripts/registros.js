@@ -290,7 +290,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla){
         '       <td>' +
         '           <label for="motivo">Motivo de la pensión (CIE10)</label>' +
         '           <select name="motivo" class="selectCIE10" data-placeholder="Seleccione motivo">' +
-        '<option value="-1">Busque el código CIE10 correspondiente</option>' +
+        '<option value="">Busque el código CIE10 correspondiente</option>' +
         '</select>' +
         '       </td>'+
         '   </tr>'+
