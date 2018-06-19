@@ -166,7 +166,8 @@ function verificarEncabezado(){
         .done(function(res){
 
             if(typeof(res) == "undefined") {
-                alert("Se agrego una nueva planilla");
+                //alert("Se agrego una nueva planilla");
+                swal("Incluir Salud", "Se agrego una nueva planilla!", "success");
                 location.reload();
             }
             else

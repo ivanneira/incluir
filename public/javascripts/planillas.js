@@ -358,19 +358,38 @@ function loadPlanillas(userID){
                         $(".eliminaregistro").click(function () {
                             console.dir($(this).data())
                             var id = $(this).data().filaid;
-                            //fillModal($(this).data().departamentoid,$(this).data().numeroplanilla,$(this).data().id);
-                            if (confirm("Desea eliminar este registro ?")) {
-                                $.ajax({
-                                    url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
-                                    method: "POST",
-                                    dataType: "json",
 
-                                    success: function (res) {
-                                        console.log(res)
-                                        location.reload();
-                                    }
-                                });
-                            }
+                            /**/
+                            swal({
+                                title: "Incluir Salud",
+                                text: "El registro esta a punto de ser eliminado",
+                                icon: "warning",
+                                buttons: true,
+                                dangerMode: true,
+                            })
+                                .then((willDelete) => {
+                                if (willDelete) {
+                                    $.ajax({
+                                        url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
+                                        method: "POST",
+                                        dataType: "json",
+
+                                        success: function (res) {
+                                            console.log(res)
+                                            swal("Registro eliminado!", {
+                                                icon: "success",
+                                            });
+                                            setTimeout(function(){location.reload();},1500)
+
+                                        }
+                                    });
+
+                                } else {
+                                    //swal("Your imaginary file is safe!");
+                                }
+                        });
+                            /**/
+
                         })
                     })
 

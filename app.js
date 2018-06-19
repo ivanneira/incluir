@@ -55,7 +55,7 @@ app.use(express.static(path.join(__dirname, '/node_modules/select2/dist')));
 app.use(express.static(path.join(__dirname, '/node_modules/async/dist')));
 
 //ruta de jAlert
-app.use(express.static(path.join(__dirname, '/node_modules/jAlert/dist')));
+app.use(express.static(path.join(__dirname, '/node_modules/sweetalert/dist')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

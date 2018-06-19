@@ -525,7 +525,8 @@ function verificarCampos(){
         //alert("los datos se guardan");
         armarJSON();
     }else{
-        alert("hay errores")
+        //alert("hay errores")
+        swal("Incluir Salud", "verifique los datos ingresados!", "warning");
     }
 
 }
