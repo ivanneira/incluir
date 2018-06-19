@@ -536,14 +536,21 @@ function agregarEncuesta(){
 
 
         $.ajax({
-            url: "http://192.168.3.105:45455/api/IncluirSalud/GuardarEncuesta",
+            url: server_host+":"+server_port+"/api/IncluirSalud/GuardarEncuesta",
             method: "POST",
             data: encuestaDATA,
             dataType: "json"
         })
             .done(function(res){
 
-                console.log(res);
+                if(typeof (res) == "undefined")
+                {
+                    swal("Incluir Salud", "Se agrego una nueva registro!", "success");
+                    setTimeout(function(){location.reload();},1500)
+                }else{
+                    console.log(res);
+                }
+
             });
 
     }
