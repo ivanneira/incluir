@@ -6,6 +6,7 @@ $(function(){
 
     //forzado a usuario 1
     loadPlanillas(1);
+    loadEncuestas(1);
 
 /*
 
@@ -205,6 +206,63 @@ $(function(){
 
 });
 
+
+function loadEncuestas(userID){
+
+    $.ajax(
+        {
+        url: "http://192.168.3.105:45455/api/IncluirSalud/ObtenerEncuesta?id=" + userID,
+        method: "GET",
+        dataType: "json"
+    })
+        .done(function(res) {
+
+            var htmlStringEncuesta =
+                '<tr>' +
+                '   <th>' +
+                '       Nº de Encuesta' +
+                '   </th>' +
+                '   <th>' +
+                '       Encuestador' +
+                '   </th>' +
+                '   <th>' +
+                '       Departamento' +
+                '   </th>' +
+                '   <th>' +
+                '       Acción' +
+                '   </th>' +
+                '</tr>';
+
+            for (var index in res) {
+
+                htmlStringEncuesta +=
+                    '<tr>' +
+                    '   <td>' +
+                    res[index].NumeroEncuesta +
+                    '   </td>' +
+                    '   <td>' +
+                    res[index].EncuestadorNombre +
+                    '   </td>' +
+                    '   <td>' +
+                    res[index].DepartamentoNombre +
+                    '   </td>' +
+                    '   <td>' +
+                    '       <button class="btn btn-sm btn-success editarPlanilla" data-id="' + res[index].PlanillaID + '">Editar</button>' +
+                    //'       <button id="agregarRegistro" class="btn btn-sm btn-success" data-id="' + res[index].PlanillaID + '">+Agregar Registro</button>' +
+                    //'       <button class="btn btn-danger borrarPlanilla" data-id="' + res[index].PlanillaID + '">Borrar</button>' +
+                    '   </td>' +
+                    '</tr>';
+
+
+                //console.log(res[index]);
+            }
+
+            $("#encuestasBody")
+                .append(htmlStringEncuesta)
+        });
+
+}
+
 function loadPlanillas(userID){
 
     $.ajax({
@@ -293,7 +351,7 @@ function loadPlanillas(userID){
                     .html("<p>Espere mientras se cargan los datos.</p>");
 
                 $.ajax({
-                    url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
+                    url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerºFilasPlanilla?id=" + idplanilla,
                     method: "GET",
                     dataType: "json"
                 })
@@ -353,7 +411,7 @@ function loadPlanillas(userID){
                         $(".editarregistro").click(function () {
                             console.log($(this).data())
 
-                            fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id);
+                            fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id, $(this).data().filaid);
                         });
 
 

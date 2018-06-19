@@ -520,11 +520,16 @@ function agregarEncuesta(){
 
         encuestaDATA.tipoSexoID = $("#sexoEncuesta").val();
 
-        encuestaDATA.fechaEncuesta = $("#fechaEncuesta").val();
+        var fe = $("#fechaEncuesta").val().split('/');
+
+        encuestaDATA.fechaEncuesta = fe[2]+'-'+fe[1]+'-'+fe[0];
+
+        var fn = $("#fechaNacimientoEncuesta").val().split('/');
+
+        encuestaDATA.fechaNacimiento =  fn[2]+'-'+fn[1]+'-'+fn[0];
 
         encuestaDATA.encuestadorID = $(".selectEncuestadorEncuesta").val();
 
-        encuestaDATA.fechaNacimiento = $("#fechaNacimientoEncuesta").val();
 
         encuestaDATA.departamentoID = $(".selectDepartamentoEncuesta").val();
 

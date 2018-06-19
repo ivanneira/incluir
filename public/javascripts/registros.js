@@ -125,7 +125,7 @@ function ERROR(){
     alert("Hubo un error, por favor regargue la página");
 }
 
-function fillModal(departamentoID,NumeroPlanilla,idplanilla){
+function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
 
     //console.log(departamentoID)
 
@@ -382,6 +382,8 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla){
         .data('idplanilla',idplanilla)
         .text('Nuevo registro, planilla nº: ' + NumeroPlanilla);
 
+    if(filaid) completarDatos(filaid);
+
     $("#modalAC")
         .modal('show')
         .modal('handleUpdate');
@@ -396,6 +398,12 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla){
 
     fillDropDown(departamentoID);
 
+}
+
+function completarDatos(filaid){
+
+
+    console.log('vale por un editar')
 }
 
 //verificación
