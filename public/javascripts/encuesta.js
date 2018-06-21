@@ -541,7 +541,7 @@ function agregarEncuesta(){
 
 
         $.ajax({
-            url: server_host+":"+server_port+"/api/IncluirSalud/GuardarEncuesta",
+            url: server_host+":"+server_port+server_url+"/api/IncluirSalud/GuardarEncuesta",
             method: "POST",
             data: encuestaDATA,
             dataType: "json"

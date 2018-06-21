@@ -620,7 +620,7 @@ function enviarDatos(jsonDATA){
 
     $.ajax({
         //id de usuario forzado a 1
-        url: server_host+":"+server_port+"/api/IncluirSalud/GuardarFilaPlanilla",
+        url: server_host+":"+server_port+server_url+"/api/IncluirSalud/GuardarFilaPlanilla",
         method: "POST",
         dataType: "json",
         data: jsonDATA

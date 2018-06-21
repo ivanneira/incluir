@@ -211,13 +211,13 @@ function loadEncuestas(userID){
 
     $.ajax(
         {
-        url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerEncuesta?id=" + userID,
+        url: server_host+":"+server_port+server_url+"/api/IncluirSalud/ObtenerEncuesta?id=" + userID,
         method: "GET",
         dataType: "json"
     })
         .done(function(res) {
 
-            console.dir(res)
+            //console.dir(res)
 
             var htmlStringEncuesta =
                 '<tr>' +
@@ -308,13 +308,13 @@ function loadEncuestas(userID){
 function loadPlanillas(userID){
 
     $.ajax({
-        url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerPlanillas?id="+ userID,
+        url: server_host+":"+server_port+server_url+"/api/IncluirSalud/ObtenerPlanillas?id="+ userID,
         method: "GET",
         dataType: "json"
     })
         .done(function(res){
 
-            console.log(res)
+            //console.log(res)
 
             var htmlStringPlanillas =
                 '<div id="accordion">';
@@ -322,6 +322,7 @@ function loadPlanillas(userID){
 
 
             for(var index in res){
+
 
 
                 // Split timestamp into [ Y, M, D, h, m, s ]
@@ -341,25 +342,31 @@ function loadPlanillas(userID){
                     '       <h5 class="mb-0">' +
                     '           <button class="btn btn-block btnPlanilla" data-toggle="collapse" data-departamentoid="' +res[index].DepartamentoID + '" data-numeroplanilla="' +res[index].NumeroPlanilla + '" data-id="' +res[index].PlanillaID + '" data-target="#collapse'+ res[index].PlanillaID +'" aria-expanded="true" aria-controls="collapse'+ res[index].PlanillaID +'">' +
                     '               <div class="row font-weight-bold">' +
-                    '                   <div class="col-4">' +
+                    '                   <div class="col-3">' +
                     '                            Nº Planilla' +
                     '                   </div>' +
-                    '                   <div class="col-4">' +
+                    '                   <div class="col-3">' +
                     '                            Fecha' +
                     '                   </div>' +
-                    '                   <div class="col-4">' +
+                    '                   <div class="col-3">' +
                     '                            Encuestador' +
+                    '                   </div>' +
+                    '                   <div class="col-3">' +
+                    '                            Acciones' +
                     '                   </div>' +
                     '               </div>' +
                     '               <div class="row">' +
-                    '                   <div class="col-4">' +
+                    '                   <div class="col-3">' +
                                             res[index].NumeroPlanilla +
                     '                   </div>' +
-                    '                   <div class="col-4">' +
+                    '                   <div class="col-3">' +
                                              d +
                     '                   </div>' +
-                    '                   <div class="col-4">' +
+                    '                   <div class="col-3">' +
                                             res[index].EncuestadorNombre +
+                    '                   </div>' +
+                    '                   <div class="col-3">' +
+                    '                       <label class="btn btn-sm btn-danger eliminaPlanilla " data-filaid="' + res[index].PlanillaID + '">Eliminar</label>' +
                     '                   </div>' +
                     '               </div>' +
                     '           </button>' +
@@ -381,6 +388,158 @@ function loadPlanillas(userID){
             $("#planillasBody")
                 .append(htmlStringPlanillas);
 
+
+            $(".eliminaPlanilla").click(function () {
+                //console.dir($(this).data())
+                var id = $(this).data().filaid;
+
+                /**/
+                swal({
+                    title: "Incluir Salud",
+                    text: "El registro esta a punto de ser eliminado",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
+                    .then((willDelete) => {
+                    if (willDelete) {
+                        $.ajax({
+                            url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarPlanilla?id=" + id,
+                            method: "POST",
+                            dataType: "json",
+
+                            success: function (res) {
+                                console.log(res)
+                                swal("Registro eliminado!", {
+                                    icon: "success",
+                                });
+                                setTimeout(function(){location.reload();},1500)
+
+                            }
+                        });
+
+                    } else {
+                        //swal("Your imaginary file is safe!");
+                    }
+                });
+
+                $(".btnPlanilla").click(function(){
+
+                    var idplanilla = $(this).data().id;
+                    var iddepartamento = $(this).data().departamentoid;
+                    var numeroplanilla = $(this).data().numeroplanilla;
+
+                    console.dir($(this).data())
+
+                    $(".card-body")
+                        .html("<p>Espere mientras se cargan los datos.</p>");
+
+                    $.ajax({
+                        url: server_host+":"+server_port+server_url+"/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
+                        method: "GET",
+                        dataType: "json"
+                    })
+                        .done(function(res) {
+
+                            console.log(res)
+
+                            var htmlStringRegistro =
+                                '<table class="table table-striped">' +
+                                '<tr>' +
+                                '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '">+Agregar nuevo registro</button>' +
+                                '</tr>';
+
+                            if (res.length === 0) {
+                                htmlStringRegistro += '<p>No se encontraron registros.</p>';
+                            }
+
+
+                            for (var index in res) {
+
+                                htmlStringRegistro +=
+                                    '<tr>' +
+                                    '   <td>' +
+                                    res[index].Nombre + ' ' + res[index].Apellido +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    res[index].DNI +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    res[index].Localidad +
+                                    '   </td>' +
+                                    '   <td>' +
+                                    '       <button class="btn btn-sm btn-warning editarregistro" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
+                                    '       <button class="btn btn-sm btn-danger eliminaregistro" data-filaid="' + res[index].FilaPlanillaID + '">Eliminar</button>' +
+                                    '   </td>' +
+                                    '</tr>'
+
+                            }
+
+                            htmlStringRegistro += '</div>';
+
+                            $(".card-body")
+                                .empty();
+
+                            $("#planillaBody" + idplanilla)
+                                .append(htmlStringRegistro)
+
+                            $(".nuevoRegistro").click(function () {
+
+                                console.log($(this).data())
+
+
+                                fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id);
+
+                            });
+
+                            $(".editarregistro").click(function () {
+                                console.log($(this).data())
+
+                                fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id, $(this).data().filaid);
+                            });
+
+
+                            $(".eliminaregistro").click(function () {
+                                console.dir($(this).data())
+                                var id = $(this).data().filaid;
+
+                                /**/
+                                swal({
+                                    title: "Incluir Salud",
+                                    text: "El registro esta a punto de ser eliminado",
+                                    icon: "warning",
+                                    buttons: true,
+                                    dangerMode: true,
+                                })
+                                    .then((willDelete) => {
+                                    if (willDelete) {
+                                        $.ajax({
+                                            url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
+                                            method: "POST",
+                                            dataType: "json",
+
+                                            success: function (res) {
+                                                console.log(res)
+                                                swal("Registro eliminado!", {
+                                                    icon: "success",
+                                                });
+                                                setTimeout(function(){location.reload();},1500)
+
+                                            }
+                                        });
+
+                                    } else {
+                                        //swal("Your imaginary file is safe!");
+                                    }
+                                });
+                                /**/
+
+                            })
+                        })
+
+                });
+            });
+
             $(".btnPlanilla").click(function(){
 
                 var idplanilla = $(this).data().id;
@@ -393,7 +552,7 @@ function loadPlanillas(userID){
                     .html("<p>Espere mientras se cargan los datos.</p>");
 
                 $.ajax({
-                    url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
+                    url: server_host+":"+server_port+server_url+"/api/IncluirSalud/ObtenerFilasPlanilla?id=" + idplanilla,
                     method: "GET",
                     dataType: "json"
                 })
