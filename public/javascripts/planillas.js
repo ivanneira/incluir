@@ -585,7 +585,7 @@ function loadPlanillas(userID){
                                 res[index].Localidad +
                                 '   </td>' +
                                 '   <td>' +
-                                '       <button class="btn btn-sm btn-warning editarregistro" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
+                                '       <button class="btn btn-sm btn-warning editarregistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
                                 '       <button class="btn btn-sm btn-danger eliminaregistro" data-filaid="' + res[index].FilaPlanillaID + '">Eliminar</button>' +
                                 '   </td>' +
                                 '</tr>'
@@ -602,7 +602,8 @@ function loadPlanillas(userID){
 
                         $(".nuevoRegistro").click(function () {
 
-                            console.log($(this).data())
+
+                            //console.log($(this).data())
 
 
                             fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id);

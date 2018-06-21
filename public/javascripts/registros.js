@@ -403,7 +403,51 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
 function completarDatos(filaid){
 
 
-    console.log('vale por un editar')
+    $.ajax({
+        url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerFilaPlanilla?id=" + filaid,
+        method: "GET",
+        dataType: "json"
+    }).done(function(res){
+
+
+        var data = res[0];
+
+        console.dir(data)
+
+        $("#dni").val(data.DNI);
+
+         var conversorDeSexo = data.Sexo === 'Masculino' ? 1 : 2;
+         $("#sexo").val(conversorDeSexo);
+
+         $("#tel").val(data.Telefono);
+
+         //localizacion
+        $('.selectLocalidad')
+            .empty()
+            .append('<option selected value="'+ res.LocalidadID +'">'+ res.Localidad +'</option>');
+        $('.selectLocalidad').trigger('change');
+
+
+         /*
+         $(".selectLocalidad").val();
+         $("#domicilio").val();
+         $("#barrio").val();
+         $("#lat").val();
+         $("#lon").val();
+         //prestación
+         $("#btnTitular").prop('checked') ? 1 : 2;
+         $(".selectTipoPension ").val();
+         $(".selectCIE10").val();
+         $(".selectPrestaciones").val();
+         //vivienda
+         $("#conviven").val();
+         $("#grupo").val();
+         $(".selectTipoVivienda").val();
+         $("#comentarioTipoVivienda").val();
+         $(".selectTipoServicios").val();
+         $("#comentario").val();
+         */
+    });
 }
 
 //verificación
