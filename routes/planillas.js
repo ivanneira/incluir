@@ -164,7 +164,7 @@ router.get('/encuestadores', function(req, res, next) {
     var q = req.query.q;
 
     knex
-        .raw("select e.apellido + ', ' + e.nombre as text, e.id from encuestadores e where e.nombre  like '%"+ q +"%'")
+        .raw("select e.apellido + ', ' + e.nombre as text, e.id from personas e where e.nombre  like '%"+ q +"%' and tipoFuncionID=3")
         //.column('id', 'apellido', 'nombre')
         //.select()
         //.from('personas')
@@ -278,7 +278,7 @@ router.get('/supervisores', function(req, res, next) {
     var q = req.query.q;
 
     knex
-        .raw("select p.apellido + ', ' + p.nombre as text, p.id from personas  p left join tipofuncion tf on p.tipoFuncionID = tf.ID where tf.nombre like '%"+ q +"%'")
+        .raw("select p.apellido + ', ' + p.nombre as text, p.id from personas  p  where p.nombre like '%"+ q +"%' and tipoFuncionID = 1")
         .then(function (rows) {
             if (rows.length > 0) {
                 res.setHeader('Content-Type', 'application/json');
