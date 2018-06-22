@@ -249,8 +249,9 @@ function loadEncuestas(userID){
                     res[index].DepartamentoNombre +
                     '   </td>' +
                     '   <td>' +
-                    '       <button class="btn btn-sm btn-success editarPlanilla" data-id="' + res[index].EncuestaID + '">Editar</button>' +
-                    '       <button class="btn btn-sm btn-danger eliminarEncuesta" data-id="' + res[index].EncuestaID + '">Eliminar</button>' +
+                    '       <label class="btn btn-sm btn-primary infoEncuesta" data-id="' + res[index].EncuestaID + '"><i class="fa fa-info"></i> Detalle</label>' +
+                    '       <label class="btn btn-sm btn-success editarEncuesta" data-id="' + res[index].EncuestaID + '"><i class="fa fa-pencil"></i> Editar</label>' +
+                    '       <label class="btn btn-sm btn-danger eliminarEncuesta" data-id="' + res[index].EncuestaID + '"><i class="fa fa-trash"></i> Eliminar</label>' +
                     //'       <button id="agregarRegistro" class="btn btn-sm btn-success" data-id="' + res[index].PlanillaID + '">+Agregar Registro</button>' +
                     //'       <button class="btn btn-danger borrarPlanilla" data-id="' + res[index].PlanillaID + '">Borrar</button>' +
                     '   </td>' +
@@ -366,7 +367,9 @@ function loadPlanillas(userID){
                                             res[index].EncuestadorNombre +
                     '                   </div>' +
                     '                   <div class="col-3">' +
-                    '                       <label class="btn btn-sm btn-danger eliminaPlanilla " data-filaid="' + res[index].PlanillaID + '">Eliminar</label>' +
+                    '                       <label class="btn btn-sm btn-primary detallePlanilla " data-filaid="' + res[index].PlanillaID + '"><i class="fa fa-info"></i> Detalle</label>' +
+                    '                       <label class="btn btn-sm btn-warning editarPlanilla " data-filaid="' + res[index].PlanillaID + '"><i class="fa fa-pencil"></i> Editar</label>' +
+                    '                       <label class="btn btn-sm btn-danger eliminaPlanilla " data-filaid="' + res[index].PlanillaID + '"><i class="fa fa-trash"></i> Eliminar</label>' +
                     '                   </div>' +
                     '               </div>' +
                     '           </button>' +
@@ -446,7 +449,7 @@ function loadPlanillas(userID){
                             var htmlStringRegistro =
                                 '<table class="table table-striped">' +
                                 '<tr>' +
-                                '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '">+Agregar nuevo registro</button>' +
+                                '<label class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '"><i class="fa fa-plus"></i> Agregar nuevo registro</label>' +
                                 '</tr>';
 
                             if (res.length === 0) {
@@ -468,8 +471,9 @@ function loadPlanillas(userID){
                                     res[index].Localidad +
                                     '   </td>' +
                                     '   <td>' +
-                                    '       <button class="btn btn-sm btn-warning editarregistro" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
-                                    '       <button class="btn btn-sm btn-danger eliminaregistro" data-filaid="' + res[index].FilaPlanillaID + '">Eliminar</button>' +
+                                    '       <label class="btn btn-sm btn-primary detalleregistro" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-info"></i> Detalle</label>' +
+                                    '       <label class="btn btn-sm btn-warning editarregistro" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-pencil"></i> Editar</label>' +
+                                    '       <label class="btn btn-sm btn-danger eliminaregistro" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-trash"></i> Eliminar</label>' +
                                     '   </td>' +
                                     '</tr>'
 
@@ -563,7 +567,7 @@ function loadPlanillas(userID){
                         var htmlStringRegistro =
                             '<table class="table table-success bg-white">' +
                             '<tr>' +
-                            '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '">+Agregar nuevo registro</button>' +
+                            '<label class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '"><i class="fa fa-plus"></i> Agregar nuevo registro</label>' +
                             '</tr>';
 
                         if (res.length === 0) {
@@ -585,8 +589,9 @@ function loadPlanillas(userID){
                                 res[index].Localidad +
                                 '   </td>' +
                                 '   <td>' +
-                                '       <button class="btn btn-sm btn-warning editarregistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '" data-filaid="' + res[index].FilaPlanillaID + '">Editar</button>' +
-                                '       <button class="btn btn-sm btn-danger eliminaregistro" data-filaid="' + res[index].FilaPlanillaID + '">Eliminar</button>' +
+                                '       <label class="btn btn-sm btn-primary detalleregistro" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-info"></i> Detalle</label>' +
+                                '       <label class="btn btn-sm btn-warning editarregistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-pencil"></i> Editar</label>' +
+                                '       <label class="btn btn-sm btn-danger eliminaregistro" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-trash"></i> Eliminar</label>' +
                                 '   </td>' +
                                 '</tr>'
 

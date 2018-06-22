@@ -278,7 +278,7 @@ router.get('/supervisores', function(req, res, next) {
     var q = req.query.q;
 
     knex
-        .raw("select p.apellido + ', ' + p.nombre as text, p.id from personas  p  where p.nombre like '%"+ q +"%' and tipoFuncionID = 1")
+        .raw("select p.apellido + ', ' + p.nombre as text, p.id from personas  p  where p.nombre like '%"+ q +"%' and tipoFuncionID=1")
         .then(function (rows) {
             if (rows.length > 0) {
                 res.setHeader('Content-Type', 'application/json');
@@ -346,15 +346,6 @@ router.get('/supervisores', function(req, res, next) {
 */
 });
 
-
-/*Trae Todas las Provincias de Argentina Solamente*/
-/*Mas un valor cuyo PaisID = 1 que equivale al Valor [Sin Dato]*/
-
-
-
-/*Trae Todas las Provincias de Argentina Solamente*/
-/*Mas un valor cuyo PaisID = 1 que equivale al Valor [Sin Dato]*/
-
 router.get('/getDepartamentos', function(req, res, next) {
 
     //var q = req.query.q;
@@ -383,10 +374,6 @@ router.get('/getDepartamentos', function(req, res, next) {
         });
 
 });
-
-
-/*Trae Todas las Localidades de San Juan Solamente*/
-/*Hay que pasarle el DepartamentoID*/
 
 router.get('/getLocalidades', function(req, res, next) {
 
