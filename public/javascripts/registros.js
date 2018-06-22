@@ -50,61 +50,6 @@ $(function(){
     });
 
 
-/*
-    function processPrestaciones(data){
-
-        var padres = [];
-
-        for(var index in data){
-
-            if(data[index].PRESTACIONID == null){
-                padres.push({
-                    text: data[index].NOMBRE,
-                    id: data[index].ID,
-                    children: []
-                });
-            }
-        }
-
-        for(var index in padres){
-
-            for(var index2 in data){
-
-                if(data[index2].PRESTACIONID == padres[index].id){
-                    padres[index].children.push(
-                        {
-                            text: data[index2].NOMBRE,
-                            id: data[index2].ID
-                        }
-                    );
-                }
-            }
-        }
-
-        prestaciones = padres;
-
-    }
-*/
-/*
-    $("#agregarRegistro").click(function(){
-
-         if(
-         $("#numeroPlanilla").val() != "" &&
-         $(".selectSupervisor").val() != null &&
-         $(".selectEncuestador").val() != null &&
-         $(".selectDepartamento").val() != null
-         ){
-         fillModal();
-
-         }else{
-
-         alert("Complete los datos del encabezado primero")
-         }
-         fillModal();
-
-    });
-*/
-
     $("#agregarPlanilla").click(function(){
 
         agregarEncabezado();
@@ -133,19 +78,19 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
     var htmlString =
         '<ul class="nav nav-tabs nav-fill" role="tablist" id="formTabs">'+
         '   <li class="nav-item">' +
-        '       <a id="personales-tab" data-toggle="tab" class="nav-link active bg-dark text-light" href="#personales">Datos personales</a>' +
+        '       <a id="personales-tab" data-toggle="tab" class="nav-link active " href="#personales">Datos personales</a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="localizacion-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#localizacion">Datos de localización</a>' +
+        '       <a id="localizacion-tab" data-toggle="tab" class="nav-link " href="#localizacion">Datos de localización</a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="prestaciones-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#prestaciones">Datos de la prestación</a>' +
+        '       <a id="prestaciones-tab" data-toggle="tab" class="nav-link " href="#prestaciones">Datos de la prestación</a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="vivienda-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#vivienda">Datos de vivienda</a>' +
+        '       <a id="vivienda-tab" data-toggle="tab" class="nav-link " href="#vivienda">Datos de vivienda</a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="comentarios-tab" data-toggle="tab" class="nav-link bg-dark text-light" href="#comentarios">Comentarios</a>' +
+        '       <a id="comentarios-tab" data-toggle="tab" class="nav-link " href="#comentarios">Comentarios</a>' +
         '   </li>'+
         '</ul>';
 
@@ -167,7 +112,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
 
     //pestaña de datos personales
     var htmlPersonales =
-        '<table class="table table-dark table-striped table-hover">'+
+        '<table class="table table-striped">'+
         '  <tr>'+
         '      <td>' +
         '           <label for="nombre">Nombre</label>' +
@@ -218,7 +163,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
 
     //pestaña de datos de localización
     var htmlLocalizacion =
-        '<table class="table table-dark table-striped table-hover">'+
+        '<table class="table table-striped">'+
         '   <tr>'+
         '       <td>' +
         '           <label for="localidad">Localidad</label>' +
@@ -268,7 +213,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
 
     //pestaña de datos de la prestación
     var htmlPrestaciones =
-        '<table class="table table-dark table-striped table-hover">'+
+        '<table class="table table-striped">'+
         '   <tr>'+
         '       <td colspan="2">' +
         '           <label for="titular">Titularidad</label>' +
@@ -308,7 +253,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
 
     //pestaña de vivienda
     var htmlVivienda =
-        '<table class="table table-dark table-striped table-hover">'+
+        '<table class="table table-striped">'+
         '   <tr>'+
         '       <td>' +
         '           <label for="conviven">Nº de personas que conviven</label>' +
@@ -366,7 +311,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
 
     //pestaña de comentarios
     var htmlComentarios =
-        '<table class="table table-dark table-striped table-hover">'+
+        '<table class="table table-striped">'+
         '   </tr>'+
         '       <td>' +
         '           <label for="comentario">Comentarios</label>' +
