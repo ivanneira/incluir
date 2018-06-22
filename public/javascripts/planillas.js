@@ -561,7 +561,7 @@ function loadPlanillas(userID){
                         console.log(res)
 
                         var htmlStringRegistro =
-                            '<table class="table table-striped">' +
+                            '<table class="table table-success bg-white">' +
                             '<tr>' +
                             '<button class="btn btn-sm btn-success nuevoRegistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '">+Agregar nuevo registro</button>' +
                             '</tr>';

@@ -50,7 +50,7 @@ $(function(){
     });
 
 
-
+/*
     function processPrestaciones(data){
 
         var padres = [];
@@ -84,7 +84,7 @@ $(function(){
         prestaciones = padres;
 
     }
-
+*/
 /*
     $("#agregarRegistro").click(function(){
 
@@ -404,40 +404,80 @@ function completarDatos(filaid){
 
 
     $.ajax({
-        url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerFilaPlanilla?id=" + filaid,
+        url: server_host+":"+server_port+ server_url +"/api/IncluirSalud/ObtenerFilaPlanilla?id=" + filaid,
         method: "GET",
         dataType: "json"
     }).done(function(res){
 
 
+        //datos para completar
         var data = res[0];
 
-        console.dir(data)
+        console.dir(data);
+
+        //datos personales
+
+        $("#nombre").val(data.Nombre);
+
+        $("#apellido").val(data.Apellido);
 
         $("#dni").val(data.DNI);
 
-         var conversorDeSexo = data.Sexo === 'Masculino' ? 1 : 2;
-         $("#sexo").val(conversorDeSexo);
+        //el json trae un error de ortografía
 
-         $("#tel").val(data.Telefono);
+        $("#fechaNacimiento").datepicker("update", new Date(data.FechaNacimento));
+
+        var conversorDeSexo = data.Sexo === 'Masculino' ? 1 : 2;
+
+        $("#sexo").val(conversorDeSexo);
+
+        $("#tel").val(data.Telefono);
+
+
 
          //localizacion
         $('.selectLocalidad')
             .empty()
-            .append('<option selected value="'+ res.LocalidadID +'">'+ res.Localidad +'</option>');
-        $('.selectLocalidad').trigger('change');
+            .append('<option selected value="' + data.LocalidadID + '">'+ data.Localidad +'</option>')
+            .trigger('change');
 
+        $("#domicilio").val(data.Domicilio);
+
+        $("#barrio").val(data.Barrio);
+
+        $("#lat").val(data.Latitud);
+        $("#lon").val(data.Longitud);
+
+        $("#lat").trigger('change');
+
+
+        //Prestaciones
+        $(tipoPension).each(function(i,v){
+
+
+            if(v.text == data.TipoPension){
+
+                $(".selectTipoPension")
+                    .val(v.id)
+                    .trigger('change');
+            }
+        });
+
+        $('.selectCIE10')
+            .empty()
+            .append('<option selected value="' + data.Pension_cie10_id10 + '">'+ data.Pension_cie10_id10 + ' - ' + data.Pension_cie10_dec10 +'</option>')
+            .trigger('change');
+
+        //Vivienda
+        $("#conviven").val(data.NroIntegrantesConviven);
+        $("#grupo").val(data.NroPersonasConviven);
+
+        //$(".selectTipoVivienda").val();
+        $("#comentario").val(data.Comentario);
 
          /*
-         $(".selectLocalidad").val();
-         $("#domicilio").val();
-         $("#barrio").val();
-         $("#lat").val();
-         $("#lon").val();
          //prestación
          $("#btnTitular").prop('checked') ? 1 : 2;
-         $(".selectTipoPension ").val();
-         $(".selectCIE10").val();
          $(".selectPrestaciones").val();
          //vivienda
          $("#conviven").val();
@@ -597,7 +637,11 @@ function mostrarError(condition,selector){
 
 function armarJSON(){
 
-    var data = {};
+    var data = {
+        enlace_tipoPension: [],
+        enlace_prestaciones: [],
+        enlace_serviciosBasicos: []
+    };
 
     //en caso de que el encuestado esté fallecido
     if(!$('#fallecido').prop('checked')){
@@ -641,15 +685,43 @@ function armarJSON(){
         data.longitud = $("#lon").val();
         //prestación
         data.tipoBeneficiarioID = $("#btnTitular").prop('checked') ? 1 : 2;
-        data.tipoPensionID = $(".selectTipoPension ").val();
+
+        data.enlace_tipoPension = [
+            {
+                filaPlanillaID: data.planillaID,
+                tipoPensionID: $(".selectTipoPension ").val()
+            }
+        ];
         data.diagnosticoID = $(".selectCIE10").val();
-        data.prestacionID = $(".selectPrestaciones").val();
+        //data.enlace_prestaciones = $(".selectPrestaciones").val();
+
+        var prestaciones = $(".selectPrestaciones").val();
+
+        for(var index in prestaciones){
+
+            data.enlace_prestaciones.push({
+                prestacionID: prestaciones[index],
+                filaPlanillaID: data.planillaID
+            });
+        }
+
         //vivienda
         data.nroPersonasConviven = $("#conviven").val();
         data.nroIntegrantesBeneficiario = $("#grupo").val();
         data.tipoViviendaID = $(".selectTipoVivienda").val();
         data.tipoViviendaDetalle = $("#comentarioTipoVivienda").val();
-        data.serviciosBasicosID = $(".selectTipoServicios").val();
+        //data.enlace_serviciosBasicos = $(".selectTipoServicios").val();
+
+        var serviciosBasicos = $(".selectTipoServicios").val();
+
+        for(var index in serviciosBasicos){
+
+            data.enlace_serviciosBasicos.push({
+                serviciosBasicosID: serviciosBasicos[index],
+                filaPlanillaID: data.planillaID
+            });
+        }
+
         data.comentario = $("#comentario").val();
 
         enviarDatos(data);

@@ -1,9 +1,9 @@
-<nav class="navbar navbar-light bg-light">
+<nav class="navbar bg-light">
     <a class="navbar-brand" href="#">
         <img class="card-2 rounded" src="images/incluir_logo.jpg" width="50" height="50" alt="">
 
     </a>
-    <h3 class="text-light">Incluir Salud</h3>
+    <h3 class="text-dark ">Incluir Salud</h3>
     <button id="logout" class="btn btn-warning"><i class="fa fa-power-off"></i> Usuario: {{user}}</button>
 </nav>
 
@@ -13,18 +13,18 @@
 
     <ul class="nav nav-tabs nav-fill" role="tablist" id="formTabs">
        <li class="nav-item"> 
-               <a id="planillas-tab" data-toggle="tab" class="nav-link bg-secondary text-light active" href="#planillas">Planillas</a>
+               <a id="planillas-tab" data-toggle="tab" class="nav-link  active  bg-light border border-bottom-0 border-secondary" href="#planillas">Planillas</a>
 
            </li>
        <li class="nav-item vivo"> 
-               <a id="encuestas-tab" data-toggle="tab" class="nav-link bg-secondary text-light" href="#encuestas">Encuestas</a>
+               <a id="encuestas-tab" data-toggle="tab" class="nav-link  bg-light border border-bottom-0 border-secondary" href="#encuestas">Encuestas</a>
            </li>
     </ul>
 
-    <div class="tab-content" id="tabContent">
+    <div class="tab-content bg-light" id="tabContent">
        <div class="tab-pane fade show active" id="planillas" role="tabpanel" aria-labelledby="planillas-tab">
            <button id="agregarPlanilla" class="btn btn-sm btn-success">+Agregar nueva planilla</button>
-           <table class="card-1 table table-primary table-striped table-hover">
+           <table class="table table-primary table-striped">
                <tbody id="planillasBody">
 
                </tbody>
@@ -32,7 +32,7 @@
        </div>
        <div class="tab-pane fade" id="encuestas" role="tabpanel" aria-labelledby="encuestas-tab">
            <button id="agregarEncuesta" class="btn btn-sm btn-success">+Agregar Encuesta</button>
-           <table class="card-1 table table-primary table-striped table-hover">
+           <table class="table table-striped">
                <tbody id="encuestasBody">
 
                </tbody>
@@ -40,7 +40,11 @@
        </div>
     </div>
 
-
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
 
 </div>

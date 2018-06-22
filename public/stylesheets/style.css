@@ -27,9 +27,7 @@ body {
   width: 100%;
 }
 
-.navbar {
-  background-color: #212529 !important;
-}
+
 
 .select2-selection--multiple {
   overflow: hidden;
@@ -158,8 +156,12 @@ ul.select2-selection__rendered {
 
 .tab-content {
 
-  border: 1px solid white;
+  border-top: none;
+  border-bottom: 1px solid grey !important;
+  border-left: 1px solid grey !important;
+  border-right: 1px solid grey !important;
 }
+
 
 .select2-selection__choice{
 
@@ -184,4 +186,9 @@ input[type=radio], input[type=checkbox] {
   word-wrap: break-word !important;
   text-overflow: inherit !important;
   white-space: normal !important;
+}
+
+
+.btnPlanilla {
+  background-color: #b8daff;
 }
