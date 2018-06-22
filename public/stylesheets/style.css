@@ -198,3 +198,7 @@ input[type=radio], input[type=checkbox] {
   display : grid !important;
 
 }
+
+.margen20px{
+margin-left: 22px !important;
+}
