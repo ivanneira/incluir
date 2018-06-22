@@ -145,7 +145,7 @@ function loadPlanillas(userID){
                     '           <button class="btn btn-block btnPlanilla" data-toggle="collapse" data-departamentoid="' +res[index].DepartamentoID + '" data-numeroplanilla="' +res[index].NumeroPlanilla + '" data-id="' +res[index].PlanillaID + '" data-target="#collapse'+ res[index].PlanillaID +'" aria-expanded="true" aria-controls="collapse'+ res[index].PlanillaID +'">' +
                     '               <div class="row font-weight-bold">' +
                     '                   <div class="col-3">' +
-                    '                            Nº Planilla' +
+                    '                            Nº Planilla  ' +
                     '                   </div>' +
                     '                   <div class="col-3">' +
                     '                            Fecha' +
@@ -159,7 +159,7 @@ function loadPlanillas(userID){
                     '               </div>' +
                     '               <div class="row">' +
                     '                   <div class="col-3">' +
-                                            res[index].NumeroPlanilla +
+                                            res[index].NumeroPlanilla + '<p><span class="badge badge-dark">Registros cargados: '+res[index].CantidadDeRegistros+'</p></span>'+
                     '                   </div>' +
                     '                   <div class="col-3">' +
                                              d +
