@@ -192,3 +192,9 @@ input[type=radio], input[type=checkbox] {
 .btnPlanilla {
   background-color: #b8daff;
 }
+
+
+.botonesList{
+  display : grid !important;
+
+}

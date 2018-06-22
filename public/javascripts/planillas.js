@@ -366,7 +366,7 @@ function loadPlanillas(userID){
                     '                   <div class="col-3">' +
                                             res[index].EncuestadorNombre +
                     '                   </div>' +
-                    '                   <div class="col-3">' +
+                    '                   <div class="col-3 botonesList">' +
                     '                       <label class="btn btn-sm btn-success detallePlanilla " data-filaid="' + res[index].PlanillaID + '"><i class="fa fa-info"></i> Detalle</label>' +
                     '                       <label class="btn btn-sm btn-warning editarPlanilla " data-filaid="' + res[index].PlanillaID + '"><i class="fa fa-pencil"></i> Editar</label>' +
                     '                       <label class="btn btn-sm btn-danger eliminaPlanilla " data-filaid="' + res[index].PlanillaID + '"><i class="fa fa-trash"></i> Eliminar</label>' +
