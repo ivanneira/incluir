@@ -226,8 +226,7 @@ margin-left: 22px !important;
 }
 
 a.bg-light:hover{
-  background: #fff !important;
-  border: 1px solid #00C851 !important;
+  background: #ebebeb !important;
 }
 
 .nav-link.active,.nav-link.show:hover {

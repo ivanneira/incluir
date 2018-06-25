@@ -17,6 +17,8 @@ var index = require('./routes/index');
 var dashboard = require('./routes/dashboard');
 var planillas = require('./routes/planillas');
 
+var registro = require('./routes/registro');
+
 
 var trylogin = require('./routes/trylogin');
 
@@ -72,6 +74,8 @@ app.use('/', index);
 //app.use('/users', users);
 app.use('/dashboard', dashboard);
 app.use('/planillas', planillas);
+
+app.use('/registro', registro);
 
 app.use('/trylogin', trylogin);
 app.use('/logout', logout);

@@ -159,7 +159,7 @@ function loadPlanillas(userID){
                     '               </div>' +
                     '               <div class="row">' +
                     '                   <div class="col-3">' +
-                                            res[index].NumeroPlanilla + '<p><span class="badge badge-dark">Registros cargados: '+res[index].CantidadDeRegistros+'</p></span>'+
+                                            res[index].NumeroPlanilla + '<p><span class="badge badge-dark">'+res[index].CantidadDeRegistros+' registros</p></span>'+
                     '                   </div>' +
                     '                   <div class="col-3">' +
                                              d +
