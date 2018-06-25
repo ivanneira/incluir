@@ -1,6 +1,8 @@
 var planillasDATA = [];
 var registrosDATA = [];
 var encuestasDATA = [];
+var editar = 0;
+var PlanillaID="";
 
 $(function(){
 
@@ -289,7 +291,7 @@ function loadPlanillas(userID){
                                 .append(htmlStringRegistro)
 
                             $(".nuevoRegistro").click(function () {
-
+                                editar = 0;
                                 console.log($(this).data())
 
 
@@ -299,7 +301,7 @@ function loadPlanillas(userID){
 
                             $(".editarregistro").click(function () {
                                 console.log($(this).data())
-
+                                editar=1;
                                 fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id, $(this).data().filaid);
                             });
 
@@ -408,7 +410,7 @@ function loadPlanillas(userID){
 
                         $(".nuevoRegistro").click(function () {
 
-
+                            editar=0;
                             //console.log($(this).data())
 
 
@@ -418,7 +420,7 @@ function loadPlanillas(userID){
 
                         $(".editarregistro").click(function () {
                             console.log($(this).data())
-
+                            editar=1;
                             fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id, $(this).data().filaid);
                         });
 

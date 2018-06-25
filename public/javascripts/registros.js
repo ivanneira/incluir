@@ -5,6 +5,7 @@
 var tipoPension;
 var tipoVivienda;
 var tipoServicios;
+
 //var prestaciones;
 
 var map;
@@ -370,8 +371,12 @@ function completarDatos(filaid){
 
         //el json trae un error de ortografía
 
-        $("#fechaNacimiento").datepicker("update", new Date(data.FechaNacimento));
+        //$("#fechaNacimiento").datepicker("update", new Date(data.FechaNacimento));
+        var v=data.FechaNacimiento;
+        v = v.substr(0,10);
+        v=v.split('-');
 
+        $("#fechaNacimiento").datepicker({format:'dd/mm/yyyy',}).datepicker("setDate", v[2].substr(0,2)  + "/" + v[1] + "/" + v[0]);
         var conversorDeSexo = data.Sexo === 'Masculino' ? 1 : 2;
 
         $("#sexo").val(conversorDeSexo);
@@ -419,6 +424,20 @@ function completarDatos(filaid){
 
         //$(".selectTipoVivienda").val();
         $("#comentario").val(data.Comentario);
+
+        //Titularidad
+        // Base 1- Titular | 2 - Adherente
+
+
+            if(data.Titularidad == 1)
+            {
+                $(".btn-light").first().button("toggle");
+            }
+            else
+            {
+                $(".btn-light").slice(1,2).button("toggle");
+
+            }
 
          /*
          //prestación
@@ -676,12 +695,14 @@ function armarJSON(){
 
 function enviarDatos(jsonDATA){
 
+
     console.log("los datos que se enviarían son los siguientes:");
     console.dir(jsonDATA);
 
+    var url = (editar==0) ? server_host+":"+server_port+server_url+"/api/IncluirSalud/GuardarFilaPlanilla" : server_host+":"+server_port+server_url+"/api/IncluirSalud/ActualizarFilaPlanilla";
     $.ajax({
         //id de usuario forzado a 1
-        url: server_host+":"+server_port+server_url+"/api/IncluirSalud/GuardarFilaPlanilla",
+        url: url,
         method: "POST",
         dataType: "json",
         data: jsonDATA
