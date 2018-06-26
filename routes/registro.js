@@ -7,7 +7,7 @@ router.get('/', function(req, resq, next) {
 
     //var filaID = req.body.id;
 
-    http.get("http://192.168.3.105:45457/api/IncluirSalud/ObtenerFilaPlanilla?id=3", (res) => {
+    http.get("http://192.168.3.105:45457/api/IncluirSalud/ObtenerFilaPlanilla?id=8", (res) => {
         //console.log(`Got resonse: ${res.statusCode}`);
 
         var body = "";
@@ -24,19 +24,26 @@ router.get('/', function(req, resq, next) {
 
             if(typeof(data) !== 'undefined'){
 
-                resq.render('registro',{
-                    Nombre: isnull(data.Nombre),
-                    Apellido: isnull(data.Apellido),
-                    FechaNacimiento: isnull(data.FechaNacimiento),
-                    Telefono: isnull(data.Telefono),
-                    Localidad: isnull(data.Localidad),
-                    Domicilio: isnull(data.Domicilio),
-                    Barrio: isnull(data.Barrio),
-                    Latitud: isnull(data.Latitud),
-                    Longitud: isnull(data.Longitud)
+                var indices = Object.keys(data);
+                var datatosend = {};
 
 
-                });
+                for(var index in indices){
+
+                    datatosend[indices[index]] = data[indices[index]];
+                }
+
+                if(datatosend['Titularidad']){
+
+                    if(datatosend['Titularidad'] === 1){
+                        datatosend['Titularidad'] = 'Titular';
+                    }else{
+                        datatosend['Titularidad'] = 'Adherente';
+                    }
+
+                }
+
+                resq.render('registro',datatosend)
 
             }else{
 
@@ -51,7 +58,6 @@ router.get('/', function(req, resq, next) {
         console.log(`Got error from Finhockey: ${e.message}`);
     });
 
-    //res.render('registro', { title: 'Incluir Salud' });
 
 });
 
@@ -61,7 +67,7 @@ function isnull(reg){
             reg == null
 
     ){
-        return 'sin dato';
+        return '<i class="fa fa-times-circle"></i>';
     }else{
                 return reg;
     }
