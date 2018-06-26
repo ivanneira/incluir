@@ -629,7 +629,7 @@ function armarJSON(){
 
         //planilla
         data.ID = ID;
-        data.planillaID = 18; //$("#modalACTitulo").data().id;
+        data.planillaID = PlanillaID; //$("#modalACTitulo").data().id;
         //personales
         data.nombre = $("#nombre").val();
         data.apellido = $("#apellido").val();
