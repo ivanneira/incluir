@@ -9,6 +9,6 @@ var server_port = 80;
 */
 
 var server_url = "";
-var server_host = "http://192.168.3.105";
-var server_port = 45457;
+var server_host = "http://localhost";
+var server_port = 1941;
 

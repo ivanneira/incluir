@@ -629,7 +629,7 @@ function armarJSON(){
 
         //planilla
         data.ID = ID;
-        data.planillaID = $("#modalACTitulo").data().idplanilla;
+        data.planillaID = 18; //$("#modalACTitulo").data().id;
         //personales
         data.nombre = $("#nombre").val();
         data.apellido = $("#apellido").val();
@@ -657,7 +657,8 @@ function armarJSON(){
 
         data.enlace_tipoPension = [
             {
-                filaPlanillaID: data.planillaID,
+
+                filaPlanillaID: ID,//data.planillaID,
                 tipoPensionID: $(".selectTipoPension ").val()
             }
         ];
@@ -669,6 +670,7 @@ function armarJSON(){
         for(var index in prestaciones){
 
             data.enlace_prestaciones.push({
+                ID:0,
                 prestacionID: prestaciones[index],
                 filaPlanillaID: data.planillaID
             });
@@ -686,6 +688,7 @@ function armarJSON(){
         for(var index in serviciosBasicos){
 
             data.enlace_serviciosBasicos.push({
+                ID:0,
                 serviciosBasicosID: serviciosBasicos[index],
                 filaPlanillaID: data.planillaID
             });

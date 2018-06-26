@@ -394,7 +394,7 @@ function loadPlanillas(userID){
                                 '   </td>' +
                                 '   <td>' +
                                 '       <label class="btn btn-sm btn-success detalleregistro" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-info"></i> Detalle</label>' +
-                                '       <label class="btn btn-sm btn-warning editarregistro" data-id="' + idplanilla + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-pencil"></i> Editar</label>' +
+                                '       <label class="btn btn-sm btn-warning editarregistro" data-id="' + res[index].FilaPlanillaID + '" data-numeroplanilla="' + numeroplanilla + '" data-departamentoid="' + iddepartamento + '" data-filaid="' + idplanilla + '"><i class="fa fa-pencil"></i> Editar</label>' +
                                 '       <label class="btn btn-sm btn-danger eliminaregistro" data-filaid="' + res[index].FilaPlanillaID + '"><i class="fa fa-trash"></i> Eliminar</label>' +
                                 '   </td>' +
                                 '</tr>'
@@ -423,7 +423,8 @@ function loadPlanillas(userID){
                             console.log($(this).data())
                             editar=1;
                             ID = $(this).data().id;
-                            fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id, $(this).data().filaid);
+                            fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id, ID);
+                            console.log("hola")
                         });
 
 
