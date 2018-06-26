@@ -562,8 +562,12 @@ function verificarCampos(){
         var noEmptyInputs =
             [
                 $("#nombre"),
-                $("#apellido")
+                $("#apellido"),
+                $('#lat'),
+                $('#lon')
             ];
+
+
 
 
         $(noEmptyInputs).each(function(index,item){
