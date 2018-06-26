@@ -624,6 +624,7 @@ function armarJSON(){
         //TODO: faltan datos para guardar.
 
         //planilla
+        data.ID = ID;
         data.planillaID = $("#modalACTitulo").data().idplanilla;
         //personales
         data.nombre = $("#nombre").val();
