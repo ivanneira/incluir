@@ -37,68 +37,57 @@ function agregarEncabezado() {
         placeholder: 'Busque supervisor',
         dropdownParent: $("#modalACBody"),
         width: '100%',
+        minimumInputLength: 3,
         language: 'es',
         ajax: {
-            url: 'planillas/supervisores',
+            //url: 'planillas/supervisores',
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 1,
             type: 'GET',
-            dataType: 'json',
+            dataType: "json",
+            delay: 250,
             data: function (params) {
-                var query = {
-                    q: params.term
-                };
-
-                // Query parameters will be ?1=[term]
-                return query;
-            },
-            processResults: function (data) {
-
+                console.dir(params)
                 return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.text,
-                            id: item.id
-                        }
-
-                    })
+                    searchTerm: params.term // search term
                 };
-            }
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
         }
     });
 
-    //select2 de departamento
+
     $(".selectDepartamento").select2({
         placeholder: 'Busque departamento',
         width: '100%',
         dropdownParent: $("#modalACBody"),
-        minimumResultsForSearch: -1,        language: 'es',
+        minimumInputLength: 3,
+        language : 'es',
         ajax: {
-            url: 'planillas/getDepartamentos',
-            type: 'GET',
-            dataType: 'json',
-            /*data: function (params) {
-             var query = {
-             q: params.term
-             };
-
-             // Query parameters will be ?1=[term]
-             return query;
-             },*/
-            processResults: function (data) {
-
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerDepartamentos?id=" + 18,
+            dataType: "json",
+            type: "GET",
+            delay: 250,
+            data: function (params) {
+                console.dir(params)
                 return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.Nombre,
-                            id: item.ID
-                        }
-
-                    })
+                    searchTerm: params.term // search term
                 };
-            }
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
         }
     });
+
+
 
     //select2 de encuestador
     $(".selectEncuestador").select2({
@@ -107,31 +96,26 @@ function agregarEncabezado() {
         width: '100%',
         language: 'es',
         ajax: {
-            url: 'planillas/encuestadores',
+            //url: 'planillas/encuestadores',
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 3,
             type: 'GET',
             dataType: 'json',
+
+            delay: 250,
             data: function (params) {
-                var query = {
-                    q: params.term
-                };
-
-                // Query parameters will be ?1=[term]
-                return query;
-            },
-            processResults: function (data) {
-
+                console.dir(params)
                 return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.text,
-                            id: item.id
-                        }
-
-                    })
+                    searchTerm: params.term // search term
                 };
-            }
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
         }
+
     });
 
     $("#modalACAceptar")

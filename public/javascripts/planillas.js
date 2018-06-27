@@ -294,7 +294,7 @@ function loadPlanillas(userID){
                             $(".nuevoRegistro").click(function () {
                                 editar = 0;
                                 ID=0;
-                                PlanillaID = 0;
+                                PlanillaID = "";
                                 console.log($(this).data())
 
                                 fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id);
@@ -417,7 +417,7 @@ function loadPlanillas(userID){
                             editar=0;
                             //console.log($(this).data())
                             ID=0;
-                            PlanillaID = 0;
+                            PlanillaID = "";
 
                             fillModal($(this).data().departamentoid, $(this).data().numeroplanilla, $(this).data().id);
 

@@ -12,11 +12,13 @@ var map;
 $(function(){
 
     $.ajax({
-        url: 'planillas/getTipoPension',
+        //url: 'planillas/getTipoPension',
+        url: server_host + ":" + server_port + "/api/IncluirSalud/obtenerTipoPensiones",
         type: 'GET',
         dataType: 'json',
         success: function(data){
             tipoPension = data;
+            console.dir(data)
         },
         error: function(e){
             ERROR();
@@ -25,7 +27,8 @@ $(function(){
     });
 
     $.ajax({
-        url: '/planillas/getTipoVivienda',
+        //url: '/planillas/getTipoVivienda',
+        url: server_host + ":" + server_port + "/api/IncluirSalud/obtenerTipoViviendas",
         type: 'GET',
         dataType: 'json',
         success: function(data){
@@ -38,7 +41,8 @@ $(function(){
     });
 
     $.ajax({
-        url: '/planillas/getTipoServicios',
+        //url: '/planillas/getTipoServicios',
+        url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerTipoServicios",
         type: 'GET',
         dataType: 'json',
         success: function(data){
@@ -439,6 +443,9 @@ function completarDatos(filaid){
 
             }
 
+        //verga
+        $(".selectPrestaciones").select2('val', 1);
+
          /*
          //prestación
          $("#btnTitular").prop('checked') ? 1 : 2;
@@ -670,7 +677,6 @@ function armarJSON(){
         for(var index in prestaciones){
 
             data.enlace_prestaciones.push({
-                ID:0,
                 prestacionID: prestaciones[index],
                 filaPlanillaID: data.planillaID
             });
@@ -688,7 +694,6 @@ function armarJSON(){
         for(var index in serviciosBasicos){
 
             data.enlace_serviciosBasicos.push({
-                ID:0,
                 serviciosBasicosID: serviciosBasicos[index],
                 filaPlanillaID: data.planillaID
             });
@@ -789,107 +794,93 @@ function fillDropDown(departamentoID){
     });
 
     $(".selectLocalidad").select2({
+        dropdownParent: $("#modalACBody"),
         placeholder: 'Busque localidad',
         width: '100%',
         language: 'es',
-        minimumResultsForSearch: -1,
         ajax: {
-            url: '/planillas/getLocalidades',
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerLocalidades?id="+ departamentoID,
             type: 'GET',
             dataType: 'json',
+            delay: 250,
             data: function (params) {
-                var query = {
-                    q: departamentoID
-                };
-                // Query parameters will be ?1=[term]
-                return query;
-            },
-            processResults: function (data) {
-
+                console.dir(params)
                 return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.Nombre,
-                            id: item.ID
-                        }
-
-                    })
+                    searchTerm: params.term // search term
                 };
-            }
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
         }
     });
 
     $(".selectCIE10").select2({
         width: '100%',
         dropdownAutoWidth: true,
-        //multiple: true,
+        multiple: true,
         language: 'es',
-        //containerCssClass: "wrap",
         minimumInputLength: 3,
         dropdownParent: $("#modalACBody"),
         placeholder: function(){
             $(this).data('placeholder');
         },
         ajax: {
-            url: '/planillas/getCIE10',
+            //url: '/planillas/getCIE10',
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerCIE10",
             type: 'GET',
-            dataType: 'json',
+            dataType: "json",
+            delay: 250,
             data: function (params) {
-                var query = {
-                    q: params.term
-                };
-                // Query parameters will be ?1=[term]
-                return query;
-            },
-            processResults: function (data) {
-
+                console.dir(params)
                 return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.id + ' - ' + item.text,
-                            id: item.id
-                        }
-
-                    })
+                    searchTerm: params.term // search term
                 };
-            }
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
         }
     });
 
+
+// Fetch the preselected item, and add to the control
+
+
+    //**//
     $(".selectPrestaciones").select2({
         placeholder: 'Elija prestaciones',
         width: '100%',
         language: 'es',
+        minimumInputLength: 3,
         multiple: true,
         dropdownParent: $("#modalACBody"),
-
         ajax: {
-            url: '/planillas/getPrestaciones',
+            //url: '/planillas/getCIE10',
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerPrestaciones",
             type: 'GET',
-            dataType: 'json',
+            dataType: "json",
+            delay: 250,
             data: function (params) {
-                var query = {
-                    q: params.term
-                };
-
-                // Query parameters will be ?1=[term]
-                return query;
-            },
-            processResults: function (data) {
-
+                console.dir(params)
                 return {
-                    results: $.map(data, function (item) {
-                        return {
-                            text: item.nombre,
-                            id: item.id
-                        }
-
-                    })
+                    searchTerm: params.term // search term
                 };
-            }
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
         }
+
     });
 }
 
