@@ -5,73 +5,67 @@ const http = require('http');
 /* GET home page. */
 router.get('/', function(req, resq, next) {
 
-    //var filaID = req.body.id;
+    let filaID = req.body.id;
 
-    http.get("http://192.168.3.105:45457/api/IncluirSalud/ObtenerFilaPlanilla?id=8", (res) => {
-        //console.log(`Got resonse: ${res.statusCode}`);
-
+    http.get("http://192.168.3.105:45459/api/IncluirSalud/ObtenerFilaPlanilla?id=22", (res) => {
         var body = "";
 
-        res.on('data', function (chunk) {
-            body += chunk;
-        })
+    res.on('data', function (chunk) {
+        body += chunk;
+    });
 
-        res.on('end', function () {
+    res.on('end', function () {
 
-            var data = JSON.parse(body);
+        var data = JSON.parse(body);
 
-            data = data[0];
+        data = data[0];
 
-            if(typeof(data) !== 'undefined'){
+        if(typeof(data) !== 'undefined'){
 
-                var indices = Object.keys(data);
-                var datatosend = {};
+            var indices = Object.keys(data);
+            var datatosend = {};
 
 
-                for(var index in indices){
+            for(var index in indices){
 
-                    datatosend[indices[index]] = data[indices[index]];
-                }
-
-                if(datatosend['Titularidad']){
-
-                    if(datatosend['Titularidad'] === 1){
-                        datatosend['Titularidad'] = 'Titular';
-                    }else{
-                        datatosend['Titularidad'] = 'Adherente';
-                    }
-
-                }
-
-                resq.render('registro',datatosend)
-
-            }else{
-
-                resq.send("No se econtraron datos del registro.")
+                datatosend[indices[index]] = data[indices[index]];
             }
 
+            if(datatosend['Titularidad']){
+
+                if(datatosend['Titularidad'] === 1){
+                    datatosend['Titularidad'] = 'Titular';
+                }else{
+                    datatosend['Titularidad'] = 'Adherente';
+                }
+
+            }
+
+            resq.render('registro',datatosend)
+
+        }else{
+
+            resq.send("No se econtraron datos del registro.")
+        }
 
 
-        })
 
-    }).on('error', (e) => {
+    })
+
+}).on('error', (e) => {
         console.log(`Got error from Finhockey: ${e.message}`);
-    });
+});
 
 
 });
 
-function isnull(reg){
+router.get('/encabezados', function(req) {
 
-    if(
-            reg == null
+    let filaID = req.body.id;
 
-    ){
-        return '<i class="fa fa-times-circle"></i>';
-    }else{
-                return reg;
-    }
+    res.render('encabezadoPlanilla', "coso")
 
-}
+
+});
 
 module.exports = router;

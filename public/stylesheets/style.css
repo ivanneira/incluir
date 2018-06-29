@@ -236,3 +236,18 @@ a.bg-light:hover{
 .nav-link {
   color: black !important;
 }
+
+.vistadeimpresion {
+
+  background-color: white;
+}
+
+@media print
+{
+  .noprint { visibility: hidden; }
+
+}
+
+#planillas {
+  padding: 10px;
+}

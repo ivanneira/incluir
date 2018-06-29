@@ -1,10 +1,12 @@
-<table class="registroindividual table table-striped">
+<button id="imprimir" class="btn btn-dark noprint">Imprimir</button>
+
+<table class="registroindividual table table-striped vistadeimpresion">
     <tr>
         <th colspan="2">Datos personales</th>
     </tr>
     <tr>
         <td>
-            Apellido y nombre: {{{Apellido}}} {{{Nombre}}}
+            Apellido y nombre: {{#if Apellido}} {{{Apellido}}} {{{Nombre}}} {{else}} Sin datos {{/if}}
         </td>
         <td>
             Sexo: {{{Sexo}}}
@@ -12,15 +14,15 @@
     </tr>
     <tr>
         <td>
-            Fecha de nacimiento: {{{FechaNacimiento}}}
+            Fecha de nacimiento: {{#if FechaNacimiento}} {{{FechaNacimiento}}} {{else}} Sin datos {{/if}}
         </td>
         <td>
-            DNI: {{{DNI}}}
+            DNI: {{#if FechaNacimiento}} {{{DNI}}} {{else}} Sin datos {{/if}}
         </td>
     </tr>
     <tr>
         <td>
-            Teléfono: {{{Telefono}}}
+            Teléfono: {{#if Telefono}} {{{Telefono}}} {{else}} Sin datos {{/if}}
         </td>
         <td></td>
     </tr>
@@ -29,18 +31,18 @@
     </tr>
     <tr>
         <td>
-            Localidad: {{{Localidad}}}
+            Localidad: {{#if Localidad}} {{{Localidad}}} {{else}} Sin datos {{/if}}
         </td>
         <td>
-            Domicilio: {{{Domicilio}}} {{{Barrio}}}
+            Domicilio: {{#if Domicilio}} {{{Domicilio}}} {{{Barrio}}} {{else}} Sin datos {{/if}}
         </td>
     </tr>
     <tr>
         <td>
-            Latitud: {{{Latitud}}}
+            Latitud: {{#if Latitud}} {{{Latitud}}} {{else}} Sin datos {{/if}}
         </td>
         <td>
-            Longitud: {{{Longitud}}}
+            Longitud: {{#if Longitud}} {{{Longitud}}} {{else}} Sin datos {{/if}}
         </td>
     </tr>
     <tr>
@@ -53,18 +55,27 @@
     </tr>
     <tr>
         <td>
-            Titularidad: {{{Titularidad}}}
+            Titularidad: {{#if Titularidad}} {{{Titularidad}}} {{else}} Sin datos {{/if}}
         </td>
         <td>
-            Tipo de pensión: {{{TipoPension}}}
+            Tipo de pensión: {{#if TipoPension}} {{{TipoPension}}} {{else}} Sin datos {{/if}}
         </td>
     </tr>
     <tr>
         <td>
-            Motivo de pensión: {{{Pension_cie10_dec10}}}
+            Motivo de pensión: {{#if Pension_cie10_dec10}} {{{Pension_cie10_dec10}}} {{else}} Sin datos {{/if}}
         </td>
         <td>
-            Prestaciones: {{{prestaciones}}}
+            Prestaciones:
+            {{#if prestaciones}}
+
+                {{#each prestaciones}}
+                    <span class="badge badge-secondary">{{PrestacionNombre}}</span>
+                {{/each}}
+
+            {{else}}
+                Sin datos
+            {{/if}}
         </td>
     </tr>
     <tr>
@@ -72,18 +83,29 @@
     </tr>
     <tr>
         <td>
-            Nº de personas que conviven: {{{NroPersonasConviven}}}
+            Nº de personas que conviven: {{#if NroPersonasConviven}} {{{NroPersonasConviven}}} {{else}} Sin datos {{/if}}
         </td>
         <td>
-            Nº de integrantes del grupo familiar: {{{NroIntegrantesConviven}}}
+            Nº de integrantes del grupo familiar: {{#if NroIntegrantesConviven}} {{{NroIntegrantesConviven}}} {{else}} Sin datos {{/if}}
         </td>
     </tr>
     <tr>
         <td>
-            Tipo de vivienda: {{{TipoVivienda}}}
+            Tipo de vivienda: {{#if TipoVivienda}} {{{TipoVivienda}}} {{else}} Sin datos {{/if}}
         </td>
         <td>
-            Servicios básicos: {{{TipoViviendaDetalle}}}
+            Servicios básicos:
+
+            {{#if TipoViviendaDetalle}}
+
+                {{#each TipoViviendaDetalle}}
+                    <span class="badge badge-secondary">{{nombre}}</span>
+                {{/each}}
+
+            {{else}}
+                Sin datos
+            {{/if}}
+
         </td>
     </tr>
     <tr>
@@ -91,65 +113,72 @@
     </tr>
     <tr>
         <td colspan="2">
-            Comentario: {{{Comentario}}}
+            Comentario: {{#if Comentario}} {{{Comentario}}} {{else}} Sin datos {{/if}}
         </td>
     </tr>
 </table>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpjpAsKeGWDM1REdx9hTuMXwtwbknN6DU" async defer></script>
+<br>
+<br>
+<br>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpjpAsKeGWDM1REdx9hTuMXwtwbknN6DU&callback=initMap" async defer></script>
 
 
 <script>
 
     $(function(){
 
+        $("#imprimir").click(function(){
 
+            window.print();
 
-        function initMap() {
-            var latitude = -31.536395; // YOUR LATITUDE VALUE
-            var longitude = -68.536976; // YOUR LONGITUDE VALUE
+        });
 
-            var myLatLng = {lat: latitude, lng: longitude};
-
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: myLatLng,
-                zoom: 14,
-                disableDoubleClickZoom: true, // disable the default map zoom on double click
-                fullscreenControl: false
-            });
-
-
-            var lati = '{{{Latitud}}}';
-            var long = '{{{Longitud}}}';
-
-            setMapPoint(lati , long )
-
-            function setMapPoint(lati , long ){
-
-
-                var latlng = {lat: parseFloat(lat) , lng: parseFloat(lng) };
-
-                if(marker){
-                    marker.setMap(null);
-                }
-
-                map
-                        .setCenter(latlng);
-
-                marker = new google.maps.Marker({
-                    position: latlng,
-                    map: map,
-                    title: 'Dirección'
-                });
-
-            }
-        }
-
-        initMap();
 
     });
 
+    function initMap() {
+        var latitude = {{{Latitud}}}; // YOUR LATITUDE VALUE
+        var longitude = {{{Longitud}}}; // YOUR LONGITUDE VALUE
 
+        var myLatLng = {lat: latitude, lng: longitude};
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: myLatLng,
+            zoom: 14,
+            disableDoubleClickZoom: true, // disable the default map zoom on double click
+            fullscreenControl: false,
+            mapTypeControl: false,
+            mapTypeControlOptions: false,
+            scrollwheel: false,
+            streetViewControl: false
+        });
+
+
+        var lati = '{{{Latitud}}}';
+        var long = '{{{Longitud}}}';
+
+        setMapPoint(lati , long );
+
+        function setMapPoint(lat , lng ){
+
+
+            var latlng = {lat: parseFloat(lat) , lng: parseFloat(lng) };
+
+
+
+            map
+                    .setCenter(latlng);
+
+            marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: 'Dirección'
+            });
+
+        }
+    }
 
 
 </script>

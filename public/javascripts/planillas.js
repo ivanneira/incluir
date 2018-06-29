@@ -8,11 +8,138 @@ var PlanillaID = "";
 $(function(){
 
     //forzado a usuario 1
-    loadPlanillas(1);
-    loadEncuestas(1);
+    //loadPlanillas(1);
+    //loadEncuestas(1);
+    fillDatatable(1);
 
 
 });
+
+function fillDatatable(userid){
+    function fnFormatDetails(table_id, html) {
+        var sOut = "<table id=\"exampleTable_" + table_id + "\">";
+        sOut += html;
+        sOut += "</table>";
+        return sOut;
+    }
+
+
+    var iTableCounter = 1;
+    var oTable;
+    var oInnerTable;
+    var detailsTableHtml;
+
+    //Run On HTML Build
+    $(document).ready(function () {
+
+        var oTable = $('#exampleTable').dataTable({
+            "bProcessing": true,
+            "sAjaxDataProp":"",
+
+            ajax: {
+                url: 'http://10.64.65.200/AresAPI/api/IncluirSalud/ObtenerPlanillas?id='+userid,
+            },
+
+            "columns": [
+
+
+                { "data": "PlanillaID","title": "Planilla ID", "visible": false},
+                { "data": "NumeroPlanilla","title": "Nro Planilla",},
+                { "data": "FechaPlanilla", "title": "Fecha de Planilla","format": 'M/D/YYYY',},
+                { "data": "EncuestadorNombre","title": "Encuestador",},
+
+            ],
+
+            "fnInitComplete": function(oSettings, json) {
+
+                detailsTableHtml = $("#detailsTable").html();
+
+                var nCloneTh = document.createElement('th');
+                var nCloneTd = document.createElement('td');
+                nCloneTd.innerHTML = '<img src="http://i.imgur.com/SD7Dz.png">';
+                nCloneTd.className = "center";
+
+                /******************************/
+                var nCloneTh2 = document.createElement('th');
+                var nCloneTd2 = document.createElement('td');
+                nCloneTd2.innerHTML = '<label class="btn btn-sm btn-success detallePlanilla " data-filaid="19"><i class="fa fa-info"></i> Detalle</label> <label class="btn btn-sm btn-warning editarPlanilla " data-filaid="19"><i class="fa fa-pencil"></i> Editar</label> <label class="btn btn-sm btn-danger eliminaPlanilla " data-filaid="19"><i class="fa fa-trash"></i> Eliminar</label>';
+                nCloneTd2.className = "center";
+
+                $('#exampleTable thead').each(function () {
+                    this.insertBefore(nCloneTh2, this.childNodes[3]);
+                    nCloneTh2.innerHTML = "Acciones"
+                });
+
+
+
+                $('#exampleTable thead  tr').each(function () {
+                    this.insertBefore(nCloneTh2, this.childNodes[3]);
+                });
+
+
+                $('#exampleTable tbody tr').each(function () {
+                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
+                });
+                /******************************/
+                $('#exampleTable thead  tr').each(function () {
+                    this.insertBefore(nCloneTh, this.childNodes[0]);
+                });
+
+
+                $('#exampleTable tbody tr').each(function () {
+                    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+                });
+
+                $('#exampleTable tbody td img').on('click', function () {
+
+                    var nTr = $(this).parents('tr')[0];
+                    var nTds = this;
+
+                    var id = $("#exampleTable").DataTable().row().data().PlanillaID;
+
+                    if (oTable.fnIsOpen(nTr)) {
+                        /* This row is already open - close it */
+                        this.src = "http://i.imgur.com/SD7Dz.png";
+                        oTable.fnClose(nTr);
+                    }
+                    else {
+                        /* Open this row */
+                        var rowIndex = oTable.fnGetPosition( $(nTds).closest('tr')[0] );
+                        //var detailsRowData = newRowData[rowIndex].details;
+
+                        this.src = "http://i.imgur.com/d4ICC.png";
+                        oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaID');
+                        oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
+
+                            "bProcessing": true,
+                            "sAjaxDataProp":"",
+
+                            ajax: {
+                                url:  server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerFilasPlanilla?id='+id,
+                            },
+
+                            "columns": [
+                                { "data": "FilaPlanillaID","title": "id",},
+                                { "data": "Localidad", "title": "Localidad",},
+                                { "data": "DNI", "title": "DNI",},
+                            ],
+
+                            "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull )
+                            {
+                                //var imgLink = aData['pic'];
+                                //var imgTag = '<img width="100px" src="' + imgLink + '"/>';
+                                //$('td:eq(0)', nRow).html(imgTag);
+                                //return nRow;
+                            }
+                        });
+                        iTableCounter = iTableCounter + 1;
+                    }
+                });
+            }
+        });
+    });
+
+}
 
 
 function loadEncuestas(userID){
