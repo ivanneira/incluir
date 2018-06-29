@@ -260,12 +260,6 @@ function loadPlanillas(userID){
                 // Split timestamp into [ Y, M, D, h, m, s ]
                 var t = res[index].FechaPlanilla
 
-                //console.log(t.slice(0,10))
-
-                // Apply each element to the Date function
-                //var d = new Date(Date.UTC(t[0], t[1]-1, t[2], t[3], t[4], t[5]));
-                var d = t.slice(0,10).split('-');
-                d = d[2] + '/' + d[1] + '/' + d[0];
 
 
                 htmlStringPlanillas +=
@@ -292,7 +286,7 @@ function loadPlanillas(userID){
                                             res[index].NumeroPlanilla + '<p><span class="badge badge-dark">'+res[index].CantidadDeRegistros+' registros</p></span>'+
                     '                   </div>' +
                     '                   <div class="col-3">' +
-                                             d +
+                                            res[index].FechaPlanilla +
                     '                   </div>' +
                     '                   <div class="col-3">' +
                                             res[index].EncuestadorNombre +
