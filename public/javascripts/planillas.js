@@ -37,7 +37,7 @@ function fillDatatable(userid){
             "sAjaxDataProp":"",
 
             ajax: {
-                url: 'http://10.64.65.200/AresAPI/api/IncluirSalud/ObtenerPlanillas?id='+userid,
+                url: server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerPlanillas?id='+userid,
             },
 
             "columns": [
