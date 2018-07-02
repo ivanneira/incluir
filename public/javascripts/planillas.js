@@ -132,7 +132,7 @@ function fillDatatable(userid){
                         //var detailsRowData = newRowData[rowIndex].details;
 
                         this.src = "http://i.imgur.com/d4ICC.png";
-                        oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaID');
+                        oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaHija');
                         oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
 
                             "bProcessing": true,
@@ -178,6 +178,10 @@ function fillDatatable(userid){
                                 //var imgTag = '<img width="100px" src="' + imgLink + '"/>';
                                 //$('td:eq(0)', nRow).html(imgTag);
                                 //return nRow;
+                            },
+                            "fnInitComplete": function(oSettings, json) {
+                            console.log("completa")
+                                $(".PlanillaHija").attr('colspan','5')
                             }
                         });
                         iTableCounter = iTableCounter + 1;
