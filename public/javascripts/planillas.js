@@ -17,7 +17,7 @@ $(function(){
 
 function fillDatatable(userid){
     function fnFormatDetails(table_id, html) {
-        var sOut = "<table id=\"exampleTable_" + table_id + "\">";
+        var sOut = "<table width='100%' id=\"exampleTable_" + table_id + "\">";
         sOut += html;
         sOut += "</table>";
         return sOut;
@@ -86,7 +86,7 @@ function fillDatatable(userid){
                 /******************************/
                 var nCloneTh2 = document.createElement('th');
                 var nCloneTd2 = document.createElement('td');
-                nCloneTd2.innerHTML = '<label class="btn btn-sm btn-success detallePlanilla " data-filaid="19"><i class="fa fa-info"></i> Detalle</label> <label class="btn btn-sm btn-warning editarPlanilla " data-filaid="19"><i class="fa fa-pencil"></i> Editar</label> <label class="btn btn-sm btn-danger eliminaPlanilla " data-filaid="19"><i class="fa fa-trash"></i> Eliminar</label>';
+                nCloneTd2.innerHTML = '<label class="btn btn-sm btn-success detallePlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> Detalle</label> <label class="btn btn-sm btn-warning editarPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> Editar</label> <label class="btn btn-sm btn-danger eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> Eliminar</label>';
                 nCloneTd2.className = "center";
 
                 $('#exampleTable thead').each(function () {

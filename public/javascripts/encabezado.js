@@ -37,16 +37,15 @@ function agregarEncabezado() {
         placeholder: 'Busque supervisor',
         dropdownParent: $("#modalACBody"),
         width: '100%',
-        minimumInputLength: 3,
+        minimumInputLength: 0,
         language: 'es',
         ajax: {
             //url: 'planillas/supervisores',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 1,
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 1 ,
             type: 'GET',
             dataType: "json",
             delay: 250,
             data: function (params) {
-                console.dir(params)
                 return {
                     searchTerm: params.term // search term
                 };
@@ -57,7 +56,9 @@ function agregarEncabezado() {
                 };
             },
             cache: true
-        }
+        },
+
+
     });
 
 
