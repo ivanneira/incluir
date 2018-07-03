@@ -70,7 +70,7 @@ function fillDatatableEncuestas(userid){
             "columns": [
 
 
-                { "data": "EncuestaID","title": "ID", "visible": false},
+                { "data": "EncuestaID","title": "EncuestaID", "visible": false},
                 { "data": "NumeroEncuesta","title": "NumeroEncuesta",},
                 { "data": "FechaEncuesta", "title": "Fecha de Encuesta","format": 'M/D/YYYY',},
                 { "data": "DepartamentoNombre","title": "Departamento",},
@@ -85,16 +85,10 @@ function fillDatatableEncuestas(userid){
                 detailsTableHtml = $("#detailsTableEncuesta").html();
 
                 var nCloneTh = document.createElement('th');
-
-
-                /******************************/
                 var nCloneTh2 = document.createElement('th');
                 var nCloneTd2 = document.createElement('td');
-                nCloneTd2.innerHTML =
-                    '&nbsp<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+
+                /******************************/
 
                 //nCloneTd2.className = "center";
 
@@ -109,7 +103,16 @@ function fillDatatableEncuestas(userid){
                     this.insertBefore(nCloneTh2, this.childNodes[3]);
                 });
 
-                $('#encuestasTable tbody tr').each(function () {
+                $('#encuestasTable tbody tr').each(function (v,i) {
+
+
+                    nCloneTd2.innerHTML =
+                        '&nbsp<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+
+
                     this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
                 });
             }
@@ -191,10 +194,6 @@ function fillDatatablePlanillas(userid){
             /******************************/
             var nCloneTh2 = document.createElement('th');
             var nCloneTd2 = document.createElement('td');
-            nCloneTd2.innerHTML =   '<button class="btn btn-block btn-success eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> Nuevo</button>' +
-                                    '<button class="btn btn-block btn-secondary detallePlanilla " data-planillaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> Detalle</button>' +
-                                    '<button class="btn btn-block btn-warning editarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> Editar</button>' +
-                                    '<button class="btn btn-block btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>';
 
             //nCloneTd2.className = "center";
 
@@ -210,7 +209,15 @@ function fillDatatablePlanillas(userid){
             });
 
 
-            $('#exampleTable tbody tr').each(function () {
+            $('#exampleTable tbody tr').each(function (v,i) {
+
+                nCloneTd2.innerHTML =
+                    '<button class="btn btn-block btn-success eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> Nuevo</button>' +
+                    '<button class="btn btn-block btn-secondary detallePlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> Detalle</button>' +
+                    '<button class="btn btn-block btn-warning editarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> Editar</button>' +
+                    '<button class="btn btn-block btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>';
+
+
                 this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
             });
             /******************************/
@@ -219,7 +226,10 @@ function fillDatatablePlanillas(userid){
             });
 
 
-            $('#exampleTable tbody tr').each(function () {
+            $('#exampleTable tbody tr').each(function (v,i) {
+
+
+
                 this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
             });
 
@@ -315,8 +325,8 @@ function fillDatatablePlanillas(userid){
                             },
                             "fnInitComplete": function(oSettings, json) {
 
-                                console.log("aca")
-                                console.dir(json)
+                                //console.log("aca")
+                                //console.dir(json)
                                 $(".PlanillaHija").attr('colspan','5');
 
                                 var nCloneTh4 = document.createElement('th');
