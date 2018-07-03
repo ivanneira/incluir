@@ -208,9 +208,9 @@ function fillDatatable(userid){
                                 var nCloneTh4 = document.createElement('th');
                                 var nCloneTd4 = document.createElement('td');
                                 nCloneTd4.innerHTML =   '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-plus"></i> </button>' +
-                                    '<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> </button>' +
-                                    '<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> </button>' +
-                                    '<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> </button>';
+                                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> </button>' +
+                                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> </button>' +
+                                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> </button>';
 
 
                                 $('.PlanillaHija thead tr').each(function () {
