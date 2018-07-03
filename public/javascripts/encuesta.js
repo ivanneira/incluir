@@ -3,7 +3,7 @@
 function agregarEncuesta(){
 
     var htmlEncuesta =
-        '<table class="table table-dark table-striped table-hover text-center">'+
+        '<table class="table table-striped table-hover text-center">'+
         '   <tr>'+
         '       <td>' +
         '           <div class="row">' +

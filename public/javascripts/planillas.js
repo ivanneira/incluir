@@ -10,12 +10,114 @@ $(function(){
     //forzado a usuario 1
     //loadPlanillas(1);
     //loadEncuestas(1);
-    fillDatatable(1);
+    fillDatatablePlanillas(1);
+    fillDatatableEncuestas(1);
 
 
 });
 
-function fillDatatable(userid){
+function fillDatatableEncuestas(userid){
+
+    function fnFormatDetails(table_id, html) {
+        var sOut = "<table id=\"encuestasTable_" + table_id + "\">";
+        sOut += html;
+        sOut += "</table>";
+        return sOut;
+    }
+
+
+    var iTableCounter = 1;
+    var oTable;
+    var oInnerTable;
+    var detailsTableHtml;
+
+    //Run On HTML Build
+    $(document).ready(function () {
+
+        var oTable = $('#encuestasTable').dataTable({
+            "bProcessing": true,
+            "sAjaxDataProp":"",
+
+            ajax: {
+                url: server_host+":"+server_port+server_url+ '/api/incluirSalud/Obtenerencuesta?id=' + userid,
+            },
+            language: {
+                "sProcessing":     "Cargando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar número de encuesta:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "C",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                }
+            },
+            info: false,
+            "columns": [
+
+
+                { "data": "EncuestaID","title": "ID", "visible": false},
+                { "data": "NumeroEncuesta","title": "NumeroEncuesta",},
+                { "data": "FechaEncuesta", "title": "Fecha de Encuesta","format": 'M/D/YYYY',},
+                { "data": "DepartamentoNombre","title": "Departamento",},
+
+
+
+            ],
+
+            "fnInitComplete": function(oSettings, json) {
+
+
+                detailsTableHtml = $("#detailsTableEncuesta").html();
+
+                var nCloneTh = document.createElement('th');
+
+
+                /******************************/
+                var nCloneTh2 = document.createElement('th');
+                var nCloneTd2 = document.createElement('td');
+                nCloneTd2.innerHTML =
+                    '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-plus"></i> </button>' +
+                    '<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> </button>' +
+                    '<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> </button>' +
+                    '<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> </button>';
+
+                //nCloneTd2.className = "center";
+
+                $('#encuestasTable thead').each(function () {
+                    this.insertBefore(nCloneTh2, this.childNodes[3]);
+                    nCloneTh2.innerHTML = "Acciones"
+                });
+
+
+
+                $('#encuestasTable thead  tr').each(function () {
+                    this.insertBefore(nCloneTh2, this.childNodes[3]);
+                });
+
+                $('#encuestasTable tbody tr').each(function () {
+                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
+                });
+            }
+        })
+    });
+
+}
+
+function fillDatatablePlanillas(userid){
     function fnFormatDetails(table_id, html) {
         var sOut = "<table width='100%' id=\"exampleTable_" + table_id + "\">";
         sOut += html;
@@ -43,7 +145,7 @@ function fillDatatable(userid){
         info: false,
 
         language: {
-            "sProcessing":     "Procesando...",
+            "sProcessing":     "Cargando...",
             "sLengthMenu":     "Mostrar _MENU_ registros",
             "sZeroRecords":    "No se encontraron resultados",
             "sEmptyTable":     "Ningún dato disponible en esta tabla",
@@ -54,7 +156,7 @@ function fillDatatable(userid){
             "sSearch":         "Buscar número de planilla:",
             "sUrl":            "",
             "sInfoThousands":  ",",
-            "sLoadingRecords": "Cargando...",
+            "sLoadingRecords": "",
             "oPaginate": {
                     "sFirst":    "Primero",
                         "sLast":     "Último",
@@ -77,7 +179,7 @@ function fillDatatable(userid){
         ],
         "fnInitComplete": function(oSettings, json) {
 
-            detailsTableHtml = $("#detailsTable").html();
+            detailsTableHtml = $("#detailsTablePlanilla").html();
 
             var nCloneTh = document.createElement('th');
             var nCloneTd = document.createElement('td');
@@ -165,7 +267,7 @@ function fillDatatable(userid){
                         sortable: false,
                         ordering: false,
                         language: {
-                            "sProcessing":     "Procesando...",
+                            "sProcessing":     "Cargando...",
                             "sLengthMenu":     "Mostrar _MENU_ registros",
                             "sZeroRecords":    "No se encontraron resultados",
                             "sEmptyTable":     "Ningún dato disponible en esta tabla",
@@ -176,7 +278,7 @@ function fillDatatable(userid){
                             "sSearch":         "Buscar:",
                             "sUrl":            "",
                             "sInfoThousands":  ",",
-                            "sLoadingRecords": "Cargando...",
+                            "sLoadingRecords": "",
                             "oPaginate": {
                                 "sFirst":    "Primero",
                                 "sLast":     "Último",

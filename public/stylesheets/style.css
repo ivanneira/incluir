@@ -252,7 +252,17 @@ a.bg-light:hover{
   padding: 10px;
 }
 
+#encuestas{
+  padding: 10px;
+
+}
+
 #exampleTable {
+
+  width: auto !important;
+}
+
+#encuestasTable{
 
   width: auto !important;
 }
