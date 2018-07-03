@@ -61,6 +61,7 @@ app.use(express.static(path.join(__dirname, '/node_modules/sweetalert/dist')));
 
 //ruta de datatables
 app.use(express.static(path.join(__dirname, '/node_modules/datatables/media')));
+app.use(express.static(path.join(__dirname, '/node_modules/datatables.net-bs4')));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));

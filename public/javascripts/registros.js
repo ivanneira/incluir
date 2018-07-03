@@ -75,6 +75,9 @@ function ERROR(){
     alert("Hubo un error, por favor regargue la página");
 }
 
+var modal;
+
+
 function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
 
     //console.log(departamentoID)

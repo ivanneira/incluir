@@ -36,9 +36,11 @@ function fillDatatable(userid){
             "bProcessing": true,
             "sAjaxDataProp":"",
 
-            ajax: {
-                url: server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerPlanillas?id='+userid,
+        ajax: {
+                url: server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerPlanillas?id=' + userid
             },
+        lengthMenu: [10,20],
+        info: false,
 
         language: {
             "sProcessing":     "Procesando...",
@@ -49,128 +51,148 @@ function fillDatatable(userid){
             "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
             "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
             "sInfoPostFix":    "",
-            "sSearch":         "Buscar:",
+            "sSearch":         "Buscar número de planilla:",
             "sUrl":            "",
             "sInfoThousands":  ",",
             "sLoadingRecords": "Cargando...",
             "oPaginate": {
-            "sFirst":    "Primero",
-                "sLast":     "Último",
-                "sNext":     "Siguiente",
-                "sPrevious": "Anterior"
+                    "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                },
+                "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
         },
-            "oAria": {
-            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-        },
-        },
-            "columns": [
+        "columns": [
 
 
-                { "data": "PlanillaID","title": "Planilla ID", "visible": false},
-                { "data": "NumeroPlanilla","title": "Nro Planilla",},
-                { "data": "FechaPlanilla", "title": "Fecha de Planilla","format": 'M/D/YYYY',},
-                { "data": "EncuestadorNombre","title": "Encuestador",},
+            { "data": "PlanillaID","title": "Planilla ID", "visible": false},
+            { "data": "NumeroPlanilla","title": "Nº Planilla"},
+            { "data": "FechaPlanilla", "title": "Fecha de Planilla","format": 'M/D/YYYY'},
+            { "data": "EncuestadorNombre","title": "Encuestador"}
 
-            ],
+        ],
+        "fnInitComplete": function(oSettings, json) {
 
-            "fnInitComplete": function(oSettings, json) {
+            detailsTableHtml = $("#detailsTable").html();
 
-                detailsTableHtml = $("#detailsTable").html();
+            var nCloneTh = document.createElement('th');
+            var nCloneTd = document.createElement('td');
+            nCloneTd.innerHTML = '<button class="btn btn-small btn-secondary fa fa-plus-circle">Abrir</button>';
 
-                var nCloneTh = document.createElement('th');
-                var nCloneTd = document.createElement('td');
-                nCloneTd.innerHTML = '<img src="http://i.imgur.com/SD7Dz.png">';
-                nCloneTd.className = "center";
+            nCloneTd.className = "center";
 
-                /******************************/
-                var nCloneTh2 = document.createElement('th');
-                var nCloneTd2 = document.createElement('td');
-                nCloneTd2.innerHTML = '<label class="btn btn-sm btn-success detallePlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> Detalle</label> <label class="btn btn-sm btn-warning editarPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> Editar</label> <label class="btn btn-sm btn-danger eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> Eliminar</label>';
-                nCloneTd2.className = "center";
+            /******************************/
+            var nCloneTh2 = document.createElement('th');
+            var nCloneTd2 = document.createElement('td');
+            nCloneTd2.innerHTML =   '<button class="btn btn-block btn-success eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-plus"></i> Nuevo</button>' +
+                                    '<button class="btn btn-block btn-secondary detallePlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> Detalle</button>' +
+                                    '<button class="btn btn-block btn-warning editarPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> Editar</button>' +
+                                    '<button class="btn btn-block btn-danger eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> Eliminar</button>';
 
-                $('#exampleTable thead').each(function () {
-                    this.insertBefore(nCloneTh2, this.childNodes[3]);
-                    nCloneTh2.innerHTML = "Acciones"
-                });
+            //nCloneTd2.className = "center";
 
-
-
-                $('#exampleTable thead  tr').each(function () {
-                    this.insertBefore(nCloneTh2, this.childNodes[3]);
-                });
+            $('#exampleTable thead').each(function () {
+                this.insertBefore(nCloneTh2, this.childNodes[3]);
+                nCloneTh2.innerHTML = "Acciones"
+            });
 
 
-                $('#exampleTable tbody tr').each(function () {
-                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
-                });
-                /******************************/
-                $('#exampleTable thead  tr').each(function () {
-                    this.insertBefore(nCloneTh, this.childNodes[0]);
-                });
+
+            $('#exampleTable thead  tr').each(function () {
+                this.insertBefore(nCloneTh2, this.childNodes[3]);
+            });
 
 
-                $('#exampleTable tbody tr').each(function () {
-                    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
-                });
+            $('#exampleTable tbody tr').each(function () {
+                this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
+            });
+            /******************************/
+            $('#exampleTable thead  tr').each(function () {
+                this.insertBefore(nCloneTh, this.childNodes[0]);
+            });
 
-                $('#exampleTable tbody td img').on('click', function () {
 
-                    var nTr = $(this).parents('tr')[0];
-                    var nTds = this;
+            $('#exampleTable tbody tr').each(function () {
+                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+            });
 
-                    var id = $("#exampleTable").DataTable().row().data().PlanillaID;
+            $('#exampleTable tbody td button').on('click', function () {
 
-                    if (oTable.fnIsOpen(nTr)) {
-                        /* This row is already open - close it */
-                        this.src = "http://i.imgur.com/SD7Dz.png";
-                        oTable.fnClose(nTr);
-                    }
-                    else {
-                        /* Open this row */
-                        var rowIndex = oTable.fnGetPosition( $(nTds).closest('tr')[0] );
-                        //var detailsRowData = newRowData[rowIndex].details;
+                var nTr = $(this).parents('tr')[0];
+                var nTds = this;
 
-                        this.src = "http://i.imgur.com/d4ICC.png";
+                var id = $("#exampleTable").DataTable().row().data().PlanillaID;
+
+                if (oTable.fnIsOpen(nTr)) {
+                    /* This row is already open - close it */
+
+                    $(this)
+                        .removeClass('fa-minus-circle')
+                        .addClass('fa-plus-circle');
+
+                    oTable.fnClose(nTr);
+                }
+                else {
+                    /* Open this row */
+                    var rowIndex = oTable.fnGetPosition( $(nTds).closest('tr')[0] );
+                    //var detailsRowData = newRowData[rowIndex].details;
+
+                    //this.src = "http://i.imgur.com/d4ICC.png";
+                    $(this)
+                        .removeClass('fa-plus-circle')
+                        .addClass('fa-minus-circle');
+
+                    //oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaID');
+                    //oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
+                        //this.src = "http://i.imgur.com/d4ICC.png";
                         oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaHija');
                         oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
 
-                            "bProcessing": true,
-                            "sAjaxDataProp":"",
+                        "bProcessing": true,
+                        "sAjaxDataProp":"",
 
-                            ajax: {
-                                url:  server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerFilasPlanilla?id='+id,
-                            },
+                        ajax: {
+                            url:  server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerFilasPlanilla?id='+id,
+                        },
 
-                            language: {
-                                "sProcessing":     "Procesando...",
-                                "sLengthMenu":     "Mostrar _MENU_ registros",
-                                "sZeroRecords":    "No se encontraron resultados",
-                                "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                                "sInfoPostFix":    "",
-                                "sSearch":         "Buscar:",
-                                "sUrl":            "",
-                                "sInfoThousands":  ",",
-                                "sLoadingRecords": "Cargando...",
-                                "oPaginate": {
-                                    "sFirst":    "Primero",
-                                    "sLast":     "Último",
-                                    "sNext":     "Siguiente",
-                                    "sPrevious": "Anterior"
-                                },
-                                "oAria": {
-                                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                                },
+                        paging: false,
+                        info: false,
+                        searching: false,
+                        sortable: false,
+                        ordering: false,
+                        language: {
+                            "sProcessing":     "Procesando...",
+                            "sLengthMenu":     "Mostrar _MENU_ registros",
+                            "sZeroRecords":    "No se encontraron resultados",
+                            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                            "sInfoPostFix":    "",
+                            "sSearch":         "Buscar:",
+                            "sUrl":            "",
+                            "sInfoThousands":  ",",
+                            "sLoadingRecords": "Cargando...",
+                            "oPaginate": {
+                                "sFirst":    "Primero",
+                                "sLast":     "Último",
+                                "sNext":     "Siguiente",
+                                "sPrevious": "Anterior"
                             },
-                            "columns": [
-                                { "data": "FilaPlanillaID","title": "id",},
-                                { "data": "Localidad", "title": "Localidad",},
-                                { "data": "DNI", "title": "DNI",},
-                            ],
+                            "oAria": {
+                                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                            }
+                        },
+                        "columns": [
+                            { "data": "Apellido","title": "Apellido",},
+                            { "data": "Localidad", "title": "Localidad",},
+                            { "data": "DNI", "title": "DNI",}
+                        ],
 
                             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull )
                             {
@@ -180,8 +202,27 @@ function fillDatatable(userid){
                                 //return nRow;
                             },
                             "fnInitComplete": function(oSettings, json) {
-                            console.log("completa")
-                                $(".PlanillaHija").attr('colspan','5')
+
+                                $(".PlanillaHija").attr('colspan','5');
+
+                                var nCloneTh4 = document.createElement('th');
+                                var nCloneTd4 = document.createElement('td');
+                                nCloneTd4.innerHTML =   '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-plus"></i> </button>' +
+                                    '<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> </button>' +
+                                    '<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> </button>' +
+                                    '<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> </button>';
+
+
+                                $('.PlanillaHija thead tr').each(function () {
+                                    console.dir(this)
+                                    this.insertBefore(nCloneTh4, this.childNodes[3]);
+                                    nCloneTh4.innerHTML = "Acciones"
+                                });
+
+
+                                $('.PlanillaHija tbody tr').each(function () {
+                                    this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[3]);
+                                });
                             }
                         });
                         iTableCounter = iTableCounter + 1;
