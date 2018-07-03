@@ -315,6 +315,8 @@ function fillDatatablePlanillas(userid){
                             },
                             "fnInitComplete": function(oSettings, json) {
 
+                                console.log("aca")
+                                console.dir(json)
                                 $(".PlanillaHija").attr('colspan','5');
 
                                 var nCloneTh4 = document.createElement('th');
@@ -333,8 +335,17 @@ function fillDatatablePlanillas(userid){
                                 });
 
 
-                                $('.PlanillaHija tbody tr').each(function () {
-                                    this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[3]);
+                                $('.PlanillaHija tbody tr').each(function (v,i) {
+
+                                    var nCloneTd4 = document.createElement('td');
+                                    nCloneTd4.innerHTML =
+                                        '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                                        '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                                        '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                                        '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+
+
+                                    this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
                                 });
                             }
                         });
