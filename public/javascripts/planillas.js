@@ -66,6 +66,7 @@ function fillDatatableEncuestas(userid){
                 }
             },
             info: false,
+            lengthMenu: [10,20],
             "columns": [
 
 
@@ -90,10 +91,10 @@ function fillDatatableEncuestas(userid){
                 var nCloneTh2 = document.createElement('th');
                 var nCloneTd2 = document.createElement('td');
                 nCloneTd2.innerHTML =
-                    '&nbsp<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-plus"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> </button>';
+                    '&nbsp<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
 
                 //nCloneTd2.className = "center";
 
@@ -183,17 +184,17 @@ function fillDatatablePlanillas(userid){
 
             var nCloneTh = document.createElement('th');
             var nCloneTd = document.createElement('td');
-            nCloneTd.innerHTML = '<button class="btn btn-small btn-secondary fa fa-plus-circle">Abrir</button>';
+            nCloneTd.innerHTML = '<button class="btn btn-small btn-secondary fa fa-plus-circle abrir">Abrir</button>';
 
             nCloneTd.className = "center";
 
             /******************************/
             var nCloneTh2 = document.createElement('th');
             var nCloneTd2 = document.createElement('td');
-            nCloneTd2.innerHTML =   '<button class="btn btn-block btn-success eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-plus"></i> Nuevo</button>' +
-                                    '<button class="btn btn-block btn-secondary detallePlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> Detalle</button>' +
-                                    '<button class="btn btn-block btn-warning editarPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> Editar</button>' +
-                                    '<button class="btn btn-block btn-danger eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> Eliminar</button>';
+            nCloneTd2.innerHTML =   '<button class="btn btn-block btn-success eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> Nuevo</button>' +
+                                    '<button class="btn btn-block btn-secondary detallePlanilla " data-planillaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> Detalle</button>' +
+                                    '<button class="btn btn-block btn-warning editarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> Editar</button>' +
+                                    '<button class="btn btn-block btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>';
 
             //nCloneTd2.className = "center";
 
@@ -232,69 +233,78 @@ function fillDatatablePlanillas(userid){
                 if (oTable.fnIsOpen(nTr)) {
                     /* This row is already open - close it */
 
-                    $(this)
-                        .removeClass('fa-minus-circle')
-                        .addClass('fa-plus-circle');
+                    if($(this).hasClass('abrir')){
 
-                    oTable.fnClose(nTr);
+                        $(this)
+                            .removeClass('fa-minus-circle')
+                            .addClass('fa-plus-circle');
+
+                        oTable.fnClose(nTr);
+                    }
+
+
                 }
                 else {
-                    /* Open this row */
-                    var rowIndex = oTable.fnGetPosition( $(nTds).closest('tr')[0] );
-                    //var detailsRowData = newRowData[rowIndex].details;
 
-                    //this.src = "http://i.imgur.com/d4ICC.png";
-                    $(this)
-                        .removeClass('fa-plus-circle')
-                        .addClass('fa-minus-circle');
+                    if($(this).hasClass('abrir')){
 
-                    //oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaID');
-                    //oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
+                        /* Open this row */
+                        var rowIndex = oTable.fnGetPosition( $(nTds).closest('tr')[0] );
+                        //var detailsRowData = newRowData[rowIndex].details;
+
+                        //this.src = "http://i.imgur.com/d4ICC.png";
+                        $(this)
+                            .removeClass('fa-plus-circle')
+                            .addClass('fa-minus-circle');
+
+                        //oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaID');
+                        //oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
                         //this.src = "http://i.imgur.com/d4ICC.png";
                         oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaHija');
                         oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
 
-                        "bProcessing": true,
-                        "sAjaxDataProp":"",
+                            "bProcessing": true,
+                            "sAjaxDataProp":"",
 
-                        ajax: {
-                            url:  server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerFilasPlanilla?id='+id,
-                        },
-
-                        paging: false,
-                        info: false,
-                        searching: false,
-                        sortable: false,
-                        ordering: false,
-                        language: {
-                            "sProcessing":     "Cargando...",
-                            "sLengthMenu":     "Mostrar _MENU_ registros",
-                            "sZeroRecords":    "No se encontraron resultados",
-                            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                            "sInfoPostFix":    "",
-                            "sSearch":         "Buscar:",
-                            "sUrl":            "",
-                            "sInfoThousands":  ",",
-                            "sLoadingRecords": "",
-                            "oPaginate": {
-                                "sFirst":    "Primero",
-                                "sLast":     "Último",
-                                "sNext":     "Siguiente",
-                                "sPrevious": "Anterior"
+                            ajax: {
+                                url:  server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerFilasPlanilla?id='+id,
                             },
-                            "oAria": {
-                                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                            }
-                        },
-                        "columns": [
-                            { "data": "Apellido","title": "Apellido",},
-                            { "data": "Localidad", "title": "Localidad",},
-                            { "data": "DNI", "title": "DNI",}
-                        ],
+
+                            paging: false,
+                            info: false,
+                            searching: false,
+                            sortable: false,
+                            ordering: false,
+                            language: {
+                                "sProcessing":     "Cargando...",
+                                "sLengthMenu":     "Mostrar _MENU_ registros",
+                                "sZeroRecords":    "No se encontraron resultados",
+                                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                                "sInfoPostFix":    "",
+                                "sSearch":         "Buscar:",
+                                "sUrl":            "",
+                                "sInfoThousands":  ",",
+                                "sLoadingRecords": "",
+                                "oPaginate": {
+                                    "sFirst":    "Primero",
+                                    "sLast":     "Último",
+                                    "sNext":     "Siguiente",
+                                    "sPrevious": "Anterior"
+                                },
+                                "oAria": {
+                                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                                }
+                            },
+                            "columns": [
+                                { "data": "FilaPlanillaID","title": "FilaPlanillaID", "visible": false},
+                                { "data": "Apellido","title": "Apellido",},
+                                { "data": "Localidad", "title": "Localidad",},
+                                { "data": "DNI", "title": "DNI",}
+                            ],
 
                             "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull )
                             {
@@ -309,14 +319,15 @@ function fillDatatablePlanillas(userid){
 
                                 var nCloneTh4 = document.createElement('th');
                                 var nCloneTd4 = document.createElement('td');
-                                nCloneTd4.innerHTML =   '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-plus"></i> </button>' +
-                                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-info"></i> </button>' +
-                                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-pencil"></i> </button>' +
-                                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#exampleTable").DataTable().row().data().PlanillaID+'"><i class="fa fa-trash"></i> </button>';
+                                nCloneTd4.innerHTML =
+                                    '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
 
 
                                 $('.PlanillaHija thead tr').each(function () {
-                                    console.dir(this)
+                                    //console.dir(this)
                                     this.insertBefore(nCloneTh4, this.childNodes[3]);
                                     nCloneTh4.innerHTML = "Acciones"
                                 });
@@ -328,6 +339,10 @@ function fillDatatablePlanillas(userid){
                             }
                         });
                         iTableCounter = iTableCounter + 1;
+                    }
+
+
+
                     }
                 });
             }

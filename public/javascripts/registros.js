@@ -18,7 +18,7 @@ $(function(){
         dataType: 'json',
         success: function(data){
             tipoPension = data;
-            console.dir(data)
+            //console.dir(data)
         },
         error: function(e){
             ERROR();
