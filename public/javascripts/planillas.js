@@ -107,16 +107,23 @@ function fillDatatableEncuestas(userid){
 
 
                     nCloneTd2.innerHTML =
-                        '&nbsp<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
-                        '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                        '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                        '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+                        //'&nbsp<button class="btn btn-small btn-success agregarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                        //'&nbsp<button class="btn btn-small btn-secondary detalleEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-warning editarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                        '&nbsp<button onclick="eliminarEncuesta()" class="btn btn-small btn-danger eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
 
 
                     this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
+
+
+
+
                 });
             }
         })
+
+
+
     });
 
 }
@@ -212,7 +219,7 @@ function fillDatatablePlanillas(userid){
             $('#exampleTable tbody tr').each(function (v,i) {
 
                 nCloneTd2.innerHTML =
-                    '<button class="btn btn-block btn-success eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> Nuevo</button>' +
+                    '<button class="btn btn-block btn-success agregarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> Nuevo</button>' +
                     '<button class="btn btn-block btn-secondary detallePlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> Detalle</button>' +
                     '<button class="btn btn-block btn-warning editarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> Editar</button>' +
                     '<button class="btn btn-block btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>';
@@ -332,7 +339,7 @@ function fillDatatablePlanillas(userid){
                                 var nCloneTh4 = document.createElement('th');
                                 var nCloneTd4 = document.createElement('td');
                                 nCloneTd4.innerHTML =
-                                    '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                                    //'<button class="btn btn-small btn-success agregarPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
                                     '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
                                     '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
                                     '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
@@ -349,7 +356,7 @@ function fillDatatablePlanillas(userid){
 
                                     var nCloneTd4 = document.createElement('td');
                                     nCloneTd4.innerHTML =
-                                        '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                                        '<button class="btn btn-small btn-success agregarPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
                                         '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
                                         '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
                                         '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
@@ -852,4 +859,45 @@ function fillPlanillas(){
         var indice = planillasDATA[index].PlanillaID;
 
     }
+}
+
+function eliminarEncuesta(){
+
+    $(".eliminarEncuesta").click(function ()
+    {
+        //console.dir($(this).data())
+        var id = $(this).data().encuestaid;
+
+        /**/
+        swal({
+            title: "Incluir Salud",
+            text: "El registro esta a punto de ser eliminado",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarEncuesta?id=" + id,
+                    method: "POST",
+                    dataType: "json",
+
+                    success: function (res) {
+                        console.log(res)
+                        swal("Registro eliminado!", {
+                            icon: "success",
+                        });
+                        setTimeout(function(){location.reload();},1500)
+
+                    }
+                });
+
+            } else {
+                //swal("Your imaginary file is safe!");
+            }
+        });
+    })
+
+
 }

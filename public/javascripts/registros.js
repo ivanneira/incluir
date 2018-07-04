@@ -72,7 +72,7 @@ var marker;
 var $modal = $("#modalAC");
 function ERROR(){
 
-    alert("Hubo un error, por favor regargue la página");
+    alert("Hubo un error, por favor recargue la página");
 }
 
 var modal;

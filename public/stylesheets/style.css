@@ -266,3 +266,24 @@ a.bg-light:hover{
 
   width: auto !important;
 }
+
+.nav-link {
+
+  background-color: #a3a4a5 !important;
+
+}
+
+.nav-link.active{
+
+  background-color: #f8f9fa !important;
+  color: black !important;
+
+}
+
+.nav-link.active:hover{
+
+  color: black !important;
+  background-color: #f8f9fa !important;
+  border: 1px solid black !important;
+}
+
