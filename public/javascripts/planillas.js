@@ -18,6 +18,8 @@ $("#volver").click(function(){
     $('#registros').hide();
     $('#encabezados').show();
 
+    $("#registros").destroy();
+
 });
 
 
@@ -332,18 +334,24 @@ function mostarRegistros(planillaid){
             });
 
 
-            $("#registrosTable tbody tr").each(function (v,i) {
+            if(typeof($("#registrosTable").DataTable().row().data()) !== 'undefined'){
 
-                var nCloneTd4 = document.createElement('td');
-                nCloneTd4.innerHTML =
-                    '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+                $("#registrosTable tbody tr").each(function (v,i) {
+
+                    var nCloneTd4 = document.createElement('td');
+                    nCloneTd4.innerHTML =
+                        '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
 
 
-                this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
-            });
+                    this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
+                });
+            }
+
+
+
         }
     });
 
