@@ -110,7 +110,7 @@ function fillDatatableEncuestas(userid){
                         //'&nbsp<button class="btn btn-small btn-success agregarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
                         //'&nbsp<button class="btn btn-small btn-secondary detalleEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
                         '&nbsp<button class="btn btn-small btn-warning editarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                        '&nbsp<button onclick="eliminarEncuesta()" class="btn btn-small btn-danger eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+                        '&nbsp<button onclick="eliminarEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-danger eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
 
 
                     this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
@@ -129,6 +129,7 @@ function fillDatatableEncuestas(userid){
 }
 
 function fillDatatablePlanillas(userid){
+
     function fnFormatDetails(table_id, html) {
         var sOut = "<table width='100%' id=\"exampleTable_" + table_id + "\">";
         sOut += html;
@@ -152,230 +153,109 @@ function fillDatatablePlanillas(userid){
         ajax: {
                 url: server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerPlanillas?id=' + userid
             },
-        lengthMenu: [10,20],
-        info: false,
+            lengthMenu: [10,20],
+            info: false,
 
-        language: {
-            "sProcessing":     "Cargando...",
-            "sLengthMenu":     "Mostrar _MENU_ registros",
-            "sZeroRecords":    "No se encontraron resultados",
-            "sEmptyTable":     "Ningún dato disponible en esta tabla",
-            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-            "sInfoPostFix":    "",
-            "sSearch":         "Buscar número de planilla:",
-            "sUrl":            "",
-            "sInfoThousands":  ",",
-            "sLoadingRecords": "",
-            "oPaginate": {
-                    "sFirst":    "Primero",
-                        "sLast":     "Último",
-                        "sNext":     "Siguiente",
-                        "sPrevious": "Anterior"
-                },
-                "oAria": {
-                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-            }
-        },
-        "columns": [
-
-
-            { "data": "PlanillaID","title": "Planilla ID", "visible": false},
-            { "data": "NumeroPlanilla","title": "Nº Planilla"},
-            { "data": "FechaPlanilla", "title": "Fecha de Planilla","format": 'M/D/YYYY'},
-            { "data": "EncuestadorNombre","title": "Encuestador"}
-
-        ],
-        "fnInitComplete": function(oSettings, json) {
-
-            detailsTableHtml = $("#detailsTablePlanilla").html();
-
-            var nCloneTh = document.createElement('th');
-            var nCloneTd = document.createElement('td');
-            nCloneTd.innerHTML = '<button class="btn btn-small btn-secondary fa fa-plus-circle abrir">Abrir</button>';
-
-            nCloneTd.className = "center";
-
-            /******************************/
-            var nCloneTh2 = document.createElement('th');
-            var nCloneTd2 = document.createElement('td');
-
-            //nCloneTd2.className = "center";
-
-            $('#exampleTable thead').each(function () {
-                this.insertBefore(nCloneTh2, this.childNodes[3]);
-                nCloneTh2.innerHTML = "Acciones"
-            });
-
-
-
-            $('#exampleTable thead  tr').each(function () {
-                this.insertBefore(nCloneTh2, this.childNodes[3]);
-            });
-
-
-            $('#exampleTable tbody tr').each(function (v,i) {
-
-                nCloneTd2.innerHTML =
-                    '<button class="btn btn-block btn-success agregarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> Nuevo</button>' +
-                    '<button class="btn btn-block btn-secondary detallePlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> Detalle</button>' +
-                    '<button class="btn btn-block btn-warning editarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> Editar</button>' +
-                    '<button class="btn btn-block btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar</button>';
-
-
-                this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
-            });
-            /******************************/
-            $('#exampleTable thead  tr').each(function () {
-                this.insertBefore(nCloneTh, this.childNodes[0]);
-            });
-
-
-            $('#exampleTable tbody tr').each(function (v,i) {
-
-
-
-                this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
-            });
-
-            $('#exampleTable tbody td button').on('click', function () {
-
-                var nTr = $(this).parents('tr')[0];
-                var nTds = this;
-
-                var id = $("#exampleTable").DataTable().row().data().PlanillaID;
-
-                if (oTable.fnIsOpen(nTr)) {
-                    /* This row is already open - close it */
-
-                    if($(this).hasClass('abrir')){
-
-                        $(this)
-                            .removeClass('fa-minus-circle')
-                            .addClass('fa-plus-circle');
-
-                        oTable.fnClose(nTr);
-                    }
-
-
+            language: {
+                "sProcessing":     "Cargando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar número de planilla:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "",
+                "oPaginate": {
+                        "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
                 }
-                else {
-
-                    if($(this).hasClass('abrir')){
-
-                        /* Open this row */
-                        var rowIndex = oTable.fnGetPosition( $(nTds).closest('tr')[0] );
-                        //var detailsRowData = newRowData[rowIndex].details;
-
-                        //this.src = "http://i.imgur.com/d4ICC.png";
-                        $(this)
-                            .removeClass('fa-plus-circle')
-                            .addClass('fa-minus-circle');
-
-                        //oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaID');
-                        //oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
-                        //this.src = "http://i.imgur.com/d4ICC.png";
-                        oTable.fnOpen(nTr, fnFormatDetails(iTableCounter, detailsTableHtml), 'PlanillaHija');
-                        oInnerTable = $("#exampleTable_" + iTableCounter).dataTable({
-
-                            "bProcessing": true,
-                            "sAjaxDataProp":"",
-
-                            ajax: {
-                                url:  server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerFilasPlanilla?id='+id,
-                            },
-
-                            paging: false,
-                            info: false,
-                            searching: false,
-                            sortable: false,
-                            ordering: false,
-                            language: {
-                                "sProcessing":     "Cargando...",
-                                "sLengthMenu":     "Mostrar _MENU_ registros",
-                                "sZeroRecords":    "No se encontraron resultados",
-                                "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                                "sInfoPostFix":    "",
-                                "sSearch":         "Buscar:",
-                                "sUrl":            "",
-                                "sInfoThousands":  ",",
-                                "sLoadingRecords": "",
-                                "oPaginate": {
-                                    "sFirst":    "Primero",
-                                    "sLast":     "Último",
-                                    "sNext":     "Siguiente",
-                                    "sPrevious": "Anterior"
-                                },
-                                "oAria": {
-                                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                                    "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                                }
-                            },
-                            "columns": [
-                                { "data": "FilaPlanillaID","title": "FilaPlanillaID", "visible": false},
-                                { "data": "Apellido","title": "Apellido",},
-                                { "data": "Localidad", "title": "Localidad",},
-                                { "data": "DNI", "title": "DNI",}
-                            ],
-
-                            "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull )
-                            {
-                                //var imgLink = aData['pic'];
-                                //var imgTag = '<img width="100px" src="' + imgLink + '"/>';
-                                //$('td:eq(0)', nRow).html(imgTag);
-                                //return nRow;
-                            },
-                            "fnInitComplete": function(oSettings, json) {
-
-                                //console.log("aca")
-                                //console.dir(json)
-                                $(".PlanillaHija").attr('colspan','5');
-
-                                var nCloneTh4 = document.createElement('th');
-                                var nCloneTd4 = document.createElement('td');
-                                nCloneTd4.innerHTML =
-                                    //'<button class="btn btn-small btn-success agregarPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
-                                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row().data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+            },
+            "columns": [
 
 
-                                $('.PlanillaHija thead tr').each(function () {
-                                    //console.dir(this)
-                                    this.insertBefore(nCloneTh4, this.childNodes[3]);
-                                    nCloneTh4.innerHTML = "Acciones"
-                                });
+                { "data": "PlanillaID","title": "Planilla ID", "visible": false},
+                { "data": "NumeroPlanilla","title": "Nº Planilla"},
+                { "data": "FechaPlanilla", "title": "Fecha de Planilla","format": 'M/D/YYYY'},
+                { "data": "EncuestadorNombre","title": "Encuestador"}
 
+            ],
+            "fnInitComplete": function(oSettings, json) {
 
-                                $('.PlanillaHija tbody tr').each(function (v,i) {
+                detailsTableHtml = $("#detailsTablePlanilla").html();
 
-                                    var nCloneTd4 = document.createElement('td');
-                                    nCloneTd4.innerHTML =
-                                        '<button class="btn btn-small btn-success agregarPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
-                                        '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                                        '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                                        '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+oInnerTable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+                var nCloneTh = document.createElement('th');
+                var nCloneTd = document.createElement('td');
 
+                nCloneTd.className = "center";
 
-                                    this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
-                                });
-                            }
-                        });
-                        iTableCounter = iTableCounter + 1;
-                    }
+                /******************************/
+                var nCloneTh2 = document.createElement('th');
+                var nCloneTd2 = document.createElement('td');
 
+                //nCloneTd2.className = "center";
 
-
-                    }
+                $('#exampleTable thead').each(function () {
+                    this.insertBefore(nCloneTh2, this.childNodes[3]);
+                    nCloneTh2.innerHTML = "Acciones"
                 });
+
+
+
+                $('#exampleTable thead  tr').each(function () {
+                    this.insertBefore(nCloneTh2, this.childNodes[3]);
+                });
+
+
+                $('#exampleTable tbody tr').each(function (v,i) {
+
+                    nCloneTd2.innerHTML =
+                        '<button onclick="mostarRegistros('+$("#exampleTable").DataTable().row(i).data().PlanillaID+')" class="btn btn-block btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-info"></i> Ver registros</button>' +
+                        '<button class="btn btn-block btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> Nuevo registro</button>' +
+                        '<button class="btn btn-block btn-small btn-warning editarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> Editar encabezado</button>' +
+                        '<button class="btn btn-block btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar planilla</button>';
+
+
+                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
+                });
+
+
+                /*
+                $('#exampleTable thead  tr').each(function () {
+                    this.insertBefore(nCloneTh, this.childNodes[0]);
+                });
+*/
+/*
+                $('#exampleTable tbody tr').each(function (v,i) {
+
+
+                    nCloneTd.innerHTML = '<button data-id="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" class="btn btn-small btn-secondary fa fa-plus-circle abrir">Abrir</button>';
+                    this.insertBefore(nCloneTd.cloneNode(true), this.childNodes[0]);
+                });*/
+
             }
+
         });
     });
+
+}
+
+function mostarRegistros(planillaid){
+
+    console.log(planillaid)
+
+    $('#encabezados').hide();
+    $('#registros').show();
+
 
 }
 
@@ -827,11 +707,11 @@ function fillPlanillas(){
     }
 }
 
-function eliminarEncuesta(){
+function eliminarEncuesta(encuestaID){
 
 
-        console.dir($(this).data())
-        var id = $(this).data().encuestaid;
+        console.dir(encuestaID);
+        var id = encuestaID;
 
         /**/
         swal({
@@ -862,6 +742,42 @@ function eliminarEncuesta(){
                 //swal("Your imaginary file is safe!");
             }
         });
+}
+
+function eliminarRegistro(FilaPlanillaID){
 
 
+        console.dir(FilaPlanillaID)
+        var id = FilaPlanillaID;
+
+        /**/
+        swal({
+            title: "Incluir Salud",
+            text: "El registro esta a punto de ser eliminado",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
+                    method: "POST",
+                    dataType: "json",
+
+                    success: function (res) {
+                        console.log(res)
+                        swal("Registro eliminado!", {
+                            icon: "success",
+                        });
+                        setTimeout(function(){location.reload();},1500)
+
+                    }
+                });
+
+            } else {
+                //swal("Your imaginary file is safe!");
+            }
+
+    })
 }

@@ -26,15 +26,34 @@
            <br>
            <br>
 
-           <!-- datatable -->
-           <table id="exampleTable">
+           <div id="encabezados">
 
-           </table>
-           <div style="display:none">
-               <table id="detailsTablePlanilla">
+
+               <table id="exampleTable">
+
                </table>
+               <div style="display:none">
+                   <table id="detailsTablePlanilla">
+                   </table>
+               </div>
+
+
            </div>
-           <!-- /datatable -->
+
+           <div id="registros" style="display:none">
+
+               <button class="btn btn-small btn-success"><-- Volver</button>
+
+               <table id="registrosTable">
+
+               </table>
+               <div style="display:none">
+                   <table id="detailsTableRegistros">
+                   </table>
+               </div>
+           </div>
+
+
        </div>
        <div class="tab-pane fade" id="encuestas" role="tabpanel" aria-labelledby="encuestas-tab">
            <button id="agregarEncuesta" class="btn btn-sm btn-success">+Agregar Encuesta</button>

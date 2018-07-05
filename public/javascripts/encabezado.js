@@ -7,20 +7,18 @@ function agregarEncabezado() {
 
 
     var htmlStringEncabezado =
-        '<table id="encabezado" class="card-1 table table-primary table-striped table-hover">' +
+        '<table id="encabezado" class="table table-light table-striped table-hover">' +
         '<tr>' +
-        '<thead class="thead-dark">' +
+        '<thead class="">' +
         '<th>Nº Planilla</th>' +
         '<th>Supervisor</th>' +
         '<th>Encuestador</th>' +
-        '<th>Departamento</th>' +
         '</thead>' +
         '</tr>' +
         '<tr>' +
         '<td><input id="numeroPlanilla" type="text" class="form-control" placeholder="Nº planilla"></td>' +
         '<td><select class="selectSupervisor"></select></td>' +
         '<td><select class="selectEncuestador"></select></td>' +
-        '<td><select class="selectDepartamento"></select></td>' +
         '</tr>' +
         '</table>';
 
@@ -59,33 +57,6 @@ function agregarEncabezado() {
         },
 
 
-    });
-
-
-    $(".selectDepartamento").select2({
-        placeholder: 'Busque departamento',
-        width: '100%',
-        dropdownParent: $("#modalACBody"),
-        minimumInputLength: 3,
-        language : 'es',
-        ajax: {
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerDepartamentos?id=" + 18,
-            dataType: "json",
-            type: "GET",
-            delay: 250,
-            data: function (params) {
-                console.dir(params)
-                return {
-                    searchTerm: params.term // search term
-                };
-            },
-            processResults: function (response) {
-                return {
-                    results: response
-                };
-            },
-            cache: true
-        }
     });
 
 
@@ -132,7 +103,7 @@ function verificarEncabezado(){
         supervisorID: '',
         encuestadorID: '',
         nroPlanilla: '',
-        departamentoID: ''
+
     };
 
     //TODO: cambiar cuando esté funcionando el login
@@ -140,7 +111,6 @@ function verificarEncabezado(){
     encabezadoDATA.supervisorID = $(".selectSupervisor").val();
     encabezadoDATA.encuestadorID = $(".selectEncuestador").val();
     encabezadoDATA.nroPlanilla = $("#numeroPlanilla").val();
-    encabezadoDATA.departamentoID = $(".selectDepartamento").val();
 
     $.ajax({
         url: server_host+":"+server_port+"/api/IncluirSalud/GuardarPlanilla",
