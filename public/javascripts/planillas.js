@@ -13,6 +13,13 @@ $(function(){
     fillDatatablePlanillas(1);
     fillDatatableEncuestas(1);
 
+$("#volver").click(function(){
+
+    $('#registros').hide();
+    $('#encabezados').show();
+
+});
+
 
 });
 
@@ -253,8 +260,92 @@ function mostarRegistros(planillaid){
 
     console.log(planillaid)
 
+    var id = planillaid
+
     $('#encabezados').hide();
     $('#registros').show();
+
+    $("#registrosTable").dataTable({
+
+        "bProcessing": true,
+        "sAjaxDataProp":"",
+
+        ajax: {
+            url:  server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerFilasPlanilla?id='+id,
+        },
+
+        paging: false,
+        info: false,
+        searching: false,
+        sortable: false,
+        ordering: false,
+        language: {
+            "sProcessing":     "Cargando...",
+            "sLengthMenu":     "Mostrar _MENU_ registros",
+            "sZeroRecords":    "No se encontraron resultados",
+            "sEmptyTable":     "Ningún dato disponible en esta tabla",
+            "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix":    "",
+            "sSearch":         "Buscar:",
+            "sUrl":            "",
+            "sInfoThousands":  ",",
+            "sLoadingRecords": "",
+            "oPaginate": {
+                "sFirst":    "Primero",
+                "sLast":     "Último",
+                "sNext":     "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        },
+        "columns": [
+            { "data": "FilaPlanillaID","title": "FilaPlanillaID", "visible": false},
+            { "data": "Apellido","title": "Apellido",},
+            { "data": "Localidad", "title": "Localidad",},
+            { "data": "DNI", "title": "DNI",}
+        ],
+
+        "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull )
+        {
+            //var imgLink = aData['pic'];
+            //var imgTag = '<img width="100px" src="' + imgLink + '"/>';
+            //$('td:eq(0)', nRow).html(imgTag);
+            //return nRow;
+        },
+        "fnInitComplete": function(oSettings, json) {
+
+            //console.log("aca")
+            //console.dir(json)
+            $(".PlanillaHija").attr('colspan','5');
+
+            var nCloneTh4 = document.createElement('th');
+
+            $("#registrosTable thead tr").each(function () {
+                //console.dir(this)
+                this.insertBefore(nCloneTh4, this.childNodes[3]);
+                nCloneTh4.innerHTML = "Acciones"
+            });
+
+
+            $("#registrosTable tbody tr").each(function (v,i) {
+
+                var nCloneTd4 = document.createElement('td');
+                nCloneTd4.innerHTML =
+                    '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                    '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                    '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                    '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+
+
+                this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
+            });
+        }
+    });
 
 
 }
