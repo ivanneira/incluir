@@ -5,6 +5,9 @@ var editar = 0;
 var ID = "";
 var PlanillaID = "";
 
+var registrostable;
+
+
 $(function(){
 
     //forzado a usuario 1
@@ -18,7 +21,14 @@ $("#volver").click(function(){
     $('#registros').hide();
     $('#encabezados').show();
 
-    $("#registros").destroy();
+    //console.log(registrostable)
+
+    registrostable.destroy();
+    $("#registrosTable").empty();
+
+    //console.log(registrostable)
+
+
 
 });
 
@@ -228,10 +238,10 @@ function fillDatatablePlanillas(userid){
                 $('#exampleTable tbody tr').each(function (v,i) {
 
                     nCloneTd2.innerHTML =
-                        '<button onclick="mostarRegistros('+$("#exampleTable").DataTable().row(i).data().PlanillaID+')" class="btn btn-block btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-info"></i> Ver registros</button>' +
-                        '<button class="btn btn-block btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> Nuevo registro</button>' +
-                        '<button class="btn btn-block btn-small btn-warning editarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> Editar encabezado</button>' +
-                        '<button class="btn btn-block btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> Eliminar planilla</button>';
+                        '<button onclick="mostarRegistros('+$("#exampleTable").DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-info"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i></button>' +
+                        '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>' +
+                        '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button>';
 
 
                     this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
@@ -260,18 +270,18 @@ function fillDatatablePlanillas(userid){
 
 function mostarRegistros(planillaid){
 
-    console.log(planillaid)
+    //console.log(planillaid)
 
     var id = planillaid
 
     $('#encabezados').hide();
     $('#registros').show();
 
-    $("#registrosTable").dataTable({
+    registrostable =$("#registrosTable").DataTable({
 
         "bProcessing": true,
         "sAjaxDataProp":"",
-
+        "bDestroy": true,
         ajax: {
             url:  server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerFilasPlanilla?id='+id,
         },
@@ -281,6 +291,7 @@ function mostarRegistros(planillaid){
         searching: false,
         sortable: false,
         ordering: false,
+
         language: {
             "sProcessing":     "Cargando...",
             "sLengthMenu":     "Mostrar _MENU_ registros",
@@ -323,7 +334,7 @@ function mostarRegistros(planillaid){
 
             //console.log("aca")
             //console.dir(json)
-            $(".PlanillaHija").attr('colspan','5');
+            //$(".PlanillaHija").attr('colspan','5');
 
             var nCloneTh4 = document.createElement('th');
 
@@ -340,10 +351,10 @@ function mostarRegistros(planillaid){
 
                     var nCloneTd4 = document.createElement('td');
                     nCloneTd4.innerHTML =
-                        '<button class="btn btn-small btn-success eliminaPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
-                        '&nbsp<button class="btn btn-small btn-secondary detallePlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                        '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                        '&nbsp<button class="btn btn-small btn-danger eliminaPlanilla " data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+
+                        '<button class="btn btn-small btn-secondary detalleRegitro" data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                        '&nbsp<button class="btn btn-small btn-warning editarRegistro" data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                        '&nbsp<button onclick="eliminarRegistro('+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +')" class="btn btn-small btn-danger eliminarRegistro" data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
 
 
                     this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
@@ -846,7 +857,7 @@ function eliminarEncuesta(encuestaID){
 function eliminarRegistro(FilaPlanillaID){
 
 
-        console.dir(FilaPlanillaID)
+        //console.dir(FilaPlanillaID)
         var id = FilaPlanillaID;
 
         /**/
