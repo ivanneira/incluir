@@ -80,7 +80,7 @@ function ERROR(){
 var modal;
 
 
-function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
+function fillModal(NumeroPlanilla,idplanilla,filaid){
 
     //console.log(departamentoID)
 

@@ -531,7 +531,7 @@ function agregarEncuesta(){
 
 
 
-        console.dir(encuestaDATA)
+        swal("Espere un momento...", "se está guardando la encuesta", "info");
 
 
         $.ajax({
