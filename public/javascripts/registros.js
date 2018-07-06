@@ -766,7 +766,7 @@ function fillDropDown(departamentoID){
             placeholder: 'Elija tipo de pensión',
             width: '100%',
             language: 'es',
-            minimumResultsForSearch: -1,
+            //minimumResultsForSearch: -1,
             data: tipoPension
         });
 
@@ -775,7 +775,7 @@ function fillDropDown(departamentoID){
             placeholder: 'Elija tipo de vivienda',
             width: '100%',
             language: 'es',
-            minimumResultsForSearch: -1,
+            //minimumResultsForSearch: -1,
             data: tipoVivienda
         })
         .on('select2:select',function(e){
@@ -793,7 +793,7 @@ function fillDropDown(departamentoID){
             placeholder: 'Elija tipo de vivienda',
             width: '100%',
             language: 'es',
-            minimumResultsForSearch: -1,
+            //minimumResultsForSearch: -1,
             multiple: true,
             data: tipoServicios
         }).on('select2:select',function(e){
@@ -865,7 +865,7 @@ function fillDropDown(departamentoID){
         placeholder: 'Elija prestaciones',
         width: '100%',
         language: 'es',
-        minimumInputLength: 3,
+        //minimumInputLength: 3,
         multiple: true,
         dropdownParent: $("#modalACBody"),
         ajax: {

@@ -35,7 +35,7 @@ function agregarEncabezado() {
         placeholder: 'Busque supervisor',
         dropdownParent: $("#modalACBody"),
         width: '100%',
-        minimumInputLength: 0,
+        //minimumInputLength: 0,
         language: 'es',
         ajax: {
             //url: 'planillas/supervisores',

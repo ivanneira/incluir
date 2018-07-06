@@ -360,7 +360,7 @@ function agregarEncuesta(){
         placeholder: 'Busque encuestador',
         dropdownParent: $("#modalACBody"),
         width: '100%',
-        minimumInputLength: 3,
+        //minimumInputLength: 3,
         language: 'es',
         ajax: {
             //url: 'planillas/supervisores',
@@ -390,7 +390,7 @@ function agregarEncuesta(){
     $(".selectDepartamentoEncuesta").select2({
         placeholder: 'Busque departamento',
         dropdownParent: $("#modalACBody"),
-        minimumInputLength: 3,
+        //minimumInputLength: 3,
         width: '100%',
         language: 'es',
         ajax: {
