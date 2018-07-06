@@ -9,11 +9,11 @@ function agregarEncuesta(){
         '           <div class="row">' +
         '              <div class="col-4">' +
         '                      <label for="nencuesta">Nº de encuesta</label>' +
-        '                      <input id="nencuesta" name="nencuesta" type="number" class="form-control" placeholder="Nº de encuesta">' +
+        '                      <input maxlength="20" id="nencuesta" name="nencuesta" type="number" class="form-control" placeholder="Nº de encuesta">' +
         '              </div>' +
         '              <div class="col-4">' +
         '                      <label for="fechaEncuesta">Fecha de la encuesta</label>' +
-        '                      <input id="fechaEncuesta" name="fechaEncuesta" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
+        '                      <input maxlength="10" id="fechaEncuesta" name="fechaEncuesta" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
         '              </div>' +
         '              <div class="col-4">' +
         '                      <label for="sexoEncuesta">Sexo</label>' +
@@ -49,7 +49,7 @@ function agregarEncuesta(){
         '         <div class="row">' +
         '             <div class="col-4">' +
         '                      <label for="codigoEncuesta">Código</label>' +
-        '                      <input id="codigoEncuesta" name="codigoEncuesta" type="text" class="form-control" placeholder="Código de encuesta">' +
+        '                      <input maxlength="20" id="codigoEncuesta" name="codigoEncuesta" type="text" class="form-control" placeholder="Código de encuesta">' +
         '             </div>' +
         '             <div class="col-4">' +
         '             </div>' +

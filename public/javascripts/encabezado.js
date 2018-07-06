@@ -16,7 +16,7 @@ function agregarEncabezado() {
         '</thead>' +
         '</tr>' +
         '<tr>' +
-        '<td><input id="numeroPlanilla" type="text" class="form-control" placeholder="Nº planilla"></td>' +
+        '<td><input maxlength="8" id="numeroPlanilla" type="number" class="form-control" placeholder="Nº planilla"></td>' +
         '<td><select class="selectSupervisor"></select></td>' +
         '<td><select class="selectEncuestador"></select></td>' +
         '</tr>' +

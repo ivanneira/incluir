@@ -124,11 +124,11 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
         '  <tr>'+
         '      <td>' +
         '           <label for="nombre">Nombre</label>' +
-        '           <input id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">' +
+        '           <input maxlength="50" id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">' +
         '       </td>'+
         '       <td>' +
         '           <label for="apellido">Apellido</label>' +
-        '           <input id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido">' +
+        '           <input maxlength="50" id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido">' +
         '       </td>'+
         '  </tr>'+
         '  <tr  class="vivo">'+
@@ -144,7 +144,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
         '       </td>'+
         '      <td>' +
         '           <label for="dni">DNI</label>' +
-        '           <input id="dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
+        '           <input maxlength="8" id="dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
         '       </td>'+
         '  </tr>'+
         '  <tr>'+
@@ -154,7 +154,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
         '       </td>'+
         '       <td id="fechaDefuncion">' +
         '           <label for="defuncion">Fecha de defunción</label>' +
-        '           <input id="defuncion" name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
+        '           <input maxlength="10" id="defuncion" name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
         '       </td>'+
         '      <td>' +
         '           <label for="vivo">Vivo</label>' +
@@ -179,11 +179,11 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
         '       </td>'+
         '       <td>' +
         '           <label for="domicilio">Calle, orientación y altura</label>' +
-        '           <input id="domicilio" name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
+        '           <input maxlength="50" id="domicilio" name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
         '       </td>'+
         '       <td>' +
         '           <label for="barrio">Barrio</label>' +
-        '           <input id="barrio" name="barrio" type="text" class="form-control" placeholder="Barrio">' +
+        '           <input maxlength="150" id="barrio" name="barrio" type="text" class="form-control" placeholder="Barrio">' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
@@ -192,7 +192,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
         '               <div class="input-group-prepend">'+
         '                   <span class="input-group-text" id="latitud">Latitud</span>'+
         '               </div>'+
-        '               <input name="lat" id="lat" type="text" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
+        '               <input maxlength="20" name="lat" id="lat" type="text" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
         '           </div>'+
         '       </td>' +
         '       <td>' +
@@ -200,7 +200,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
         '               <div class="input-group-prepend">'+
         '                   <span class="input-group-text" id="longitud">Longitud</span>'+
         '               </div>'+
-        '               <input name="lon" id="lon" type="text" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
+        '               <input maxlength="20" name="lon" id="lon" type="text" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
         '           </div>'+
         '       </td>' +
         '   </tr>'+
@@ -274,7 +274,7 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
         '       <td>' +
         '           <label for="vivienda">Tipo de vivienda</label>' +
         '           <select name="vivienda" class="selectTipoVivienda">' +
-        '           <input id="comentarioTipoVivienda" class="form-control" type="text" placeholder="Especifique" >' +
+        '           <input maxlength="100" id="comentarioTipoVivienda" class="form-control" type="text" placeholder="Especifique" >' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
