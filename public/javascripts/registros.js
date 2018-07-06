@@ -174,6 +174,10 @@ function fillModal(departamentoID,NumeroPlanilla,idplanilla,filaid){
         '<table class="table table-striped">'+
         '   <tr>'+
         '       <td>' +
+        '           <label for="Departamento">Departamento</label>' +
+        '           <select name="departamento" class="selectDepartamento"></select>' +
+        '       </td>'+
+        '       <td>' +
         '           <label for="localidad">Localidad</label>' +
         '           <select name="localidad" class="selectLocalidad"></select>' +
         '       </td>'+
