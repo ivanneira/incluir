@@ -238,7 +238,7 @@ function fillDatatablePlanillas(userid){
 
 
                     nCloneTd2.innerHTML =
-                        '<button onclick="mostarRegistros('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-info"></i> </button>' +
+                        '<button onclick="mostarRegistros('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-arrow-right"></i> </button>' +
                         '&nbsp<button onclick="fillModal('+table.DataTable().row(i).data().NumeroPlanilla+','+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i></button>' +
                         '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-planillaid="'+table.DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>' +
                         '&nbsp<button onclick="eliminarPlanilla('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button>';
@@ -272,7 +272,7 @@ function mostarRegistros(planillaid){
 
     //console.log(planillaid)
     $('#agregarPlanilla').hide();
-    $('#agregarRegistroBotonPrincipal').show();
+    //$('#agregarRegistroBotonPrincipal').show();
 
     var id = planillaid
 
@@ -352,11 +352,14 @@ function mostarRegistros(planillaid){
                 $("#registrosTable tbody tr").each(function (v,i) {
 
                     var nCloneTd4 = document.createElement('td');
+
+                    var registrostable = $("#registrosTable");
+
                     nCloneTd4.innerHTML =
 
-                        '<button class="btn btn-small btn-secondary detalleRegitro" data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                        '&nbsp<button class="btn btn-small btn-warning editarRegistro" data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                        '&nbsp<button onclick="eliminarRegistro('+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +')" class="btn btn-small btn-danger eliminarRegistro" data-filaid="'+$("#registrosTable").DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+                        '<button class="btn btn-small btn-secondary detalleRegitro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                        '&nbsp<button  onclick="fillModal('+registrostable.DataTable().row(i).data().NumeroPlanilla+','+planillaid+','+registrostable.DataTable().row(i).data().FilaPlanillaID+')" class="btn btn-small btn-warning editarRegistro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                        '&nbsp<button onclick="eliminarRegistro('+registrostable.DataTable().row(i).data().FilaPlanillaID +')" class="btn btn-small btn-danger eliminarRegistro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
 
 
                     this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);

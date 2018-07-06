@@ -8,7 +8,7 @@ var tipoServicios;
 //TODO: traer userid sin forzar
 var userid = 1;
 
-//var prestaciones;
+var planillaid;
 
 var map;
 $(function(){
@@ -82,7 +82,9 @@ var modal;
 
 function fillModal(NumeroPlanilla,idplanilla,filaid){
 
-    //console.log(departamentoID)
+
+
+    planillaid = idplanilla;
 
     //tabs
     var htmlString =
@@ -339,7 +341,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
 
     $("#modalACTitulo")
         .data('idplanilla',idplanilla)
-        .text('Nuevo registro, planilla nº: ' + NumeroPlanilla);
+        .text('Editar registro, planilla nº: ' + NumeroPlanilla);
 
     if(filaid) completarDatos(filaid);
 
@@ -355,12 +357,13 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //esconde el campo de cometarios de vivienda por defecto
     $("#comentarioTipoVivienda").hide();
 
-    fillDropDown(413);
+    fillDropDown();
 
 }
 
 function completarDatos(filaid){
 
+    swal("Espere...", "Se están completando los datos", "info");
 
     $.ajax({
         url: server_host+":"+server_port+ server_url +"/api/IncluirSalud/ObtenerFilaPlanilla?id=" + filaid,
@@ -368,11 +371,11 @@ function completarDatos(filaid){
         dataType: "json"
     }).done(function(res){
 
-
+        swal.close();
         //datos para completar
         var data = res[0];
 
-        console.dir(data);
+        //console.dir(data);
 
         //datos personales
 
@@ -644,8 +647,8 @@ function armarJSON(){
         //TODO: faltan datos para guardar.
 
         //planilla
-        data.ID = ID;
-        data.planillaID = PlanillaID; //$("#modalACTitulo").data().id;
+        //data.ID = ID;
+        data.planillaID = planillaid;
         //personales
         data.nombre = $("#nombre").val();
         data.apellido = $("#apellido").val();
@@ -668,13 +671,13 @@ function armarJSON(){
         data.barrio = $("#barrio").val();
         data.latitud = $("#lat").val();
         data.longitud = $("#lon").val();
+        data.departamentoID = $(".selectDepartamento").val();
         //prestación
         data.tipoBeneficiarioID = $("#btnTitular").prop('checked') ? 1 : 2;
 
         data.enlace_tipoPension = [
             {
 
-                filaPlanillaID: ID,//data.planillaID,
                 tipoPensionID: $(".selectTipoPension ").val()
             }
         ];
@@ -686,8 +689,7 @@ function armarJSON(){
         for(var index in prestaciones){
 
             data.enlace_prestaciones.push({
-                prestacionID: prestaciones[index],
-                filaPlanillaID: data.planillaID
+                prestacionID: prestaciones[index]
             });
         }
 
@@ -703,8 +705,7 @@ function armarJSON(){
         for(var index in serviciosBasicos){
 
             data.enlace_serviciosBasicos.push({
-                serviciosBasicosID: serviciosBasicos[index],
-                filaPlanillaID: data.planillaID
+                serviciosBasicosID: serviciosBasicos[index]
             });
         }
 
@@ -743,7 +744,7 @@ function enviarDatos(jsonDATA){
         });
 }
 
-function fillDropDown(departamentoID){
+function fillDropDown(){
 
     $("#fechaNacimiento")
         .datepicker({
@@ -768,6 +769,7 @@ function fillDropDown(departamentoID){
             placeholder: 'Elija tipo de pensión',
             width: '100%',
             language: 'es',
+            dropdownParent: $("#modalACBody"),
             //minimumResultsForSearch: -1,
             data: tipoPension
         });
@@ -834,7 +836,7 @@ function fillDropDown(departamentoID){
         width: '100%',
         language: 'es',
         ajax: {
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerLocalidades?id="+ departamentoID,
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerLocalidades?id="+ $(".selectDepartamento").val(),
             type: 'GET',
             dataType: 'json',
             delay: 250,
@@ -1011,9 +1013,6 @@ function initMap() {
     });
 
     function setMapPoint(lat, lng){
-
-        //console.log(lat)
-        //console.log(lng)
 
 
         var latlng = {lat: parseFloat(lat) , lng: parseFloat(lng) };
