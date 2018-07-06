@@ -5,6 +5,8 @@
 var tipoPension;
 var tipoVivienda;
 var tipoServicios;
+//TODO: traer userid sin forzar
+var userid = 1;
 
 //var prestaciones;
 
@@ -57,7 +59,7 @@ $(function(){
 
     $("#agregarPlanilla").click(function(){
 
-        agregarEncabezado();
+        agregarEncabezado(userid);
     });
 
     $("#agregarEncuesta").click(function(){

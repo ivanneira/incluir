@@ -3,7 +3,7 @@
  */
 
 
-function agregarEncabezado() {
+function agregarEncabezado(userid) {
 
 
     var htmlStringEncabezado =
@@ -28,6 +28,9 @@ function agregarEncabezado() {
 
     $("#modalAC")
         .modal('show');
+
+    $("#modalACTitulo")
+        .text('Agregar nueva planilla');
 
 
     //select2 de supervisor
@@ -54,7 +57,7 @@ function agregarEncabezado() {
                 };
             },
             cache: true
-        },
+        }
 
 
     });
@@ -92,43 +95,65 @@ function agregarEncabezado() {
 
     $("#modalACAceptar")
         .unbind('click')
-        .click(verificarEncabezado);
+        .click(function(data){
+            verificarEncabezado(userid);
+        });
 }
 
-function verificarEncabezado(){
+function verificarEncabezado(userid){
 
     var encabezadoDATA = {
 
-        usuarioID: '',
+        usuarioID: userid,
         supervisorID: '',
         encuestadorID: '',
-        nroPlanilla: '',
+        nroPlanilla: ''
 
     };
 
-    //TODO: cambiar cuando esté funcionando el login
-    encabezadoDATA.usuarioID = '1';
-    encabezadoDATA.supervisorID = $(".selectSupervisor").val();
-    encabezadoDATA.encuestadorID = $(".selectEncuestador").val();
+
+    encabezadoDATA.usuarioID = userid;
+    encabezadoDATA.supervisorID = $(".selectSupervisor").val()  == null ? '' :  $(".selectSupervisor").val();
+    encabezadoDATA.encuestadorID = $(".selectEncuestador").val() == null ? '' : $(".selectEncuestador").val();
     encabezadoDATA.nroPlanilla = $("#numeroPlanilla").val();
 
-    $.ajax({
-        url: server_host+":"+server_port+"/api/IncluirSalud/GuardarPlanilla",
-        method: "POST",
-        data: encabezadoDATA,
-        dataType: "json"
-    })
-        .done(function(res){
+    //console.log(encabezadoDATA)
 
-            if(typeof(res) == "undefined") {
-                //alert("Se agrego una nueva planilla");
-                swal("Incluir Salud", "Se agrego una nueva planilla!", "success");
-                location.reload();
-            }
-            else
-            {
-                console.log(res);
-            }
-        });
+    if(
+
+            encabezadoDATA.usuarioID === ''
+        ||  encabezadoDATA.supervisorID === ''
+        ||  encabezadoDATA.encuestadorID === ''
+        ||  encabezadoDATA.nroPlanilla === ''
+
+    ){
+
+        swal("Datos incorrectos", "Por favor agregue correctamente los campos", "error");
+    }else{
+
+        swal("Espere...", "se están guardando los datos", "info");
+
+        $.ajax({
+            url: server_host+":"+server_port+"/api/IncluirSalud/GuardarPlanilla",
+            method: "POST",
+            data: encabezadoDATA,
+            dataType: "json"
+        })
+            .done(function(res){
+
+                if(typeof(res) == "undefined") {
+
+
+                    location.reload();
+                }
+                else
+                {
+                    swal("ERROR", "No se pudo agregar la planilla, por favor recargue la página e intente nuevamente", "error");
+                }
+            });
+
+    }
+
+
 
 }

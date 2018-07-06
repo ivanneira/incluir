@@ -16,21 +16,18 @@ $(function(){
     fillDatatablePlanillas(1);
     fillDatatableEncuestas(1);
 
-$("#volver").click(function(){
+    $("#volver").click(function(){
 
-    $('#registros').hide();
-    $('#encabezados').show();
+        $('#registros').hide();
+        $('#encabezados').show();
 
-    //console.log(registrostable)
+        $('#agregarPlanilla').show();
+        $('#agregarRegistroBotonPrincipal').hide();
 
-    registrostable.destroy();
-    $("#registrosTable").empty();
+        registrostable.destroy();
+        $("#registrosTable").empty();
 
-    //console.log(registrostable)
-
-
-
-});
+    });
 
 
 });
@@ -271,6 +268,8 @@ function fillDatatablePlanillas(userid){
 function mostarRegistros(planillaid){
 
     //console.log(planillaid)
+    $('#agregarPlanilla').hide();
+    $('#agregarRegistroBotonPrincipal').show();
 
     var id = planillaid
 
