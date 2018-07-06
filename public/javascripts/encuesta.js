@@ -49,7 +49,7 @@ function agregarEncuesta(){
         '         <div class="row">' +
         '             <div class="col-4">' +
         '                      <label for="codigoEncuesta">Código</label>' +
-        '                      <input id="codigoEncuesta" name="codigoEncuesta" type="number" class="form-control" placeholder="Código de encuesta">' +
+        '                      <input id="codigoEncuesta" name="codigoEncuesta" type="text" class="form-control" placeholder="Código de encuesta">' +
         '             </div>' +
         '             <div class="col-4">' +
         '             </div>' +
@@ -354,74 +354,68 @@ function agregarEncuesta(){
             orientation: 'bottom'
         });
 
-    //select2 de encuestador
+    ////
+    //select2 de supervisor
     $(".selectEncuestadorEncuesta").select2({
         placeholder: 'Busque encuestador',
         dropdownParent: $("#modalACBody"),
         width: '100%',
+        minimumInputLength: 3,
         language: 'es',
         ajax: {
-            url: 'planillas/encuestadores',
+            //url: 'planillas/supervisores',
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 3 ,
             type: 'GET',
-            dataType: 'json',
+            dataType: "json",
+            delay: 250,
             data: function (params) {
-                var query = {
-                    q: params.term
-                };
-
-                // Query parameters will be ?1=[term]
-                return query;
-            },
-            processResults: function (data) {
-
                 return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.text,
-                            id: item.id
-                        }
-
-                    })
+                    searchTerm: params.term // search term
                 };
-            }
-        }
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        },
+
+
     });
+    ////
 
 
-    //select2 de departamento
+
     $(".selectDepartamentoEncuesta").select2({
         placeholder: 'Busque departamento',
-        width: '100%',
         dropdownParent: $("#modalACBody"),
-        minimumResultsForSearch: -1,        language: 'es',
+        minimumInputLength: 3,
+        width: '100%',
+        language: 'es',
         ajax: {
-            url: 'planillas/getDepartamentos',
+            //url: 'planillas/encuestadores',
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerDepartamentos?id=18",
             type: 'GET',
             dataType: 'json',
-            /*data: function (params) {
-             var query = {
-             q: params.term
-             };
 
-             // Query parameters will be ?1=[term]
-             return query;
-             },*/
-            processResults: function (data) {
-
+            delay: 250,
+            data: function (params) {
+                console.dir(params)
                 return {
-                    results: $.map(data, function (item) {
-
-                        return {
-                            text: item.Nombre,
-                            id: item.ID
-                        }
-
-                    })
+                    searchTerm: params.term // search term
                 };
-            }
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
         }
+
     });
+
 
     $("#fechaNacimientoEncuesta")
         .datepicker({
