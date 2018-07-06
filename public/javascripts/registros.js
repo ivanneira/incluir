@@ -355,7 +355,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //esconde el campo de cometarios de vivienda por defecto
     $("#comentarioTipoVivienda").hide();
 
-    fillDropDown(departamentoID);
+    fillDropDown(413);
 
 }
 
@@ -802,6 +802,32 @@ function fillDropDown(departamentoID){
         console.log(e)
     });
 
+
+    $(".selectDepartamento").select2({
+        dropdownParent: $("#modalACBody"),
+        placeholder: 'Busque departamento',
+        width: '100%',
+        language: 'es',
+        ajax: {
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerDepartamentos?id="+ 18, // San Juan
+            type: 'GET',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                console.dir(params)
+                return {
+                    searchTerm: params.term // search term
+                };
+            },
+            processResults: function (response) {
+                return {
+                    results: response
+                };
+            },
+            cache: true
+        }
+    });
+
     $(".selectLocalidad").select2({
         dropdownParent: $("#modalACBody"),
         placeholder: 'Busque localidad',
@@ -826,6 +852,36 @@ function fillDropDown(departamentoID){
             cache: true
         }
     });
+
+
+    $(".selectDepartamento").change(function(){
+        $(".selectLocalidad").empty();
+        $(".selectLocalidad").select2({
+            dropdownParent: $("#modalACBody"),
+            placeholder: 'Busque localidad',
+            width: '100%',
+            language: 'es',
+            ajax: {
+                url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerLocalidades?id="+ $(".selectDepartamento").val(),
+                type: 'GET',
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    console.dir(params)
+                    return {
+                        searchTerm: params.term // search term
+                    };
+                },
+                processResults: function (response) {
+                    return {
+                        results: response
+                    };
+                },
+                cache: true
+            }
+        });
+    })
+
 
     $(".selectCIE10").select2({
         width: '100%',
