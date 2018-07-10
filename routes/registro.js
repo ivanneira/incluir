@@ -5,9 +5,10 @@ const http = require('http');
 /* GET home page. */
 router.get('/', function(req, resq, next) {
 
-    let filaID = req.body.id;
+    var filaID = req.param('id');
 
-    http.get("http://192.168.3.105:45459/api/IncluirSalud/ObtenerFilaPlanilla?id=22", (res) => {
+    //cambiar dirección de IP fija por parámetros globales
+    http.get("http://192.168.3.105:45459/api/IncluirSalud/ObtenerFilaPlanilla?id="+filaID, (res) => {
         var body = "";
 
     res.on('data', function (chunk) {

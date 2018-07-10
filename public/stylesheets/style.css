@@ -157,7 +157,7 @@ ul.select2-selection__rendered {
 .tab-content {
 
   border-top: none;
-  border-bottom: 1px solid grey !important;
+  border-bottom: none !important;
   border-left: 1px solid grey !important;
   border-right: 1px solid grey !important;
 }
@@ -200,7 +200,7 @@ input[type=radio], input[type=checkbox] {
 }
 
 .margen20px{
-margin-left: 22px !important;
+  margin-left: 22px !important;
 }
 
 .btn-success {
@@ -285,5 +285,9 @@ a.bg-light:hover{
   color: black !important;
   background-color: #f8f9fa !important;
   border: 1px solid black !important;
+  border-bottom: none !important;
 }
 
+.registroContainer {
+  padding: 20px;
+}

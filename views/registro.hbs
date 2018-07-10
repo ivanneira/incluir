@@ -1,123 +1,128 @@
-<button id="imprimir" class="btn btn-dark noprint">Imprimir</button>
+<div class="registroContainer">
 
-<table class="registroindividual table table-striped vistadeimpresion">
-    <tr>
-        <th colspan="2">Datos personales</th>
-    </tr>
-    <tr>
-        <td>
-            Apellido y nombre: {{#if Apellido}} {{{Apellido}}} {{{Nombre}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td>
-            Sexo: {{{Sexo}}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Fecha de nacimiento: {{#if FechaNacimiento}} {{{FechaNacimiento}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td>
-            DNI: {{#if FechaNacimiento}} {{{DNI}}} {{else}} Sin datos {{/if}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Teléfono: {{#if Telefono}} {{{Telefono}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td></td>
-    </tr>
-    <tr>
-        <th colspan="2">Datos de localización</th>
-    </tr>
-    <tr>
-        <td>
-            Localidad: {{#if Localidad}} {{{Localidad}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td>
-            Domicilio: {{#if Domicilio}} {{{Domicilio}}} {{{Barrio}}} {{else}} Sin datos {{/if}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Latitud: {{#if Latitud}} {{{Latitud}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td>
-            Longitud: {{#if Longitud}} {{{Longitud}}} {{else}} Sin datos {{/if}}
-        </td>
-    </tr>
-    <tr>
-        <td colspan="2">
-            <div id="map"></div>
-        </td>
-    </tr>
-    <tr>
-        <th colspan="2">Datos de prestación</th>
-    </tr>
-    <tr>
-        <td>
-            Titularidad: {{#if Titularidad}} {{{Titularidad}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td>
-            Tipo de pensión: {{#if TipoPension}} {{{TipoPension}}} {{else}} Sin datos {{/if}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Motivo de pensión: {{#if Pension_cie10_dec10}} {{{Pension_cie10_dec10}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td>
-            Prestaciones:
-            {{#if prestaciones}}
+    <button id="imprimir" class="btn btn-dark noprint">Imprimir</button>
 
-                {{#each prestaciones}}
-                    <span class="badge badge-secondary">{{PrestacionNombre}}</span>
-                {{/each}}
+    <br  class="noprint">
+    <br  class="noprint">
 
-            {{else}}
-                Sin datos
-            {{/if}}
-        </td>
-    </tr>
-    <tr>
-        <th colspan="2">Datos de vivienda</th>
-    </tr>
-    <tr>
-        <td>
-            Nº de personas que conviven: {{#if NroPersonasConviven}} {{{NroPersonasConviven}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td>
-            Nº de integrantes del grupo familiar: {{#if NroIntegrantesConviven}} {{{NroIntegrantesConviven}}} {{else}} Sin datos {{/if}}
-        </td>
-    </tr>
-    <tr>
-        <td>
-            Tipo de vivienda: {{#if TipoVivienda}} {{{TipoVivienda}}} {{else}} Sin datos {{/if}}
-        </td>
-        <td>
-            Servicios básicos:
+    <table class="registroindividual table table-striped vistadeimpresion">
+        <tr>
+            <th colspan="2">Datos personales</th>
+        </tr>
+        <tr>
+            <td>
+                Apellido y nombre: {{#if Apellido}} {{{Apellido}}} {{{Nombre}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                Sexo: {{{Sexo}}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Fecha de nacimiento: {{#if FechaNacimiento}} {{{FechaNacimiento}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                DNI: {{#if FechaNacimiento}} {{{DNI}}} {{else}} Sin datos {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Teléfono: {{#if Telefono}} {{{Telefono}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <th colspan="2">Datos de localización</th>
+        </tr>
+        <tr>
+            <td>
+                Localidad: {{#if Localidad}} {{{Localidad}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                Domicilio: {{#if Domicilio}} {{{Domicilio}}} {{{Barrio}}} {{else}} Sin datos {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Latitud: {{#if Latitud}} {{{Latitud}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                Longitud: {{#if Longitud}} {{{Longitud}}} {{else}} Sin datos {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="map"></div>
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">Datos de prestación</th>
+        </tr>
+        <tr>
+            <td>
+                Titularidad: {{#if Titularidad}} {{{Titularidad}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                Tipo de pensión: {{#if TipoPension}} {{{TipoPension}}} {{else}} Sin datos {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Motivo de pensión: {{#if Pension_cie10_dec10}} {{{Pension_cie10_dec10}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                Prestaciones:
+                {{#if prestaciones}}
 
-            {{#if TipoViviendaDetalle}}
+                    {{#each prestaciones}}
+                        <span class="badge badge-secondary">{{PrestacionNombre}}</span>
+                    {{/each}}
 
-                {{#each TipoViviendaDetalle}}
-                    <span class="badge badge-secondary">{{nombre}}</span>
-                {{/each}}
+                {{else}}
+                    Sin datos
+                {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">Datos de vivienda</th>
+        </tr>
+        <tr>
+            <td>
+                Nº de personas que conviven: {{#if NroPersonasConviven}} {{{NroPersonasConviven}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                Nº de integrantes del grupo familiar: {{#if NroIntegrantesConviven}} {{{NroIntegrantesConviven}}} {{else}} Sin datos {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tipo de vivienda: {{#if TipoVivienda}} {{{TipoVivienda}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                Servicios básicos:
 
-            {{else}}
-                Sin datos
-            {{/if}}
+                {{#if TipoViviendaDetalle}}
 
-        </td>
-    </tr>
-    <tr>
-        <th colspan="2">Comentario</th>
-    </tr>
-    <tr>
-        <td colspan="2">
-            Comentario: {{#if Comentario}} {{{Comentario}}} {{else}} Sin datos {{/if}}
-        </td>
-    </tr>
-</table>
+                    {{#each TipoViviendaDetalle}}
+                        <span class="badge badge-secondary">{{nombre}}</span>
+                    {{/each}}
 
+                {{else}}
+                    Sin datos
+                {{/if}}
+
+            </td>
+        </tr>
+        <tr>
+            <th colspan="2">Comentario</th>
+        </tr>
+        <tr>
+            <td colspan="2">
+                Comentario: {{#if Comentario}} {{{Comentario}}} {{else}} Sin datos {{/if}}
+            </td>
+        </tr>
+    </table>
+</div>
 <br>
 <br>
 <br>
