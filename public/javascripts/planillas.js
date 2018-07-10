@@ -132,7 +132,7 @@ function fillDatatableEncuestas(userid){
                     this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
 
 
-
+                    $("#encuestasTable").attr('style','')
 
                 });
             }
@@ -246,7 +246,6 @@ function fillDatatablePlanillas(userid){
 
                     this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
                 });
-
 
                 /*
                 $('#exampleTable thead  tr').each(function () {
@@ -366,7 +365,7 @@ function mostarRegistros(planillaid){
                 });
             }
 
-
+            $("#registrosTable").attr('style','');
 
         }
     });
