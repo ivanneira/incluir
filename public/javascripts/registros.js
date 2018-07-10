@@ -733,7 +733,7 @@ function enviarDatos(jsonDATA){
         .done(function(res){
             if(typeof(res)=="undefined")
                 {
-                    swal("Incluir Salud", "Se agrego una nueva registro!", "success");
+                    swal("Incluir Salud", "Se agrego una nuevo registro!", "success");
                     setTimeout(function(){location.reload();},1500)
                 }
                 else

@@ -238,10 +238,10 @@ function fillDatatablePlanillas(userid){
 
 
                     nCloneTd2.innerHTML =
-                        '<button onclick="mostarRegistros('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-arrow-right"></i> </button>' +
+                        '<div class="row"><button onclick="mostarRegistros('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-arrow-right"></i> </button>' +
                         '&nbsp<button onclick="fillModal('+table.DataTable().row(i).data().NumeroPlanilla+','+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i></button>' +
                         '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-planillaid="'+table.DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>' +
-                        '&nbsp<button onclick="eliminarPlanilla('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button>';
+                        '&nbsp<button onclick="eliminarPlanilla('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button></div>';
 
 
                     this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
@@ -357,9 +357,9 @@ function mostarRegistros(planillaid){
 
                     nCloneTd4.innerHTML =
 
-                        '<button class="btn btn-small btn-secondary detalleRegitro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                        '<div class="row"><button class="btn btn-small btn-secondary detalleRegitro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i> </button>' +
                         '&nbsp<button  onclick="fillModal('+registrostable.DataTable().row(i).data().NumeroPlanilla+','+planillaid+','+registrostable.DataTable().row(i).data().FilaPlanillaID+')" class="btn btn-small btn-warning editarRegistro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
-                        '&nbsp<button onclick="eliminarRegistro('+registrostable.DataTable().row(i).data().FilaPlanillaID +')" class="btn btn-small btn-danger eliminarRegistro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
+                        '&nbsp<button onclick="eliminarRegistro('+registrostable.DataTable().row(i).data().FilaPlanillaID +')" class="btn btn-small btn-danger eliminarRegistro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button></div>';
 
 
                     this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
@@ -530,6 +530,8 @@ function loadPlanillas(userID){
                 })
                     .then((willDelete) => {
                     if (willDelete) {
+
+                        swal("Espere un momento...", "se está eliminando el registro", "info");
                         $.ajax({
                             url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarPlanilla?id=" + id,
                             method: "POST",
@@ -644,6 +646,9 @@ function loadPlanillas(userID){
                                 })
                                     .then((willDelete) => {
                                     if (willDelete) {
+
+                                        swal("Espere un momento...", "se está eliminando el registro", "info");
+
                                         $.ajax({
                                             url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
                                             method: "POST",
@@ -767,6 +772,8 @@ function loadPlanillas(userID){
                             })
                                 .then((willDelete) => {
                                 if (willDelete) {
+
+                                    swal("Espere un momento...", "se está eliminando el registro", "info");
                                     $.ajax({
                                         url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
                                         method: "POST",
@@ -838,6 +845,7 @@ function eliminarEncuesta(encuestaID){
         })
             .then((willDelete) => {
             if (willDelete) {
+                swal("Espere un momento...", "se está eliminando el registro", "info");
                 $.ajax({
                     url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarEncuesta?id=" + id,
                     method: "POST",
@@ -872,9 +880,10 @@ function eliminarRegistro(FilaPlanillaID){
         })
             .then((willDelete) => {
 
-            swal("Espere un momento...", "se está eliminando el registro", "info");
+
 
             if (willDelete) {
+                swal("Espere un momento...", "se está eliminando el registro", "info");
                 $.ajax({
                     url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
                     method: "POST",
@@ -911,9 +920,11 @@ function eliminarPlanilla(planillaid){
     })
         .then((willDelete) => {
 
-        swal("Espere un momento...", "se está eliminando la planilla", "info");
+
 
         if (willDelete) {
+            swal("Espere un momento...", "se está eliminando la planilla", "info");
+
             $.ajax({
                 url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarPlanilla?id=" + id,
                 method: "POST",
@@ -930,8 +941,9 @@ function eliminarPlanilla(planillaid){
             });
 
         } else {
-            //swal("Your imaginary file is safe!");
+
         }
+
     });
 
 }
