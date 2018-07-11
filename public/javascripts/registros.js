@@ -363,15 +363,24 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
 
 function completarDatos(filaid){
 
-    swal("Espere...", "Se están completando los datos", "info");
 
     $.ajax({
-        url: server_host+":"+server_port+ server_url +"/api/IncluirSalud/ObtenerFilaPlanilla?id=" + filaid,
+        url: server_host + ":" + server_port + server_url + "/api/IncluirSalud/ObtenerFilaPlanilla?id=" + filaid,
         method: "GET",
-        dataType: "json"
-    }).done(function(res){
+        dataType: "json",
 
-        swal.close();
+        beforeSend: function()
+        {
+
+            swal("Espere...", "Se están completando los datos", "info");
+        }
+
+    }).done(function(res){
+        //Tiempo de creacion sugerido para el swalert
+        setTimeout(function(){
+            swal.close();
+        },500)
+
         //datos para completar
         var data = res[0];
 
@@ -470,7 +479,7 @@ function completarDatos(filaid){
          $(".selectTipoServicios").val();
          $("#comentario").val();
          */
-    });
+    })
 }
 
 //verificación
