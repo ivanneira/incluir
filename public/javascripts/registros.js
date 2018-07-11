@@ -124,7 +124,8 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
 
     //pestaña de datos personales
     var htmlPersonales =
-        '<table class="table table-striped">'+
+        '<table class="table table-striped">' +
+        '<thead class="motivosPersonales">'+
             '<tr class="tr-importante">' +
                 '<td colspan="2" id="td-motivoPersonal">' +
                     '<div class="custom-control custom-checkbox">'+
@@ -132,7 +133,9 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
                         '<label class="custom-control-label" for="motivoPersonal">No tengo este dato</label>'+
                     '</div>'+
                 '</td>' +
-            '</tr>'+
+            '</tr>' +
+        '</thead>' +
+        '<tbody class="camposPersonales">' +
         '  <tr>'+
         '      <td>' +
         '           <label for="nombre">Nombre</label>' +
@@ -172,7 +175,8 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '           <label for="vivo">Vivo</label>' +
         '          <input name="vivo" id="fallecido" type="checkbox" checked data-toggle="toggle">' +
         '      </td>' +
-        '  </tr>'+
+        '  </tr>' +
+        '</tbody>'+
         '</table>';
 
     $("#personales")
