@@ -202,7 +202,8 @@ function fillDatatablePlanillas(userid){
                 { "data": "PlanillaID","title": "Planilla ID", "visible": false},
                 { "data": "NumeroPlanilla","title": "Nº Planilla"},
                 { "data": "FechaPlanilla", "title": "Fecha de Planilla","format": 'M/D/YYYY'},
-                { "data": "EncuestadorNombre","title": "Encuestador"}
+                { "data": "EncuestadorNombre","title": "Encuestador"},
+                { "data": "SupervisorNombre", "title": "Supervisor"}
 
             ],
             "fnInitComplete": function(oSettings, json) {
@@ -212,7 +213,11 @@ function fillDatatablePlanillas(userid){
                 var nCloneTh = document.createElement('th');
                 var nCloneTd = document.createElement('td');
 
-                nCloneTd.className = "center";
+                nCloneTd
+                    .className = "center";
+
+
+
 
                 /******************************/
                 var nCloneTh2 = document.createElement('th');
@@ -221,14 +226,14 @@ function fillDatatablePlanillas(userid){
                 //nCloneTd2.className = "center";
 
                 $('#exampleTable thead').each(function () {
-                    this.insertBefore(nCloneTh2, this.childNodes[3]);
+                    this.insertBefore(nCloneTh2, this.childNodes[4]);
                     nCloneTh2.innerHTML = "Acciones"
                 });
 
 
 
                 $('#exampleTable thead  tr').each(function () {
-                    this.insertBefore(nCloneTh2, this.childNodes[3]);
+                    this.insertBefore(nCloneTh2, this.childNodes[4]);
                 });
 
 
@@ -238,13 +243,13 @@ function fillDatatablePlanillas(userid){
 
 
                     nCloneTd2.innerHTML =
-                        '<div class="row"><button onclick="mostarRegistros('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-arrow-right"></i> </button>' +
-                        '&nbsp<button onclick="fillModal('+table.DataTable().row(i).data().NumeroPlanilla+','+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i></button>' +
+                        '<div class="row" style="width: 160px"><button onclick="mostarRegistros('+table.DataTable().row(i).data().PlanillaID+',\''+table.DataTable().row(i).data().EncuestadorNombre+'\',\''+table.DataTable().row(i).data().SupervisorNombre+'\',\''+table.DataTable().row(i).data().NumeroPlanilla+'\')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-arrow-right"></i> </button>' +
+                        //'&nbsp<button onclick="fillModal('+table.DataTable().row(i).data().NumeroPlanilla+','+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i></button>' +
                         '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-planillaid="'+table.DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>' +
                         '&nbsp<button onclick="eliminarPlanilla('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button></div>';
 
 
-                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
+                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[4]);
                 });
 
                 /*
@@ -267,16 +272,23 @@ function fillDatatablePlanillas(userid){
 
 }
 
-function mostarRegistros(planillaid){
+function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPlanilla){
 
     //console.log(planillaid)
     $('#agregarPlanilla').hide();
     //$('#agregarRegistroBotonPrincipal').show();
 
-    var id = planillaid
+    var id = planillaid;
+
+    $("#nuevoRegistro")
+        .click(function(){
+            fillModal(numeroPlanilla,planillaid);
+        });
 
     $('#encabezados').hide();
     $('#registros').show();
+
+    $("#plannillaTitulo").text("Planilla Nº:" + numeroPlanilla + ", Encuestador: " + encuestadorNombre + ", Supervisor: " + supervisorNombre);
 
     registrostable =$("#registrosTable").DataTable({
 
@@ -356,13 +368,14 @@ function mostarRegistros(planillaid){
 
                     nCloneTd4.innerHTML =
 
-                        '<div class="row">' +
+                        '<div class="row" style="width: 200px">' +
                         '<button onclick="verRegistro('+registrostable.DataTable().row(i).data().FilaPlanillaID +')" class="btn btn-small btn-secondary detalleRegitro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Ver"><i class="fa fa-eye"></i> </button>' +
                         '&nbsp<button  onclick="fillModal('+registrostable.DataTable().row(i).data().NumeroPlanilla+','+planillaid+','+registrostable.DataTable().row(i).data().FilaPlanillaID+')" class="btn btn-small btn-warning editarRegistro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
                         '&nbsp<button onclick="eliminarRegistro('+registrostable.DataTable().row(i).data().FilaPlanillaID +')" class="btn btn-small btn-danger eliminarRegistro" data-filaid="'+registrostable.DataTable().row(i).data().FilaPlanillaID +'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button></div>';
 
 
                     this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
+                    //console.dir(this)
                 });
             }
 

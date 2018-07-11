@@ -53,9 +53,9 @@ router.get('/', function(req, resq, next) {
 
     })
 
-}).on('error', (e) => {
-        console.log(`Got error from Finhockey: ${e.message}`);
-});
+    }).on('error', (e) => {
+            console.log(`Got error from Finhockey: ${e.message}`);
+    });
 
 
 });
