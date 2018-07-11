@@ -1,6 +1,12 @@
 body {
   background-color: #0099CC;
 }
+
+.tr-importante{
+  background: #ccc !important;
+  width: 100% !important;
+}
+
 .select2-container .select2-selection--single {
   box-sizing: border-box;
   cursor: pointer;

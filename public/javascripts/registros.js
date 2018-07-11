@@ -90,7 +90,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     var htmlString =
         '<ul class="nav nav-tabs nav-fill" role="tablist" id="formTabs">'+
         '   <li class="nav-item">' +
-        '       <a id="personales-tab" data-toggle="tab" class="nav-link active " href="#personales">Datos personales</a>' +
+        '       <a id="personales-tab" data-toggle="tab" class="nav-link active " href="#personales">Datos personales  </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
         '       <a id="localizacion-tab" data-toggle="tab" class="nav-link " href="#localizacion">Datos de localización</a>' +
@@ -125,6 +125,14 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de datos personales
     var htmlPersonales =
         '<table class="table table-striped">'+
+            '<tr class="tr-importante">' +
+                '<td colspan="2" id="td-motivoPersonal">' +
+                    '<div class="custom-control custom-checkbox">'+
+                        '<input type="checkbox" class="custom-control-input" id="motivoPersonal">'+
+                        '<label class="custom-control-label" for="motivoPersonal">No tengo este dato</label>'+
+                    '</div>'+
+                '</td>' +
+            '</tr>'+
         '  <tr>'+
         '      <td>' +
         '           <label for="nombre">Nombre</label>' +
@@ -176,6 +184,14 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de datos de localización
     var htmlLocalizacion =
         '<table class="table table-striped">'+
+            '<tr class="tr-importante">' +
+                '<td colspan="4" id="td-motivoLocalizacion">' +
+                    '<div class="custom-control custom-checkbox">'+
+                        '<input type="checkbox" class="custom-control-input" id="motivoLocalizacion">'+
+                        '<label class="custom-control-label" for="motivoLocalizacion">No tengo este dato</label>'+
+                    '</div>'+
+                '</td>' +
+            '</tr>'+
         '   <tr>'+
         '       <td>' +
         '           <label for="Departamento">Departamento</label>' +
@@ -230,6 +246,14 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de datos de la prestación
     var htmlPrestaciones =
         '<table class="table table-striped">'+
+            '<tr class="tr-importante">' +
+                '<td colspan="2" id="td-motivoPrestaciones">' +
+                    '<div class="custom-control custom-checkbox">'+
+                        '<input type="checkbox" class="custom-control-input" id="motivoPrestaciones">'+
+                        '<label class="custom-control-label" for="motivoPrestaciones">No tengo este dato</label>'+
+                    '</div>'+
+                '</td>' +
+            '</tr>'+
         '   <tr>'+
         '       <td colspan="2">' +
         '           <label for="titular">Titularidad</label>' +
@@ -270,6 +294,14 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de vivienda
     var htmlVivienda =
         '<table class="table table-striped">'+
+            '<tr class="tr-importante">'+
+                '<td colspan="3" id="td-motivoVivienda">' +
+                    '<div class="custom-control custom-checkbox">'+
+                        '<input type="checkbox" class="custom-control-input" id="motivoVivienda">'+
+                        '<label class="custom-control-label" for="motivoVivienda">No tengo este dato</label>'+
+                    '</div>'+
+                '</td>' +
+            '</tr>'+
         '   <tr>'+
         '       <td>' +
         '           <label for="conviven">Nº de personas que conviven</label>' +
@@ -305,6 +337,33 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         offstyle: 'danger',
         width: '100%'
     });
+
+
+    $("#motivoPersonal").change(function(){
+        console.log("clicked");
+        console.log($("#motivoPersonal").prop("checked"))
+        $("#td-motivoPersonal").append("<p>Hola</p>")
+
+    })
+
+    $("#motivoLocalizacion").change(function(){
+        console.log("clicked");
+        console.log($("#motivoLocalizacion").prop("checked"))
+        $("#td-motivoLocalizacion").append("<p>Hola</p>")
+    })
+
+    $("#motivoPrestaciones").change(function(){
+        console.log("clicked");
+        console.log($("#motivoPrestaciones").prop("checked"))
+        $("#td-motivoPrestaciones").append("<p>Hola</p>")
+    })
+
+    $("#motivoVivienda").change(function(){
+        console.log("clicked");
+        console.log($("#motivoVivienda").prop("checked"))
+        $("#td-motivoVivienda").append("<p>Hola</p>")
+    })
+
 
 
     //evento del botón fallecido
