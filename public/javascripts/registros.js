@@ -143,58 +143,64 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de datos personales
     var htmlPersonales =
         '<table class="table table-striped">' +
-        '<thead class="motivosPersonales">'+
-            '<tr class="tr-importante">' +
-                '<td colspan="2" id="td-motivoPersonal">' +
-                    '<div class="custom-control custom-checkbox">'+
-                        '<input type="checkbox" class="custom-control-input" id="motivoPersonal">'+
-                        '<label class="custom-control-label" for="motivoPersonal">No tengo este dato</label>'+
-                    '</div>'+
-                '</td>' +
-            '</tr>' +
-        '</thead>' +
-        '<tbody class="camposPersonales">' +
-        '  <tr>'+
-        '      <td>' +
-        '           <label for="nombre">Nombre</label>' +
-        '           <input maxlength="50" id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">' +
-        '       </td>'+
-        '       <td>' +
-        '           <label for="apellido">Apellido</label>' +
-        '           <input maxlength="50" id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido">' +
-        '       </td>'+
-        '  </tr>'+
-        '  <tr  class="vivo">'+
-        '      <td>' +
-        '           <label for="fecnac">Fecha de nacimiento</label>' +
-        '           <input id="fechaNacimiento" name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
-        '           <label for="sexo">Sexo</label>' +
-        '           <select class="form-control" id="sexo" name="sexo">' +
-        '               <option value="-1">Seleccione el sexo...</option>' +
-        '               <option value="1">Masculino</option>' +
-        '               <option value="2">Femenino</option>' +
-        '           </select>' +
-        '       </td>'+
-        '      <td>' +
-        '           <label for="dni">DNI</label>' +
-        '           <input maxlength="8" id="dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
-        '       </td>'+
-        '  </tr>'+
-        '  <tr>'+
-        '      <td  class="vivo">' +
-        '           <label for="tel">Teléfono</label>' +
-        '           <input id="tel" name="tel" type="text" class="form-control" placeholder="Teléfono">' +
-        '       </td>'+
-        '       <td id="fechaDefuncion">' +
-        '           <label for="defuncion">Fecha de defunción</label>' +
-        '           <input maxlength="10" id="defuncion" name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
-        '       </td>'+
-        '      <td>' +
-        '           <label for="vivo">Vivo</label>' +
-        '          <input name="vivo" id="fallecido" type="checkbox" checked data-toggle="toggle">' +
-        '      </td>' +
-        '  </tr>' +
-        '</tbody>'+
+        '   <thead>'+
+        '       <tr class="tr-importante">' +
+        '           <td class="bg-light" id="td-motivoPersonal">' +
+        '               <div class="custom-control custom-checkbox">'+
+        '                   <input type="checkbox" data-mot="0" id="mot-0" class="custom-control-input che">'+
+        '                   <label class="custom-control-label" for="mot-0">No tengo este dato</label>'+
+        '               </div>'+
+        '           </td>' +
+        '           <td  class="bg-light">' +
+        '                <select id="sel-0">'+
+        '                   <option> coso</option>'+
+        '                   <option> coso</option>'+
+        '               </select>'+
+        '           </td>' +
+        '       </tr>' +
+        '   </thead>' +
+        '   <tbody id="cam-0">' +
+        '     <tr>'+
+        '         <td>' +
+        '              <label for="nombre">Nombre</label>' +
+        '              <input maxlength="50" id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">' +
+        '          </td>'+
+        '          <td>' +
+        '              <label for="apellido">Apellido</label>' +
+        '              <input maxlength="50" id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido">' +
+        '          </td>'+
+        '     </tr>'+
+        '     <tr  class="vivo">'+
+        '         <td>' +
+        '              <label for="fecnac">Fecha de nacimiento</label>' +
+        '              <input id="fechaNacimiento" name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
+        '              <label for="sexo">Sexo</label>' +
+        '              <select class="form-control" id="sexo" name="sexo">' +
+        '                  <option value="-1">Seleccione el sexo...</option>' +
+        '                  <option value="1">Masculino</option>' +
+        '                  <option value="2">Femenino</option>' +
+        '              </select>' +
+        '          </td>'+
+        '         <td>' +
+        '              <label for="dni">DNI</label>' +
+        '              <input maxlength="8" id="dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
+        '          </td>'+
+        '     </tr>'+
+        '     <tr>'+
+        '         <td  class="vivo">' +
+        '              <label for="tel">Teléfono</label>' +
+        '              <input id="tel" name="tel" type="text" class="form-control" placeholder="Teléfono">' +
+        '          </td>'+
+        '          <td id="fechaDefuncion">' +
+        '              <label for="defuncion">Fecha de defunción</label>' +
+        '              <input maxlength="10" id="defuncion" name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
+        '          </td>'+
+        '         <td>' +
+        '              <label for="vivo">Vivo</label>' +
+        '             <input name="vivo" id="fallecido" type="checkbox" checked data-toggle="toggle">' +
+        '         </td>' +
+        '     </tr>' +
+        '   </tbody>'+
         '</table>';
 
     $("#personales")
@@ -203,17 +209,27 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     $("#fechaDefuncion").hide();
 
 
+
     //pestaña de datos de localización
     var htmlLocalizacion =
         '<table class="table table-striped">'+
-            '<tr class="tr-importante">' +
-                '<td colspan="4" id="td-motivoLocalizacion">' +
-                    '<div class="custom-control custom-checkbox">'+
-                        '<input type="checkbox" class="custom-control-input" id="motivoLocalizacion">'+
-                        '<label class="custom-control-label" for="motivoLocalizacion">No tengo este dato</label>'+
-                    '</div>'+
-                '</td>' +
-            '</tr>'+
+        '   <thead>'+
+        '    <tr class="tr-importante">' +
+        '        <td colspan="2" class="bg-light" id="td-motivoLocalizacion">' +
+        '            <div class="custom-control custom-checkbox">'+
+        '                <input type="checkbox" data-mot="1" id="mot-1" class="custom-control-input che che-1" >'+
+        '                <label class="custom-control-label" for="mot-1">No tengo este dato</label>'+
+        '            </div>'+
+        '        </td>' +
+        '           <td colspan="2" class="bg-light">' +
+        '                <select id="sel-1">'+
+        '                   <option> coso</option>'+
+        '                   <option> coso</option>'+
+        '               </select>'+
+        '           </td>' +
+        '    </tr>'+
+        '   </thead>'+
+        '   <tbody id="cam-1">' +
         '   <tr>'+
         '       <td>' +
         '           <label for="Departamento">Departamento</label>' +
@@ -258,6 +274,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '           </div>'+
         '       </td>'+
         '   </tr>'+
+        '</tbody>'+
         '</table>';
 
     $("#localizacion")
@@ -268,14 +285,14 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de datos de la prestación
     var htmlPrestaciones =
         '<table class="table table-striped">'+
-            '<tr class="tr-importante">' +
-                '<td colspan="2" id="td-motivoPrestaciones">' +
-                    '<div class="custom-control custom-checkbox">'+
-                        '<input type="checkbox" class="custom-control-input" id="motivoPrestaciones">'+
-                        '<label class="custom-control-label" for="motivoPrestaciones">No tengo este dato</label>'+
-                    '</div>'+
-                '</td>' +
-            '</tr>'+
+        '    <tr class="tr-importante">' +
+        '        <td colspan="2" id="td-motivoPrestaciones">' +
+        '            <div class="custom-control custom-checkbox">'+
+        '                <input type="checkbox" class="custom-control-input" id="motivoPrestaciones">'+
+        '                <label class="custom-control-label" for="motivoPrestaciones">No tengo este dato</label>'+
+        '            </div>'+
+        '        </td>' +
+        '    </tr>'+
         '   <tr>'+
         '       <td colspan="2">' +
         '           <label for="titular">Titularidad</label>' +
@@ -295,7 +312,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '           <select name="pension" class="selectTipoPension"></select>' +
         '       </td>'+
         '       <td>' +
-        '           <label for="motivo">Motivo de la pensión (CIE10)</label>' +
+        '           <label for="motivo">Diagnóstico (CIE10)</label>' +
         '           <select name="motivo" class="selectCIE10" data-placeholder="Seleccione motivo">' +
         '<option value="">Busque el código CIE10 correspondiente</option>' +
         '</select>' +
@@ -349,6 +366,10 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '   </tr>'+
         '</table>';
 
+    $("#sel-0").hide();
+    $("#sel-1").hide();
+
+
     $("#vivienda")
         .append(htmlVivienda);
 
@@ -360,13 +381,50 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         width: '100%'
     });
 
+    $(".che").change(function(){
 
+        console.log("CHANGE")
+        console.log($(this).data('mot'))
+
+        if($(this).prop('checked') == true){
+
+            console.log('ni fu')
+
+            $("#sel-"+$(this).data('mot')).show();
+            $("#cam-"+$(this).data('mot')).hide();
+
+        }else{
+            console.log('ni fa')
+
+            $("#sel-"+$(this).data('mot')).hide();
+            $("#cam-"+$(this).data('mot')).show()
+        }
+
+
+
+
+    });
+
+
+/*
     $("#motivoPersonal").change(function(){
-        console.log("clicked");
-        console.log($("#motivoPersonal").prop("checked"))
-        $("#td-motivoPersonal").append("<p>Hola</p>")
 
-    })
+        if($("#motivoPersonal").prop("checked")){
+
+            $(".camposPersonales")
+                .hide();
+
+            $("#td-motivoPersonal").append("<p>Hola</p>")
+        }else{
+
+            $(".camposPersonales")
+                .show();
+        }
+
+
+    });
+
+
 
     $("#motivoLocalizacion").change(function(){
         console.log("clicked");
@@ -386,7 +444,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         $("#td-motivoVivienda").append("<p>Hola</p>")
     })
 
-
+*/
 
     //evento del botón fallecido
     $("#fallecido").change(function(){
