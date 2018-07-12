@@ -477,13 +477,9 @@ function completarDatos(filaid){
 
         //el json trae un error de ortografía
 
-        //$("#fechaNacimiento").datepicker("update", new Date(data.FechaNacimento));
-        var v=data.FechaNacimiento;
-        v = v.substr(0,10);
-        v=v.split('-');
-
-        $("#fechaNacimiento").datepicker({format:'dd/mm/yyyy',}).datepicker("setDate", v[2].substr(0,2)  + "/" + v[1] + "/" + v[0]);
         var conversorDeSexo = data.Sexo === 'Masculino' ? 1 : 2;
+
+        $("#fechaNacimiento").val(data.FechaNacimiento);
 
         $("#sexo").val(conversorDeSexo);
 
