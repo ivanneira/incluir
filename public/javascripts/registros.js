@@ -489,16 +489,19 @@ function completarDatos(filaid){
 
 
          //localizacion
-        $('.selectLocalidad')
-            .empty()
-            .append('<option selected value="' + data.LocalidadID + '">'+ data.Localidad +'</option>')
-            .trigger('change');
+
+
 
         $('.selectDepartamento')
             .empty()
             .append('<option selected value="' + data.DepartamentoID + '">'+ data.DepartamentoNombre +'</option>')
             .trigger('change');
 
+
+        $('.selectLocalidad')
+            .empty()
+            .append('<option selected value="' + data.LocalidadID + '">'+ data.Localidad +'</option>')
+            .trigger('change');
 
         $("#domicilio").val(data.Domicilio);
 
