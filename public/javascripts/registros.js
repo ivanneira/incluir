@@ -545,7 +545,17 @@ function completarDatos(filaid){
 
 
 
+
          //localizacion
+
+
+
+        $('.selectDepartamento')
+            .empty()
+            .append('<option selected value="' + data.DepartamentoID + '">'+ data.DepartamentoNombre +'</option>')
+            .trigger('change');
+
+
         $('.selectLocalidad')
             .empty()
             .append('<option selected value="' + data.LocalidadID + '">'+ data.Localidad +'</option>')
