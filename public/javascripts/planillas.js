@@ -910,7 +910,7 @@ function eliminarPlanilla(planillaid){
     /**/
     swal({
         title: "ATENCION",
-        text: "La planilla completa y todos sus registros están a punto de ser eliminados!! Ésta acción no se puede deshacer!!",
+        text: "La planilla completa y todos sus registros están a punto de ser eliminados!! Esta acción no se puede deshacer!!",
         icon: "warning",
         buttons: true,
         dangerMode: true,
