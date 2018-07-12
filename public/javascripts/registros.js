@@ -7,11 +7,29 @@ var tipoVivienda;
 var tipoServicios;
 //TODO: traer userid sin forzar
 var userid = 1;
-
 var planillaid;
+
+var motivos;
 
 var map;
 $(function(){
+
+
+    $.ajax({
+        //url: 'planillas/Obtenerotivos',
+        url: server_host + ":" + server_port + "/api/IncluirSalud/obtenerMotivos",
+        type: 'GET',
+        dataType: 'json',
+        success: function(data){
+            motivos = data;
+            //console.dir(data)
+        },
+        error: function(e){
+            ERROR();
+            console.log(e);
+        }
+    });
+
 
     $.ajax({
         //url: 'planillas/getTipoPension',
