@@ -147,19 +147,17 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '       <tr class="tr-importante">' +
         '           <td class="bg-light" id="td-motivoPersonal">' +
         '               <div class="custom-control custom-checkbox">'+
-        '                   <input type="checkbox" data-mot="0" id="mot-0" class="custom-control-input che">'+
-        '                   <label class="custom-control-label" for="mot-0">No tengo este dato</label>'+
+        '                   <input type="checkbox" data-mot="1" id="mot-1" class="custom-control-input che">'+
+        '                   <label class="custom-control-label" for="mot-1">No tengo este dato</label>'+
         '               </div>'+
         '           </td>' +
         '           <td  class="bg-light">' +
-        '                <select id="sel-0">'+
-        '                   <option> coso</option>'+
-        '                   <option> coso</option>'+
+        '                <select id="sel-1">'+
         '               </select>'+
         '           </td>' +
         '       </tr>' +
         '   </thead>' +
-        '   <tbody id="cam-0">' +
+        '   <tbody id="cam-1">' +
         '     <tr>'+
         '         <td>' +
         '              <label for="nombre">Nombre</label>' +
@@ -217,19 +215,17 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '    <tr class="tr-importante">' +
         '        <td colspan="2" class="bg-light" id="td-motivoLocalizacion">' +
         '            <div class="custom-control custom-checkbox">'+
-        '                <input type="checkbox" data-mot="1" id="mot-1" class="custom-control-input che che-1" >'+
-        '                <label class="custom-control-label" for="mot-1">No tengo este dato</label>'+
+        '                <input type="checkbox" data-mot="2" id="mot-2" class="custom-control-input che che-1" >'+
+        '                <label class="custom-control-label" for="mot-2">No tengo este dato</label>'+
         '            </div>'+
         '        </td>' +
         '           <td colspan="2" class="bg-light">' +
-        '                <select id="sel-1">'+
-        '                   <option> coso</option>'+
-        '                   <option> coso</option>'+
+        '                <select id="sel-2">'+
         '               </select>'+
         '           </td>' +
         '    </tr>'+
         '   </thead>'+
-        '   <tbody id="cam-1">' +
+        '   <tbody id="cam-2">' +
         '   <tr>'+
         '       <td>' +
         '           <label for="Departamento">Departamento</label>' +
@@ -285,14 +281,21 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de datos de la prestación
     var htmlPrestaciones =
         '<table class="table table-striped">'+
+            '<thead>'+
         '    <tr class="tr-importante">' +
         '        <td colspan="2" id="td-motivoPrestaciones">' +
         '            <div class="custom-control custom-checkbox">'+
-        '                <input type="checkbox" class="custom-control-input" id="motivoPrestaciones">'+
-        '                <label class="custom-control-label" for="motivoPrestaciones">No tengo este dato</label>'+
+        '                <input type="checkbox" class="custom-control-input che" data-mot="3" id="mot-3">'+
+        '                <label class="custom-control-label" for="mot-3">No tengo este dato</label>'+
         '            </div>'+
         '        </td>' +
+        '        <td colspan="2" class="bg-light">' +
+        '                <select id="sel-3">'+
+        '               </select>'+
+        '           </td>' +
         '    </tr>'+
+        '</thead>'+
+        '   <tbody id="cam-3">' +
         '   <tr>'+
         '       <td colspan="2">' +
         '           <label for="titular">Titularidad</label>' +
@@ -324,6 +327,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '           <select name="prestaciones" class="selectPrestaciones">' +
         '       </td>'+
         '   </tr>'+
+        '</tbody>'+
         '</table>';
 
     $("#prestaciones")
@@ -333,14 +337,21 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de vivienda
     var htmlVivienda =
         '<table class="table table-striped">'+
+            '<thead>' +
             '<tr class="tr-importante">'+
                 '<td colspan="3" id="td-motivoVivienda">' +
                     '<div class="custom-control custom-checkbox">'+
-                        '<input type="checkbox" class="custom-control-input" id="motivoVivienda">'+
-                        '<label class="custom-control-label" for="motivoVivienda">No tengo este dato</label>'+
+                        '<input type="checkbox" class="custom-control-input che" data-mot="4" id="mot-4">'+
+                        '<label class="custom-control-label" for="mot-4">No tengo este dato</label>'+
                     '</div>'+
                 '</td>' +
+        '        <td colspan="2" class="bg-light">' +
+        '                <select id="sel-4">'+
+        '               </select>'+
+        '           </td>' +
             '</tr>'+
+        '</thead>'+
+        '   <tbody id="cam-4">' +
         '   <tr>'+
         '       <td>' +
         '           <label for="conviven">Nº de personas que conviven</label>' +
@@ -364,14 +375,42 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '   </tr>'+
         '   <tr>'+
         '   </tr>'+
+        '</tbody>'+
         '</table>';
 
-    $("#sel-0").hide();
-    $("#sel-1").hide();
 
-
-    $("#vivienda")
+       $("#vivienda")
         .append(htmlVivienda);
+
+
+    $("#sel-1").hide();
+    $("#sel-2").hide();
+    $("#sel-3").hide();
+    $("#sel-4").hide();
+
+    $.each(motivos, function(key, value) {
+        console.dir(key)
+        console.dir(value)
+        $('#sel-1')
+            .append($("<option></option>")
+                .attr("value",value.id)
+                .text(value.text));
+
+        $('#sel-2')
+            .append($("<option></option>")
+                .attr("value",value.id)
+                .text(value.text));
+
+        $('#sel-3')
+            .append($("<option></option>")
+                .attr("value",value.id)
+                .text(value.text));
+
+        $('#sel-4')
+            .append($("<option></option>")
+                .attr("value",value.id)
+                .text(value.text));
+    });
 
     $("#fallecido").bootstrapToggle({
         on: "Vivo",
