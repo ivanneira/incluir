@@ -7,6 +7,7 @@ var PlanillaID = "";
 
 var registrostable;
 
+var planilla_back,supervisor_back,encuestador_back
 
 $(function(){
 
@@ -48,7 +49,7 @@ function fillDatatableEncuestas(userid){
     var detailsTableHtml;
 
     //Run On HTML Build
-    $(document).ready(function () {
+    //$(document).ready(function () {
 
         var oTable = $('#encuestasTable').dataTable({
             "bProcessing": true,
@@ -136,7 +137,7 @@ function fillDatatableEncuestas(userid){
 
 
 
-    });
+    //});
 
 }
 
@@ -254,6 +255,10 @@ function fillDatatablePlanillas(userid){
 function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPlanilla){
 
     //console.log(planillaid)
+    planilla_back = planillaid;
+    encuestador_back = encuestadorNombre;
+    supervisor_back = supervisorNombre;
+
     $('#agregarPlanilla').hide();
     //$('#agregarRegistroBotonPrincipal').show();
 

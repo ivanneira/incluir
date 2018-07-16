@@ -285,7 +285,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     //pestaña de datos de la prestación
     var htmlPrestaciones =
         '<table class="table table-striped">'+
-            '<thead>'+
+        '<thead>'+
         '    <tr class="tr-importante">' +
         '        <td  class="bg-light" colspan="2" id="td-motivoPrestaciones">' +
         '            <div class="custom-control custom-checkbox">'+
@@ -940,10 +940,22 @@ function enviarDatos(jsonDATA){
         data: jsonDATA
     })
         .done(function(res){
+            console.dir("aca")
+            console.dir(jsonDATA)
             if(typeof(res)=="undefined")
                 {
-                    swal("Incluir Salud", "Se agrego una nuevo registro!", "success");
-                    setTimeout(function(){location.reload();},1500)
+
+
+                    swal("Incluir Salud", (editar==1) ? "Se ha editado el registro" :  "Se agrego una nuevo registro!", "success");
+                    setTimeout(function(){
+                        /*location.reload();*/
+                        $("#modalAC").modal("hide");
+                        $("#registrosTable").empty();
+                        swal.close();
+
+                        mostarRegistros(planilla_back,supervisor_back,encuestador_back);
+
+                        },1500)
                 }
                 else
                 {
