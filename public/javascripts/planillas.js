@@ -7,7 +7,7 @@ var PlanillaID = "";
 
 var registrostable;
 
-var planilla_back,supervisor_back,encuestador_back
+var planilla_back,supervisor_back,encuestador_back,numeroplanulla_back;
 
 $(function(){
 
@@ -254,8 +254,10 @@ function fillDatatablePlanillas(userid){
 
 function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPlanilla){
 
-    //console.log(planillaid)
+    console.log(planillaid)
+
     planilla_back = planillaid;
+    numeroplanulla_back = numeroPlanilla;
     encuestador_back = encuestadorNombre;
     supervisor_back = supervisorNombre;
 

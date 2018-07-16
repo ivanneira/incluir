@@ -532,7 +532,7 @@ function completarDatos(filaid){
         var data = res[0];
 
 
-        console.dir(data);
+        //console.dir(data);
 
         //datos personales
 
@@ -928,7 +928,7 @@ function enviarDatos(jsonDATA){
 
 
     console.log("los datos que se enviarían son los siguientes:");
-    console.dir(jsonDATA);
+    //console.dir(jsonDATA);
 
     var url = (editar==0) ? server_host+":"+server_port+server_url+"/api/IncluirSalud/GuardarFilaPlanilla" : server_host+":"+server_port+server_url+"/api/IncluirSalud/ActualizarFilaPlanilla";
 
@@ -940,8 +940,8 @@ function enviarDatos(jsonDATA){
         data: jsonDATA
     })
         .done(function(res){
-            console.dir("aca")
-            console.dir(jsonDATA)
+            //console.dir("aca")
+            //console.dir(jsonDATA)
             if(typeof(res)=="undefined")
                 {
 
@@ -953,7 +953,7 @@ function enviarDatos(jsonDATA){
                         $("#registrosTable").empty();
                         swal.close();
 
-                        mostarRegistros(planilla_back,supervisor_back,encuestador_back);
+                        mostarRegistros(planilla_back,encuestador_back,supervisor_back, numeroplanulla_back);
 
                         },1500)
                 }
