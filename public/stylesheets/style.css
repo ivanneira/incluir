@@ -265,14 +265,19 @@ a.bg-light:hover{
 
 #exampleTable {
 
-  width: auto !important;
+  min-width: 100% !important;
 }
-/*
-#encuestasTable{
 
-  width: auto !important;
+#exampleTable  th {
+
+  min-width: 20% !important;
 }
-*/
+
+#encuestasTable th{
+
+  min-width: 25% !important;
+}
+
 .nav-link {
 
   background-color: #a3a4a5 !important;
@@ -297,3 +302,4 @@ a.bg-light:hover{
 .registroContainer {
   padding: 20px;
 }
+

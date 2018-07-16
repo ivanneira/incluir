@@ -8,6 +8,7 @@ var tipoServicios;
 //TODO: traer userid sin forzar
 var userid = 1;
 var planillaid;
+var filaID;
 
 var motivos;
 
@@ -101,6 +102,9 @@ var modal;
 function fillModal(NumeroPlanilla,idplanilla,filaid){
 
 
+    if(typeof(filaid)!= 'undefined' ){
+        filaID = filaid;
+    }
 
     planillaid = idplanilla;
 
@@ -152,7 +156,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '               </div>'+
         '           </td>' +
         '           <td  class="bg-light">' +
-        '                <select id="sel-1">'+
+        '                <select class="form-control" id="sel-1">'+
         '               </select>'+
         '           </td>' +
         '       </tr>' +
@@ -220,7 +224,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '            </div>'+
         '        </td>' +
         '           <td colspan="2" class="bg-light">' +
-        '                <select id="sel-2">'+
+        '                <select class="form-control" id="sel-2">'+
         '               </select>'+
         '           </td>' +
         '    </tr>'+
@@ -283,14 +287,14 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '<table class="table table-striped">'+
             '<thead>'+
         '    <tr class="tr-importante">' +
-        '        <td colspan="2" id="td-motivoPrestaciones">' +
+        '        <td  class="bg-light" colspan="2" id="td-motivoPrestaciones">' +
         '            <div class="custom-control custom-checkbox">'+
         '                <input type="checkbox" class="custom-control-input che" data-mot="3" id="mot-3">'+
         '                <label class="custom-control-label" for="mot-3">No tengo este dato</label>'+
         '            </div>'+
         '        </td>' +
         '        <td colspan="2" class="bg-light">' +
-        '                <select id="sel-3">'+
+        '                <select class="form-control" id="sel-3">'+
         '               </select>'+
         '           </td>' +
         '    </tr>'+
@@ -339,14 +343,14 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '<table class="table table-striped">'+
             '<thead>' +
             '<tr class="tr-importante">'+
-                '<td colspan="3" id="td-motivoVivienda">' +
+                '<td  class="bg-light" colspan="3" id="td-motivoVivienda">' +
                     '<div class="custom-control custom-checkbox">'+
                         '<input type="checkbox" class="custom-control-input che" data-mot="4" id="mot-4">'+
                         '<label class="custom-control-label" for="mot-4">No tengo este dato</label>'+
                     '</div>'+
                 '</td>' +
         '        <td colspan="2" class="bg-light">' +
-        '                <select id="sel-4">'+
+        '                <select class="form-control" id="sel-4">'+
         '               </select>'+
         '           </td>' +
             '</tr>'+
@@ -389,8 +393,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     $("#sel-4").hide();
 
     $.each(motivos, function(key, value) {
-        console.dir(key)
-        console.dir(value)
+
         $('#sel-1')
             .append($("<option></option>")
                 .attr("value",value.id)
@@ -445,46 +448,6 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     });
 
 
-/*
-    $("#motivoPersonal").change(function(){
-
-        if($("#motivoPersonal").prop("checked")){
-
-            $(".camposPersonales")
-                .hide();
-
-            $("#td-motivoPersonal").append("<p>Hola</p>")
-        }else{
-
-            $(".camposPersonales")
-                .show();
-        }
-
-
-    });
-
-
-
-    $("#motivoLocalizacion").change(function(){
-        console.log("clicked");
-        console.log($("#motivoLocalizacion").prop("checked"))
-        $("#td-motivoLocalizacion").append("<p>Hola</p>")
-    })
-
-    $("#motivoPrestaciones").change(function(){
-        console.log("clicked");
-        console.log($("#motivoPrestaciones").prop("checked"))
-        $("#td-motivoPrestaciones").append("<p>Hola</p>")
-    })
-
-    $("#motivoVivienda").change(function(){
-        console.log("clicked");
-        console.log($("#motivoVivienda").prop("checked"))
-        $("#td-motivoVivienda").append("<p>Hola</p>")
-    })
-
-*/
-
     //evento del botón fallecido
     $("#fallecido").change(function(){
 
@@ -521,7 +484,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         .data('idplanilla',idplanilla)
         .text('Editar registro, planilla nº: ' + NumeroPlanilla);
 
-    if(filaid) completarDatos(filaid);
+
 
     $("#modalAC")
         .modal('show')
@@ -536,6 +499,12 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     $("#comentarioTipoVivienda").hide();
 
     fillDropDown();
+
+    if(typeof(filaid) != 'undefined'){
+
+        completarDatos(filaid);
+        editar = 1;
+    }
 
 }
 
@@ -562,7 +531,8 @@ function completarDatos(filaid){
         //datos para completar
         var data = res[0];
 
-        //console.dir(data);
+
+        console.dir(data);
 
         //datos personales
 
@@ -586,9 +556,6 @@ function completarDatos(filaid){
 
 
          //localizacion
-
-
-
         $('.selectDepartamento')
             .empty()
             .append('<option selected value="' + data.DepartamentoID + '">'+ data.DepartamentoNombre +'</option>')
@@ -611,6 +578,30 @@ function completarDatos(filaid){
 
 
         //Prestaciones
+
+        if(data.Titularidad == 1)
+        {
+            $(".btn-light").first().button("toggle");
+        }
+        else
+        {
+            $(".btn-light").slice(1,2).button("toggle");
+
+        }
+
+        $(".selectPrestaciones")
+            .empty();
+
+        for(var index in data.enlace_prestaciones){
+
+            $(".selectPrestaciones")
+                .append('<option selected value="' + data.enlace_prestaciones[index].PrestacionID + '">'+ data.enlace_prestaciones[index].PrestacionID + ' - ' + data.enlace_prestaciones[index].PrestacionNombre +'</option>')
+        }
+
+        $(".selectPrestaciones")
+            .trigger('change');
+
+
         $(tipoPension).each(function(i,v){
 
 
@@ -623,33 +614,42 @@ function completarDatos(filaid){
         });
 
         $('.selectCIE10')
-            .empty()
-            .append('<option selected value="' + data.Pension_cie10_id10 + '">'+ data.Pension_cie10_id10 + ' - ' + data.Pension_cie10_dec10 +'</option>')
+            .empty();
+
+
+        for(var index in data.enlace_diagnosticos){
+
+            $('.selectCIE10')
+                .append('<option selected value="' + data.enlace_diagnosticos[index].DiagnosticoID + '">'+ data.enlace_diagnosticos[index].DiagnosticoID + ' - ' + data.enlace_diagnosticos[index].DiagnosticoNombre +'</option>')
+
+        }
+
+        $('.selectCIE10')
             .trigger('change');
 
+
+
         //Vivienda
+
         $("#conviven").val(data.NroIntegrantesConviven);
         $("#grupo").val(data.NroPersonasConviven);
 
         //$(".selectTipoVivienda").val();
         $("#comentario").val(data.Comentario);
 
+        $(".selectTipoServicios ")
+            .empty()
+
+        for(var index in data.enlace_serviciosBasicos){
+
+            $(".selectTipoServicios")
+                .append('<option selected value="' + data.enlace_serviciosBasicos[index].ServicioID + '">'+ data.enlace_serviciosBasicos[index].ServicioID + ' - ' + data.enlace_serviciosBasicos[index].ServicioNombre +'</option>');
+        }
+
         //Titularidad
         // Base 1- Titular | 2 - Adherente
 
 
-            if(data.Titularidad == 1)
-            {
-                $(".btn-light").first().button("toggle");
-            }
-            else
-            {
-                $(".btn-light").slice(1,2).button("toggle");
-
-            }
-
-        //verga
-        $(".selectPrestaciones").select2('val', 1);
 
          /*
          //prestación
@@ -820,7 +820,8 @@ function armarJSON(){
     var data = {
         enlace_tipoPension: [],
         enlace_prestaciones: [],
-        enlace_serviciosBasicos: []
+        enlace_serviciosBasicos: [],
+        enlace_diagnosticos: [],
     };
 
     //en caso de que el encuestado esté fallecido
@@ -840,7 +841,7 @@ function armarJSON(){
         //TODO: faltan datos para guardar.
 
         //planilla
-        //data.ID = ID;
+        data.ID = filaID;
         data.planillaID = planillaid;
         //personales
         data.nombre = $("#nombre").val();
@@ -849,8 +850,8 @@ function armarJSON(){
         var fd = $("#defuncion").val().split('/');
         data.fechaDefuncion = typeof(fd[0]) === 'undefined' ? fd[2]+'-'+fd[1]+'-'+fd[0] : null;
 
-        console.dir(fd)
-        console.dir(data.fechaDefuncion)
+        //console.dir(fd)
+        //console.dir(data.fechaDefuncion)
 
         var fn = $("#fechaNacimiento").val().split('/');
         data.fechaNacimiento = fn[2]+'-'+fn[1]+'-'+fn[0];
@@ -868,21 +869,34 @@ function armarJSON(){
         //prestación
         data.tipoBeneficiarioID = $("#btnTitular").prop('checked') ? 1 : 2;
 
+
         data.enlace_tipoPension = [
             {
 
-                tipoPensionID: $(".selectTipoPension ").val()
+                tipoPensionID: $(".selectTipoPension ").val(),
+                filaPlanillaID: filaID
             }
         ];
-        data.diagnosticoID = $(".selectCIE10").val();
+        //data.diagnosticoID = $(".selectCIE10").val();
         //data.enlace_prestaciones = $(".selectPrestaciones").val();
+
+        var diagnosticos = $(".selectCIE10").val();
+
+        for(var index in diagnosticos){
+
+            data.enlace_diagnosticos.push({
+                id10: diagnosticos[index],
+                filaPlanillaID: filaID
+            });
+        }
 
         var prestaciones = $(".selectPrestaciones").val();
 
         for(var index in prestaciones){
 
             data.enlace_prestaciones.push({
-                prestacionID: prestaciones[index]
+                prestacionID: prestaciones[index],
+                filaPlanillaID: filaID
             });
         }
 
@@ -898,7 +912,8 @@ function armarJSON(){
         for(var index in serviciosBasicos){
 
             data.enlace_serviciosBasicos.push({
-                serviciosBasicosID: serviciosBasicos[index]
+                serviciosBasicosID: serviciosBasicos[index],
+                filaPlanillaID: filaID
             });
         }
 
@@ -916,6 +931,7 @@ function enviarDatos(jsonDATA){
     console.dir(jsonDATA);
 
     var url = (editar==0) ? server_host+":"+server_port+server_url+"/api/IncluirSalud/GuardarFilaPlanilla" : server_host+":"+server_port+server_url+"/api/IncluirSalud/ActualizarFilaPlanilla";
+
     $.ajax({
         //id de usuario forzado a 1
         url: url,
