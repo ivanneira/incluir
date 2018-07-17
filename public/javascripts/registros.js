@@ -112,19 +112,19 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     var htmlString =
         '<ul class="nav nav-tabs nav-fill" role="tablist" id="formTabs">'+
         '   <li class="nav-item">' +
-        '       <a id="personales-tab" data-toggle="tab" class="nav-link active " href="#personales">Datos personales  </a>' +
+        '       <a id="personales-tab" data-toggle="tab" class="nav-link active " href="#personales">Datos personales <i class="alerta personales fa fa-exclamation-triangle text-warning"></i> </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="localizacion-tab" data-toggle="tab" class="nav-link " href="#localizacion">Datos de localización</a>' +
+        '       <a id="localizacion-tab" data-toggle="tab" class="nav-link " href="#localizacion">Datos de localización <i class="alerta localizacion fa fa-exclamation-triangle text-warning"></i> </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="prestaciones-tab" data-toggle="tab" class="nav-link " href="#prestaciones">Datos de la prestación</a>' +
+        '       <a id="prestaciones-tab" data-toggle="tab" class="nav-link " href="#prestaciones">Datos de la prestación <i class="alerta prestacion fa fa-exclamation-triangle text-warning"></i> </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="vivienda-tab" data-toggle="tab" class="nav-link " href="#vivienda">Datos de vivienda</a>' +
+        '       <a id="vivienda-tab" data-toggle="tab" class="nav-link " href="#vivienda">Datos de vivienda <i class="alerta vivienda fa fa-exclamation-triangle text-warning"></i> </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="comentarios-tab" data-toggle="tab" class="nav-link " href="#comentarios">Comentarios</a>' +
+        '       <a id="comentarios-tab" data-toggle="tab" class="nav-link " href="#comentarios">Comentarios </a>' +
         '   </li>'+
         '</ul>';
 
@@ -144,6 +144,9 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         .empty()
         .append(htmlString);
 
+    //esconde las alertas
+    $(".alerta").hide();
+
     //pestaña de datos personales
     var htmlPersonales =
         '<table class="table table-striped">' +
@@ -152,7 +155,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '           <td class="bg-light" id="td-motivoPersonal">' +
         '               <div class="custom-control custom-checkbox">'+
         '                   <input type="checkbox" data-mot="1" id="mot-1" class="custom-control-input che">'+
-        '                   <label class="custom-control-label" for="mot-1">No tengo este dato</label>'+
+        '                   <label class="custom-control-label" for="mot-1">Datos incompletos</label>'+
         '               </div>'+
         '           </td>' +
         '           <td  class="bg-light">' +
@@ -220,7 +223,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '        <td colspan="2" class="bg-light" id="td-motivoLocalizacion">' +
         '            <div class="custom-control custom-checkbox">'+
         '                <input type="checkbox" data-mot="2" id="mot-2" class="custom-control-input che che-1" >'+
-        '                <label class="custom-control-label" for="mot-2">No tengo este dato</label>'+
+        '                <label class="custom-control-label" for="mot-2">Datos incompletos</label>'+
         '            </div>'+
         '        </td>' +
         '           <td colspan="2" class="bg-light">' +
@@ -290,7 +293,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '        <td  class="bg-light" colspan="2" id="td-motivoPrestaciones">' +
         '            <div class="custom-control custom-checkbox">'+
         '                <input type="checkbox" class="custom-control-input che" data-mot="3" id="mot-3">'+
-        '                <label class="custom-control-label" for="mot-3">No tengo este dato</label>'+
+        '                <label class="custom-control-label" for="mot-3">Datos incompletos</label>'+
         '            </div>'+
         '        </td>' +
         '        <td colspan="2" class="bg-light">' +
@@ -346,7 +349,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
                 '<td  class="bg-light" colspan="3" id="td-motivoVivienda">' +
                     '<div class="custom-control custom-checkbox">'+
                         '<input type="checkbox" class="custom-control-input che" data-mot="4" id="mot-4">'+
-                        '<label class="custom-control-label" for="mot-4">No tengo este dato</label>'+
+                        '<label class="custom-control-label" for="mot-4">Datos incompletos</label>'+
                     '</div>'+
                 '</td>' +
         '        <td colspan="2" class="bg-light">' +
@@ -430,16 +433,16 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
 
         if($(this).prop('checked') == true){
 
-            console.log('ni fu')
+            //console.log('ni fu')
 
             $("#sel-"+$(this).data('mot')).show();
-            $("#cam-"+$(this).data('mot')).hide();
+            //$("#cam-"+$(this).data('mot')).hide();
 
         }else{
-            console.log('ni fa')
+            //console.log('ni fa')
 
             $("#sel-"+$(this).data('mot')).hide();
-            $("#cam-"+$(this).data('mot')).show()
+            //$("#cam-"+$(this).data('mot')).show()
         }
 
 
@@ -664,6 +667,21 @@ function verificarCampos(){
     //bandera para comprobar que no salió alguna corrección
     var flag = true;
 
+    var clases = [
+        '.personales',
+        '.localizacion',
+        '.prestacion',
+        '.vivienda'
+    ];
+
+    var grupos = [
+        true,
+        true,
+        true,
+        true
+    ];
+
+
     //en caso que NO esté seleccionado como fallecido
     if($("#fallecido").prop('checked') ){
 
@@ -695,7 +713,8 @@ function verificarCampos(){
                 $("#domicilio"),
                 $("#conviven"),
                 $("#grupo"),
-                $("#barrio")
+                $("#barrio"),
+                $("#tel")
 
             ];
 
@@ -714,8 +733,10 @@ function verificarCampos(){
         //verificación de campo sexo
         if($("#sexo").val() === '-1'){
             flag = false;
+            grupos[0] = false;
             $("#sexo").addClass('bg-warning');
         }else{
+            grupos[0] = true;
             $("#sexo").removeClass('bg-warning');
         }
 
@@ -725,6 +746,21 @@ function verificarCampos(){
             $("#fechaNacimiento").addClass('bg-warning');
         }else{
             $("#fechaNacimiento").removeClass('bg-warning');
+        }
+
+        //verificación de selector de departamento
+        if($(".selectDepartamento").val()){
+
+            $(".selectDepartamento")
+                .next()
+                .find('.select2-selection')
+                .removeClass('bg-warning');
+        }else{
+            flag = false;
+            $(".selectDepartamento")
+                .next()
+                .find('.select2-selection')
+                .addClass('bg-warning');
         }
 
         //verificación de selector de localidad
@@ -741,6 +777,54 @@ function verificarCampos(){
                 .find('.select2-selection')
                 .addClass('bg-warning');
         }
+
+
+        //verificación de selector de pension
+        if($(".selectPrestaciones").val() == []){
+
+            $(".selectPrestaciones")
+                .next()
+                .find('.select2-selection')
+                .removeClass('bg-warning');
+        }else{
+            flag = false;
+            $(".selectPrestaciones")
+                .next()
+                .find('.select2-selection')
+                .addClass('bg-warning');
+        }
+
+        //verificación de selector de diagnóstico
+
+        if($(".selectCIE10").val() == []){
+
+            $(".selectCIE10")
+                .next()
+                .find('.select2-selection')
+                .removeClass('bg-warning');
+        }else{
+            flag = false;
+            $(".selectCIE10")
+                .next()
+                .find('.select2-selection')
+                .addClass('bg-warning');
+        }
+
+        //verificación de selector de servicios básicos
+        if($(".selectTipoServicios").val() == []){
+
+            $(".selectTipoServicios")
+                .next()
+                .find('.select2-selection')
+                .removeClass('bg-warning');
+        }else{
+            flag = false;
+            $(".selectTipoServicios")
+                .next()
+                .find('.select2-selection')
+                .addClass('bg-warning');
+        }
+
 
 
         if($("#btnTitular").prop('checked') || $("#btnAdherente").prop('checked')){
@@ -790,7 +874,19 @@ function verificarCampos(){
         armarJSON();
     }else{
         //alert("hay errores")
+
+        for(var i=0; i < grupos.length; i++){
+
+            if(grupos[i] == false){
+
+                $(clases[i]).show();
+
+            }
+        }
+
         swal("Incluir Salud", "verifique los datos ingresados!", "warning");
+
+
     }
 
 }
@@ -990,6 +1086,7 @@ function fillDropDown(){
     $(".selectTipoVivienda")
         .select2({
             placeholder: 'Elija tipo de vivienda',
+            dropdownParent: $("#modalACBody"),
             width: '100%',
             language: 'es',
             //minimumResultsForSearch: -1,
@@ -1008,6 +1105,7 @@ function fillDropDown(){
     $(".selectTipoServicios")
         .select2({
             placeholder: 'Elija tipo de vivienda',
+            dropdownParent: $("#modalACBody"),
             width: '100%',
             language: 'es',
             //minimumResultsForSearch: -1,

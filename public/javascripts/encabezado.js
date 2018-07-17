@@ -1,7 +1,18 @@
 /**
  * Created by ien83 on 07/06/2018.
  */
+var urlencabezado;
 
+var encabezadoDATA = {
+
+    usuarioID: userid,
+    supervisorID: '',
+    encuestadorID: '',
+    nroPlanilla: ''
+
+};
+
+var mensaje;
 
 function agregarEncabezado(userid,encabezadoid) {
 
@@ -32,24 +43,6 @@ function agregarEncabezado(userid,encabezadoid) {
     $("#modalACTitulo")
         .text('Agregar nueva planilla');
 
-    var url,verb;
-
-    if(encabezadoid){
-
-        console.log("MODO EDICION DE ENCABEZADO");
-        console.log(encabezadoid)
-
-        url = server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + userid ;
-
-        verb = 'POST'
-
-    }else{
-        url = server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + userid ;
-
-        verb = 'GET';
-    }
-
-
 
     //select2 de supervisor
     $(".selectSupervisor").select2({
@@ -60,7 +53,7 @@ function agregarEncabezado(userid,encabezadoid) {
         language: 'es',
         ajax: {
             //url: 'planillas/supervisores',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + userid,
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 1,
             type: 'GET',
             dataType: "json",
             delay: 250,
@@ -96,7 +89,7 @@ function agregarEncabezado(userid,encabezadoid) {
 
             delay: 250,
             data: function (params) {
-                console.dir(params)
+                //console.dir(params)
                 return {
                     searchTerm: params.term // search term
                 };
@@ -116,18 +109,72 @@ function agregarEncabezado(userid,encabezadoid) {
         .click(function(data){
             verificarEncabezado(userid);
         });
+
+    mensaje = "No se pudo agregar o actualizar la planilla, por favor recargue la página e intente nuevamente";
+
+    if(encabezadoid){
+
+        //console.log("MODO EDICION DE ENCABEZADO");
+        //console.log(encabezadoid)
+
+        mensaje = "No se pudo editar la planilla, ¿Ya está agregado éste número de planilla?";
+
+        encabezadoDATA.ID = encabezadoid;
+
+        $("#modalACTitulo")
+            .text('Editar encabezado de planilla');
+
+        urlencabezado = server_host+":"+server_port+"/api/IncluirSalud/ActualizarPlanilla?id=" + userid ;
+
+        swal("Espere...", "se están cargando los datos", "info");
+
+        $.ajax({
+            url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerPlanilla?id=" + encabezadoid ,
+            method: "GET",
+            dataType: "json"
+        })
+            .done(function(res){
+
+
+                swal.close();
+
+                if(typeof(res) !== "undefined") {
+
+
+                    $(".selectSupervisor")
+                        .append('<option selected value="' + res[0].SupervisorID + '">'+ res[0].SupervisorNombre +'</option>')
+                        .trigger('change');
+
+                    $(".selectEncuestador")
+                        .append('<option selected value="' + res[0].EncuestadorID + '">'+ res[0].EncuestadorNombre +'</option>')
+                        .trigger('change');
+
+                    $("#numeroPlanilla").val(res[0].NumeroPlanilla);
+                }
+                else
+                {
+                   alert("Hubo un error, recargue la página e intente nuevamente");
+                }
+            });
+
+
+    }else{
+
+        urlencabezado = server_host+":"+server_port+"/api/IncluirSalud/GuardarPlanilla", + userid ;
+
+    }
+
+
 }
+
+
+
+
+
 
 function verificarEncabezado(userid){
 
-    var encabezadoDATA = {
 
-        usuarioID: userid,
-        supervisorID: '',
-        encuestadorID: '',
-        nroPlanilla: ''
-
-    };
 
 
     encabezadoDATA.usuarioID = userid;
@@ -152,21 +199,23 @@ function verificarEncabezado(userid){
         swal("Espere...", "se están guardando los datos", "info");
 
         $.ajax({
-            url: server_host+":"+server_port+"/api/IncluirSalud/GuardarPlanilla",
+            url: urlencabezado,
             method: "POST",
             data: encabezadoDATA,
             dataType: "json"
         })
             .done(function(res){
 
-                if(typeof(res) == "undefined") {
+
+
+                if(res === "OK") {
 
 
                     location.reload();
                 }
                 else
                 {
-                    swal("ERROR", "No se pudo agregar la planilla, por favor recargue la página e intente nuevamente", "error");
+                    swal("ERROR", res, "error");
                 }
             });
 
