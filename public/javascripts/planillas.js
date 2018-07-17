@@ -200,6 +200,7 @@ function fillDatatablePlanillas(userid){
 
                 { "data": "PlanillaID","title": "Planilla ID", "visible": false},
                 { "data": "NumeroPlanilla","title": "Nº Planilla"},
+                { "data": "CantidadDeRegistros","title": "Registros",},
                 { "data": "FechaPlanilla", "title": "Fecha de Planilla","format": 'M/D/YYYY'},
                 { "data": "EncuestadorNombre","title": "Encuestador"},
                 { "data": "SupervisorNombre", "title": "Supervisor"}
@@ -222,14 +223,14 @@ function fillDatatablePlanillas(userid){
                 //nCloneTd2.className = "center";
 
                 $('#exampleTable thead').each(function () {
-                    this.insertBefore(nCloneTh2, this.childNodes[4]);
+                    this.insertBefore(nCloneTh2, this.childNodes[5]);
                     nCloneTh2.innerHTML = "Acciones"
                 });
 
 
 
                 $('#exampleTable thead  tr').each(function () {
-                    this.insertBefore(nCloneTh2, this.childNodes[4]);
+                    this.insertBefore(nCloneTh2, this.childNodes[5]);
                 });
 
 
@@ -245,7 +246,7 @@ function fillDatatablePlanillas(userid){
                         '&nbsp<button onclick="eliminarPlanilla('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button></div>';
 
 
-                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[4]);
+                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[5]);
                 });
 
             }
