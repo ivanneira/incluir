@@ -3,7 +3,7 @@
  */
 
 
-function agregarEncabezado(userid) {
+function agregarEncabezado(userid,encabezadoid) {
 
 
     var htmlStringEncabezado =
@@ -32,6 +32,24 @@ function agregarEncabezado(userid) {
     $("#modalACTitulo")
         .text('Agregar nueva planilla');
 
+    var url,verb;
+
+    if(encabezadoid){
+
+        console.log("MODO EDICION DE ENCABEZADO");
+        console.log(encabezadoid)
+
+        url = server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + userid ;
+
+        verb = 'POST'
+
+    }else{
+        url = server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + userid ;
+
+        verb = 'GET';
+    }
+
+
 
     //select2 de supervisor
     $(".selectSupervisor").select2({
@@ -42,7 +60,7 @@ function agregarEncabezado(userid) {
         language: 'es',
         ajax: {
             //url: 'planillas/supervisores',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 1 ,
+            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + userid,
             type: 'GET',
             dataType: "json",
             delay: 250,

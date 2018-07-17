@@ -9,13 +9,15 @@ var registrostable;
 
 var planilla_back,supervisor_back,encuestador_back,numeroplanulla_back;
 
+var userID = 1;
+
 $(function(){
 
     //forzado a usuario 1
     //loadPlanillas(1);
     //loadEncuestas(1);
-    fillDatatablePlanillas(1);
-    fillDatatableEncuestas(1);
+    fillDatatablePlanillas(userID);
+    fillDatatableEncuestas(userID);
 
     $("#volver").click(function(){
 
@@ -157,7 +159,7 @@ function fillDatatablePlanillas(userid){
     var detailsTableHtml;
 
     //Run On HTML Build
-    $(document).ready(function () {
+
 
         var oTable = $('#exampleTable').dataTable({
             "bProcessing": true,
@@ -214,6 +216,7 @@ function fillDatatablePlanillas(userid){
                     .className = "center";
 
                 var nCloneTh2 = document.createElement('th');
+                $(nCloneTh2).removeAttr('style');
                 var nCloneTd2 = document.createElement('td');
 
                 //nCloneTd2.className = "center";
@@ -238,7 +241,7 @@ function fillDatatablePlanillas(userid){
                     nCloneTd2.innerHTML =
                         '<div class="row" style="width: 160px"><button onclick="mostarRegistros('+table.DataTable().row(i).data().PlanillaID+',\''+table.DataTable().row(i).data().EncuestadorNombre+'\',\''+table.DataTable().row(i).data().SupervisorNombre+'\',\''+table.DataTable().row(i).data().NumeroPlanilla+'\')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-arrow-right"></i> </button>' +
                         //'&nbsp<button onclick="fillModal('+table.DataTable().row(i).data().NumeroPlanilla+','+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i></button>' +
-                        '&nbsp<button class="btn btn-small btn-warning editarPlanilla " data-planillaid="'+table.DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>' +
+                        '&nbsp<button  onclick="agregarEncabezado('+ userID +',' +table.DataTable().row(i).data().PlanillaID +')" class="btn btn-small btn-warning editarPlanilla " data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>' +
                         '&nbsp<button onclick="eliminarPlanilla('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button></div>';
 
 
@@ -248,7 +251,7 @@ function fillDatatablePlanillas(userid){
             }
 
         });
-    });
+
 
 }
 

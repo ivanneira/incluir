@@ -268,12 +268,12 @@ a.bg-light:hover{
   min-width: 100% !important;
 }
 
-#exampleTable  th {
+#exampleTable > thead > tr > th{
 
-  min-width: 20% !important;
+  width: 20% !important;
 }
 
-#encuestasTable th{
+#encuestasTable > thead > tr > th{
 
   min-width: 25% !important;
 }

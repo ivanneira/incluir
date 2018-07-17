@@ -531,9 +531,6 @@ function completarDatos(filaid){
         //datos para completar
         var data = res[0];
 
-
-        //console.dir(data);
-
         //datos personales
 
         $("#nombre").val(data.Nombre);
@@ -589,6 +586,8 @@ function completarDatos(filaid){
 
         }
 
+        if(data.enlace_prestaciones)
+
         $(".selectPrestaciones")
             .empty();
 
@@ -601,32 +600,37 @@ function completarDatos(filaid){
         $(".selectPrestaciones")
             .trigger('change');
 
+        if(data.enlace_tipoPension.length !== 0){
 
-        $(tipoPension).each(function(i,v){
+
+            $(".selectTipoPension")
+                .val(data.enlace_tipoPension[0].PensionID)
+                .trigger('change');
+        }
 
 
-            if(v.text == data.TipoPension){
 
-                $(".selectTipoPension")
-                    .val(v.id)
-                    .trigger('change');
-            }
-        });
 
         $('.selectCIE10')
             .empty();
 
+        if(data.enlace_diagnosticos.length !== 0){
 
-        for(var index in data.enlace_diagnosticos){
+            for(var index in data.enlace_diagnosticos){
+
+                $('.selectCIE10')
+                    .append('<option selected value="' + data.enlace_diagnosticos[index].DiagnosticoID + '">'+ data.enlace_diagnosticos[index].DiagnosticoID + ' - ' + data.enlace_diagnosticos[index].DiagnosticoNombre +'</option>')
+
+            }
+
+        }else{
 
             $('.selectCIE10')
-                .append('<option selected value="' + data.enlace_diagnosticos[index].DiagnosticoID + '">'+ data.enlace_diagnosticos[index].DiagnosticoID + ' - ' + data.enlace_diagnosticos[index].DiagnosticoNombre +'</option>')
-
+                .append('<option selected value="000">(000) Sin diagnóstico</option>')
         }
 
         $('.selectCIE10')
             .trigger('change');
-
 
 
         //Vivienda
@@ -637,32 +641,20 @@ function completarDatos(filaid){
         //$(".selectTipoVivienda").val();
         $("#comentario").val(data.Comentario);
 
-        $(".selectTipoServicios ")
-            .empty()
 
-        for(var index in data.enlace_serviciosBasicos){
+        if(data.enlace_serviciosBasicos.length !== 0){
 
-            $(".selectTipoServicios")
-                .append('<option selected value="' + data.enlace_serviciosBasicos[index].ServicioID + '">'+ data.enlace_serviciosBasicos[index].ServicioID + ' - ' + data.enlace_serviciosBasicos[index].ServicioNombre +'</option>');
+            for(var index in data.enlace_serviciosBasicos){
+
+                $(".selectTipoServicios")
+                    .append('<option selected value="' + data.enlace_serviciosBasicos[index].ServicioID + '">'+ data.enlace_serviciosBasicos[index].ServicioID + ' - ' + data.enlace_serviciosBasicos[index].ServicioNombre +'</option>');
+            }
+
         }
 
-        //Titularidad
-        // Base 1- Titular | 2 - Adherente
+        $(".selectTipoServicios ")
+            .trigger('change');
 
-
-
-         /*
-         //prestación
-         $("#btnTitular").prop('checked') ? 1 : 2;
-         $(".selectPrestaciones").val();
-         //vivienda
-         $("#conviven").val();
-         $("#grupo").val();
-         $(".selectTipoVivienda").val();
-         $("#comentarioTipoVivienda").val();
-         $(".selectTipoServicios").val();
-         $("#comentario").val();
-         */
     })
 }
 
