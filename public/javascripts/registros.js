@@ -670,8 +670,225 @@ function completarDatos(filaid){
 function verificarCampos(){
 
     //bandera para comprobar que no salió alguna corrección
-    var flag = true;
+    var error = false;
 
+    //si falleció solamente son obligatorios algunos campos personales e incluso estos no son obligatorios con motivo
+    var fallecido = $("#fallecido").prop('checked');
+
+    //alerta de errores por grupo
+    var grupos = [
+        {
+            clase: '.personales',
+            alerta: false
+        },
+        {
+            clase: '.localizacion',
+            alerta: false
+        },
+        {
+            clase: '.prestaciones',
+            alerta: false
+        },
+        {
+            clase: '.vivienda',
+            alerta: false
+        }
+    ];
+
+
+    //es un toggle de alerta
+    function mostrarError(condition,selector){
+
+        if(condition){
+            $(selector)
+                .addClass('bg-warning');
+        }else{
+            $(selector)
+                .removeClass('bg-warning');
+        }
+    }
+
+    //función genérica para inputs simples
+    function inputsVacios(selector,indice){
+
+        if(!selector.prop('checked')){
+
+            if(selector.val() === ''){
+                mostrarError(true,selector);
+                error = true;
+                grupos[indice].alerta = true;
+
+            }else{
+                mostrarError(false,selector);
+
+            }
+
+        }
+    }
+
+    //función genérica para comprobar errores en select2 de simple selección
+    function errorEnSelect2(selector,indice){
+
+        if((selector).val()){
+
+            $(selector)
+                .next()
+                .find('.select2-selection')
+                .removeClass('bg-warning');
+
+        }else{
+            $(selector)
+                .next()
+                .find('.select2-selection')
+                .addClass('bg-warning');
+
+            error = true;
+
+            grupos[indice].alerta = true;
+        }
+    }
+
+    //función genérica par acomprobar errores en selec2 de selección múltiple
+    function errorEnSelect2Multiple(selector,indice){
+
+        if($(selector).val().length !== 0){
+
+            $(selector)
+                .next()
+                .find('.select2-selection--multiple')
+                .removeClass('bg-warning');
+
+        }else{
+            $(selector)
+                .next()
+                .find('.select2-selection--multiple')
+                .addClass('bg-warning');
+
+            error = true;
+
+            grupos[indice].alerta = true;
+        }
+    }
+
+
+    //datos personales
+    if(!$("#mot-1").prop('checked')){
+
+        //si no paró las patas
+        if(fallecido){
+
+            //nombre
+            inputsVacios($("#nombre"),0);
+            //apellido
+            inputsVacios($("#apellido"),0);
+            //dni
+            inputsVacios($("#dni"),0);
+            //fecha
+            inputsVacios($("#fechaNacimiento"),0);
+            //teléfono
+            inputsVacios($("#tel"),0);
+
+            //sexo
+            if($("#sexo").val() === '-1'){
+
+                error = true;
+                grupos[0].alerta = true;
+
+                $("#sexo").addClass('bg-warning');
+            }else{
+                $("#sexo").removeClass('bg-warning');
+            }
+
+        }else{
+
+            //datos obligatorios en caso de fallecido
+
+            //nombre
+            inputsVacios($("#nombre"),0);
+            //apellido
+            inputsVacios($("#apellido"),0);
+            //fecha de defunción
+            inputsVacios($("#defuncion"),0);
+        }
+    }
+
+    //datos de localización
+    if(!$("#mot-2").prop('checked')){
+
+        if(fallecido){
+
+            //departamento
+            errorEnSelect2($(".selectDepartamento"),1);
+
+            //localidad
+            errorEnSelect2($(".selectLocalidad"),1);
+
+            //calle
+            inputsVacios($("#domicilio"),1);
+
+            //barrio
+            inputsVacios($("#barrio"),1);
+
+            //latitud
+            inputsVacios($("#lat"),1);
+
+            //longitud
+            inputsVacios($("#lon"),1);
+
+        }
+    }
+
+    //datos de prestación
+    if(!$("#mot-3").prop('checked')){
+
+        if(fallecido) {
+
+            //titularidad
+            if ($("#btnTitular").prop('checked') || $("#btnAdherente").prop('checked')) {
+
+                $("#titular").removeClass('alert alert-warning');
+            } else {
+                error = true;
+                grupos[2].alerta = true;
+                $("#titular").addClass('alert bg-warning');
+            }
+
+            //tipo de pensión
+            errorEnSelect2($(".selectTipoPension"), 2);
+
+            //diagnóstico
+            errorEnSelect2Multiple($(".selectCIE10"), 2);
+
+            //prestaciones
+            errorEnSelect2Multiple($(".selectPrestaciones"), 2);
+        }
+    }
+
+    //vivienda
+
+    if(!$("#mot-4").prop('checked')) {
+
+        if (fallecido) {
+
+            //nº de personas que conviven
+            inputsVacios($("#conviven"),3)
+
+            //nº de grupo familiar
+            inputsVacios($("#grupo"),3)
+
+            //servicios básicos
+            errorEnSelect2Multiple($(".selectTipoServicios"), 3);
+        }
+    }
+
+
+
+    console.dir(grupos)
+
+    console.log(error)
+
+    armarJSON();
+    /*
     var clases = [
         '.personales',
         '.localizacion',
@@ -893,20 +1110,10 @@ function verificarCampos(){
 
 
     }
-
+*/
 }
 
 
-function mostrarError(condition,selector){
-
-    if(condition){
-        $(selector)
-            .addClass('bg-warning');
-    }else{
-        $(selector)
-            .removeClass('bg-warning');
-    }
-}
 
 function armarJSON(){
 
