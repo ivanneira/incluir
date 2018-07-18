@@ -258,7 +258,7 @@ function fillDatatablePlanillas(userid){
 
 function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPlanilla){
 
-    console.log(planillaid)
+    //console.log(planillaid)
 
     planilla_back = planillaid;
     numeroplanulla_back = numeroPlanilla;

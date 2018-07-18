@@ -8,7 +8,9 @@ var tipoServicios;
 //TODO: traer userid sin forzar
 var userid = userID;
 var planillaid;
-var filaID;
+var filaID = '';
+
+var filaplanillaid;
 
 var motivos;
 
@@ -90,21 +92,35 @@ $(function(){
 
 var marker;
 
-var $modal = $("#modalAC");
+
 function ERROR(){
 
     alert("Hubo un error, por favor recargue la página");
 }
 
-var modal;
-
 
 function fillModal(NumeroPlanilla,idplanilla,filaid){
 
 
-    if(typeof(filaid)!= 'undefined' ){
+    filaplanillaid = idplanilla;
+
+    if( typeof(filaid) !== 'undefined' ){
         filaID = filaid;
+    }else{
+
+        filaID = '';
     }
+
+    console.log('NumeroPlanilla')
+    console.log(NumeroPlanilla)
+    console.log('idplanilla')
+    console.log(idplanilla)
+    console.log('filaid')
+    console.log(filaid)
+    console.log('filaID')
+    console.log(filaID)
+    console.log('editar')
+    console.log(editar)
 
     planillaid = idplanilla;
 
@@ -482,9 +498,12 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     $("#comentarios")
         .append(htmlComentarios);
 
-    $("#modalACTitulo")
-        .data('idplanilla',idplanilla)
-        .text('Editar registro, planilla nº: ' + NumeroPlanilla);
+        $("#modalACTitulo")
+            .data('idplanilla',idplanilla)
+            .text('Agregar registro, planilla nº: ' + NumeroPlanilla);
+
+
+
 
 
 
@@ -505,13 +524,19 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
     if(typeof(filaid) != 'undefined'){
 
         completarDatos(filaid);
+
         editar = 1;
+    }else{
+        editar = 0;
     }
 
 }
 
 function completarDatos(filaid){
 
+
+    $("#modalACTitulo")
+        .text('Editar registro');
 
     $.ajax({
         url: server_host + ":" + server_port + server_url + "/api/IncluirSalud/ObtenerFilaPlanilla?id=" + filaid,
@@ -686,7 +711,7 @@ function verificarCampos(){
             alerta: false
         },
         {
-            clase: '.prestaciones',
+            clase: '.prestacion',
             alerta: false
         },
         {
@@ -883,234 +908,27 @@ function verificarCampos(){
 
 
 
-    console.dir(grupos)
+    //console.dir(grupos)
 
-    console.log(error)
+    for(var index in grupos){
 
-    armarJSON();
-    /*
-    var clases = [
-        '.personales',
-        '.localizacion',
-        '.prestacion',
-        '.vivienda'
-    ];
+        if(grupos[index].alerta){
 
-    var grupos = [
-        true,
-        true,
-        true,
-        true
-    ];
-
-
-    //en caso que NO esté seleccionado como fallecido
-    if($("#fallecido").prop('checked') ){
-
-        //verificación de campos numéricos
-        $('#modalACBody :input[type="number"]').each(function(index,item){
-
-
-            //condicion que no permite caracteres extraños en campos numéricos
-            if(
-                item.value.includes('-')
-                || item.value.includes('+')
-                || item.value.includes('e')
-                || item.value.includes(NaN)
-                || (item.value === '')
-            ){
-                mostrarError(true,item)
-                flag = false;
-
-
-            }else{
-                mostrarError(false,item)
-            }
-        });
-
-        var noEmptyInputs =
-            [
-                $("#nombre"),
-                $("#apellido"),
-                $("#domicilio"),
-                $("#conviven"),
-                $("#grupo"),
-                $("#barrio"),
-                $("#tel")
-
-            ];
-
-
-        $(noEmptyInputs).each(function(index,item){
-
-            if(item.val() === ''){
-                flag = false;
-                mostrarError(true,item)
-            }else{
-                mostrarError(false,item)
-            }
-        });
-
-
-        //verificación de campo sexo
-        if($("#sexo").val() === '-1'){
-            flag = false;
-            grupos[0] = false;
-            $("#sexo").addClass('bg-warning');
-        }else{
-            grupos[0] = true;
-            $("#sexo").removeClass('bg-warning');
-        }
-
-        //verificación de campo fecha de nacimiento
-        if($("#fechaNacimiento").val() === ''){
-            flag = false;
-            $("#fechaNacimiento").addClass('bg-warning');
-        }else{
-            $("#fechaNacimiento").removeClass('bg-warning');
-        }
-
-        //verificación de selector de departamento
-        if($(".selectDepartamento").val()){
-
-            $(".selectDepartamento")
-                .next()
-                .find('.select2-selection')
-                .removeClass('bg-warning');
-        }else{
-            flag = false;
-            $(".selectDepartamento")
-                .next()
-                .find('.select2-selection')
-                .addClass('bg-warning');
-        }
-
-        //verificación de selector de localidad
-        if($(".selectLocalidad").val()){
-
-            $(".selectLocalidad")
-                .next()
-                .find('.select2-selection')
-                .removeClass('bg-warning');
-        }else{
-            flag = false;
-            $(".selectLocalidad")
-                .next()
-                .find('.select2-selection')
-                .addClass('bg-warning');
-        }
-
-
-        //verificación de selector de pension
-        if($(".selectPrestaciones").val() == []){
-
-            $(".selectPrestaciones")
-                .next()
-                .find('.select2-selection')
-                .removeClass('bg-warning');
-        }else{
-            flag = false;
-            $(".selectPrestaciones")
-                .next()
-                .find('.select2-selection')
-                .addClass('bg-warning');
-        }
-
-        //verificación de selector de diagnóstico
-
-        if($(".selectCIE10").val() == []){
-
-            $(".selectCIE10")
-                .next()
-                .find('.select2-selection')
-                .removeClass('bg-warning');
-        }else{
-            flag = false;
-            $(".selectCIE10")
-                .next()
-                .find('.select2-selection')
-                .addClass('bg-warning');
-        }
-
-        //verificación de selector de servicios básicos
-        if($(".selectTipoServicios").val() == []){
-
-            $(".selectTipoServicios")
-                .next()
-                .find('.select2-selection')
-                .removeClass('bg-warning');
-        }else{
-            flag = false;
-            $(".selectTipoServicios")
-                .next()
-                .find('.select2-selection')
-                .addClass('bg-warning');
-        }
-
-
-
-        if($("#btnTitular").prop('checked') || $("#btnAdherente").prop('checked')){
-
-            $("#titular").removeClass('alert alert-warning')
-        }else{
-            flag = false;
-            $("#titular").addClass('alert bg-warning')
-        }
-
-        //verificaciones en caso de encuestado fallecido
-    }else{
-
-        //verificación de selector de fecha de defuncion
-        if(!$('#defuncion').val()){
-            flag = false;
-            $("#defuncion").addClass('bg-warning')
+            $(grupos[index].clase).show();
         }else{
 
-            $("#defuncion").removeClass('bg-warning')
+            $(grupos[index].clase).hide();
         }
-
-        var noEmptyInputs =
-            [
-                $("#nombre"),
-                $("#apellido"),
-                $('#lat'),
-                $('#lon')
-            ];
-
-
-
-
-        $(noEmptyInputs).each(function(index,item){
-
-            if(item.val() === ''){
-                flag = false;
-                mostrarError(true,item)
-            }else{
-                mostrarError(false,item)
-            }
-        });
     }
 
-    if(flag){
-        //alert("los datos se guardan");
-        armarJSON();
-    }else{
-        //alert("hay errores")
-
-        for(var i=0; i < grupos.length; i++){
-
-            if(grupos[i] == false){
-
-                $(clases[i]).show();
-
-            }
-        }
+    if(error){
 
         swal("Incluir Salud", "verifique los datos ingresados!", "warning");
-
-
+    }else{
+        swal("Espere por favor...", "Se están enviando los datos", "info");
+        armarJSON();
     }
-*/
+
 }
 
 
@@ -1138,10 +956,9 @@ function armarJSON(){
         //caso común de la encuesta
     }else{
 
-        //TODO: faltan datos para guardar.
-
         //planilla
-        data.ID = filaID;
+        if(filaID) data.ID = filaID;
+
         data.planillaID = planillaid;
         //personales
         data.nombre = $("#nombre").val();
@@ -1174,7 +991,7 @@ function armarJSON(){
             {
 
                 tipoPensionID: $(".selectTipoPension ").val(),
-                filaPlanillaID: filaID
+                filaPlanillaID: filaplanillaid
             }
         ];
         //data.diagnosticoID = $(".selectCIE10").val();
@@ -1186,7 +1003,7 @@ function armarJSON(){
 
             data.enlace_diagnosticos.push({
                 id10: diagnosticos[index],
-                filaPlanillaID: filaID
+                filaPlanillaID: filaplanillaid
             });
         }
 
@@ -1196,7 +1013,7 @@ function armarJSON(){
 
             data.enlace_prestaciones.push({
                 prestacionID: prestaciones[index],
-                filaPlanillaID: filaID
+                filaPlanillaID: filaplanillaid
             });
         }
 
@@ -1213,7 +1030,7 @@ function armarJSON(){
 
             data.enlace_serviciosBasicos.push({
                 serviciosBasicosID: serviciosBasicos[index],
-                filaPlanillaID: filaID
+                filaPlanillaID: filaplanillaid
             });
         }
 
@@ -1234,27 +1051,33 @@ function enviarDatos(jsonDATA){
 
 
     console.log("los datos que se enviarían son los siguientes:");
-    //console.dir(jsonDATA);
+    console.dir(jsonDATA);
 
-    var url = (editar==0) ? server_host+":"+server_port+server_url+"/api/IncluirSalud/GuardarFilaPlanilla" : server_host+":"+server_port+server_url+"/api/IncluirSalud/ActualizarFilaPlanilla";
+    console.log('editar')
+    console.log(editar)
+
+    var url =
+        (editar==0)
+            ?
+            server_host+":"+server_port+server_url+"/api/IncluirSalud/GuardarFilaPlanilla"
+            :
+            server_host+":"+server_port+server_url+"/api/IncluirSalud/ActualizarFilaPlanilla";
 
     $.ajax({
-        //id de usuario forzado a 1
         url: url,
         method: "POST",
         dataType: "json",
         data: jsonDATA
     })
         .done(function(res){
-            //console.dir("aca")
-            //console.dir(jsonDATA)
+
             if(typeof(res)=="undefined")
                 {
 
-
-                    swal("Incluir Salud", (editar==1) ? "Se ha editado el registro" :  "Se agrego una nuevo registro!", "success");
+                    swal.close();
+                    swal("Incluir Salud", (editar==1) ? "Se ha editado el registro" :  "Se agregó un nuevo registro!", "success");
                     setTimeout(function(){
-                        /*location.reload();*/
+
                         $("#modalAC").modal("hide");
                         $("#registrosTable").empty();
                         swal.close();
