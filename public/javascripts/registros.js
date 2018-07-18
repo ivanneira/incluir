@@ -270,7 +270,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '       </td>' +
         '   </tr>'+
         '   <tr>'+
-        '       <td colspan="3" >' +
+        '       <td colspan="4" >' +
         '           <div style="padding:10px">'+
         '           <label for="map">Mapa interactivo</label>' +
         '               <div id="map"></div>'+
@@ -323,8 +323,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '       </td>'+
         '       <td>' +
         '           <label for="motivo">Diagnóstico (CIE10)</label>' +
-        '           <select name="motivo" class="selectCIE10" data-placeholder="Seleccione motivo">' +
-        '<option value="">Busque el código CIE10 correspondiente</option>' +
+        '           <select name="motivo" class="selectCIE10">' +
         '</select>' +
         '       </td>'+
         '   </tr>'+
@@ -1196,6 +1195,8 @@ function fillDropDown(){
     })
 
 
+
+
     $(".selectCIE10").select2({
         width: '100%',
         dropdownAutoWidth: true,
@@ -1203,9 +1204,6 @@ function fillDropDown(){
         language: 'es',
         minimumInputLength: 3,
         dropdownParent: $("#modalACBody"),
-        placeholder: function(){
-            $(this).data('placeholder');
-        },
         ajax: {
             //url: '/planillas/getCIE10',
             url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerCIE10",
@@ -1226,6 +1224,7 @@ function fillDropDown(){
             cache: true
         }
     });
+
 
 
 // Fetch the preselected item, and add to the control
