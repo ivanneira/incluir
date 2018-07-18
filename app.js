@@ -18,6 +18,7 @@ var dashboard = require('./routes/dashboard');
 var planillas = require('./routes/planillas');
 
 var registro = require('./routes/registro');
+var registroEncuesta = require('./routes/registroEncuesta');
 
 
 var trylogin = require('./routes/trylogin');
@@ -29,7 +30,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
-
 
 
 //ruta de jquery
@@ -80,6 +80,7 @@ app.use('/dashboard', dashboard);
 app.use('/planillas', planillas);
 
 app.use('/registro', registro);
+app.use('/registroEncuesta', registroEncuesta);
 
 app.use('/trylogin', trylogin);
 app.use('/logout', logout);

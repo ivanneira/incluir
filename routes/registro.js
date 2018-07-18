@@ -2,13 +2,18 @@ var express = require('express');
 var router = express.Router();
 const http = require('http');
 
+var server_url = "";
+var server_host = "http://localhost";
+var server_port = 1941;
+
+
 /* GET home page. */
 router.get('/', function(req, resq, next) {
 
     var filaID = req.param('id');
 
     //cambiar dirección de IP fija por parámetros globales
-    http.get("http://192.168.3.105:45455/api/IncluirSalud/ObtenerFilaPlanilla?id="+filaID, (res) => {
+    http.get(server_host + ":" + server_port + server_url +"/api/IncluirSalud/ObtenerFilaPlanilla?id="+filaID, (res) => {
         var body = "";
 
     res.on('data', function (chunk) {
@@ -60,13 +65,5 @@ router.get('/', function(req, resq, next) {
 
 });
 
-router.get('/encabezados', function(req) {
-
-    let filaID = req.body.id;
-
-    res.render('encabezadoPlanilla', "coso")
-
-
-});
 
 module.exports = router;

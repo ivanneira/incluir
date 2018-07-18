@@ -124,7 +124,7 @@ function fillDatatableEncuestas(userid){
                     nCloneTd2.innerHTML =
                         //'&nbsp<button class="btn btn-small btn-success agregarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
                         //'&nbsp<button class="btn btn-small btn-secondary detalleEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                        //'&nbsp<button class="btn btn-small btn-warning editarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i> </button>' +
+                        '&nbsp<button onclick="detalleEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-secondary eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Detalle"><i class="fa fa-eye"></i> </button>' +
                         '&nbsp<button onclick="eliminarEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-danger eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>';
 
 
@@ -380,6 +380,11 @@ function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPla
 function verRegistro(planillaid){
 
     window.open('/registro?id=' + planillaid);
+}
+
+
+function detalleEncuesta(encuestaID){
+    window.open('/registroEncuesta?id=' + encuestaID);
 }
 
 function eliminarEncuesta(encuestaID){

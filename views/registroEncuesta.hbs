@@ -1,0 +1,114 @@
+<div class="registroContainer">
+
+    <button id="imprimir" class="btn btn-dark noprint">Imprimir</button>
+
+    <br  class="noprint">
+    <br  class="noprint">
+
+    <table class="registroindividual table table-striped vistadeimpresion">
+        <tr>
+            <th colspan="2">Encuestador : {{{EncuestadorNombre}}} | Fecha de la encuesta: {{{FechaEncuesta}}}</th>
+        </tr>
+        <tr>
+            <td>
+                Departamento: {{{DepartamentoNombre}}}
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Fecha de nacimiento: {{#if FechaNacimiento}} {{{FechaNacimiento}}} {{else}} Sin datos {{/if}}
+            </td>
+            <td>
+                Sexo: {{{Sexo}}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tiempo de prestación: {{{TiempoPrestacion}}}
+            </td>
+            <td>
+                Tipo pensión: {{{TipoPension}}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Calidad de atención: {{{CalidadAtencion}}}
+            </td>
+            <td>
+                Calidad de atención UGP: {{{CalidadAtencionUGP}}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Estudios solicitados: {{{EstudiosSolicitados}}}
+            </td>
+            <td>
+                Derivado: {{{Derivado}}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Conoce beneficios del programa: {{{ConoceBeneficioPrograma}}}
+            </td>
+            <td>
+                Demora en remedios:
+                 {{{DemoraRemedios}}}
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Atendido por:
+                {{#if Enlace_AtendidoPor}}
+
+                    {{#each Enlace_AtendidoPor}}
+                        <span class="badge badge-secondary">{{AtendidoPor}}</span>
+                    {{/each}}
+
+                {{else}}
+                    Sin datos
+                {{/if}}
+            </td>
+
+            <td>
+                Lugar de atención:
+                {{#if Enlace_EncuestaLugarAtencion}}
+
+                    {{#each Enlace_EncuestaLugarAtencion}}
+                        <span class="badge badge-secondary">{{LugarAtencion}}</span>
+                    {{/each}}
+
+                {{else}}
+                    Sin datos
+                {{/if}}
+            </td>
+        </tr>
+
+    </table>
+</div>
+<br>
+<br>
+<br>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpjpAsKeGWDM1REdx9hTuMXwtwbknN6DU&callback=initMap" async defer></script>
+
+
+<script>
+
+    $(function(){
+
+        $("#imprimir").click(function(){
+
+            window.print();
+
+        });
+
+
+    });
+
+
+
+
+</script>
