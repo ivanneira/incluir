@@ -657,6 +657,12 @@ function completarDatos(filaid){
         $(".selectTipoServicios ")
             .trigger('change');
 
+        /*DropDown de motivos*/
+        $("#sel-1").val(data.motivoPersonalID);
+        $("#sel-2").val(data.motivoLocalizacionID);
+        $("#sel-3").val(data.motivoPrestacionID);
+        $("#sel-4").val(data.motivoViviendaID);
+
     })
 }
 
@@ -1003,6 +1009,12 @@ function armarJSON(){
                 filaPlanillaID: filaID
             });
         }
+
+        /*DropDown de motivos*/
+        data.motivoPersonalID = $("#sel-1").val)();
+        data.motivoLocalizacionID = $("#sel-2").val)();
+        data.motivoPrestacionID = $("#sel-3").val)();
+        data.motivoViviendaID = $("#sel-4").val)();
 
         data.comentario = $("#comentario").val();
 
