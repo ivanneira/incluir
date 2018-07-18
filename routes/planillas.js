@@ -24,16 +24,18 @@ var knex = require('knex')({
 router.get('/', function(req, res, next) {
 
     var user = req.session.user;
-/*descomentar!
+    var id = req.session.uid;
+
+
     if(typeof(user) !='undefined'){
 
         //res.render('dashboard', { title: 'Dashboard', user: user });
-        res.render('planillas', { title: 'Planillas', user: user });
+        res.render('planillas', { title: 'Planillas', user: user, id: id });
     }else{
         res.redirect('/');
     }
 
-*/res.render('planillas', { title: 'Planillas', user: user });
+//res.render('planillas', { title: 'Planillas', user: user, id: id });
 
 });
 

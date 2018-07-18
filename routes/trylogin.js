@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var userID = "";
 
 
 router.post('/', function(req, res, next) {
@@ -10,11 +11,19 @@ router.post('/', function(req, res, next) {
     var user = req.body.user;
     var pass = req.body.pass;
 
+
     consultar(user,pass,function(response){
         if(response){
+            console.log("userID",userID);
+            req.session.uid = userID;
             req.session.user = user;
-            res.send("dashboard");
+            //res.render("planillas");
+            //res.redirect('/planillas');
+            res.send('planillas');
+            console.log("USUARIO CORRECTO")
+
         }else{
+            console.log("USUARIO INNNN CORRECTO")
             res.send(false);
         }
     })
@@ -37,17 +46,15 @@ function consultar(user,pass,callback){
 
 
         knex
-        .column('usuario','clave')
+        .column('usuario','clave','ID')
         .select()
         .from("usuarios")
         .where("usuario",'=', user)
         .andWhere("clave",'=', pass)
         .andWhere('activo','=', 1)
         .then(function(rows){
-            console.log(1)
-            console.log("rows")
-            console.dir(rows)
             if(rows.length > 0) {
+                userID = rows[0].ID;
                 callback(true);
             }
             else

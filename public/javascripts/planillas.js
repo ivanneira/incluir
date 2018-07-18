@@ -9,7 +9,7 @@ var registrostable;
 
 var planilla_back,supervisor_back,encuestador_back,numeroplanulla_back;
 
-var userID = 1;
+var userID = $("#uid").val();
 
 $(function(){
 
