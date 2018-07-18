@@ -1218,10 +1218,10 @@ function armarJSON(){
         }
 
         /*DropDown de motivos*/
-        data.motivoPersonalID = $("#sel-1").val)();
-        data.motivoLocalizacionID = $("#sel-2").val)();
-        data.motivoPrestacionID = $("#sel-3").val)();
-        data.motivoViviendaID = $("#sel-4").val)();
+        data.motivoPersonalID = $("#sel-1").val();
+        data.motivoLocalizacionID = $("#sel-2").val();
+        data.motivoPrestacionID = $("#sel-3").val();
+        data.motivoViviendaID = $("#sel-4").val();
 
         data.comentario = $("#comentario").val();
 
