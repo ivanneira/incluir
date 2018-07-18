@@ -58,7 +58,7 @@ function fillDatatableEncuestas(userid){
             "sAjaxDataProp":"",
 
             ajax: {
-                url: server_host+":"+server_port+server_url+ '/api/incluirSalud/Obtenerencuesta?id=' + userid,
+                url: server_host+":"+server_port+server_url+ '/api/incluirSalud/Obtenerencuestas?id=' + userid,
             },
             language: {
                 "sProcessing":     "Cargando...",
