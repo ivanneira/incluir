@@ -2049,6 +2049,11 @@ function armarJSON(){
         data.planillaID = planillaid;
         //personales
         data.nombre = $("#nombre").val();
+
+        if($("#apellido").val().trim() == '')
+            $("#apellido").val('Nombre no declarado');
+
+
         data.apellido = $("#apellido").val();
 
         var fd = $("#defuncion").val().split('/');
