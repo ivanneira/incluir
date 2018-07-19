@@ -282,7 +282,7 @@ function agregarEncuesta(){
         '               <label class="form-check-label" for="co4">Más de 1 mes</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="conseguir" class="form-check-input" type="radio" id="co5">' +
+        '               <input value="5" name="conseguir" class="form-check-input" type="radio" id="co5">' +
         '               <label class="form-check-label" for="co5">Más de 1 año</label>' +
         '           </div>' +
         '       </td>' +
