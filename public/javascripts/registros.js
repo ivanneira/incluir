@@ -1216,7 +1216,7 @@ function fillDropDown(){
             width: '100%',
             language: 'es',
             ajax: {
-                url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerLocalidades?id="+ $(".selectDepartamento").val(),
+                url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/ObtenerLocalidades?id="+ $(".selectDepartamento").val(),
                 type: 'GET',
                 dataType: 'json',
                 delay: 250,
