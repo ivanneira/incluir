@@ -53,7 +53,7 @@ function agregarEncabezado(userid,encabezadoid) {
         language: 'es',
         ajax: {
             //url: 'planillas/supervisores',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 1,
+            url:server_host + ":" + server_port + server_url + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 1,
             type: 'GET',
             dataType: "json",
             delay: 250,
@@ -83,7 +83,7 @@ function agregarEncabezado(userid,encabezadoid) {
         language: 'es',
         ajax: {
             //url: 'planillas/encuestadores',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 3,
+            url: server_host + ":" + server_port + server_url + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 3,
             type: 'GET',
             dataType: 'json',
 
@@ -124,12 +124,12 @@ function agregarEncabezado(userid,encabezadoid) {
         $("#modalACTitulo")
             .text('Editar encabezado de planilla');
 
-        urlencabezado = server_host+":"+server_port+"/api/IncluirSalud/ActualizarPlanilla?id=" + userid ;
+        urlencabezado = server_host+":"+server_port+ server_url +"/api/IncluirSalud/ActualizarPlanilla?id=" + userid ;
 
         swal("Espere...", "se están cargando los datos", "info");
 
         $.ajax({
-            url: server_host+":"+server_port+"/api/IncluirSalud/ObtenerPlanilla?id=" + encabezadoid ,
+            url: server_host+":"+server_port+ server_url +"/api/IncluirSalud/ObtenerPlanilla?id=" + encabezadoid ,
             method: "GET",
             dataType: "json"
         })
@@ -160,7 +160,7 @@ function agregarEncabezado(userid,encabezadoid) {
 
     }else{
 
-        urlencabezado = server_host+":"+server_port+"/api/IncluirSalud/GuardarPlanilla", + userid ;
+        urlencabezado = server_host+":"+server_port+ server_url + "/api/IncluirSalud/GuardarPlanilla", + userid ;
 
     }
 

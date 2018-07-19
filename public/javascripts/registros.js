@@ -1660,7 +1660,9 @@ function completarDatos(filaid){
 
         $("#domicilio").val(data.Domicilio);
 
-        $("#barrio").val(data.Barrio);
+        $(".selectBarrio")
+            .val(data.Barrio)
+            .trigger('change');
 
         $("#lat").val(data.Latitud);
         $("#lon").val(data.Longitud);
@@ -1919,7 +1921,7 @@ function verificarCampos(){
             inputsVacios($("#domicilio"),1);
 
             //barrio
-            inputsVacios($("#barrio"),1);
+            errorEnSelect2($(".selectBarrio"),1);
 
             //latitud
             inputsVacios($("#lat"),1);
@@ -2046,7 +2048,7 @@ function armarJSON(){
         //localizacion
         data.localidadID = $(".selectLocalidad").val();
         data.domicilio  = $("#domicilio").val();
-        data.barrio = $("#barrio").val();
+        data.barrio = $(".selectBarrio").val();
         data.latitud = $("#lat").val();
         data.longitud = $("#lon").val();
         data.departamentoID = $(".selectDepartamento").val();
