@@ -36,7 +36,7 @@ $(function(){
 
     $.ajax({
         //url: 'planillas/getTipoPension',
-        url: server_host + ":" + server_port + "/api/IncluirSalud/obtenerTipoPensiones",
+        url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/obtenerTipoPensiones",
         type: 'GET',
         dataType: 'json',
         success: function(data){
@@ -51,7 +51,7 @@ $(function(){
 
     $.ajax({
         //url: '/planillas/getTipoVivienda',
-        url: server_host + ":" + server_port + "/api/IncluirSalud/obtenerTipoViviendas",
+        url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/obtenerTipoViviendas",
         type: 'GET',
         dataType: 'json',
         success: function(data){
@@ -65,7 +65,7 @@ $(function(){
 
     $.ajax({
         //url: '/planillas/getTipoServicios',
-        url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerTipoServicios",
+        url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/ObtenerTipoServicios",
         type: 'GET',
         dataType: 'json',
         success: function(data){
