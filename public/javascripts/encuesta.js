@@ -1,4 +1,5 @@
 //Encuesta de satisfacción
+var userid = userID;
 
 function agregarEncuesta(){
 
