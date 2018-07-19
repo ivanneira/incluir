@@ -74,7 +74,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 //express session
-app.use(session({resave: true, saveUninitialized: true, secret: 'shhhh', cookie: { maxAge: 60000 }}));
+app.use(session({resave: true, saveUninitialized: true, secret: 'shhhh', cookie: { maxAge: null }}));
 
 app.use('/', index);
 //app.use('/users', users);

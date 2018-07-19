@@ -2024,6 +2024,8 @@ function armarJSON(){
             $("#apellido").val('Apellido no declarado');
 
 
+        data.ingresosDeclarados = $("#ingresosDeclarados").val();
+
         data.apellido = $("#apellido").val();
 
         if($("#defuncion").val() === ''){
