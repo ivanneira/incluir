@@ -1263,7 +1263,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '              <input id="fechaNacimiento" name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
         '              <label for="sexo">Sexo</label>' +
         '              <select class="form-control" id="sexo" name="sexo">' +
-        '                  <option value="-1">Seleccione el sexo...</option>' +
+        '                  <option value="3">Seleccione el sexo...</option>' +
         '                  <option value="1">Masculino</option>' +
         '                  <option value="2">Femenino</option>' +
         '              </select>' +
@@ -1883,7 +1883,7 @@ function verificarCampos(){
             inputsVacios($("#tel"),0);
 
             //sexo
-            if($("#sexo").val() === '-1'){
+            if($("#sexo").val() === '3'){
 
                 error = true;
                 grupos[0].alerta = true;
@@ -2014,10 +2014,28 @@ function armarJSON(){
     //en caso de que el encuestado esté fallecido
     if(!$('#fallecido').prop('checked')){
 
+        if($("#nombre").val().trim() == '')
+            $("#nombre").val('Nombre no declarado');
+
 
         data.nombre = $("#nombre").val();
+
+        if($("#apellido").val().trim() == '')
+            $("#apellido").val('Nombre no declarado');
+
+
         data.apellido = $("#apellido").val();
-        data.fechaDefuncion  = $("#defuncion").val();
+
+        if($("#defuncion").val() === ''){
+
+            $("#defuncion").val('01/01/1900');
+            fn = $("#defuncion").val().split('/');
+            data.fechaDefuncion = fn[2]+'-'+fn[1]+'-'+fn[0];
+
+        }else{
+            fn = $("#defuncion").val().split('/');
+            data.fechaDefuncion = fn[2]+'-'+fn[1]+'-'+fn[0];
+        }
 
 
         enviarDatos(data);
@@ -2036,11 +2054,20 @@ function armarJSON(){
         var fd = $("#defuncion").val().split('/');
         data.fechaDefuncion = typeof(fd[0]) === 'undefined' ? fd[2]+'-'+fd[1]+'-'+fd[0] : null;
 
-        //console.dir(fd)
-        //console.dir(data.fechaDefuncion)
+        var fn;
 
-        var fn = $("#fechaNacimiento").val().split('/');
-        data.fechaNacimiento = fn[2]+'-'+fn[1]+'-'+fn[0];
+        if($("#fechaNacimiento").val() === ''){
+
+            $("#fechaNacimiento").val('01/01/1900');
+            fn = $("#fechaNacimiento").val().split('/');
+            data.fechaNacimiento = fn[2]+'-'+fn[1]+'-'+fn[0];
+
+        }else{
+            fn = $("#fechaNacimiento").val().split('/');
+            data.fechaNacimiento = fn[2]+'-'+fn[1]+'-'+fn[0];
+        }
+
+
 
         data.dni = $("#dni").val();
         data.tipoSexoID = $("#sexo").val();
