@@ -20,7 +20,7 @@ $(function(){
 
     $.ajax({
         //url: 'planillas/Obtenerotivos',
-        url: server_host + ":" + server_port + "/api/IncluirSalud/obtenerMotivos",
+        url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/obtenerMotivos",
         type: 'GET',
         dataType: 'json',
         success: function(data){
