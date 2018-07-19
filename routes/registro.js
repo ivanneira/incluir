@@ -2,11 +2,6 @@ var express = require('express');
 var router = express.Router();
 const http = require('http');
 
-var server_url = "";
-var server_host = "http://localhost";
-var server_port = 1941;
-
-
 /* GET home page. */
 router.get('/', function(req, resq, next) {
 
