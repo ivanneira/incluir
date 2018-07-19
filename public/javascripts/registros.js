@@ -1163,7 +1163,7 @@ function fillDropDown(){
         width: '100%',
         language: 'es',
         ajax: {
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerDepartamentos?id="+ 18, // San Juan
+            url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/ObtenerDepartamentos?id="+ 18, // San Juan
             type: 'GET',
             dataType: 'json',
             delay: 250,
@@ -1188,7 +1188,7 @@ function fillDropDown(){
         width: '100%',
         language: 'es',
         ajax: {
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerLocalidades?id="+ $(".selectDepartamento").val(),
+            url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/ObtenerLocalidades?id="+ $(".selectDepartamento").val(),
             type: 'GET',
             dataType: 'json',
             delay: 250,
@@ -1248,7 +1248,7 @@ function fillDropDown(){
         dropdownParent: $("#modalACBody"),
         ajax: {
             //url: '/planillas/getCIE10',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerCIE10",
+            url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/ObtenerCIE10",
             type: 'GET',
             dataType: "json",
             delay: 250,
@@ -1282,7 +1282,7 @@ function fillDropDown(){
         dropdownParent: $("#modalACBody"),
         ajax: {
             //url: '/planillas/getCIE10',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerPrestaciones",
+            url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/ObtenerPrestaciones",
             type: 'GET',
             dataType: "json",
             delay: 250,

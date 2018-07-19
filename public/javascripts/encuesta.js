@@ -364,7 +364,7 @@ function agregarEncuesta(){
         language: 'es',
         ajax: {
             //url: 'planillas/supervisores',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 3 ,
+            url: server_host+":"+server_port+server_url+"/api/IncluirSalud/ObtenerEncuestadorSupervisor?id=" + 3 ,
             type: 'GET',
             dataType: "json",
             delay: 250,
@@ -394,7 +394,7 @@ function agregarEncuesta(){
         language: 'es',
         ajax: {
             //url: 'planillas/encuestadores',
-            url: server_host + ":" + server_port + "/api/IncluirSalud/ObtenerDepartamentos?id=18",
+            url:server_host+":"+server_port+server_url+"/api/IncluirSalud/ObtenerDepartamentos?id=18",
             type: 'GET',
             dataType: 'json',
 

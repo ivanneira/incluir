@@ -405,7 +405,7 @@ function eliminarEncuesta(encuestaID){
             if (willDelete) {
                 swal("Espere un momento...", "se está eliminando el registro", "info");
                 $.ajax({
-                    url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarEncuesta?id=" + id,
+                    url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/EliminarEncuesta?id=" + id,
                     method: "POST",
                     dataType: "json",
 
@@ -443,7 +443,7 @@ function eliminarRegistro(FilaPlanillaID){
             if (willDelete) {
                 swal("Espere un momento...", "se está eliminando el registro", "info");
                 $.ajax({
-                    url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
+                    url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/EliminarFilaPlanilla?id=" + id,
                     method: "POST",
                     dataType: "json",
 
@@ -484,7 +484,7 @@ function eliminarPlanilla(planillaid){
             swal("Espere un momento...", "se está eliminando la planilla", "info");
 
             $.ajax({
-                url: server_host + ":" + server_port + "/api/IncluirSalud/EliminarPlanilla?id=" + id,
+                url: server_host+":"+server_port+server_url+ "/api/IncluirSalud/EliminarPlanilla?id=" + id,
                 method: "POST",
                 dataType: "json",
 
