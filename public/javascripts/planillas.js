@@ -9,9 +9,10 @@ var registrostable;
 
 var planilla_back,supervisor_back,encuestador_back,numeroplanulla_back;
 
-var userID = $("#uid").val();
+userID = $("#uid").val();
 
 $(function(){
+
 
     //forzado a usuario 1
     //loadPlanillas(1);
@@ -53,10 +54,10 @@ function fillDatatableEncuestas(userid){
     //Run On HTML Build
     //$(document).ready(function () {
 
-        var oTable = $('#encuestasTable').dataTable({
+        var oTable = $('#encuestasTable').DataTable({
             "bProcessing": true,
             "sAjaxDataProp":"",
-
+            "bDestroy": true,
             ajax: {
                 url: server_host+":"+server_port+server_url+ '/api/incluirSalud/Obtenerencuestas?id=' + userid,
             },

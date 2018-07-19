@@ -544,7 +544,13 @@ function agregarEncuesta(){
                 if(typeof (res) == "undefined")
                 {
                     swal("Incluir Salud", "Se agrego una nueva encuesta!", "success");
-                    setTimeout(function(){location.reload();},1500)
+                    setTimeout(function(){
+                        //location.reload();
+                        swal.close();
+                        $("#modalAC").modal("hide");
+                        $("#encuestasTable").empty()
+                        fillDatatableEncuestas(userID)
+                        },1500)
                 }else{
                     console.log(res);
                 }
