@@ -5,8 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-
-
+//url del sevidor
+server_url = "/aresapi";
+server_host = "http://10.64.65.200";
+server_port = 80;
 
 //express-session
 var session = require('express-session');

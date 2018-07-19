@@ -390,7 +390,6 @@ function agregarEncuesta(){
     $(".selectDepartamentoEncuesta").select2({
         placeholder: 'Busque departamento',
         dropdownParent: $("#modalACBody"),
-        //minimumInputLength: 3,
         width: '100%',
         language: 'es',
         ajax: {
@@ -449,8 +448,8 @@ function agregarEncuesta(){
     function guardarDatosEncuesta(){
 
         var encuestaDATA = {
-            //id de usuario forzado
-            usuarioID: 1,
+
+            usuarioID: userID,
             nroEncuesta: '',
             tipoSexoID: '',
             fechaEncuesta: '',
@@ -544,7 +543,7 @@ function agregarEncuesta(){
 
                 if(typeof (res) == "undefined")
                 {
-                    swal("Incluir Salud", "Se agrego una nueva registro!", "success");
+                    swal("Incluir Salud", "Se agrego una nueva encuesta!", "success");
                     setTimeout(function(){location.reload();},1500)
                 }else{
                     console.log(res);

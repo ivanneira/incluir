@@ -30,7 +30,7 @@ router.get('/', function(req, res, next) {
     if(typeof(user) !='undefined'){
 
         //res.render('dashboard', { title: 'Dashboard', user: user });
-        res.render('planillas', { title: 'Planillas', user: user, id: id });
+        res.render('planillas', { title: 'Planillas', user: user, id: id, server_url: server_url, server_host: server_host, server_port: server_port });
     }else{
         res.redirect('/');
     }
