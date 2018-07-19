@@ -63,18 +63,36 @@
                 Titularidad: {{#if Titularidad}} {{{Titularidad}}} {{else}} Sin datos {{/if}}
             </td>
             <td>
-                Tipo de pensión: {{#if TipoPension}} {{{TipoPension}}} {{else}} Sin datos {{/if}}
+                Tipo de pensión:
+                {{#if enlace_tipoPension}}
+
+                    {{#each enlace_tipoPension}}
+                        <span class="badge badge-secondary">{{PensionNombre}}</span>
+                    {{/each}}
+
+                {{else}}
+                    Sin datos
+                {{/if}}
             </td>
         </tr>
         <tr>
             <td>
-                Motivo de pensión: {{#if Pension_cie10_dec10}} {{{Pension_cie10_dec10}}} {{else}} Sin datos {{/if}}
+                Diagnóstico:
+                {{#if enlace_diagnosticos}}
+
+                    {{#each enlace_diagnosticos}}
+                        <span class="badge badge-secondary">{{DiagnosticoNombre}}</span>
+                    {{/each}}
+
+                {{else}}
+                    Sin datos
+                {{/if}}
             </td>
             <td>
                 Prestaciones:
-                {{#if prestaciones}}
+                {{#if enlace_prestaciones}}
 
-                    {{#each prestaciones}}
+                    {{#each enlace_prestaciones}}
                         <span class="badge badge-secondary">{{PrestacionNombre}}</span>
                     {{/each}}
 
@@ -101,10 +119,10 @@
             <td>
                 Servicios básicos:
 
-                {{#if TipoViviendaDetalle}}
+                {{#if enlace_serviciosBasicos}}
 
-                    {{#each TipoViviendaDetalle}}
-                        <span class="badge badge-secondary">{{nombre}}</span>
+                    {{#each enlace_serviciosBasicos}}
+                        <span class="badge badge-secondary">{{ServicioNombre}}</span>
                     {{/each}}
 
                 {{else}}
