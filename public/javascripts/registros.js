@@ -2048,6 +2048,10 @@ function armarJSON(){
 
         data.planillaID = planillaid;
         //personales
+        if($("#nombre").val().trim() == '')
+            $("#nombre").val('Nombre no declarado');
+
+
         data.nombre = $("#nombre").val();
 
         if($("#apellido").val().trim() == '')
