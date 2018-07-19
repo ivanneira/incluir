@@ -389,8 +389,6 @@ function detalleEncuesta(encuestaID){
 
 function eliminarEncuesta(encuestaID){
 
-
-        console.dir(encuestaID);
         var id = encuestaID;
 
         /**/
@@ -410,7 +408,7 @@ function eliminarEncuesta(encuestaID){
                     dataType: "json",
 
                     success: function (res) {
-                        console.log(res)
+
                         swal("Registro eliminado!", {
                             icon: "success",
                         });
@@ -448,7 +446,7 @@ function eliminarRegistro(FilaPlanillaID){
                     dataType: "json",
 
                     success: function (res) {
-                        console.log(res)
+
                         swal("Registro eliminado!", {
                             icon: "success",
                         });
@@ -489,7 +487,7 @@ function eliminarPlanilla(planillaid){
                 dataType: "json",
 
                 success: function (res) {
-                    console.log(res)
+
                     swal("Planilla eliminada!", {
                         icon: "success",
                     });
