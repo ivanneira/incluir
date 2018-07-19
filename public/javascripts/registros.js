@@ -1375,7 +1375,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '<table class="table table-striped">'+
         '<thead>'+
         '    <tr class="tr-importante">' +
-        '        <td  class="bg-light" colspan="2" id="td-motivoPrestaciones">' +
+        '        <td  class="bg-light" id="td-motivoPrestaciones">' +
         '            <div class="custom-control custom-checkbox">'+
         '                <input type="checkbox" class="custom-control-input che" data-mot="3" id="mot-3">'+
         '                <label class="custom-control-label" for="mot-3">Datos incompletos</label>'+
@@ -1430,7 +1430,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '<table class="table table-striped">'+
             '<thead>' +
             '<tr class="tr-importante">'+
-                '<td  class="bg-light" colspan="3" id="td-motivoVivienda">' +
+                '<td  class="bg-light" colspan="2" id="td-motivoVivienda">' +
                     '<div class="custom-control custom-checkbox">'+
                         '<input type="checkbox" class="custom-control-input che" data-mot="4" id="mot-4">'+
                         '<label class="custom-control-label" for="mot-4">Datos incompletos</label>'+
@@ -2021,7 +2021,7 @@ function armarJSON(){
         data.nombre = $("#nombre").val();
 
         if($("#apellido").val().trim() == '')
-            $("#apellido").val('Nombre no declarado');
+            $("#apellido").val('Apellido no declarado');
 
 
         data.apellido = $("#apellido").val();
@@ -2055,7 +2055,7 @@ function armarJSON(){
         data.nombre = $("#nombre").val();
 
         if($("#apellido").val().trim() == '')
-            $("#apellido").val('Nombre no declarado');
+            $("#apellido").val('Apellido no declarado');
 
 
         data.apellido = $("#apellido").val();
