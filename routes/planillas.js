@@ -25,12 +25,12 @@ router.get('/', function(req, res, next) {
 
     var user = req.session.user;
     var id = req.session.uid;
-
+    var apenom = req.session.apenom;
 
     if(typeof(user) !='undefined'){
 
         //res.render('dashboard', { title: 'Dashboard', user: user });
-        res.render('planillas', { title: 'Planillas', user: user, id: id, server_url: server_url, server_host: server_host, server_port: server_port });
+        res.render('planillas', { title: 'Planillas', user: user, id: id, apenom : apenom, server_url: server_url, server_host: server_host, server_port: server_port });
     }else{
         res.redirect('/');
     }
