@@ -1765,6 +1765,30 @@ function completarDatos(filaid){
         $("#sel-3").val(data.motivoPrestacionID);
         $("#sel-4").val(data.motivoViviendaID);
 
+        if(data.motivoPersonalID !=1)
+        {
+            $("#mot-1").prop("checked",true);
+            $("#sel-1").show()
+        }
+
+        if(data.motivoLocalizacionID !=1)
+        {
+            $("#mot-2").prop("checked",true);
+            $("#sel-2").show()
+        }
+
+        if(data.motivoPrestacionID !=1)
+        {
+            $("#mot-3").prop("checked",true);
+            $("#sel-3").show()
+        }
+
+        if(data.motivoViviendaID !=1)
+        {
+            $("#mot-4").prop("checked",true);
+            $("#sel-4").show()
+        }
+
     })
 }
 
