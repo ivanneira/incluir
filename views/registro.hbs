@@ -7,7 +7,10 @@
 
     <table class="registroindividual table table-striped vistadeimpresion">
         <tr>
-            <th colspan="2">Datos personales</th>
+            <th colspan="2">Planilla Nª {{numeroPlanilla}}, Encuestador: {{nombreEncuestador}}, Supervisor: {{nombreSupervisor}}</th>
+        </tr>
+        <tr>
+            <th colspan="2">Datos personales <span class="text-danger"> {{#if motivoPersonalID}} (datos faltantes: {{motivoPersonalNombre}}) {{/if}}</span> </th>
         </tr>
         <tr>
             <td>
@@ -32,13 +35,18 @@
             <td></td>
         </tr>
         <tr>
-            <th colspan="2">Datos de localización</th>
+            <th colspan="2">Datos de localización <span class="text-danger"> {{#if motivoLocalizacionID}} (datos faltantes: {{motivoLocalizacionNombre}}) {{/if}}</span> </th>
         </tr>
         <tr>
             <td>
                 Localidad: {{#if Localidad}} {{{Localidad}}} {{else}} Sin datos {{/if}}
             </td>
             <td>
+                Departamento: {{#if DepartamentoNombre}} {{{DepartamentoNombre}}} {{else}} Sin datos {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
                 Domicilio: {{#if Domicilio}} {{{Domicilio}}} {{{Barrio}}} {{else}} Sin datos {{/if}}
             </td>
         </tr>
@@ -56,7 +64,7 @@
             </td>
         </tr>
         <tr>
-            <th colspan="2">Datos de prestación</th>
+            <th colspan="2">Datos de prestación <span class="text-danger"> {{#if motivoPrestacionID}} (datos faltantes: {{motivoPrestacionNombre}}) {{/if}}</span></th>
         </tr>
         <tr>
             <td>
@@ -107,7 +115,7 @@
             </td>
         </tr>
         <tr>
-            <th colspan="2">Datos de vivienda</th>
+            <th colspan="2">Datos de vivienda <span class="text-danger"> {{#if motivoViviendaID}} (datos faltantes: {{motivoViviendaNombre}}) {{/if}}</span></th>
         </tr>
         <tr>
             <td>

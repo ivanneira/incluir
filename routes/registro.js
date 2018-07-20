@@ -7,6 +7,10 @@ router.get('/', function(req, resq, next) {
 
     var filaID = req.param('id');
 
+    var numeroPlanilla = req.param('numeroPlanilla');
+    var nombreEncuestador = req.param('nombreEncuestador');
+    var nombreSupervisor = req.param('nombreSupervisor');
+
     //cambiar dirección de IP fija por parámetros globales
     http.get(server_host + ":" + server_port + server_url +"/api/IncluirSalud/ObtenerFilaPlanilla?id="+filaID, (res) => {
         var body = "";
@@ -41,6 +45,26 @@ router.get('/', function(req, resq, next) {
                 }
 
             }
+
+            if(datatosend['motivoPersonalID'] === 1){
+                datatosend['motivoPersonalID'] = null;
+            }
+
+            if(datatosend['motivoLocalizacionID'] === 1){
+                datatosend['motivoLocalizacionID'] = null;
+            }
+
+            if(datatosend['motivoPrestacionID'] === 1){
+                datatosend['motivoPrestacionID'] = null;
+            }
+
+            if(datatosend['motivoViviendaID'] === 1){
+                datatosend['motivoViviendaID'] = null;
+            }
+
+            datatosend.numeroPlanilla = numeroPlanilla;
+            datatosend.nombreEncuestador = nombreEncuestador;
+            datatosend.nombreSupervisor = nombreSupervisor;
 
             resq.render('registro',datatosend)
 

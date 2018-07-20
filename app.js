@@ -10,6 +10,13 @@ server_url = "/aresapi";
 server_host = "http://10.64.65.200";
 server_port = 80;
 
+/*
+//url de api en desarrollo
+server_url = "";
+server_host = "http://192.168.3.105";
+server_port = 45455;
+*/
+
 //express-session
 var session = require('express-session');
 

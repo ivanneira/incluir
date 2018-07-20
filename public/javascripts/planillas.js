@@ -382,7 +382,7 @@ function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPla
 
 function verRegistro(planillaid){
 
-    window.open('/registro?id=' + planillaid);
+    window.open('/registro?id=' + planillaid + '&numeroPlanilla=' + numeroplanulla_back + '&nombreEncuestador=' + encuestador_back + '&nombreSupervisor=' + supervisor_back);
 }
 
 
