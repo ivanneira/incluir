@@ -44,22 +44,7 @@ function agregarEncuesta(){
         '             </div>' +
         '         </div>' +
         '      </td>' +
-        '   </tr>' +
-        '   <tr>' +
-        '      <td>' +
-        '         <div class="row">' +
-        '             <div class="col-4">' +
-        '                      <label for="codigoEncuesta">Código</label>' +
-        '                      <input maxlength="20" id="codigoEncuesta" name="codigoEncuesta" type="text" class="form-control" placeholder="Código de encuesta">' +
-        '             </div>' +
-        '             <div class="col-4">' +
-        '             </div>' +
-        '             <div class="col-4">' +
-        '             </div>' +
-        '         </div>' +
-        '      </td>' +
-        '   </tr>' +
-        '';
+        '   </tr>';
 
     //¿Qué tipo de pensión tiene asignada?
     htmlEncuesta +=
@@ -527,8 +512,8 @@ function agregarEncuesta(){
 
         encuestaDATA.departamentoID = $(".selectDepartamentoEncuesta").val();
 
-        encuestaDATA.codigo = $("#codigoEncuesta").val();
-
+        //encuestaDATA.codigo = $("#codigoEncuesta").val();
+        encuestaDATA.codigo = 0;
 
 
         swal("Espere un momento...", "se está guardando la encuesta", "info");

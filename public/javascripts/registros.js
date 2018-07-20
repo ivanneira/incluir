@@ -1325,7 +1325,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '           <select name="localidad" class="selectLocalidad"></select>' +
         '       </td>'+
         '       <td>' +
-        '           <label for="domicilio">Calle, orientación y altura</label>' +
+        '           <label for="domicilio">Calle, orientación y altura o referencia</label>' +
         '           <input maxlength="50" id="domicilio" name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
         '       </td>'+
         '       <td>' +
@@ -1389,7 +1389,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '</thead>'+
         '   <tbody id="cam-3">' +
         '   <tr>'+
-        '       <td colspan="2">' +
+        '       <td >' +
         '           <label for="titular">Titularidad</label>' +
         '           <div id="titular" class="btn-group btn-group-toggle" data-toggle="buttons">'+
         '               <label class="btn btn-light">'+
@@ -1400,7 +1400,13 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '               </label>'+
         '           </div>' +
         '       </td>'+
+
+        '       <td >' +
+        '              <label for="ingresosDeclarados">Ingresos declarados</label>' +
+        '              <input maxlength="19" id="ingresosDeclarados" name="ingresosDeclarados" type="text" class="form-control" placeholder="Ingresos declarados">' +
+        '       </td>'+
         '   </tr>'+
+
         '   <tr>'+
         '       <td>' +
         '           <label for="pension">Tipo de pensión</label>' +
@@ -1681,6 +1687,8 @@ function completarDatos(filaid){
             $(".btn-light").slice(1,2).button("toggle");
 
         }
+
+        $("#ingresosDeclarados").val(data.IngresosDeclarados);
 
         if(data.enlace_prestaciones)
 
@@ -2024,7 +2032,7 @@ function armarJSON(){
             $("#apellido").val('Apellido no declarado');
 
 
-        data.ingresosDeclarados = $("#ingresosDeclarados").val();
+        data.IngresosDeclarados = $("#ingresosDeclarados").val();
 
         data.apellido = $("#apellido").val();
 
@@ -2042,8 +2050,10 @@ function armarJSON(){
 
         enviarDatos(data);
 
-        //caso común de la encuesta
+    //caso común de la encuesta
     }else{
+
+
 
         //planilla
         if(filaID) data.ID = filaID;
@@ -2092,13 +2102,13 @@ function armarJSON(){
         data.departamentoID = $(".selectDepartamento").val();
         //prestación
         data.tipoBeneficiarioID = $("#btnTitular").prop('checked') ? 1 : 2;
-
+        data.IngresosDeclarados = $("#ingresosDeclarados").val();
 
         data.enlace_tipoPension = [
             {
 
                 tipoPensionID: $(".selectTipoPension ").val(),
-                filaPlanillaID: filaplanillaid
+                filaPlanillaID: filaID ? filaID : 0
             }
         ];
 
@@ -2109,7 +2119,7 @@ function armarJSON(){
 
             data.enlace_diagnosticos.push({
                 id10: diagnosticos[index],
-                filaPlanillaID: filaplanillaid
+                filaPlanillaID: filaID ? filaID : 0
             });
         }
 
@@ -2119,7 +2129,7 @@ function armarJSON(){
 
             data.enlace_prestaciones.push({
                 prestacionID: prestaciones[index],
-                filaPlanillaID: filaplanillaid
+                filaPlanillaID: filaID ? filaID : 0
             });
         }
 
@@ -2136,7 +2146,7 @@ function armarJSON(){
 
             data.enlace_serviciosBasicos.push({
                 serviciosBasicosID: serviciosBasicos[index],
-                filaPlanillaID: filaplanillaid
+                filaPlanillaID: filaID ? filaID : 0
             });
         }
 
@@ -2147,7 +2157,7 @@ function armarJSON(){
         data.motivoViviendaID = $("#sel-4").val();
 
         data.comentario = $("#comentario").val();
-
+        console.dir(data)
         enviarDatos(data);
     }
 
