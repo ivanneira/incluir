@@ -48,7 +48,7 @@ function agregarEncuesta(){
 
     //¿Qué tipo de pensión tiene asignada?
     htmlEncuesta +=
-        '   <tr>'+
+        '   <tr class="pension">'+
         '       <td>' +
         '           <p class="font-italic">¿Qué tipo de pensión tiene asignada?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -76,7 +76,7 @@ function agregarEncuesta(){
 
 //¿Dónde se atiende?
     htmlEncuesta +=
-        '   <tr>'+
+        '   <tr class="donde">'+
         '       <td>' +
         '           <p class="font-italic">¿Dónde se atiende?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -88,8 +88,8 @@ function agregarEncuesta(){
         '               <label class="form-check-label" for="do2">Hospital</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input  value="3" class="form-check-input" type="checkbox" id="do3">' +
-        '               <label class="atiende form-check-label" for="do3">Consultorio particular</label>' +
+        '               <input  value="3" class="atiende form-check-input" type="checkbox" id="do3">' +
+        '               <label class="form-check-label" for="do3">Consultorio particular</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
         '               <input value="4" class="atiende form-check-input" type="checkbox" id="do4">' +
@@ -100,7 +100,7 @@ function agregarEncuesta(){
 
 //¿Quién lo atiende?
     htmlEncuesta +=
-        '   <tr>'+
+        '   <tr class="quientr">'+
         '       <td>' +
         '           <p class="font-italic">¿Quién lo atiende?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -124,7 +124,7 @@ function agregarEncuesta(){
 
 //¿Cuánto tiempo le llevó encontrar el turno?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="cuanto">' +
         '       <td>' +
         '           <p class="font-italic">¿Cuánto tiempo le llevó encontrar el turno?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -144,7 +144,7 @@ function agregarEncuesta(){
 
 //¿Cómo fue atendido?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="como">' +
         '       <td>' +
         '           <p class="font-italic">¿Cómo fue atendido?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -168,7 +168,7 @@ function agregarEncuesta(){
 
 //¿Le solicitaron estudios, cuáles?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="solicitaron">' +
         '       <td>' +
         '           <p class="font-italic">¿Le solicitaron estudios, cuáles?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -188,7 +188,7 @@ function agregarEncuesta(){
 
 //¿Le indicaron remedios? Los consiguió con facilidad?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="indicaron">' +
         '       <td>' +
         '           <p class="font-italic">¿Le indicaron remedios? Los consiguió con facilidad?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -208,7 +208,7 @@ function agregarEncuesta(){
 
 //¿Fue derivado a otro médico?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="derivadotr">' +
         '       <td>' +
         '           <p class="font-italic">¿Fue derivado a otro médico?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -224,7 +224,7 @@ function agregarEncuesta(){
 
 //¿Cómo es atendido en la UGP?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="ugptr">' +
         '       <td>' +
         '           <p class="font-italic">¿Cómo es atendido en la UGP?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -248,7 +248,7 @@ function agregarEncuesta(){
 
 //¿Cuánto tiempo le llevó conseguir la prestación solicitada?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="tiempo">' +
         '       <td>' +
         '           <p class="font-italic">¿Cuánto tiempo le llevó conseguir la prestación solicitada?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -276,7 +276,7 @@ function agregarEncuesta(){
 
 //¿Conoce los beneficios que brinda el programa?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="beneficiostr">' +
         '       <td>' +
         '           <p class="font-italic">¿Conoce los beneficios que brinda el programa?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -292,7 +292,7 @@ function agregarEncuesta(){
 
 //¿Quién le brindó información del Programa?
     htmlEncuesta +=
-        '   <tr>' +
+        '   <tr class="brindo">' +
         '       <td>' +
         '           <p class="font-italic">¿Quién le brindó información del Programa?</p>' +
         '           <div class="form-check form-check-inline">' +
@@ -509,9 +509,136 @@ function agregarEncuesta(){
             toggleWarningSelect($('.selectDepartamentoEncuesta'),false);
         }
 
+        if(typeof($('input[name=pension]:checked').val()) === 'undefined'){
+
+            $(".pension").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".pension").removeClass("bg-warning");
+        }
+
+        var almenosuno = false;
+
+        $(".atiende").each(function(i,v){
+
+            if($(v).prop('checked')){
+                almenosuno = true;
+                console.log("asdf")
+            }
+        });
+
+        if(almenosuno){
+
+            $(".donde").removeClass('bg-warning');
+            console.log("error1")
 
 
+        }else{
+            error = true;
+            $(".donde").addClass('bg-warning');
+            console.log("error2")
+        }
 
+        almenosuno = false;
+
+        $(".quien").each(function(i,v){
+
+            if($(v).prop('checked')){
+                almenosuno = true;
+            }
+        });
+
+        if(almenosuno){
+
+            $(".quientr").removeClass('bg-warning');
+
+        }else{
+            error = true;
+            $(".quientr").addClass('bg-warning');
+        }
+
+
+        if(typeof($('input[name=tiempo]:checked').val()) === 'undefined'){
+
+            $(".cuanto").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".cuanto").removeClass("bg-warning");
+        }
+
+        if(typeof($('input[name=atendido]:checked').val()) === 'undefined'){
+
+            $(".como").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".como").removeClass("bg-warning");
+        }
+
+        if(typeof($('input[name=estudios]:checked').val()) === 'undefined'){
+
+            $(".solicitaron").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".solicitaron").removeClass("bg-warning");
+        }
+
+        if(typeof($('input[name=remedios]:checked').val()) === 'undefined'){
+
+            $(".indicaron").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".indicaron").removeClass("bg-warning");
+        }
+
+        if(typeof($('input[name=derivado]:checked').val()) === 'undefined'){
+
+            $(".derivadotr").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".derivadotr").removeClass("bg-warning");
+        }
+
+        if(typeof($('input[name=ugp]:checked').val()) === 'undefined'){
+
+            $(".ugptr").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".ugptr").removeClass("bg-warning");
+        }
+
+        if(typeof($('input[name=conseguir]:checked').val()) === 'undefined'){
+
+            $(".tiempo").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".tiempo").removeClass("bg-warning");
+        }
+
+        if(typeof($('input[name=beneficios]:checked').val()) === 'undefined'){
+
+            $(".beneficiostr").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".beneficiostr").removeClass("bg-warning");
+        }
+
+        if(typeof($('input[name=informacion]:checked').val()) === 'undefined'){
+
+            $(".brindo").addClass("bg-warning");
+            error = true;
+
+        }else{
+            $(".brindo").removeClass("bg-warning");
+        }
 
         //muestra error o envía datos
         if(!error){
