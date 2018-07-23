@@ -510,6 +510,10 @@ function agregarEncuesta(){
         }
 
 
+
+
+
+        //muestra error o envía datos
         if(!error){
 
             guardarDatosEncuesta();
@@ -627,6 +631,7 @@ function agregarEncuesta(){
                         fillDatatableEncuestas(userID)
                         },1500)
                 }else{
+                    swal("Error", "No se pudo guardar la encuesta, intente nuevamente en un momento.", "error");
                     console.log(res);
                 }
 
