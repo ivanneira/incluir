@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 //url del sevidor
 server_url = "/aresapi";
 server_host = "";
-server_port = 80;
+server_port = '';
 
 /*
 //url de api en desarrollo
