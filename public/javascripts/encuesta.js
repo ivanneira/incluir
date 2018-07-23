@@ -425,10 +425,103 @@ function agregarEncuesta(){
 
     function verificarEncuesta(){
 
+        var error = false;
+
+        function toggleWarning(selector, error){
+
+            if(error){
+                selector.addClass('bg-warning');
+            }else{
+                selector.removeClass('bg-warning');
+            }
+        }
+
+        function toggleWarningSelect(selector,error){
+
+            if(error){
+
+                selector
+                    .next()
+                    .find('.select2-selection')
+                    .addClass('bg-warning');
+
+            }else{
+                selector
+                    .next()
+                    .find('.select2-selection')
+                    .removeClass('bg-warning');
+
+                error = true;
+            }
+        }
+
+        if($('#nencuesta').val() === ''){
+
+            error = true;
+            toggleWarning($('#nencuesta'),true);
+        }else{
+
+            toggleWarning($('#nencuesta'),false);
+        }
+
+        if($('#fechaEncuesta').val() === ''){
+
+            error = true;
+            toggleWarning($('#fechaEncuesta'),true);
+        }else{
+
+            toggleWarning($('#fechaEncuesta'),false);
+        }
+
+        if($('#sexoEncuesta').val() === '-1'){
+
+            error = true;
+            toggleWarning($('#sexoEncuesta'),true);
+        }else{
+
+            toggleWarning($('#sexoEncuesta'),false);
+        }
+
+        if($('.selectEncuestadorEncuesta').val() === null){
+
+            error = true;
+            toggleWarningSelect($('.selectEncuestadorEncuesta'),true);
+        }else{
+
+            toggleWarningSelect($('.selectEncuestadorEncuesta'),false);
+        }
+
+        if($('#fechaNacimientoEncuesta').val() === ''){
+
+            error = true;
+            toggleWarning($('#fechaNacimientoEncuesta'),true);
+        }else{
+
+            toggleWarning($('#fechaNacimientoEncuesta'),false);
+        }
+
+        if($('.selectDepartamentoEncuesta').val() === null){
+
+            error = true;
+            toggleWarningSelect($('.selectDepartamentoEncuesta'),true);
+        }else{
+
+            toggleWarningSelect($('.selectDepartamentoEncuesta'),false);
+        }
 
 
-        guardarDatosEncuesta();
 
+
+
+        //muestra error o envía datos
+        if(!error){
+
+            guardarDatosEncuesta();
+
+        }else{
+
+            swal("Error", "Hay datos que no fueron completados", "error");
+        }
     }
 
     function guardarDatosEncuesta(){
@@ -538,6 +631,7 @@ function agregarEncuesta(){
                         fillDatatableEncuestas(userID)
                         },1500)
                 }else{
+                    swal("Error", "No se pudo guardar la encuesta, intente nuevamente en un momento.", "error");
                     console.log(res);
                 }
 

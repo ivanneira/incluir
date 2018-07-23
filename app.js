@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 //url del sevidor
 server_url = "/aresapi";
-server_host = "http://200.0.236.210";
+server_host = "http://gedoc.sanjuan.gob.ar";
 server_port = 80;
 
 /*
