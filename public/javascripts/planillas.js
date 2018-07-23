@@ -122,16 +122,20 @@ function fillDatatableEncuestas(userid){
                 $('#encuestasTable tbody tr').each(function (v,i) {
 
 
-                    nCloneTd2.innerHTML =
-                        '<div style="width: 100px">' +
-                        //'&nbsp<button class="btn btn-small btn-success agregarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
-                        //'&nbsp<button class="btn btn-small btn-secondary detalleEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
-                        '<button onclick="detalleEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-secondary eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Detalle"><i class="fa fa-eye"></i> </button>' +
-                        '&nbsp<button onclick="eliminarEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-danger eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>' +
-                        '</div>';
+                    if(typeof($("#encuestasTable").DataTable().row(i).data()) != "undefined")
+                    {
+                        nCloneTd2.innerHTML =
+                            '<div style="width: 100px">' +
+                            //'&nbsp<button class="btn btn-small btn-success agregarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
+                            //'&nbsp<button class="btn btn-small btn-secondary detalleEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
+                            '<button onclick="detalleEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-secondary eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Detalle"><i class="fa fa-eye"></i> </button>' +
+                            '&nbsp<button onclick="eliminarEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-danger eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>' +
+                            '</div>';
 
 
-                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
+                        this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[3]);
+
+                    }
 
 
                     $("#encuestasTable").attr('style','')
@@ -242,14 +246,16 @@ function fillDatatablePlanillas(userid){
                     var table = $("#exampleTable");
 
 
-                    nCloneTd2.innerHTML =
-                        '<div class="row" style="width: 160px"><button onclick="mostarRegistros('+table.DataTable().row(i).data().PlanillaID+',\''+table.DataTable().row(i).data().EncuestadorNombre+'\',\''+table.DataTable().row(i).data().SupervisorNombre+'\',\''+table.DataTable().row(i).data().NumeroPlanilla+'\')" class="btn btn-small btn-info verRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Abrir"><i class="fa fa-arrow-right"></i> </button>' +
-                        //'&nbsp<button onclick="fillModal('+table.DataTable().row(i).data().NumeroPlanilla+','+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i></button>' +
-                        '&nbsp<button  onclick="agregarEncabezado('+ userID +',' +table.DataTable().row(i).data().PlanillaID +')" class="btn btn-small btn-warning editarPlanilla " data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>' +
-                        '&nbsp<button onclick="eliminarPlanilla('+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button></div>';
+                    if(typeof($("#exampleTable").DataTable().row(i).data()) != "undefined") {
+                        nCloneTd2.innerHTML =
+                            '<div class="row" style="width: 160px"><button onclick="mostarRegistros(' + table.DataTable().row(i).data().PlanillaID + ',\'' + table.DataTable().row(i).data().EncuestadorNombre + '\',\'' + table.DataTable().row(i).data().SupervisorNombre + '\',\'' + table.DataTable().row(i).data().NumeroPlanilla + '\')" class="btn btn-small btn-info verRegistro " data-planillaid="' + $("#exampleTable").DataTable().row(i).data().PlanillaID + '"  data-toggle="tooltip" title="Abrir"><i class="fa fa-arrow-right"></i> </button>' +
+                            //'&nbsp<button onclick="fillModal('+table.DataTable().row(i).data().NumeroPlanilla+','+table.DataTable().row(i).data().PlanillaID+')" class="btn btn-small btn-success agregarRegistro " data-planillaid="'+$("#exampleTable").DataTable().row(i).data().PlanillaID+'"  data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i></button>' +
+                            '&nbsp<button  onclick="agregarEncabezado(' + userID + ',' + table.DataTable().row(i).data().PlanillaID + ')" class="btn btn-small btn-warning editarPlanilla " data-toggle="tooltip" title="Editar"><i class="fa fa-pencil"></i></button>' +
+                            '&nbsp<button onclick="eliminarPlanilla(' + table.DataTable().row(i).data().PlanillaID + ')" class="btn btn-small btn-danger eliminaPlanilla " data-planillaid="' + $("#exampleTable").DataTable().row(i).data().PlanillaID + '" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i></button></div>';
 
 
-                    this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[5]);
+                        this.insertBefore(nCloneTd2.cloneNode(true), this.childNodes[5]);
+                    }
                 });
 
             }
