@@ -1197,16 +1197,16 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '       <a id="personales-tab" data-toggle="tab" class="nav-link active " href="#personales">Datos personales <i class="alerta personales fa fa-exclamation-triangle text-warning"></i> </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="localizacion-tab" data-toggle="tab" class="nav-link " href="#localizacion">Datos de localización <i class="alerta localizacion fa fa-exclamation-triangle text-warning"></i> </a>' +
+        '       <a id="localizacion-tab" tabindex="9" data-toggle="tab" class="nav-link " href="#localizacion">Datos de localización <i class="alerta localizacion fa fa-exclamation-triangle text-warning"></i> </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="prestaciones-tab" data-toggle="tab" class="nav-link " href="#prestaciones">Datos de la prestación <i class="alerta prestacion fa fa-exclamation-triangle text-warning"></i> </a>' +
+        '       <a id="prestaciones-tab" tabindex="16" data-toggle="tab" class="nav-link " href="#prestaciones">Datos de la prestación <i class="alerta prestacion fa fa-exclamation-triangle text-warning"></i> </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="vivienda-tab" data-toggle="tab" class="nav-link " href="#vivienda">Datos de vivienda <i class="alerta vivienda fa fa-exclamation-triangle text-warning"></i> </a>' +
+        '       <a id="vivienda-tab"  tabindex="22" data-toggle="tab" class="nav-link " href="#vivienda">Datos de vivienda <i class="alerta vivienda fa fa-exclamation-triangle text-warning"></i> </a>' +
         '   </li>'+
         '   <li class="nav-item vivo">' +
-        '       <a id="comentarios-tab" data-toggle="tab" class="nav-link " href="#comentarios">Comentarios </a>' +
+        '       <a id="comentarios-tab"  tabindex="27" data-toggle="tab" class="nav-link " href="#comentarios">Comentarios </a>' +
         '   </li>'+
         '</ul>';
 
@@ -1250,19 +1250,19 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '     <tr>'+
         '         <td>' +
         '              <label for="nombre">Nombre</label>' +
-        '              <input maxlength="50" id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">' +
+        '              <input tabindex="1" maxlength="50" id="nombre" name="nombre" type="text" class="form-control" placeholder="Nombre">' +
         '          </td>'+
         '          <td>' +
         '              <label for="apellido">Apellido</label>' +
-        '              <input maxlength="50" id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido">' +
+        '              <input tabindex="2" maxlength="50" id="apellido" name="apellido" type="text" class="form-control" placeholder="Apellido">' +
         '          </td>'+
         '     </tr>'+
         '     <tr  class="vivo">'+
         '         <td>' +
         '              <label for="fecnac">Fecha de nacimiento</label>' +
-        '              <input id="fechaNacimiento" name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
+        '              <input tabindex="3" id="fechaNacimiento" name="fecnac" class="inputtipobootstrap" placeholder="Elija fecha" data-provide="datepicker">' +
         '              <label for="sexo">Sexo</label>' +
-        '              <select class="form-control" id="sexo" name="sexo">' +
+        '              <select tabindex="5" class="form-control" id="sexo" name="sexo">' +
         '                  <option value="3">Seleccione el sexo...</option>' +
         '                  <option value="1">Masculino</option>' +
         '                  <option value="2">Femenino</option>' +
@@ -1270,21 +1270,21 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '          </td>'+
         '         <td>' +
         '              <label for="dni">DNI</label>' +
-        '              <input maxlength="8" id="dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
+        '              <input tabindex="4" maxlength="8" id="dni" name="dni" type="number" class="form-control" placeholder="DNI">' +
         '          </td>'+
         '     </tr>'+
         '     <tr>'+
         '         <td  class="vivo">' +
         '              <label for="tel">Teléfono</label>' +
-        '              <input id="tel" name="tel" type="text" class="form-control" placeholder="Teléfono">' +
+        '              <input tabindex="6" id="tel" name="tel" type="text" class="form-control" placeholder="Teléfono">' +
         '          </td>'+
         '          <td id="fechaDefuncion">' +
         '              <label for="defuncion">Fecha de defunción</label>' +
-        '              <input maxlength="10" id="defuncion" name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
+        '              <input tabindex="7" maxlength="10" id="defuncion" name="defuncion" class="inputtipobootstrap" placeholder="Elija fecha de fallecimiento" data-provide="datepicker">' +
         '          </td>'+
         '         <td>' +
         '              <label for="vivo">Vivo</label>' +
-        '             <input name="vivo" id="fallecido" type="checkbox" checked data-toggle="toggle">' +
+        '             <input tabindex="8" name="vivo" id="fallecido" type="checkbox" checked data-toggle="toggle">' +
         '         </td>' +
         '     </tr>' +
         '   </tbody>'+
@@ -1318,20 +1318,20 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '   <tr>'+
         '       <td>' +
         '           <label for="Departamento">Departamento</label>' +
-        '           <select name="departamento" class="selectDepartamento"></select>' +
+        '           <select tabindex="10" name="departamento" class="selectDepartamento"></select>' +
         '       </td>'+
         '       <td>' +
         '           <label for="localidad">Localidad</label>' +
-        '           <select name="localidad" class="selectLocalidad"></select>' +
+        '           <select tabindex="11" name="localidad" class="selectLocalidad"></select>' +
         '       </td>'+
         '       <td>' +
         '           <label for="domicilio">Calle, orientación y altura o referencia</label>' +
-        '           <input maxlength="50" id="domicilio" name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
+        '           <input tabindex="12" maxlength="50" id="domicilio" name="domicilio" type="text" class="form-control" placeholder="Domicilio">' +
         '       </td>'+
         '       <td>' +
         '           <label for="barrio">Barrio</label>' +
         //'           <input maxlength="150" id="barrio" name="barrio" type="text" class="form-control" placeholder="Barrio">' +
-        '               <select class="selectBarrio" name="barrio">' +
+        '               <select tabindex="13" class="selectBarrio" name="barrio">' +
                             barrio +
          '              </select>' +
         '       </td>'+
@@ -1342,7 +1342,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '               <div class="input-group-prepend">'+
         '                   <span class="input-group-text" id="latitud">Latitud</span>'+
         '               </div>'+
-        '               <input maxlength="20" name="lat" id="lat" type="text" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
+        '               <input tabindex="14" maxlength="20" name="lat" id="lat" type="text" class="form-control" aria-describedby="latitud" placeholder="latitud">'+
         '           </div>'+
         '       </td>' +
         '       <td>' +
@@ -1350,7 +1350,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '               <div class="input-group-prepend">'+
         '                   <span class="input-group-text" id="longitud">Longitud</span>'+
         '               </div>'+
-        '               <input maxlength="20" name="lon" id="lon" type="text" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
+        '               <input tabindex="15" maxlength="20" name="lon" id="lon" type="text" class="form-control" aria-describedby="longitud" placeholder="longitud">'+
         '           </div>'+
         '       </td>' +
         '   </tr>'+
@@ -1391,9 +1391,9 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '   <tr>'+
         '       <td >' +
         '           <label for="titular">Titularidad</label>' +
-        '           <div id="titular" class="btn-group btn-group-toggle" data-toggle="buttons">'+
+        '           <div  id="titular" class="btn-group btn-group-toggle" data-toggle="buttons">'+
         '               <label class="btn btn-light">'+
-        '                   <input id="btnTitular" type="radio" name="options" autocomplete="off"> Titular'+
+        '                   <input tabindex="17" id="btnTitular" type="radio" name="options" autocomplete="off"> Titular'+
         '               </label>'+
         '               <label class="btn btn-light">'+
         '                   <input id="btnAdherente" type="radio" name="options" autocomplete="off"> Adherente'+
@@ -1403,25 +1403,25 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
 
         '       <td >' +
         '              <label for="ingresosDeclarados">Ingresos declarados</label>' +
-        '              <input maxlength="19" id="ingresosDeclarados" name="ingresosDeclarados" type="text" class="form-control" placeholder="Ingresos declarados">' +
+        '              <input tabindex="18" maxlength="19" id="ingresosDeclarados" name="ingresosDeclarados" type="text" class="form-control" placeholder="Ingresos declarados">' +
         '       </td>'+
         '   </tr>'+
 
         '   <tr>'+
         '       <td>' +
         '           <label for="pension">Tipo de pensión</label>' +
-        '           <select name="pension" class="selectTipoPension"></select>' +
+        '           <select tabindex="19" name="pension" class="selectTipoPension"></select>' +
         '       </td>'+
         '       <td>' +
         '           <label for="motivo">Diagnóstico (CIE10)</label>' +
-        '           <select name="motivo" class="selectCIE10">' +
+        '           <select tabindex="20" name="motivo" class="selectCIE10">' +
         '</select>' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
         '       <td colspan="2">' +
         '           <label for="prestaciones">Prestaciones</label>' +
-        '           <select name="prestaciones" class="selectPrestaciones">' +
+        '           <select  tabindex="21" name="prestaciones" class="selectPrestaciones">' +
         '       </td>'+
         '   </tr>'+
         '</tbody>'+
@@ -1452,22 +1452,22 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '   <tr>'+
         '       <td>' +
         '           <label for="conviven">Nº de personas que conviven</label>' +
-        '           <input id="conviven" name="conviven" type="number" class="form-control" placeholder="Nº conviven">' +
+        '           <input  tabindex="23" id="conviven" name="conviven" type="number" class="form-control" placeholder="Nº conviven">' +
         '       </td>'+
         '       <td>' +
         '           <label for="grupo">Nº del grupo familiar</label>' +
-        '           <input id="grupo" name="grupo" type="number" class="form-control" placeholder="Nº G Familiar">' +
+        '           <input  tabindex="24" id="grupo" name="grupo" type="number" class="form-control" placeholder="Nº G Familiar">' +
         '       </td>'+
         '       <td>' +
         '           <label for="vivienda">Tipo de vivienda</label>' +
-        '           <select name="vivienda" class="selectTipoVivienda">' +
+        '           <select tabindex="25"  name="vivienda" class="selectTipoVivienda">' +
         '           <input maxlength="100" id="comentarioTipoVivienda" class="form-control" type="text" placeholder="Especifique" >' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
         '       <td colspan="3">' +
         '           <label for="servicios">Servicios básicos</label>' +
-        '           <select name="servicios" class="selectTipoServicios">' +
+        '           <select  tabindex="26" name="servicios" class="selectTipoServicios">' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
@@ -1576,7 +1576,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
             .text('Agregar registro, planilla nº: ' + NumeroPlanilla);
 
 
-
+    $("#nombre").focus();
 
 
 
