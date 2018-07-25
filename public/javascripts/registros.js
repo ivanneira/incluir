@@ -1083,7 +1083,7 @@ $(function(){
         dataType: 'json',
         success: function(data){
             motivos = data;
-            //console.dir(data)
+
         },
         error: function(e){
             ERROR();
@@ -1099,7 +1099,7 @@ $(function(){
         dataType: 'json',
         success: function(data){
             tipoPension = data;
-            //console.dir(data)
+
         },
         error: function(e){
             ERROR();
@@ -1521,16 +1521,14 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
 
         if($(this).prop('checked') == true){
 
-            //console.log('ni fu')
 
             $("#sel-"+$(this).data('mot')).show();
-            //$("#cam-"+$(this).data('mot')).hide();
+
 
         }else{
-            //console.log('ni fa')
 
             $("#sel-"+$(this).data('mot')).hide();
-            //$("#cam-"+$(this).data('mot')).show()
+
         }
 
 
@@ -2009,8 +2007,6 @@ function verificarCampos(){
 
 
 
-    //console.dir(grupos)
-
     for(var index in grupos){
 
         if(grupos[index].alerta){
@@ -2181,7 +2177,7 @@ function armarJSON(){
         data.motivoViviendaID = $("#sel-4").val();
 
         data.comentario = $("#comentario").val();
-        console.dir(data)
+
         enviarDatos(data);
     }
 
@@ -2415,7 +2411,6 @@ function fillDropDown(){
 // Fetch the preselected item, and add to the control
 
 
-    //**//
     $(".selectPrestaciones").select2({
         placeholder: 'Elija prestaciones',
         width: '100%',
@@ -2512,7 +2507,6 @@ function initMap() {
 
         var latlng = {lat: parseFloat(lat) , lng: parseFloat(lng) };
 
-        //console.log(latlng)
         if(marker){
             marker.setMap(null);
         }

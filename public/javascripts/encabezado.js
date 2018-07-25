@@ -89,7 +89,7 @@ function agregarEncabezado(userid,encabezadoid) {
 
             delay: 250,
             data: function (params) {
-                //console.dir(params)
+
                 return {
                     searchTerm: params.term // search term
                 };
@@ -114,8 +114,6 @@ function agregarEncabezado(userid,encabezadoid) {
 
     if(encabezadoid){
 
-        //console.log("MODO EDICION DE ENCABEZADO");
-        //console.log(encabezadoid)
 
         mensaje = "No se pudo editar la planilla, ¿Ya está agregado éste número de planilla?";
 
@@ -182,7 +180,6 @@ function verificarEncabezado(userid){
     encabezadoDATA.encuestadorID = $(".selectEncuestador").val() == null ? '' : $(".selectEncuestador").val();
     encabezadoDATA.nroPlanilla = $("#numeroPlanilla").val();
 
-    //console.log(encabezadoDATA)
 
     if(
 

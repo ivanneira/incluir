@@ -270,12 +270,12 @@ a.bg-light:hover{
 
 #exampleTable > thead > tr > th{
 
-  width: 20% !important;
+  width: 15% !important;
 }
 
 #encuestasTable > thead > tr > th{
 
-  min-width: 25% !important;
+  min-width: 20% !important;
 }
 
 .nav-link {
@@ -302,4 +302,3 @@ a.bg-light:hover{
 .registroContainer {
   padding: 20px;
 }
-

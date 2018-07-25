@@ -13,10 +13,6 @@ var userID = $("#uid").val();
 
 $(function(){
 
-
-    //forzado a usuario 1
-    //loadPlanillas(1);
-    //loadEncuestas(1);
     fillDatatablePlanillas(userID);
     fillDatatableEncuestas(userID);
 
@@ -33,26 +29,13 @@ $(function(){
 
     });
 
-
 });
 
 function fillDatatableEncuestas(userid){
 
-    // function fnFormatDetails(table_id, html) {
-    //     var sOut = "<table id=\"encuestasTable_" + table_id + "\">";
-    //     sOut += html;
-    //     sOut += "</table>";
-    //     return sOut;
-    // }
-    //
-    //
-    // var iTableCounter = 1;
-    // var oTable;
-    // var oInnerTable;
+
     var detailsTableHtml;
 
-    //Run On HTML Build
-    //$(document).ready(function () {
 
         var oTable = $('#encuestasTable').DataTable({
             "bProcessing": true,
@@ -93,9 +76,7 @@ function fillDatatableEncuestas(userid){
                 { "data": "EncuestaID","title": "EncuestaID", "visible": false},
                 { "data": "NumeroEncuesta","title": "NumeroEncuesta",},
                 { "data": "FechaEncuesta", "title": "Fecha de Encuesta","format": 'M/D/YYYY',},
-                { "data": "DepartamentoNombre","title": "Departamento",},
-
-
+                { "data": "DepartamentoNombre","title": "Departamento",}
 
             ],
 
@@ -126,8 +107,6 @@ function fillDatatableEncuestas(userid){
                     {
                         nCloneTd2.innerHTML =
                             '<div style="width: 100px">' +
-                            //'&nbsp<button class="btn btn-small btn-success agregarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Nuevo"><i class="fa fa-plus"></i> </button>' +
-                            //'&nbsp<button class="btn btn-small btn-secondary detalleEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Ver"><i class="fa fa-info"></i> </button>' +
                             '<button onclick="detalleEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-secondary eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Detalle"><i class="fa fa-eye"></i> </button>' +
                             '&nbsp<button onclick="eliminarEncuesta('+$("#encuestasTable").DataTable().row(i).data().EncuestaID+')" class="btn btn-small btn-danger eliminarEncuesta " data-encuestaid="'+$("#encuestasTable").DataTable().row(i).data().EncuestaID+'" data-toggle="tooltip" title="Eliminar"><i class="fa fa-trash"></i> </button>' +
                             '</div>';
@@ -137,35 +116,18 @@ function fillDatatableEncuestas(userid){
 
                     }
 
-
-                    $("#encuestasTable").attr('style','')
-
                 });
+
+                $("#encuestasTable").attr('style','')
             }
         })
-
-
-
-    //});
 
 }
 
 function fillDatatablePlanillas(userid){
 
-    // function fnFormatDetails(table_id, html) {
-    //     var sOut = "<table width='100%' id=\"exampleTable_" + table_id + "\">";
-    //     sOut += html;
-    //     sOut += "</table>";
-    //     return sOut;
-    // }
 
-
-    //var iTableCounter = 1;
-    //var oTable;
-    //var oInnerTable;
     var detailsTableHtml;
-
-    //Run On HTML Build
 
 
         var oTable = $('#exampleTable').dataTable({
@@ -258,6 +220,8 @@ function fillDatatablePlanillas(userid){
                     }
                 });
 
+                $("#exampleTable").attr('style','')
+
             }
 
         });
@@ -267,15 +231,12 @@ function fillDatatablePlanillas(userid){
 
 function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPlanilla){
 
-    //console.log(planillaid)
-
     planilla_back = planillaid;
     numeroplanulla_back = numeroPlanilla;
     encuestador_back = encuestadorNombre;
     supervisor_back = supervisorNombre;
 
     $('#agregarPlanilla').hide();
-    //$('#agregarRegistroBotonPrincipal').show();
 
     var id = planillaid;
 
@@ -337,21 +298,15 @@ function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPla
 
         "fnRowCallback": function( nRow, aData, iDisplayIndex, iDisplayIndexFull )
         {
-            //var imgLink = aData['pic'];
-            //var imgTag = '<img width="100px" src="' + imgLink + '"/>';
-            //$('td:eq(0)', nRow).html(imgTag);
-            //return nRow;
+
         },
         "fnInitComplete": function(oSettings, json) {
 
-            //console.log("aca")
-            //console.dir(json)
-            //$(".PlanillaHija").attr('colspan','5');
 
             var nCloneTh4 = document.createElement('th');
 
             $("#registrosTable thead tr").each(function () {
-                //console.dir(this)
+
                 this.insertBefore(nCloneTh4, this.childNodes[3]);
                 nCloneTh4.innerHTML = "Acciones"
             });
@@ -374,7 +329,7 @@ function mostarRegistros(planillaid,encuestadorNombre,supervisorNombre,numeroPla
 
 
                     this.insertBefore(nCloneTd4.cloneNode(true), this.childNodes[4]);
-                    //console.dir(this)
+
                 });
             }
 
@@ -400,7 +355,7 @@ function eliminarEncuesta(encuestaID){
 
         var id = encuestaID;
 
-        /**/
+
         swal({
             title: "Incluir Salud",
             text: "El registro esta a punto de ser eliminado",

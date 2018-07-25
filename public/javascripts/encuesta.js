@@ -386,7 +386,7 @@ function agregarEncuesta(){
 
             delay: 250,
             data: function (params) {
-                console.dir(params)
+
                 return {
                     searchTerm: params.term // search term
                 };
@@ -524,20 +524,20 @@ function agregarEncuesta(){
 
             if($(v).prop('checked')){
                 almenosuno = true;
-                console.log("asdf")
+
             }
         });
 
         if(almenosuno){
 
             $(".donde").removeClass('bg-warning');
-            console.log("error1")
+
 
 
         }else{
             error = true;
             $(".donde").addClass('bg-warning');
-            console.log("error2")
+
         }
 
         almenosuno = false;

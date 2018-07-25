@@ -14,17 +14,15 @@ router.post('/', function(req, res, next) {
 
     consultar(user,pass,function(response){
         if(response){
-            console.log("userID",userID);
+
             req.session.uid = userID;
             req.session.apenom = ApeNom;
             req.session.user = user;
-            //res.render("planillas");
-            //res.redirect('/planillas');
             res.send('planillas');
-            //console.log("USUARIO CORRECTO")
+
 
         }else{
-            //console.log("USUARIO INNNN CORRECTO")
+
             res.send(false);
         }
     })
@@ -63,7 +61,7 @@ function consultar(user,pass,callback){
             {
                 callback(false);
             }
-            //res.send(rows) ;
+
 
         })
         .catch(function(error){
