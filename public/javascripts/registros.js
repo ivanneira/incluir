@@ -2067,6 +2067,7 @@ function armarJSON(){
             data.fechaDefuncion = fn[2]+'-'+fn[1]+'-'+fn[0];
         }
 
+        data.planillaID = planillaid;
 
         enviarDatos(data);
 
@@ -2184,7 +2185,6 @@ function armarJSON(){
 }
 
 function enviarDatos(jsonDATA){
-
 
 
     var url =
