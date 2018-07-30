@@ -14,7 +14,7 @@ server_port = 80;
 //url de api en desarrollo
 server_url = "";
 server_host = "http://192.168.3.105";
-server_port = 45455;
+server_port = 45457;
 */
 
 //express-session
