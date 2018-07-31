@@ -902,12 +902,21 @@ function verificarCampos(){
             //barrio
             errorEnSelect2($(".selectBarrio"),1);
 
+
+            //borro latitud y longitud incorrecta
+            if($("#lat").val() < -40 || $("#lat").val() > -20){
+                $("#lat").val('');
+            }
+            if($("#lon").val() < -80 || $("#lon").val() > -60){
+                $("#lon").val('');
+            }
+
+
             //latitud
             inputsVacios($("#lat"),1);
 
             //longitud
             inputsVacios($("#lon"),1);
-
         }
     }
 
