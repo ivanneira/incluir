@@ -69,7 +69,7 @@ function fillDatatableEncuestas(userid){
                 }
             },
             info: false,
-            lengthMenu: [10,20],
+            lengthMenu: [100,200],
             "columns": [
 
 
@@ -137,7 +137,7 @@ function fillDatatablePlanillas(userid){
         ajax: {
                 url: server_host+":"+server_port+server_url+ '/api/incluirSalud/ObtenerPlanillas?id=' + userid
             },
-            lengthMenu: [10,20],
+            lengthMenu: [100,200],
             info: false,
 
             language: {
