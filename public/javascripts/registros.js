@@ -5,7 +5,6 @@
 var tipoPension;
 var tipoVivienda;
 var tipoServicios;
-//TODO: traer userid sin forzar
 var userid = userID;
 var planillaid;
 var filaID = '';
