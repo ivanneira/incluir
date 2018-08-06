@@ -5,9 +5,16 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+/*
 //url del sevidor
 server_url = "/aresapi";
 server_host = "http://gedoc.sanjuan.gob.ar";
+server_port = 80;
+*/
+
+//para evitar error de CORS
+server_url = "/aresapi";
+server_host = "http://200.0.236.210";
 server_port = 80;
 
 /*
@@ -17,6 +24,19 @@ server_host = "http://192.168.3.105";
 server_port = 45457;
 */
 
+  knex = require('knex')({
+    client: 'mssql',
+    connection: {
+        host : '10.64.65.200',
+        port: 5000,
+        user : 'sa',
+        password : 'Alamitos+2016',
+        database : 'MSP-IncluirSalud'
+    },
+    debug: false,
+    pool: { min: 0, max: 40 }
+});
+
 //express-session
 var session = require('express-session');
 
@@ -25,6 +45,9 @@ var index = require('./routes/index');
 //var users = require('./routes/users');
 var dashboard = require('./routes/dashboard');
 var planillas = require('./routes/planillas');
+var estadisticas = require('./routes/estadisticas');
+
+var excel = require('./routes/excel');
 
 var registro = require('./routes/registro');
 var registroEncuesta = require('./routes/registroEncuesta');
@@ -93,6 +116,9 @@ app.use('/registroEncuesta', registroEncuesta);
 
 app.use('/trylogin', trylogin);
 app.use('/logout', logout);
+app.use('/estadisticas', estadisticas);
+
+app.use('/excel', excel);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

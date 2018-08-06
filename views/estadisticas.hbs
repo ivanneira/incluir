@@ -1,0 +1,108 @@
+
+
+<input id="uid" type="hidden" value="{{id}}">
+
+<nav class="navbar bg-light">
+
+    <h3 class="text-dark ">Programa Federal Incluir Salud</h3>
+    <span class="text-muted">Estadísticas de planillas de reempadronados.</span>
+    <button id="logout" class="btn btn-warning"><i class="fa fa-power-off"></i> Usuario: {{apenom}} <small>[{{user}}</small>]</button>
+</nav>
+
+<div class="container">
+    <br>
+    <br>
+
+    <div class="row card-1 bg-light registroContainer">
+        <h6>Descargar excel con todos los datos</h6>
+
+    </div>
+
+    <div class="row card-1 bg-light registroContainer">
+
+        <div class="col-4"></div>
+        <div class="col-4">   <button class="btn btn-success -align-center" onclick="location.href='excel';" value="excel">Descargar</button>     </div>
+        <div class="col-4"></div>
+    </div>
+
+
+    <div class="row card-1 bg-light registroContainer">
+        <h4>Totales</h4>
+    </div>
+
+    <div class="row card-1 bg-light registroContainer">
+
+        <div class="col-4">
+            <span class="badge badge-secondary">
+            <h6>Planillas</h6>
+            <h1 id="totalplanillas">-</h1>
+            </span>
+        </div>
+
+        <div class="col-4">
+            <span class="badge badge-secondary">
+           <h6>Registros</h6>
+            <h1 id="totalregistros">-</h1>
+            </span>
+        </div>
+
+        <div class="col-4">
+            <span class="badge badge-secondary">
+           <h6>Encuestas</h6>
+            <h1 id="totalencuestas">-</h1>
+            </span>
+        </div>
+
+    </div>
+
+    <br>
+    <div class="row card-1 bg-light registroContainer">
+        <h4>Datos por usuario</h4>
+    </div>
+    <div class="row card-1 bg-light registroContainer">
+
+        <div class="col-6">
+            <div id="planillasPorUsuario"></div>
+        </div>
+    </div>
+
+
+    <br>
+    <div class="row card-1 bg-light registroContainer">
+        <h4>Puntos en el mapa</h4>
+    </div>
+    <div class="row card-1 bg-light registroContainer">
+
+        <div class="col-12">
+            <div id="map"></div>
+        </div>
+    </div>
+
+
+
+
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
+</div>
+
+<script>
+
+    var server_url = "{{server_url}}";
+    var server_host = "{{server_host}}";
+    var server_port = "{{server_port}}";
+</script>
+
+
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBpjpAsKeGWDM1REdx9hTuMXwtwbknN6DU" ></script>
+<!-- Async JS  -->
+<script src="async.min.js"></script>
+
+<script src="/javascripts/highcharts.src.js"></script>
+<script src="/javascripts/estadisticas.js"></script>

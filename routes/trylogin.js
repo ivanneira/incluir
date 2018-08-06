@@ -12,14 +12,19 @@ router.post('/', function(req, res, next) {
     var pass = req.body.pass;
 
 
+
     consultar(user,pass,function(response){
         if(response){
 
             req.session.uid = userID;
             req.session.apenom = ApeNom;
             req.session.user = user;
-            res.send('planillas');
 
+            if(user === 'est'){
+                res.send('estadisticas');
+            }else{
+                res.send('planillas');
+            }
 
         }else{
 
@@ -30,18 +35,6 @@ router.post('/', function(req, res, next) {
 
 function consultar(user,pass,callback){
 
-    var knex = require('knex')({
-        client: 'mssql',
-        connection: {
-            host : '10.64.65.200',
-            port: 5000,
-            user : 'sa',
-            password : 'Alamitos+2016',
-            database : 'MSP-IncluirSalud'
-        },
-        debug: false,
-        pool: { min: 0, max: 40 }
-    });
 
 
         knex
