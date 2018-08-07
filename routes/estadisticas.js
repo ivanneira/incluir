@@ -117,6 +117,65 @@ router.get('/totales', function(req, res, next) {
                         console.log(error);
                     });
 
+            },
+            //total de registros por usuario
+            function(callback) {
+
+                knex.raw("select (u.apellido + ' ' + u.nombre) as usuario,  (SELECT COUNT(*) FROM filaPlanilla fp left join planillas p on fp.planillaID = p.ID WHERE p.usuarioID = u.ID) AS cantidad   FROM filaPlanilla fp   left join planillas p on p.ID = fp.planillaID  left join usuarios u on u.ID = p.usuarioID  group by u.apellido, u.nombre,u.ID ORDER BY cantidad ASC")
+                    .then(function(row){
+
+                        callback(null, row);
+                    })
+                    .catch(function(error){
+
+                        console.log(error);
+
+                    });
+
+            },
+            //total de registros por supervisor
+            function(callback) {
+
+                knex.raw("SELECT "+
+                    "(u.apellido + ' ' + u.nombre) as supervisor, "+
+                    "(SELECT COUNT(*) FROM filaPlanilla fp left join planillas p on fp.planillaID = p.ID WHERE " +
+                    "p.supervisorID = u.ID) AS cantidad "+
+                    "FROM filaPlanilla fp "+
+                    "left join planillas p on p.ID = fp.planillaID "+
+                    "left join personas u on u.ID = p.supervisorID "+
+                    "group by u.apellido, u.nombre,u.ID")
+                    .then(function(row){
+
+                        callback(null, row);
+                    })
+                    .catch(function(error){
+
+                        console.log(error);
+
+                    });
+
+            },
+            //total de registros por encuestador
+            function(callback) {
+
+                knex.raw("SELECT " +
+                    "(u.apellido + ' ' + u.nombre) as encuestador, " +
+                    "(SELECT COUNT(*) FROM filaPlanilla fp left join planillas p on fp.planillaID = p.ID " +
+                    "WHERE p.encuestadorID = u.ID) AS cantidad "+
+                    "FROM filaPlanilla fp "+
+                    "left join planillas p on p.ID = fp.planillaID "+
+                    "left join personas u on u.ID = p.encuestadorID "+
+                    "group by u.apellido, u.nombre,u.ID ORDER BY cantidad ASC")
+                    .then(function(row){
+
+                        callback(null, row);
+                    })
+                    .catch(function(error){
+
+                        console.log(error);
+
+                    });
+
             }
         ],
 

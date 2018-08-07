@@ -48,20 +48,70 @@ function setDatos(datos){
 
 function loadCharts(datos){
 
-    var chartData = [];
+    var planillasPorUsuarioData = [];
+    var planillasPorSupervisorData = [];
+    var planillasPorEncuestadorData = [];
+    var registrosPorUsuarioData = [];
+    var registrosPorSupervisorData = [];
+    var registrosPorEncuestadorData = [];
 
     for(var index in datos[2]){
 
-        chartData.push({
+        planillasPorUsuarioData.push({
             name: datos[2][index].nombre + ' ' + datos[2][index].apellido,
-            data: datos[2][index].cantidad
+            data: [datos[2][index].cantidad]
         });
 
     }
 
-    console.dir(chartData)
+    for(var index in datos[3]){
 
-    var myChart = Highcharts.chart('planillasPorUsuario', {
+        planillasPorSupervisorData.push({
+            name: datos[3][index].nombre + ' ' + datos[3][index].apellido,
+            data: [datos[3][index].cantidad]
+        });
+
+    }
+
+
+    for(var index in datos[4]){
+
+        planillasPorEncuestadorData.push({
+            name: datos[4][index].nombre + ' ' + datos[4][index].apellido,
+            data: [datos[4][index].cantidad]
+        });
+
+    }
+
+    for(var index in datos[6]){
+
+        registrosPorUsuarioData.push({
+            name: datos[6][index].usuario,
+            data: [datos[6][index].cantidad]
+        });
+
+    }
+
+    for(var index in datos[7]){
+
+        registrosPorSupervisorData.push({
+            name: datos[7][index].supervisor,
+            data: [datos[7][index].cantidad]
+        });
+
+    }
+
+    for(var index in datos[8]){
+
+        registrosPorEncuestadorData.push({
+            name: datos[8][index].encuestador,
+            data: [datos[8][index].cantidad]
+        });
+
+    }
+
+
+    var planillasPorUsuario = Highcharts.chart('planillasPorUsuario', {
         chart: {
             width: '600',
             type: 'bar'
@@ -71,15 +121,121 @@ function loadCharts(datos){
         },
         xAxis: {
             title: {
-                text: 'usuarios'
+                text: 'Usuarios'
             }
         },
         yAxis: {
             title: {
-                text: 'planillas'
+                text: 'Planillas'
             }
         },
-        series: chartData
+        series: planillasPorUsuarioData
+    });
+
+    var planillasPorSupervisor = Highcharts.chart('planillasPorSupervisor', {
+        chart: {
+            width: '600',
+            type: 'bar'
+        },
+        title: {
+            text: 'Planillas por Supervisor'
+        },
+        xAxis: {
+            title: {
+                text: 'Usuarios'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Planillas'
+            }
+        },
+        series: planillasPorSupervisorData
+    });
+
+    var planillasPorEncuestador = Highcharts.chart('planillasPorEncuestador', {
+        chart: {
+            width: '600',
+            type: 'bar'
+        },
+        title: {
+            text: 'Planillas por Encuestador'
+        },
+        xAxis: {
+            title: {
+                text: 'Usuarios'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Planillas'
+            }
+        },
+        series: planillasPorEncuestadorData
+    });
+
+
+    var registrosPorUsuario = Highcharts.chart('registrosPorUsuario', {
+        chart: {
+            width: '600',
+            type: 'bar'
+        },
+        title: {
+            text: 'Registros por usuario'
+        },
+        xAxis: {
+            title: {
+                text: 'Usuarios'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Planillas'
+            }
+        },
+        series: registrosPorUsuarioData
+    });
+
+    var registrosPorSupervisor = Highcharts.chart('registrosPorSupervisor', {
+        chart: {
+            width: '600',
+            type: 'bar'
+        },
+        title: {
+            text: 'Registros por supervisor'
+        },
+        xAxis: {
+            title: {
+                text: 'Usuarios'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Planillas'
+            }
+        },
+        series: registrosPorSupervisorData
+    });
+
+    var registrosPorEncuestador = Highcharts.chart('registrosPorEncuestador', {
+        chart: {
+            width: '600',
+            type: 'bar'
+        },
+        title: {
+            text: 'Registros por encuestador'
+        },
+        xAxis: {
+            title: {
+                text: 'Usuarios'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Planillas'
+            }
+        },
+        series: registrosPorEncuestadorData
     });
 
 }

@@ -17,6 +17,8 @@ var map;
 
 var barrio = "";
 
+var fechahora = "";
+
 $(function(){
 
 
@@ -224,7 +226,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         '     <tr>'+
         '         <td  class="vivo">' +
         '              <label for="tel">Teléfono</label>' +
-        '              <input tabindex="6" id="tel" name="tel" type="text" class="form-control" placeholder="Teléfono">' +
+        '              <input tabindex="6" id="tel" name="tel" type="text" class="form-control" placeholder="Teléfono" maxlength="20">' +
         '          </td>'+
         '          <td id="fechaDefuncion">' +
         '              <label for="defuncion">Fecha de defunción</label>' +
@@ -576,6 +578,8 @@ function completarDatos(filaid){
 
         //datos para completar
         var data = res[0];
+
+        fechahora = data.FechaCarga;
 
         //datos personales
 
@@ -1026,6 +1030,8 @@ function armarJSON(){
 
         data.planillaID = planillaid;
 
+        data.fechahora = fechahora;
+
         enviarDatos(data);
 
     //caso común de la encuesta
@@ -1135,6 +1141,8 @@ function armarJSON(){
         data.motivoViviendaID = $("#sel-4").val();
 
         data.comentario = $("#comentario").val();
+
+        data.fechahora = fechahora;
 
         enviarDatos(data);
     }
