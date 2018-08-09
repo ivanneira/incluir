@@ -579,6 +579,8 @@ function completarDatos(filaid){
         //datos para completar
         var data = res[0];
 
+        console.log(data)
+
         fechahora = data.FechaCarga;
 
         //datos personales
@@ -616,8 +618,9 @@ function completarDatos(filaid){
 
         $("#domicilio").val(data.Domicilio);
 
+        //TODO: arreglar la Ï en barrioID
         $(".selectBarrio")
-            .val(data.Barrio)
+            .append('<option selected value="">'+ data.BarrioNombre +'</option>')
             .trigger('change');
 
         $("#lat").val(data.Latitud);
@@ -689,8 +692,8 @@ function completarDatos(filaid){
 
         //Vivienda
 
-        $("#conviven").val(data.NroIntegrantesConviven);
-        $("#grupo").val(data.NroPersonasConviven);
+        $("#conviven").val(data.NroPersonasConviven);
+        $("#grupo").val(data.NroIntegrantesConviven);
 
         //$(".selectTipoVivienda").val();
         $("#comentario").val(data.Comentario);
