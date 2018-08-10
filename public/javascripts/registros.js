@@ -283,7 +283,7 @@ function fillModal(NumeroPlanilla,idplanilla,filaid){
         //'           <input maxlength="150" id="barrio" name="barrio" type="text" class="form-control" placeholder="Barrio">' +
         '               <select tabindex="13" class="selectBarrio" name="barrio">' +
                             barrio +
-         '              </select>' +
+        '              </select>' +
         '       </td>'+
         '   </tr>'+
         '   <tr>'+
@@ -618,9 +618,9 @@ function completarDatos(filaid){
 
         $("#domicilio").val(data.Domicilio);
 
-        //TODO: arreglar la Ï en barrioID
+
         $(".selectBarrio")
-            .append('<option selected value="">'+ data.BarrioNombre +'</option>')
+            .val(data.BarrioID)
             .trigger('change');
 
         $("#lat").val(data.Latitud);
@@ -694,6 +694,14 @@ function completarDatos(filaid){
 
         $("#conviven").val(data.NroPersonasConviven);
         $("#grupo").val(data.NroIntegrantesConviven);
+
+        if(data.TipoVivienda !== 0){
+
+
+            $(".selectTipoVivienda")
+                .val(data.TipoViviendaID)
+                .trigger('change');
+        }
 
         //$(".selectTipoVivienda").val();
         $("#comentario").val(data.Comentario);
@@ -1083,7 +1091,7 @@ function armarJSON(){
         //localizacion
         data.localidadID = $(".selectLocalidad").val();
         data.domicilio  = $("#domicilio").val();
-        data.barrio = $(".selectBarrio").val();
+        data.barrioid = $(".selectBarrio").val();
         data.latitud = $("#lat").val();
         data.longitud = $("#lon").val();
         data.departamentoID = $(".selectDepartamento").val();

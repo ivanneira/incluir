@@ -36,7 +36,7 @@ function agregarEncuesta(){
         '             </div>' +
         '             <div class="col-4">' +
         '                   <label for="fechaNacimientoEncuesta">Fecha de nacimiento</label>' +
-        '                   <input id="fechaNacimientoEncuesta" name="fechaNacimientoEncuesta" class="inputtipobootstrap" placeholder="Elija fecha de nacimient" data-provide="datepicker">' +
+        '                   <input id="fechaNacimientoEncuesta" name="fechaNacimientoEncuesta" class="inputtipobootstrap" placeholder="Elija fecha de nacimiento" data-provide="datepicker">' +
         '             </div>' +
         '             <div class="col-4">' +
         '                  <label for="selectDepartamentoEncuesta">Departamento</label>' +
@@ -65,11 +65,12 @@ function agregarEncuesta(){
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
         '               <input name="pension" value="4" class="form-check-input" type="radio" id="pe4">' +
-        '               <label class="form-check-label" for="pe4">Héroes ex Combatientes de Malvina</label>' +
+        '               <label class="form-check-label" for="pe4">Héroes ex Combatientes de Malvinas</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input name="pension" value="5" class="form-check-input" type="radio" id="pe5">' +
-        '               <label class="form-check-label" for="pe5">Otro</label>' +
+        '               <input name="pension" value="5" class="form-check-input" type="radio" id="pe0">' +
+        '               <label class="form-check-label" for="pe0">Otro</label>' +
+        '               <input value="" class="form-control" type="text" id="pe0t" placeholder="especifique">' +
         '           </div>' +
         '       </td>'+
         '   </tr>';
@@ -92,8 +93,9 @@ function agregarEncuesta(){
         '               <label class="form-check-label" for="do3">Consultorio particular</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="4" class="atiende form-check-input" type="checkbox" id="do4">' +
-        '               <label class="form-check-label" for="do4">Otro</label>' +
+        '               <input  value="4" class="atiende form-check-input" type="checkbox" id="do0">' +
+        '               <label class="form-check-label" for="do0">Otro</label>' +
+        '               <input value="" class="atiende form-check-input form-control" type="text" id="do0t" placeholder="especifique">' +
         '           </div>' +
         '       </td>'+
         '   </tr>';
@@ -116,8 +118,9 @@ function agregarEncuesta(){
         '               <label class="form-check-label" for="qu3">Médico de guardia</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="4" class="quien form-check-input" type="checkbox" id="qu4">' +
-        '               <label class="form-check-label" for="qu4">Otro</label>' +
+        '               <input value="4" class="quien form-check-input" type="checkbox" id="qu0">' +
+        '               <label class="form-check-label" for="qu0">Otro</label>' +
+        '               <input value="" class="quien form-control" type="text" id="qu0t" placeholder="especifique">' +
         '           </div>' +
         '       </td>'+
         '   </tr>';
@@ -172,16 +175,17 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Le solicitaron estudios, cuáles?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="1" name="estudios" class="form-check-input" type="radio" id="es1">' +
+        '               <input value="1" name="estudios" class="estudios form-check-input" type="checkbox" id="es1">' +
         '               <label class="form-check-label" for="es1">RX</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="2" name="estudios" class="form-check-input" type="radio" id="es2">' +
+        '               <input value="2" name="estudios" class="estudios form-check-input" type="checkbox" id="es2">' +
         '               <label class="form-check-label" for="es2">Laboratorio</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="3" name="estudios" class="form-check-input" type="radio" id="es3">' +
-        '               <label class="form-check-label" for="es3">otros</label>' +
+        '               <input value="3" name="estudios" class="estudios form-check-input" type="checkbox" id="es0">' +
+        '               <label class="form-check-label" for="es0">Otro</label>' +
+        '               <input value="" name="estudios" class="form-control" type="text" id="es0t" placeholder="especifique">' +
         '           </div>' +
         '       </td>' +
         '   </tr>';
@@ -243,6 +247,10 @@ function agregarEncuesta(){
         '               <input value="4" name="ugp" class="form-check-input" type="radio" id="ug4">' +
         '               <label class="form-check-label" for="ug4">Mal</label>' +
         '           </div>' +
+        '           <div class="form-check form-check-inline">' +
+        '               <input value="5" name="ugp" class="form-check-input" type="radio" id="ug5">' +
+        '               <label class="form-check-label" for="ug5">No fue atendido en la UGP</label>' +
+        '           </div>' +
         '       </td>' +
         '   </tr>';
 
@@ -296,24 +304,25 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Quién le brindó información del Programa?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="1" name="informacion" class="form-check-input" type="radio" id="in1">' +
+        '               <input value="1" name="informacion" class="form-check-input informacion" type="checkbox" id="in1">' +
         '               <label class="form-check-label" for="in1">UGP</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="2" name="informacion" class="form-check-input" type="radio" id="in2">' +
+        '               <input value="2" name="informacion" class="form-check-input informacion" type="checkbox" id="in2">' +
         '               <label class="form-check-label" for="in2">CAPS</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="3" name="informacion" class="form-check-input" type="radio" id="in3">' +
+        '               <input value="3" name="informacion" class="form-check-input informacion" type="checkbox" id="in3">' +
         '               <label class="form-check-label" for="in3">Radio/TV</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="4" name="informacion" class="form-check-input" type="radio" id="in4">' +
+        '               <input value="4" name="informacion" class="form-check-input informacion" type="checkbox" id="in4">' +
         '               <label class="form-check-label" for="in4">Encuestador</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="5" name="informacion" class="form-check-input" type="radio" id="in5">' +
-        '               <label class="form-check-label" for="in5">Otros</label>' +
+        '               <input value="5" name="informacion" class="form-check-input informacion" type="checkbox" id="in0">' +
+        '               <label class="form-check-label" for="in0">Otro</label>' +
+        '               <input value="" name="informacion" class="form-control" type="text" id="in0t" placeholder="especifique">' +
         '           </div>' +
         '       </td>' +
         '   </tr>';
@@ -369,7 +378,6 @@ function agregarEncuesta(){
 
 
     });
-    ////
 
 
 
@@ -415,6 +423,73 @@ function agregarEncuesta(){
         .modal('show')
         .modal('handleUpdate');
 
+    $("#pe0t").hide();
+    $(".pension").click(function(){
+
+        if($("#pe0").prop('checked')){
+
+            $("#pe0t").show();
+
+        }else{
+            $("#pe0t").hide();
+
+        }
+    });
+
+
+    $("#do0t").hide();
+    $("#do0").click(function(){
+
+        if($("#do0").prop('checked')){
+
+            $("#do0t").show();
+
+        }else{
+            $("#do0t").hide();
+
+        }
+    });
+
+    $("#es0t").hide();
+    $("#es0").click(function(){
+
+        if($("#es0").prop('checked')){
+
+            $("#es0t").show();
+
+        }else{
+            $("#es0t").hide();
+
+        }
+    });
+
+
+    $("#qu0t").hide();
+    $("#qu0").click(function(){
+
+        if($("#qu0").prop('checked')){
+
+            $("#qu0t").show();
+
+        }else{
+            $("#qu0t").hide();
+
+        }
+    });
+
+    $("#in0t").hide();
+    $("#in0").click(function(){
+
+        if($("#in0").prop('checked')){
+
+            $("#in0t").show();
+
+        }else{
+            $("#in0t").hide();
+
+        }
+    });
+
     $("#modalACAceptar")
         .unbind('click')
         .click(function(){
@@ -423,6 +498,128 @@ function agregarEncuesta(){
         verificarEncuesta();
     });
 
+
+    function verificarEncuesta(){
+
+
+        console.log("verificar encuesta");
+
+        var error = false;
+
+        function toggleWarning(selector, error){
+
+            if(error){
+                selector.addClass('bg-warning');
+            }else{
+                selector.removeClass('bg-warning');
+            }
+        }
+
+        function toggleWarningSelect(selector,error){
+
+            if(error){
+
+                selector
+                    .next()
+                    .find('.select2-selection')
+                    .addClass('bg-warning');
+
+            }else{
+                selector
+                    .next()
+                    .find('.select2-selection')
+                    .removeClass('bg-warning');
+
+                error = true;
+            }
+        }
+
+        if($('#nencuesta').val() === ''){
+
+            error = true;
+            toggleWarning($('#nencuesta'),true);
+        }else{
+
+            toggleWarning($('#nencuesta'),false);
+        }
+
+        if($('#fechaEncuesta').val() === ''){
+
+            error = true;
+            toggleWarning($('#fechaEncuesta'),true);
+        }else{
+
+            toggleWarning($('#fechaEncuesta'),false);
+        }
+
+        if($('#sexoEncuesta').val() === '-1'){
+
+            error = true;
+            toggleWarning($('#sexoEncuesta'),true);
+        }else{
+
+            toggleWarning($('#sexoEncuesta'),false);
+        }
+
+        if($('.selectEncuestadorEncuesta').val() === null){
+
+            error = true;
+            toggleWarningSelect($('.selectEncuestadorEncuesta'),true);
+        }else{
+
+            toggleWarningSelect($('.selectEncuestadorEncuesta'),false);
+        }
+
+        if($('#fechaNacimientoEncuesta').val() === ''){
+
+            error = true;
+            toggleWarning($('#fechaNacimientoEncuesta'),true);
+        }else{
+
+            toggleWarning($('#fechaNacimientoEncuesta'),false);
+        }
+
+        if($('.selectDepartamentoEncuesta').val() === null){
+
+            error = true;
+            toggleWarningSelect($('.selectDepartamentoEncuesta'),true);
+        }else{
+
+            toggleWarningSelect($('.selectDepartamentoEncuesta'),false);
+        }
+
+        if(typeof($('input[name=pension]:checked').val()) === 'undefined'){
+
+            $(".pension").addClass("bg-warning");
+            error = true;
+
+        }else{
+
+            if($('input[name=pension]:checked').val() === 0 && $("#pe0t").val() === ""){
+
+                $("#pe0t").addClass("bg-warning");
+            }else{
+                $("#pe0t").removeClass("bg-warning");
+            }
+
+            $(".pension").removeClass("bg-warning");
+        }
+
+
+        //muestra error o envía datos
+        if(!error){
+
+            guardarDatosEncuesta();
+
+        }else{
+
+            swal("Error", "Hay datos que no fueron completados", "error");
+        }
+
+
+
+    }
+/*
     function verificarEncuesta(){
 
         var error = false;
@@ -651,6 +848,8 @@ function agregarEncuesta(){
         }
     }
 
+    */
+
     function guardarDatosEncuesta(){
 
         var encuestaDATA = {
@@ -668,13 +867,19 @@ function agregarEncuesta(){
             enlace_atendidoPor: [],
             tiempoTurnoID: '',
             calidadAtencionID: '',
-            estudiosSolicitadosID: '',
+            enlace_encuestaInformacionPrograma: [],
+            enlace_encuestaEstudiosSolicitados: [],
             demoraRemedios: '',
             derivado: '',
             calidadAtencionUgpID: '',
             tiempoPrestacionID: '',
             conoceBeneficioPrograma: '',
-            informacionProgramaID: ''
+            informacionProgramaID: '',
+            tipoPensionDetalle: '',
+            dondeSeAtiendeDetalle: '',
+            quienLoAtiendeDetalle: '',
+            solicitaronEstudiosDetalle: '',
+            quienBrindoInfoDetalle: ''
 
         };
 
@@ -701,7 +906,14 @@ function agregarEncuesta(){
 
         encuestaDATA.calidadAtencionID = $("input:radio[name ='atendido']:checked").val();
 
-        encuestaDATA.estudiosSolicitadosID = $("input:radio[name ='estudios']:checked").val();
+        //encuestaDATA.estudiosSolicitadosID = $("input:radio[name ='estudios']:checked").val();
+        $(".estudios").each(function(i,v){
+
+            if($(v).prop('checked')){
+                encuestaDATA.enlace_encuestaEstudiosSolicitados.push({estudiosSolicitadosID: v.value})
+            }
+
+        });
 
         encuestaDATA.demoraRemedios = $("input:radio[name ='remedios']:checked").val();
 
@@ -732,8 +944,23 @@ function agregarEncuesta(){
 
         encuestaDATA.departamentoID = $(".selectDepartamentoEncuesta").val();
 
+        encuestaDATA.tipoPensionDetalle = $("#pe0t").val();
+        encuestaDATA.dondeSeAtiendeDetalle = $("#do0t").val();
+        encuestaDATA.quienLoAtiendeDetalle = $("#qu0t").val();
+        encuestaDATA.solicitaronEstudiosDetalle = $("#es0t").val();
+        //encuestaDATA.quienBrindoInfoDetalle = $("#in0t").val();
+        $(".informacion").each(function(i,v){
+
+            if($(v).prop('checked')){
+                encuestaDATA.enlace_encuestaInformacionPrograma.push({informacionProgramaID: v.value})
+            }
+
+        });
+
         //encuestaDATA.codigo = $("#codigoEncuesta").val();
         encuestaDATA.codigo = 0;
+
+        console.dir(encuestaDATA)
 
 
         swal("Espere un momento...", "se está guardando la encuesta", "info");

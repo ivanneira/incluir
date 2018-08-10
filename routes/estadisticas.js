@@ -143,7 +143,7 @@ router.get('/totales', function(req, res, next) {
                     "FROM filaPlanilla fp "+
                     "left join planillas p on p.ID = fp.planillaID "+
                     "left join personas u on u.ID = p.supervisorID "+
-                    "group by u.apellido, u.nombre,u.ID")
+                    "group by u.apellido, u.nombre,u.ID ORDER BY cantidad ASC")
                     .then(function(row){
 
                         callback(null, row);

@@ -112,7 +112,9 @@ function loadCharts(datos){
 
 
     var planillasPorUsuario = Highcharts.chart('planillasPorUsuario', {
+
         chart: {
+
             width: '600',
             type: 'bar'
         },
@@ -156,7 +158,7 @@ function loadCharts(datos){
     var planillasPorEncuestador = Highcharts.chart('planillasPorEncuestador', {
         chart: {
             width: '600',
-            type: 'bar'
+            type: 'column'
         },
         title: {
             text: 'Planillas por Encuestador'
@@ -220,7 +222,7 @@ function loadCharts(datos){
     var registrosPorEncuestador = Highcharts.chart('registrosPorEncuestador', {
         chart: {
             width: '600',
-            type: 'bar'
+            type: 'column'
         },
         title: {
             text: 'Registros por encuestador'
