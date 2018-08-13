@@ -9,7 +9,8 @@ router.get('/', function(req, resq, next) {
     var ID = req.param('id');
 
     //cambiar dirección de IP fija por parámetros globales
-    http.get(server_host + ":" + server_port + server_url +"/api/IncluirSalud/ObtenerEncuesta?id="+ID, (res) => {
+    //http.get(server_host + ":" + server_port + server_url +"/api/IncluirSalud/ObtenerEncuesta?id="+ID, (res) => {
+    http.get("http://10.64.65.200/aresapi/api/IncluirSalud/ObtenerEncuesta?id="+ID, (res) => {
         var body = "";
 
     res.on('data', function (chunk) {
