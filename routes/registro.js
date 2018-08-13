@@ -12,7 +12,8 @@ router.get('/', function(req, resq, next) {
     var nombreSupervisor = req.param('nombreSupervisor');
 
     //cambiar dirección de IP fija por parámetros globales
-    http.get(server_host + ":" + server_port + server_url +"/api/IncluirSalud/ObtenerFilaPlanilla?id="+filaID, (res) => {
+    //http.get(server_host + ":" + server_port + server_url +"/api/IncluirSalud/ObtenerFilaPlanilla?id="+filaID, (res) => {
+    http.get("10.64.65.200:80" + "/aresapi" +"/api/IncluirSalud/ObtenerFilaPlanilla?id="+filaID, (res) => {
         var body = "";
 
     res.on('data', function (chunk) {
