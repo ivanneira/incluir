@@ -322,7 +322,7 @@ function agregarEncuesta(){
         '           <div class="form-check form-check-inline">' +
         '               <input value="5" name="informacion" class="form-check-input informacion" type="checkbox" id="in0">' +
         '               <label class="form-check-label" for="in0">Otro</label>' +
-        '               <input value="" name="informacion" class="form-control" type="text" id="in0t" placeholder="especifique">' +
+        '               <input value=""  class="form-control" type="text" id="in0t" placeholder="especifique">' +
         '           </div>' +
         '       </td>' +
         '   </tr>';
@@ -879,7 +879,7 @@ function agregarEncuesta(){
         encuestaDATA.dondeSeAtiendeDetalle = $("#do0t").val();
         encuestaDATA.quienLoAtiendeDetalle = $("#qu0t").val();
         encuestaDATA.solicitaronEstudiosDetalle = $("#es0t").val();
-        //encuestaDATA.quienBrindoInfoDetalle = $("#in0t").val();
+        encuestaDATA.quienBrindoInfoDetalle = $("#in0t").val();
         $(".informacion").each(function(i,v){
 
             if($(v).prop('checked')){
