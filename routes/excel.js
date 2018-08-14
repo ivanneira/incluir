@@ -11,7 +11,7 @@ router.get('/', function(req, res, next) {
 
     var workbook = new excel.Workbook();
     var wsPlanillas = workbook.addWorksheet('planillas');
-    //var wsEncuestas = workbook.addWorksheet('encuestas');
+    var wsEncuestas = workbook.addWorksheet('encuestas');
     var wsRegistros = workbook.addWorksheet('registros');
 
     var estiloFecha = workbook.createStyle({
@@ -207,11 +207,10 @@ router.get('/', function(req, res, next) {
                     });
 
             },
-            /*
             //encuestas
             function(callback) {
 
-                knex.raw("SELECT 1")
+                knex.raw("exec spReporteEncuestaIncluirSalud")
                     .then(function(row){
 
                         wsEncuestas.cell(1,1).string("ID").style(estiloBold);
@@ -224,41 +223,49 @@ router.get('/', function(req, res, next) {
                         wsEncuestas.cell(1,8).string("Departamento").style(estiloBold);
                         wsEncuestas.cell(1,9).string("¿Qué tipo de pensión tiene asignada?").style(estiloBold);
                         wsEncuestas.cell(1,10).string("¿Dónde se atiende?").style(estiloBold);
-                        wsEncuestas.cell(1,11).string("¿Quién lo atiende?").style(estiloBold);
-                        wsEncuestas.cell(1,12).string("¿Cuánto tiempo le llevó encontrar el turno?").style(estiloBold);
-                        wsEncuestas.cell(1,13).string("¿Cómo fue atendido?").style(estiloBold);
-                        wsEncuestas.cell(1,14).string("¿Le solicitaron estudios?").style(estiloBold);
-                        wsEncuestas.cell(1,15).string("¿Le indicaron remedios?").style(estiloBold);
-                        wsEncuestas.cell(1,16).string("¿Fue derivado a otro médico?").style(estiloBold);
-                        wsEncuestas.cell(1,17).string("¿Cómo es atendido en la UGP?").style(estiloBold);
-                        wsEncuestas.cell(1,18).string("¿Cuánto tiempo le llevó conseguir la prestación?").style(estiloBold);
-                        wsEncuestas.cell(1,19).string("¿Conoce los beneficios del programa?").style(estiloBold);
-                        wsEncuestas.cell(1,20).string("¿Quién le brindó información del Programa?").style(estiloBold);
+                        wsEncuestas.cell(1,11).string("especifique").style(estiloBold);
+                        wsEncuestas.cell(1,12).string("¿Quién lo atiende?").style(estiloBold);
+                        wsEncuestas.cell(1,13).string("especifique").style(estiloBold);
+                        wsEncuestas.cell(1,14).string("¿Cuánto tiempo le llevó encontrar el turno?").style(estiloBold);
+                        wsEncuestas.cell(1,15).string("¿Cómo fue atendido?").style(estiloBold);
+                        wsEncuestas.cell(1,16).string("¿Le solicitaron estudios?").style(estiloBold);
+                        wsEncuestas.cell(1,17).string("especifique").style(estiloBold);
+                        wsEncuestas.cell(1,18).string("¿Le indicaron remedios?").style(estiloBold);
+                        wsEncuestas.cell(1,19).string("¿Fue derivado a otro médico?").style(estiloBold);
+                        wsEncuestas.cell(1,20).string("¿Cómo es atendido en la UGP?").style(estiloBold);
+                        wsEncuestas.cell(1,21).string("¿Cuánto tiempo le llevó conseguir la prestación?").style(estiloBold);
+                        wsEncuestas.cell(1,22).string("¿Conoce los beneficios del programa?").style(estiloBold);
+                        wsEncuestas.cell(1,23).string("¿Quién le brindó información del Programa?").style(estiloBold);
+                        wsEncuestas.cell(1,24).string("especifique").style(estiloBold);
 
                         var filecounter = 2;
 
                         for(var index in row){
 
                             wsEncuestas.cell(filecounter,1).number(row[index].id);
-                            wsEncuestas.cell(filecounter,2).number(row[index].usuario);
+                            wsEncuestas.cell(filecounter,2).string(row[index].usuario);
                             wsEncuestas.cell(filecounter,3).string(row[index].numeroencuesta).style(estiloCentrado);
-                            wsEncuestas.cell(filecounter,4).string(row[index].fechaencuesta).style(estiloCentrado);
+                            wsEncuestas.cell(filecounter,4).string(row[index].fechaEncuesta).style(estiloCentrado);
                             wsEncuestas.cell(filecounter,5).string(row[index].encuestador);
-                            wsEncuestas.cell(filecounter,6).string(row[index].fechanacimiento).style(estiloCentrado);
+                            wsEncuestas.cell(filecounter,6).string(row[index].fechaNacimiento).style(estiloCentrado);
                             wsEncuestas.cell(filecounter,7).string(row[index].sexo);
-                            wsEncuestas.cell(filecounter,8).date(row[index].departamento);
-                            wsEncuestas.cell(filecounter,9).date(row[index].tipopension);
-                            wsEncuestas.cell(filecounter,10).date(row[index].dondeseatiende);
-                            wsEncuestas.cell(filecounter,11).date(row[index].quienloatiende);
-                            wsEncuestas.cell(filecounter,12).date(row[index].cuantotiempo);
-                            wsEncuestas.cell(filecounter,13).date(row[index].comoesatendido);
-                            wsEncuestas.cell(filecounter,14).date(row[index].solicitaronestudios);
-                            wsEncuestas.cell(filecounter,15).date(row[index].indicaronremedios);
-                            wsEncuestas.cell(filecounter,16).date(row[index].fuederivado);
-                            wsEncuestas.cell(filecounter,17).date(row[index].comoesatendidougp);
-                            wsEncuestas.cell(filecounter,18).date(row[index].conseguirprestacion);
-                            wsEncuestas.cell(filecounter,19).date(row[index].conocebeneficios);
-                            wsEncuestas.cell(filecounter,20).date(row[index].brindoinformacion);
+                            wsEncuestas.cell(filecounter,8).string(row[index].departamento);
+                            wsEncuestas.cell(filecounter,9).string(row[index].tipopension ? row[index].tipopension : "Sin datos");
+                            wsEncuestas.cell(filecounter,10).string(row[index].dondeseatiende ? row[index].dondeseatiende : "Sin datos");
+                            wsEncuestas.cell(filecounter,11).string(row[index].dondeseatiendedetalle ? row[index].dondeseatiendedetalle : "Sin datos");
+                            wsEncuestas.cell(filecounter,12).string(row[index].quienloatiende ? row[index].quienloatiende : "Sin datos");
+                            wsEncuestas.cell(filecounter,13).string(row[index].quienloatiendedetalle ? row[index].quienloatiendedetalle : "Sin datos");
+                            wsEncuestas.cell(filecounter,14).string(row[index].cuantotiempo ? row[index].cuantotiempo : "Sin datos");
+                            wsEncuestas.cell(filecounter,15).string(row[index].comoesatendido ? row[index].comoesatendido : "Sin datos");
+                            wsEncuestas.cell(filecounter,16).string(row[index].solicitaronestudios ? row[index].solicitaronestudios : "Sin datos");
+                            wsEncuestas.cell(filecounter,17).string(row[index].solicitaronestudiosdetalle ? row[index].solicitaronestudiosdetalle : "Sin datos");
+                            wsEncuestas.cell(filecounter,18).string(row[index].indicaronremedios ? row[index].indicaronremedios : "Sin datos");
+                            wsEncuestas.cell(filecounter,19).string(row[index].fuederivado ? row[index].fuederivado : "Sin datos");
+                            wsEncuestas.cell(filecounter,20).string(row[index].comoesatendidougp ? row[index].comoesatendidougp : "Sin datos");
+                            wsEncuestas.cell(filecounter,21).string(row[index].conseguirprestacion ? row[index].conseguirprestacion : "Sin datos");
+                            wsEncuestas.cell(filecounter,22).string(row[index].conocebeneficios ? row[index].conocebeneficios : "Sin datos");
+                            wsEncuestas.cell(filecounter,23).string(row[index].brindoinformacion ? row[index].brindoinformacion : "Sin datos");
+                            wsEncuestas.cell(filecounter,24).string(row[index].brindoinformaciondetalle ? row[index].brindoinformaciondetalle : "Sin datos");
 
                             filecounter++;
                         }
@@ -283,6 +290,10 @@ router.get('/', function(req, res, next) {
                         wsEncuestas.column(18).setWidth(42);
                         wsEncuestas.column(19).setWidth(33);
                         wsEncuestas.column(20).setWidth(39);
+                        wsEncuestas.column(21).setWidth(39);
+                        wsEncuestas.column(22).setWidth(39);
+                        wsEncuestas.column(23).setWidth(39);
+                        wsEncuestas.column(24).setWidth(39);
 
                         callback();
                     })
@@ -293,7 +304,6 @@ router.get('/', function(req, res, next) {
                     });
 
             }
-            */
         ],
         function(err, results) {
             workbook.write('padron.xlsx',res);
