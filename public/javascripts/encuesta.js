@@ -806,7 +806,7 @@ function agregarEncuesta(){
 
         };
 
-
+/*
         $(".atiende").each(function(i,v){
 
             if($(v).prop('checked')){
@@ -814,11 +814,19 @@ function agregarEncuesta(){
             }
 
         });
-
-        $(".quien").each(function(i,v){
+*/
+        $('input[name=quien]:checked').each(function(i,v){
 
             if($(v).prop('checked')){
                 encuestaDATA.enlace_atendidoPor.push({atendidoPorID: v.value})
+            }
+
+        });
+
+        $('input[name=atiende]:checked').each(function(i,v){
+
+            if($(v).prop('checked')){
+                encuestaDATA.enlace_encuestaLugarAtencion.push({encuestaLugarAtencionID: v.value})
             }
 
         });
