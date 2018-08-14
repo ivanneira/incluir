@@ -192,7 +192,7 @@ function loadCharts(datos){
         },
         yAxis: {
             title: {
-                text: 'Planillas'
+                text: 'Registros'
             }
         },
         series: registrosPorUsuarioData
@@ -208,12 +208,12 @@ function loadCharts(datos){
         },
         xAxis: {
             title: {
-                text: 'Usuarios'
+                text: 'Supervisor'
             }
         },
         yAxis: {
             title: {
-                text: 'Planillas'
+                text: 'Usuarios'
             }
         },
         series: registrosPorSupervisorData
@@ -229,12 +229,12 @@ function loadCharts(datos){
         },
         xAxis: {
             title: {
-                text: 'Usuarios'
+                text: 'Encuestador'
             }
         },
         yAxis: {
             title: {
-                text: 'Planillas'
+                text: 'Registros'
             }
         },
         series: registrosPorEncuestadorData
