@@ -81,19 +81,19 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Dónde se atiende?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="1" name="atiende" class="form-check-input" type="checkbox" id="do1">' +
+        '               <input value="1" name="atiende" class="form-check-input atiende" type="checkbox" id="do1">' +
         '               <label class="form-check-label" for="do1">CAPS</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="2" name="atiende" class="form-check-input" type="checkbox" id="do2">' +
+        '               <input value="2" name="atiende" class="form-check-input atiende" type="checkbox" id="do2">' +
         '               <label class="form-check-label" for="do2">Hospital</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input  value="3" name="atiende" class="form-check-input" type="checkbox" id="do3">' +
+        '               <input  value="3" name="atiende" class="form-check-input atiende" type="checkbox" id="do3">' +
         '               <label class="form-check-label" for="do3">Consultorio particular</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input  value="4" name="atiende" class="form-check-input" type="checkbox" id="do0">' +
+        '               <input  value="4" name="atiende" class="form-check-input atiende" type="checkbox" id="do0">' +
         '               <label class="form-check-label" for="do0">Otro</label>' +
         '               <input value="" class="form-check-input form-control" type="text" id="do0t" placeholder="especifique">' +
         '           </div>' +
@@ -106,19 +106,19 @@ function agregarEncuesta(){
         '       <td>' +
         '           <p class="font-italic">¿Quién lo atiende?</p>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="1" name="quien" class="form-check-input" type="checkbox" id="qu1">' +
+        '               <input value="1" name="quien" class="form-check-input quien" type="checkbox" id="qu1">' +
         '               <label class="form-check-label" for="qu1">Médico de cabecera</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="2" name="quien" class="form-check-input" type="checkbox" id="qu2">' +
+        '               <input value="2" name="quien" class="form-check-input quien" type="checkbox" id="qu2">' +
         '               <label class="form-check-label" for="qu2">Médico especialista</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="3" name="quien" class="form-check-input" type="checkbox" id="qu3">' +
+        '               <input value="3" name="quien" class="form-check-input quien" type="checkbox" id="qu3">' +
         '               <label class="form-check-label" for="qu3">Médico de guardia</label>' +
         '           </div>' +
         '           <div class="form-check form-check-inline">' +
-        '               <input value="4" name="quien" class="form-check-input" type="checkbox" id="qu0">' +
+        '               <input value="4" name="quien" class="form-check-input quien" type="checkbox" id="qu0">' +
         '               <label class="form-check-label" for="qu0">Otro</label>' +
         '               <input value="" class="form-control" type="text" id="qu0t" placeholder="especifique">' +
         '           </div>' +
@@ -814,16 +814,13 @@ function agregarEncuesta(){
             }
 
         });
+
 */
-        $('input[name=quien]:checked').each(function(i,v){
+        ///¿Qué tipo de pensión tiene asignada?
+        encuestaDATA.tipoPensionID = $("input:radio[name ='pension']:checked").val();
 
-            if($(v).prop('checked')){
-                encuestaDATA.enlace_atendidoPor.push({atendidoPorID: v.value})
-            }
-
-        });
-
-        $('input[name=atiende]:checked').each(function(i,v){
+        //¿Dónde se atiende?
+        $('.atiende').each(function(i,v){
 
             if($(v).prop('checked')){
                 encuestaDATA.enlace_encuestaLugarAtencion.push({encuestaLugarAtencionID: v.value})
@@ -831,13 +828,22 @@ function agregarEncuesta(){
 
         });
 
-        encuestaDATA.tipoPensionID = $("input:radio[name ='pension']:checked").val();
+        //¿Quién lo atiende?
+        $('.quien').each(function(i,v){
 
+            if($(v).prop('checked')){
+                encuestaDATA.enlace_atendidoPor.push({atendidoPorID: v.value})
+            }
+
+        });
+
+        //¿Cuánto tiempo le llevó encontrar el turno?
         encuestaDATA.tiempoTurnoID = $("input:radio[name ='tiempo']:checked").val();
 
+        //¿Cómo fue atendido?
         encuestaDATA.calidadAtencionID = $("input:radio[name ='atendido']:checked").val();
 
-        //encuestaDATA.estudiosSolicitadosID = $("input:radio[name ='estudios']:checked").val();
+        //¿Le solicitaron estudios, cuáles?
         $(".estudios").each(function(i,v){
 
             if($(v).prop('checked')){
@@ -846,40 +852,22 @@ function agregarEncuesta(){
 
         });
 
+        //¿Le indicaron remedios? Los consiguió con facilidad?
         encuestaDATA.demoraRemedios = $("input:radio[name ='remedios']:checked").val();
 
+        //¿Fue derivado a otro médico?
         encuestaDATA.derivado = $("input:radio[name ='derivado']:checked").val();
 
+        //¿Cómo es atendido en la UGP?
         encuestaDATA.calidadAtencionUgpID = $("input:radio[name ='ugp']:checked").val();
 
+        //¿Cuánto tiempo le llevó conseguir la prestación solicitada?
         encuestaDATA.tiempoPrestacionID = typeof($("input:radio[name ='conseguir']:checked").val()) === "undefined" ? 6 : $("input:radio[name ='conseguir']:checked").val();
 
+        //¿Conoce los beneficios que brinda el programa?
         encuestaDATA.conoceBeneficioPrograma =  typeof($("input:radio[name ='beneficios']:checked").val()) === "undefined" ? false : $("input:radio[name ='beneficios']:checked").val();
 
-        //encuestaDATA.informacionProgramaID = typeof($("input:radio[name ='informacion']:checked").val()) === "undefined" ? 0 : $("input:radio[name ='informacion']:checked").val();
-
-        encuestaDATA.nroEncuesta = $("#nencuesta").val();
-
-        encuestaDATA.tipoSexoID = $("#sexoEncuesta").val();
-
-        var fe = $("#fechaEncuesta").val().split('/');
-
-        encuestaDATA.fechaEncuesta = fe[2]+'-'+fe[1]+'-'+fe[0];
-
-        var fn = $("#fechaNacimientoEncuesta").val().split('/');
-
-        encuestaDATA.fechaNacimiento =  fn[2]+'-'+fn[1]+'-'+fn[0];
-
-        encuestaDATA.encuestadorID = $(".selectEncuestadorEncuesta").val();
-
-
-        encuestaDATA.departamentoID = $(".selectDepartamentoEncuesta").val();
-
-        encuestaDATA.tipoPensionDetalle = $("#pe0t").val();
-        encuestaDATA.dondeSeAtiendeDetalle = $("#do0t").val();
-        encuestaDATA.quienLoAtiendeDetalle = $("#qu0t").val();
-        encuestaDATA.solicitaronEstudiosDetalle = $("#es0t").val();
-        encuestaDATA.quienBrindoInfoDetalle = $("#in0t").val();
+        //¿Quién le brindó información del Programa?
         $(".informacion").each(function(i,v){
 
             if($(v).prop('checked')){
@@ -888,10 +876,39 @@ function agregarEncuesta(){
 
         });
 
-        //encuestaDATA.codigo = $("#codigoEncuesta").val();
+        //numero de encuesta
+        encuestaDATA.nroEncuesta = $("#nencuesta").val();
+
+        //sexo
+        encuestaDATA.tipoSexoID = $("#sexoEncuesta").val();
+
+        //fecha de encuesta
+        var fe = $("#fechaEncuesta").val().split('/');
+
+        encuestaDATA.fechaEncuesta = fe[2]+'-'+fe[1]+'-'+fe[0];
+
+        //fecha de nacimiento
+        var fn = $("#fechaNacimientoEncuesta").val().split('/');
+
+        encuestaDATA.fechaNacimiento =  fn[2]+'-'+fn[1]+'-'+fn[0];
+
+        //encuestador
+        encuestaDATA.encuestadorID = $(".selectEncuestadorEncuesta").val();
+
+        //departamento
+        encuestaDATA.departamentoID = $(".selectDepartamentoEncuesta").val();
+
+        //campos "otros"
+        encuestaDATA.tipoPensionDetalle = $("#pe0t").val();
+        encuestaDATA.dondeSeAtiendeDetalle = $("#do0t").val();
+        encuestaDATA.quienLoAtiendeDetalle = $("#qu0t").val();
+        encuestaDATA.solicitaronEstudiosDetalle = $("#es0t").val();
+        encuestaDATA.quienBrindoInfoDetalle = $("#in0t").val();
+
+        //codigo sin uso
         encuestaDATA.codigo = 0;
 
-        console.dir(encuestaDATA)
+        //console.dir(encuestaDATA)
 
 
         swal("Espere un momento...", "se está guardando la encuesta", "info");
