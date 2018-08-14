@@ -25,60 +25,113 @@
         </tr>
         <tr>
             <td>
-                Tiempo de prestación: {{{TiempoPrestacion}}}
+                ¿Qué tipo de pensión tiene asignada?: {{{TipoPension}}}
             </td>
             <td>
-                Tipo pensión: {{{TipoPension}}}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Calidad de atención: {{{CalidadAtencion}}}
-            </td>
-            <td>
-                Calidad de atención UGP: {{{CalidadAtencionUGP}}}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Estudios solicitados: {{{EstudiosSolicitados}}}
-            </td>
-            <td>
-                Derivado: {{{Derivado}}}
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Conoce beneficios del programa: {{{ConoceBeneficioPrograma}}}
-            </td>
-            <td>
-                Demora en remedios:
-                 {{{DemoraRemedios}}}
+                ¿Dónde se atiende?:
+                {{#if Enlace_EncuestaLugarAtencion}}
+
+                    {{#each Enlace_EncuestaLugarAtencion}}
+                        <span class="badge badge-secondary">{{LugarAtencion}}</span>
+                    {{/each}}
+
+                    {{#if dondeSeAtiendeDetalle}}
+                        ({{dondeSeAtiendeDetalle}})
+                    {{/if}}
+
+                {{else}}
+                    Sin datos
+                {{/if}}
 
             </td>
         </tr>
-
         <tr>
             <td>
-                Atendido por:
+                ¿Quién lo atiende?:
                 {{#if Enlace_AtendidoPor}}
 
                     {{#each Enlace_AtendidoPor}}
                         <span class="badge badge-secondary">{{AtendidoPor}}</span>
                     {{/each}}
 
+                    {{#if quienLoAtiendeDetalle}}
+                        ({{quienLoAtiendeDetalle}})
+                    {{/if}}
+
+
                 {{else}}
                     Sin datos
                 {{/if}}
             </td>
+            <td>
+                ¿Cuánto tiempo le llevó encontrar el turno?: {{{TiempoPrestacion}}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ¿Cómo fue atendido?:
+                {{{CalidadAtencion}}}
+            </td>
+            <td>
+                ¿Le solicitaron estudios, cuáles?:
+                {{#if Enlace_EstudiosSolicitados}}
+
+                    {{#each Enlace_EstudiosSolicitados}}
+                        <span class="badge badge-secondary">{{EstudiosSolicitadosNombre}}</span>
+                    {{/each}}
+
+                    {{#if solicitaronEstudiosDetalle}}
+                        ({{solicitaronEstudiosDetalle}})
+                    {{/if}}
+
+
+                {{else}}
+                    Sin datos
+                {{/if}}
+            </td>
+        </tr>
+        <tr>
+            <td>
+                ¿Le indicaron remedios? Los consiguió con facilidad?: {{{DemoraRemedios}}}
+            </td>
+            <td>
+                ¿Fue derivado a otro médico?:
+                 {{{Derivado}}}
+
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                ¿Cómo es atendido en la UGP?: {{{CalidadAtencionUGP}}}
+
+            </td>
 
             <td>
-                Lugar de atención:
-                {{#if Enlace_EncuestaLugarAtencion}}
+                ¿Cuánto tiempo le llevó conseguir la prestación solicitada?: {{{TiempoPrestacion}}}
+            </td>
+        </tr>
 
-                    {{#each Enlace_EncuestaLugarAtencion}}
-                        <span class="badge badge-secondary">{{LugarAtencion}}</span>
+        <tr>
+            <td>
+                ¿Conoce los beneficios que brinda el programa?: {{{ConoceBeneficioPrograma}}}
+
+
+            </td>
+
+            <td>
+                ¿Quién le brindó información del Programa?:
+
+                {{#if Enlace_InformacionPrograma}}
+
+                    {{#each Enlace_InformacionPrograma}}
+                        <span class="badge badge-secondary">{{InformacionProgramaNombre}}</span>
                     {{/each}}
+
+                    {{#if quienBrindoInfoDetalle}}
+                        ({{quienBrindoInfoDetalle}})
+                    {{/if}}
+
 
                 {{else}}
                     Sin datos
@@ -96,6 +149,7 @@
 
 
 <script>
+
 
     $(function(){
 
