@@ -11,24 +11,24 @@
         </tr>
         <tr>
             <td>
-                Departamento: {{{DepartamentoNombre}}}
+                <b>Departamento:</b> {{{DepartamentoNombre}}}
             </td>
 
         </tr>
         <tr>
             <td>
-                Fecha de nacimiento: {{#if FechaNacimiento}} {{{FechaNacimiento}}} {{else}} Sin datos {{/if}}
+                <b>Fecha de nacimiento:</b> {{#if FechaNacimiento}} {{{FechaNacimiento}}} {{else}} Sin datos {{/if}}
             </td>
             <td>
-                Sexo: {{{Sexo}}}
+                <b>Sexo:</b> {{{Sexo}}}
             </td>
         </tr>
         <tr>
             <td>
-                ¿Qué tipo de pensión tiene asignada?: {{{TipoPension}}}
+                <b>¿Qué tipo de pensión tiene asignada?:</b> {{{TipoPension}}}
             </td>
             <td>
-                ¿Dónde se atiende?:
+                <b>¿Dónde se atiende?:</b>
                 {{#if Enlace_EncuestaLugarAtencion}}
 
                     {{#each Enlace_EncuestaLugarAtencion}}
@@ -47,7 +47,7 @@
         </tr>
         <tr>
             <td>
-                ¿Quién lo atiende?:
+                <b>¿Quién lo atiende?:</b>
                 {{#if Enlace_AtendidoPor}}
 
                     {{#each Enlace_AtendidoPor}}
@@ -64,16 +64,16 @@
                 {{/if}}
             </td>
             <td>
-                ¿Cuánto tiempo le llevó encontrar el turno?: {{{TiempoPrestacion}}}
+                <b>¿Cuánto tiempo le llevó encontrar el turno?:</b> {{{TiempoPrestacion}}}
             </td>
         </tr>
         <tr>
             <td>
-                ¿Cómo fue atendido?:
+                <b>¿Cómo fue atendido?:</b>
                 {{{CalidadAtencion}}}
             </td>
             <td>
-                ¿Le solicitaron estudios, cuáles?:
+                <b>¿Le solicitaron estudios, cuáles?:</b>
                 {{#if Enlace_EstudiosSolicitados}}
 
                     {{#each Enlace_EstudiosSolicitados}}
@@ -92,10 +92,10 @@
         </tr>
         <tr>
             <td>
-                ¿Le indicaron remedios? Los consiguió con facilidad?: {{{DemoraRemedios}}}
+                <b>¿Le indicaron remedios? Los consiguió con facilidad?:</b> {{{DemoraRemedios}}}
             </td>
             <td>
-                ¿Fue derivado a otro médico?:
+                <b>¿Fue derivado a otro médico?:</b>
                  {{{Derivado}}}
 
             </td>
@@ -103,24 +103,24 @@
 
         <tr>
             <td>
-                ¿Cómo es atendido en la UGP?: {{{CalidadAtencionUGP}}}
+                <b>¿Cómo es atendido en la UGP?:</b> {{{CalidadAtencionUGP}}}
 
             </td>
 
             <td>
-                ¿Cuánto tiempo le llevó conseguir la prestación solicitada?: {{{TiempoPrestacion}}}
+                <b>¿Cuánto tiempo le llevó conseguir la prestación solicitada?:</b> {{{TiempoPrestacion}}}
             </td>
         </tr>
 
         <tr>
             <td>
-                ¿Conoce los beneficios que brinda el programa?: {{{ConoceBeneficioPrograma}}}
+                <b>¿Conoce los beneficios que brinda el programa?:</b> {{{ConoceBeneficioPrograma}}}
 
 
             </td>
 
             <td>
-                ¿Quién le brindó información del Programa?:
+                <b>¿Quién le brindó información del Programa?:</b>
 
                 {{#if Enlace_InformacionPrograma}}
 
