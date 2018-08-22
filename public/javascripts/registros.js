@@ -581,7 +581,9 @@ function completarDatos(filaid){
 
         console.log(data)
 
-        fechahora = data.FechaCarga;
+        //fix de error al editar
+        fechahora = data.FechaCarga.split("/")[1] + "/" + data.FechaCarga.split("/")[0] + "/" + data.FechaCarga.split("/")[2] ;
+        //console.log(fechahora)
 
         //datos personales
 
