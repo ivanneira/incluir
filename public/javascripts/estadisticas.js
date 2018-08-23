@@ -115,7 +115,7 @@ function loadCharts(datos){
 
         chart: {
 
-            width: '600',
+            width: '500',
             type: 'bar'
         },
         title: {
@@ -124,6 +124,9 @@ function loadCharts(datos){
         xAxis: {
             title: {
                 text: 'Usuarios'
+            },
+            labels: {
+                enabled: false
             }
         },
         yAxis: {
@@ -131,12 +134,17 @@ function loadCharts(datos){
                 text: 'Planillas'
             }
         },
-        series: planillasPorUsuarioData
+        series: planillasPorUsuarioData,
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.y + '</b> planillas de <b>'+ this.series.name +'</b>';
+            }
+        },
     });
 
     var planillasPorSupervisor = Highcharts.chart('planillasPorSupervisor', {
         chart: {
-            width: '600',
+            width: '500',
             type: 'bar'
         },
         title: {
@@ -145,6 +153,9 @@ function loadCharts(datos){
         xAxis: {
             title: {
                 text: 'Usuarios'
+            },
+            labels: {
+                enabled: false
             }
         },
         yAxis: {
@@ -152,12 +163,17 @@ function loadCharts(datos){
                 text: 'Planillas'
             }
         },
-        series: planillasPorSupervisorData
+        series: planillasPorSupervisorData,
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.y + '</b> planillas de <b>'+ this.series.name +'</b>';
+            }
+        }
     });
 
     var planillasPorEncuestador = Highcharts.chart('planillasPorEncuestador', {
         chart: {
-            width: '600',
+            width: '500',
             type: 'column'
         },
         title: {
@@ -166,6 +182,9 @@ function loadCharts(datos){
         xAxis: {
             title: {
                 text: 'Usuarios'
+            },
+            labels: {
+                enabled: false
             }
         },
         yAxis: {
@@ -173,13 +192,18 @@ function loadCharts(datos){
                 text: 'Planillas'
             }
         },
-        series: planillasPorEncuestadorData
+        series: planillasPorEncuestadorData,
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.y + '</b> planillas de <b>'+ this.series.name +'</b>';
+            }
+        }
     });
 
 
     var registrosPorUsuario = Highcharts.chart('registrosPorUsuario', {
         chart: {
-            width: '600',
+            width: '500',
             type: 'bar'
         },
         title: {
@@ -188,6 +212,9 @@ function loadCharts(datos){
         xAxis: {
             title: {
                 text: 'Usuarios'
+            },
+            labels: {
+                enabled: false
             }
         },
         yAxis: {
@@ -195,12 +222,17 @@ function loadCharts(datos){
                 text: 'Registros'
             }
         },
-        series: registrosPorUsuarioData
+        series: registrosPorUsuarioData,
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.y + '</b> registros de <b>'+ this.series.name +'</b>';
+            }
+        }
     });
 
     var registrosPorSupervisor = Highcharts.chart('registrosPorSupervisor', {
         chart: {
-            width: '600',
+            width: '500',
             type: 'bar'
         },
         title: {
@@ -216,12 +248,17 @@ function loadCharts(datos){
                 text: 'Usuarios'
             }
         },
-        series: registrosPorSupervisorData
+        series: registrosPorSupervisorData,
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.y + '</b> registros de <b>'+ this.series.name +'</b>';
+            }
+        }
     });
 
     var registrosPorEncuestador = Highcharts.chart('registrosPorEncuestador', {
         chart: {
-            width: '600',
+            width: '500',
             type: 'column'
         },
         title: {
@@ -235,9 +272,17 @@ function loadCharts(datos){
         yAxis: {
             title: {
                 text: 'Registros'
+            },
+            labels: {
+                enabled: false
             }
         },
-        series: registrosPorEncuestadorData
+        series: registrosPorEncuestadorData,
+        tooltip: {
+            formatter: function() {
+                return '<b>'+ this.y + '</b> registros de <b>'+ this.series.name +'</b>';
+            }
+        }
     });
 
 }
