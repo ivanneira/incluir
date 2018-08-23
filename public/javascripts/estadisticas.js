@@ -211,7 +211,7 @@ function loadCharts(datos){
         },
         xAxis: {
             title: {
-                text: 'Usuarios'
+                text: 'Encuestadores'
             },
             labels: {
                 enabled: false
@@ -299,7 +299,7 @@ function loadCharts(datos){
         },
         xAxis: {
             title: {
-                text: 'Encuestador'
+                text: 'Encuestadores'
             }
         },
         yAxis: {
