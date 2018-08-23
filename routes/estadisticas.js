@@ -176,6 +176,51 @@ router.get('/totales', function(req, res, next) {
 
                     });
 
+            },
+            //registros por departamento
+            function (callback) {
+
+                knex.raw("select de.Nombre as departamento, COUNT(en.departamentoID) as cantidad from filaplanilla en " +
+                        "join departamento de on en.departamentoID = de.ID " +
+                        "GROUP BY de.Nombre")
+                    .then(function(row){
+                        callback(null, row);
+                    })
+                    .catch(function(error){
+
+                        console.log(error);
+
+                    });
+            },
+            //encuestas por departamento
+            function (callback) {
+
+                knex.raw("select de.Nombre as departamento, COUNT(en.departamentoID) as cantidad from encuesta en " +
+                    "join departamento de on en.departamentoID = de.ID " +
+                    "GROUP BY de.Nombre")
+                    .then(function(row){
+                        callback(null, row);
+                    })
+                    .catch(function(error){
+
+                        console.log(error);
+
+                    });
+            },
+            //registros por localidad
+            function (callback) {
+
+                knex.raw("SELECT lo.Nombre as nombre, COUNT(fp.localidadID) AS cantidad FROM filaplanilla fp " +
+                    "JOIN localidad lo ON fp.localidadID = lo.ID " +
+                    "GROUP BY lo.Nombre")
+                    .then(function(row){
+                        callback(null, row);
+                    })
+                    .catch(function(error){
+
+                        console.log(error);
+
+                    });
             }
         ],
 

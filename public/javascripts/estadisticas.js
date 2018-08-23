@@ -54,6 +54,9 @@ function loadCharts(datos){
     var registrosPorUsuarioData = [];
     var registrosPorSupervisorData = [];
     var registrosPorEncuestadorData = [];
+    var graficoPorDepartamentoData = [];
+    var graficoPorDepartamentoEncuestaData = [];
+    var registrosPorLocalidadData = [];
 
     for(var index in datos[2]){
 
@@ -106,6 +109,33 @@ function loadCharts(datos){
         registrosPorEncuestadorData.push({
             name: datos[8][index].encuestador,
             data: [datos[8][index].cantidad]
+        });
+
+    }
+
+    for(var index in datos[9]){
+
+        graficoPorDepartamentoData.push({
+            name: datos[9][index].departamento,
+            y: datos[9][index].cantidad
+        });
+
+    }
+
+    for(var index in datos[10]){
+
+        graficoPorDepartamentoEncuestaData.push({
+            name: datos[10][index].departamento,
+            y: datos[10][index].cantidad
+        });
+
+    }
+
+    for(var index in datos[11]){
+
+        registrosPorLocalidadData.push({
+            name: datos[11][index].nombre,
+            y: datos[11][index].cantidad
         });
 
     }
@@ -192,6 +222,9 @@ function loadCharts(datos){
                 text: 'Planillas'
             }
         },
+        legend: {
+            enabled: false
+        },
         series: planillasPorEncuestadorData,
         tooltip: {
             formatter: function() {
@@ -277,6 +310,9 @@ function loadCharts(datos){
                 enabled: false
             }
         },
+        legend: {
+            enabled: false
+        },
         series: registrosPorEncuestadorData,
         tooltip: {
             formatter: function() {
@@ -284,6 +320,104 @@ function loadCharts(datos){
             }
         }
     });
+
+
+    var graficoPorDepartamento = Highcharts.chart('graficoPorDepartamento', {
+        chart: {
+            width: '500',
+            type: 'pie'
+        },
+        title: {
+            text: 'Registros por departamento'
+        },
+        xAxis: {
+            title: {
+                text: 'Departamento'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Registros'
+            }
+        },
+        series: [{
+            name: "Departamentos",
+            data: graficoPorDepartamentoData
+        }],
+        tooltip: {
+
+            formatter: function() {
+
+                return this.key + ': <b>' + this.y + '</b> registros,  <b>' + this.point.percentage.toFixed(2) + '%</b>';
+            }
+        },
+    });
+
+    var graficoPorDepartamentoEncuesta = Highcharts.chart('graficoPorDepartamentoEncuesta', {
+        chart: {
+            width: '500',
+            type: 'pie'
+        },
+        title: {
+            text: 'Encuestas por departamento'
+        },
+        xAxis: {
+            title: {
+                text: 'Departamento'
+            }
+        },
+        yAxis: {
+            title: {
+                text: 'Registros'
+            }
+        },
+        series: [{
+            name: "Departamentos",
+            data: graficoPorDepartamentoEncuestaData
+        }],
+        tooltip: {
+
+            formatter: function() {
+
+                return this.key + ': <b>' + this.y + '</b> registros,  <b>' + this.point.percentage.toFixed(2) + '%</b>';
+            }
+        },
+    });
+
+    var registrosPorLocalidad = Highcharts.chart('registrosPorLocalidad', {
+            chart: {
+                width: '500',
+                type: 'pie'
+            },
+            title: {
+                text: 'Registros por Localidad'
+            },
+            xAxis: {
+                title: {
+                    text: 'Localidad'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Registros'
+                },
+                labels: {
+                    enabled: false
+                }
+            },
+            series: [{
+                name: "Localidades",
+                data: registrosPorLocalidadData
+            }],
+            tooltip: {
+                formatter: function() {
+
+                    return this.key + ': <b>' + this.y + '</b> registros,  <b>' + this.point.percentage.toFixed(2) + '%</b>';
+                }
+            }
+    });
+
+
 
 }
 
